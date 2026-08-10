@@ -7,12 +7,20 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 
+class HistoryMessage(BaseModel):
+    """A message from conversation history for drill-down context."""
+    role: str = "user"
+    content: str = ""
+    sql: str | None = None
+
+
 class ChatRequest(BaseModel):
     """Chat endpoint request body."""
 
     query: str = Field(..., description="User's natural language question")
     session_id: str | None = Field(None, description="Session ID for conversation continuity")
     max_rows: int | None = Field(None, description="Override max row limit for results")
+    history: list[HistoryMessage] = Field(default_factory=list, description="Conversation history for drill-down context")
 
 
 class ChatMessage(BaseModel):

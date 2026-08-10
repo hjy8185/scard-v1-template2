@@ -91,18 +91,25 @@ export async function* parseSSEStream(
 /**
  * Send a chat message and stream back SSE events.
  */
+export interface ChatHistory {
+  role: 'user' | 'assistant';
+  content: string;
+  sql?: string;
+}
+
 export async function sendChatMessage(
   query: string,
   onEvent: (event: SSEEvent) => void,
   onError: (error: Error) => void,
   onComplete: () => void,
   signal?: AbortSignal,
+  history?: ChatHistory[],
 ): Promise<void> {
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, history: history?.slice(-6) }),
       signal,
     });
 

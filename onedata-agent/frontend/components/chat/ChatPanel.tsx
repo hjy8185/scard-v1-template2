@@ -6,10 +6,10 @@ import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';
 
 const EXAMPLE_QUERIES = [
-  '30대 남성 고객 수는 몇 명이야?',
-  '카드 거래 금액 상위 10명의 고객을 보여줘',
-  '신한은행과 신한카드 동시 가입 고객 수는?',
-  '연령대별 고객 분포를 알려줘',
+  '그룹사별 고객 수 현황을 알려줘',
+  '연령대별 고객 분포를 보여줘',
+  '카드 거래 금액 상위 10명의 고객을 알려줘',
+  '신한은행과 신한카드 동시 보유 고객은 몇 명이야?',
 ];
 
 export function ChatPanel() {
@@ -77,6 +77,7 @@ export function ChatPanel() {
                     setSelectedMessage(msg);
                   }
                 }}
+                onDrillDown={msg.role === 'assistant' ? (query) => sendMessage(query) : undefined}
               />
             ))}
             {isStreaming && (

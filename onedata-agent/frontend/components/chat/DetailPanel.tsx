@@ -6,10 +6,10 @@ import { useAppContext } from '@/lib/context';
 import { ReasoningTraceDetail } from './ReasoningTrace';
 import { SqlDisplay } from './SqlDisplay';
 import { ResultTable } from './ResultTable';
+import { ReportChart } from './ReportChart';
 import { OntologyView } from '@/components/graph/OntologyView';
-import { DataLineage } from '@/components/showcase/DataLineage';
 
-type TabId = 'reasoning' | 'sql' | 'results' | 'ontology' | 'lineage';
+type TabId = 'reasoning' | 'sql' | 'results' | 'report' | 'ontology';
 
 interface Tab {
   id: TabId;
@@ -58,6 +58,18 @@ export function DetailPanel() {
       enabled: !!(selectedMessage?.queryResults && selectedMessage.queryResults.rows.length > 0),
     },
     {
+      id: 'report',
+      label: '리포트',
+      icon: (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+      ),
+      enabled: !!(selectedMessage?.queryResults && selectedMessage.queryResults.rows.length > 1),
+    },
+    {
       id: 'ontology',
       label: '온톨로지',
       icon: (
@@ -71,22 +83,6 @@ export function DetailPanel() {
           <line x1="14.5" y1="10.5" x2="18.5" y2="7.5" />
           <line x1="9.5" y1="13.5" x2="5.5" y2="16.5" />
           <line x1="14.5" y1="13.5" x2="18.5" y2="16.5" />
-        </svg>
-      ),
-      enabled: true,
-    },
-    {
-      id: 'lineage',
-      label: '데이터 계보',
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M6 3v18" />
-          <path d="M18 3v18" />
-          <path d="M6 12h12" />
-          <circle cx="6" cy="6" r="2" />
-          <circle cx="18" cy="6" r="2" />
-          <circle cx="6" cy="18" r="2" />
-          <circle cx="18" cy="18" r="2" />
         </svg>
       ),
       enabled: true,
@@ -152,11 +148,13 @@ export function DetailPanel() {
         {detailView === 'results' && selectedMessage.queryResults && (
           <ResultTable result={selectedMessage.queryResults} />
         )}
-        {detailView === 'ontology' && (
-          <OntologyView context={selectedMessage.reasoning} />
+        {detailView === 'report' && selectedMessage.queryResults && (
+          <ReportChart result={selectedMessage.queryResults} />
         )}
-        {detailView === 'lineage' && (
-          <DataLineage sql={selectedMessage.sql} />
+        {detailView === 'ontology' && (
+          <OntologyView context={selectedMessage.reasoning} tablesUsed={
+            selectedMessage.reasoning?.find(s => s.id === 'sql_generate')?.data?.tables_used as string[] | undefined
+          } />
         )}
       </div>
     </div>

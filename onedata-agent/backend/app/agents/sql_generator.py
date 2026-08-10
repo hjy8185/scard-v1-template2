@@ -118,7 +118,7 @@ class SQLGenerator:
         self._opensearch = opensearch_client
 
     async def generate(
-        self, query: str, domain_hint: str | None = None
+        self, query: str, domain_hint: str | None = None, conversation_context: str | None = None
     ) -> SQLGenerationResult:
         """Generate SQL for a natural language query.
 
@@ -131,6 +131,7 @@ class SQLGenerator:
         Args:
             query: User's natural language question.
             domain_hint: Optional domain hint from intent classification.
+            conversation_context: Previous conversation for drill-down queries.
 
         Returns:
             SQLGenerationResult with the generated SQL and metadata.
@@ -171,6 +172,11 @@ class SQLGenerator:
                     f"(테이블: {term_info['table_name']})\n"
                 )
             context_str += synonym_context
+
+        # Add conversation context for drill-down queries
+        if conversation_context:
+            context_str += f"\n\n=== CONVERSATION HISTORY (for drill-down context) ===\n{conversation_context}\n"
+            context_str += "\nIMPORTANT: '위 결과를' 또는 이전 대화를 참조하는 질문의 경우, 이전 SQL을 기반으로 확장/수정하세요.\n"
 
         # Step 4: Generate SQL via LLM
         try:

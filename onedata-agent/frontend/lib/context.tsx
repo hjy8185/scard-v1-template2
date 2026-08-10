@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
 import type { ChatMessage, ReasoningStep, QueryResult, SSEEvent } from './types';
 import { generateId } from './utils';
-import { sendChatMessage } from './chat-stream';
+import { sendChatMessage, type ChatHistory } from './chat-stream';
 
 // Default reasoning steps template
 function createReasoningSteps(): ReasoningStep[] {
@@ -20,8 +20,8 @@ interface AppContextValue {
   messages: ChatMessage[];
   isStreaming: boolean;
   selectedMessage: ChatMessage | null;
-  detailView: 'reasoning' | 'sql' | 'results' | 'ontology' | 'lineage';
-  setDetailView: (view: 'reasoning' | 'sql' | 'results' | 'ontology' | 'lineage') => void;
+  detailView: 'reasoning' | 'sql' | 'results' | 'report' | 'ontology';
+  setDetailView: (view: 'reasoning' | 'sql' | 'results' | 'report' | 'ontology') => void;
   setSelectedMessage: (msg: ChatMessage | null) => void;
   sendMessage: (content: string) => void;
   clearMessages: () => void;
@@ -167,8 +167,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setIsStreaming(false);
     };
 
-    sendChatMessage(content, handleEvent, handleError, handleComplete, abortController.signal);
-  }, []);
+    // Build conversation history for context
+    const history: ChatHistory[] = messages
+      .filter((m) => m.content)
+      .map((m) => ({
+        role: m.role,
+        content: m.content,
+        sql: m.sql,
+      }));
+
+    sendChatMessage(content, handleEvent, handleError, handleComplete, abortController.signal, history);
+  }, [messages]);
 
   const clearMessages = useCallback(() => {
     setMessages([]);

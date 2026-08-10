@@ -15,7 +15,7 @@ from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 
 from app.agents.orchestrator import Orchestrator, PipelineEvent
-from app.models.schemas import ChatRequest
+from app.models.schemas import ChatRequest, HistoryMessage
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -42,11 +42,11 @@ def _sse_line(event: dict) -> str:
     return f"data: {json.dumps(event, ensure_ascii=False)}\n\n"
 
 
-async def _stream_chat(query: str, session_id: str, max_rows: int | None = None) -> AsyncGenerator[str, None]:
+async def _stream_chat(query: str, session_id: str, max_rows: int | None = None, history: list[HistoryMessage] | None = None) -> AsyncGenerator[str, None]:
     orchestrator = _get_orchestrator()
 
     try:
-        async for event in orchestrator.process_query(query, session_id, max_rows):
+        async for event in orchestrator.process_query(query, session_id, max_rows, history=history):
             if event.event_type == "stage":
                 yield _sse_line({
                     "event_type": event.data.get("stage", "unknown"),
@@ -101,10 +101,10 @@ async def _stream_chat(query: str, session_id: str, max_rows: int | None = None)
 @router.post("/api/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
     session_id = request.session_id or str(uuid.uuid4())
-    logger.info("Chat request: session=%s query=%s", session_id, request.query[:80])
+    logger.info("Chat request: session=%s query=%s history=%d", session_id, request.query[:80], len(request.history))
 
     return StreamingResponse(
-        _stream_chat(request.query, session_id, request.max_rows),
+        _stream_chat(request.query, session_id, request.max_rows, request.history or None),
         media_type="text/event-stream; charset=utf-8",
         headers=_SSE_HEADERS,
     )

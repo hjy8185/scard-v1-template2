@@ -4,14 +4,16 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { formatTimestamp } from '@/lib/utils';
 import { ReasoningTrace } from './ReasoningTrace';
+import { DrillDownSuggestions } from './DrillDownSuggestions';
 import type { ChatMessage as ChatMessageType } from '@/lib/types';
 
 interface ChatMessageProps {
   message: ChatMessageType;
   onClick?: () => void;
+  onDrillDown?: (query: string) => void;
 }
 
-export function ChatMessage({ message, onClick }: ChatMessageProps) {
+export function ChatMessage({ message, onClick, onDrillDown }: ChatMessageProps) {
   const isUser = message.role === 'user';
 
   return (
@@ -82,6 +84,11 @@ export function ChatMessage({ message, onClick }: ChatMessageProps) {
                   </span>
                 )}
               </div>
+            )}
+
+            {/* Drill-down Suggestions */}
+            {message.queryResults && message.queryResults.rows.length > 0 && onDrillDown && (
+              <DrillDownSuggestions message={message} onSelect={onDrillDown} />
             )}
 
             <p className="text-[10px] text-mist/60 mt-2">

@@ -99,7 +99,7 @@ class Orchestrator:
         logger.info("Orchestrator initialized")
 
     async def process_query(
-        self, query: str, session_id: str, max_rows: int | None = None
+        self, query: str, session_id: str, max_rows: int | None = None, history: list | None = None
     ) -> AsyncGenerator[PipelineEvent, None]:
         """Process a user query through the full pipeline, yielding events.
 
@@ -188,9 +188,25 @@ class Orchestrator:
         t0 = time.monotonic()
 
         try:
+            # Build conversation context for drill-down queries
+            conversation_context = None
+            if history:
+                ctx_parts = []
+                for msg in history[-4:]:
+                    if hasattr(msg, 'role'):
+                        if msg.role == 'user':
+                            ctx_parts.append(f"사용자: {msg.content}")
+                        elif msg.role == 'assistant' and msg.content:
+                            ctx_parts.append(f"AI: {msg.content[:200]}")
+                            if hasattr(msg, 'sql') and msg.sql:
+                                ctx_parts.append(f"이전 SQL: {msg.sql}")
+                if ctx_parts:
+                    conversation_context = "\n".join(ctx_parts)
+
             sql_result = await self._sql_generator.generate(
                 query=query,
                 domain_hint=intent_result.domain_hint,
+                conversation_context=conversation_context,
             )
             sql_ms = int((time.monotonic() - t0) * 1000)
 
