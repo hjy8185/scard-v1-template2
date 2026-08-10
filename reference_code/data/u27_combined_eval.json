@@ -1,0 +1,1011 @@
+{
+ "meta": {
+  "title": "U27 통합 검증 세트 — 정규(demo 44) + 확장(variant/edge/retry 24)",
+  "date": "2026-07-16",
+  "total": 68,
+  "scoring": "judge(gold→panel) + picker-v3 적응(해부 실렌더·희소성·멀티뷰·풍부성·서사)"
+ },
+ "scenarios": [
+  {
+   "id": "D01",
+   "capability": "A",
+   "act": "1.탐색-용어이해",
+   "question": "우리 카드로 식음료 쪽 혜택은 어떤 것들이 있어?",
+   "expected_intent": "category_search",
+   "verification_keywords": [
+    "커피",
+    "음식점",
+    "제과"
+   ],
+   "gold_facts": "'식음료'는 카탈로그 상위개념(커피/음료·음식점·제과/베이커리·패스트푸드 포함). 하위 카테고리 혜택 카드를 제시하면 PASS. 현업이 '식음료'만 말해도 시스템이 하위로 풀어야 함(v1 불가).",
+   "demo_point": "현업이 세부 카테고리명을 몰라도 '식음료' 상위개념으로 질문 → 카탈로그 SKOS 계층이 하위로 자동 확장",
+   "group": "demo"
+  },
+  {
+   "id": "D02",
+   "capability": "A",
+   "act": "1.탐색-용어이해",
+   "question": "생활 관련 소비에 쓸 만한 카드 추천해줘",
+   "expected_intent": "category_search",
+   "verification_keywords": [
+    "편의점",
+    "슈퍼",
+    "마트"
+   ],
+   "gold_facts": "'생활'은 상위개념(편의점·슈퍼마켓/마트 등 포함). 하위 카테고리 카드 제시하면 PASS.",
+   "demo_point": "비즈니스 용어('생활')→온톨로지 카테고리 매핑",
+   "group": "demo"
+  },
+  {
+   "id": "D03",
+   "capability": "A",
+   "act": "1.탐색-용어이해",
+   "question": "쇼핑이라고 하면 우리 데이터에선 뭐가 포함돼?",
+   "expected_intent": "category_search",
+   "verification_keywords": [
+    "온라인쇼핑"
+   ],
+   "gold_facts": "'쇼핑' 상위개념 = 온라인쇼핑·의류/패션 등. 카탈로그 용어 정의로 답하면 PASS. 데이터 스키마 몰라도 됨.",
+   "demo_point": "카탈로그 glossary가 '어떤 데이터가 있는지'를 현업에게 설명",
+   "group": "demo"
+  },
+  {
+   "id": "D04",
+   "capability": "B",
+   "act": "2.진단-커버리지",
+   "question": "우리 카드 혜택이 약한 소비 영역이 어디야?",
+   "expected_intent": "coverage_gap",
+   "verification_keywords": [
+    "약",
+    "부족"
+   ],
+   "gold_facts": "온톨로지 커버리지: 주류/유흥 1장, 의류/패션 4장, 제과/베이커리 7장이 약함. 커피/음료 282장 강함. 약한 영역을 카테고리로 제시하면 PASS.",
+   "demo_point": "온톨로지 전체를 스캔해 커버리지 강/약을 진단 — v1은 단일 카드만 봐서 불가",
+   "group": "demo"
+  },
+  {
+   "id": "D05",
+   "capability": "B",
+   "act": "2.진단-커버리지",
+   "question": "혜택을 더 넣으면 좋을 영역을 짚어줘",
+   "expected_intent": "coverage_gap",
+   "verification_keywords": [
+    "주류",
+    "의류",
+    "커버"
+   ],
+   "gold_facts": "커버 카드 0~적은 카테고리(주류/유흥, 의류/패션 등)가 보강 대상. 근거 있는 진단이면 PASS.",
+   "demo_point": "커버리지 갭 → 상품 기획 인사이트",
+   "group": "demo"
+  },
+  {
+   "id": "D06",
+   "capability": "B",
+   "act": "2.진단-커버리지",
+   "question": "카테고리별로 우리가 혜택을 얼마나 커버하고 있는지 전체적으로 보여줘",
+   "expected_intent": "coverage_gap",
+   "verification_keywords": [
+    "카테고리",
+    "커피",
+    "커버"
+   ],
+   "gold_facts": "14개 카테고리별 카드 수 분포(커피282~주류1) 제시하면 PASS. 강/약 구분.",
+   "demo_point": "온톨로지 전수 커버리지 대시보드",
+   "group": "demo"
+  },
+  {
+   "id": "D07",
+   "capability": "C",
+   "act": "3.분석-정형지표",
+   "question": "우리 카드들 실질 혜택률이 평균적으로 어느 정도야?",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "실질",
+    "혜택률",
+    "%"
+   ],
+   "gold_facts": "effective_reward_rate 전체 grand-total(약 0.6%대). 정형 지표값 제시하면 PASS. 비율은 sum/sum 재계산.",
+   "demo_point": "dbt 정형 지표 — v1엔 없던 계산된 metric",
+   "group": "demo"
+  },
+  {
+   "id": "D08",
+   "capability": "C",
+   "act": "3.분석-정형지표",
+   "question": "20대 고객의 실질 혜택률은 어때?",
+   "expected_intent": "self_metric",
+   "expected_metric_family": "effective_reward_rate",
+   "verification_keywords": [
+    "20",
+    "실질",
+    "혜택률"
+   ],
+   "gold_facts": "age_band=20 세그먼트 실질혜택률 1건(재계산값). 세그먼트 필터축 조회. 필요한 것만 전달(전체 덤프 아님).",
+   "demo_point": "세그먼트별 지표 — 현업이 '20대'만 말해도 세그먼트 grain으로 조회",
+   "group": "demo"
+  },
+  {
+   "id": "D09",
+   "capability": "C",
+   "act": "3.분석-정형지표",
+   "question": "연령대별로 실질 혜택률이 어떻게 다른지 비교해줘",
+   "expected_intent": "self_metric",
+   "expected_metric_family": "effective_reward_rate",
+   "verification_keywords": [
+    "연령",
+    "20",
+    "30"
+   ],
+   "gold_facts": "age_band 6개 값(10~60이상) 각 실질혜택률 제시하면 PASS. 그룹바이(해당 축 값만, 전체 아님).",
+   "demo_point": "세그먼트 그룹바이 분석",
+   "group": "demo"
+  },
+  {
+   "id": "D10",
+   "capability": "C",
+   "act": "3.분석-정형지표",
+   "question": "우리가 리워드로 나가는 비용이 총 얼마나 돼?",
+   "expected_intent": "self_metric",
+   "expected_metric_family": "reward_amounts",
+   "verification_keywords": [
+    "리워드",
+    "비용",
+    "원"
+   ],
+   "gold_facts": "reward_delta_amount grand-total 총계 1건(약 236,048원 규모). 3000행 덤프 아니라 총계값.",
+   "demo_point": "총계 집계 — 필터 없는 전역 질의에 grand-total 제공",
+   "group": "demo"
+  },
+  {
+   "id": "D11",
+   "capability": "C",
+   "act": "3.분석-정형지표",
+   "question": "혜택 대상이 되는 소비 금액 규모가 어느 정도야?",
+   "expected_intent": "self_metric",
+   "expected_metric_family": "eligible",
+   "verification_keywords": [
+    "소비",
+    "금액"
+   ],
+   "gold_facts": "eligible_spend 지표값 제시하면 PASS.",
+   "demo_point": "적격 소비 정형 지표",
+   "group": "demo"
+  },
+  {
+   "id": "D12",
+   "capability": "D",
+   "act": "4.신뢰-거버넌스",
+   "question": "방금 그 실질 혜택률은 정확히 어떻게 계산되는 거야?",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "계산",
+    "expected_reward",
+    "eligible_spend"
+   ],
+   "gold_facts": "metric_meta: 계산식 sum(expected_reward)/nullif(sum(prev_month_eligible_spend),0), 단위 ratio 제시하면 PASS.",
+   "demo_point": "지표 거버넌스 — 카탈로그/registry의 정의를 현업에게 설명(신뢰)",
+   "gold_check": {
+    "metric": "effective_reward_rate",
+    "require": [
+     "formula"
+    ]
+   },
+   "group": "demo"
+  },
+  {
+   "id": "D13",
+   "capability": "D",
+   "act": "4.신뢰-거버넌스",
+   "question": "이 숫자 믿어도 돼? 실제 데이터야 아니면 추정이야?",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "합성",
+    "synthetic"
+   ],
+   "gold_facts": "metric_meta: synthetic_flag=true(합성 데이터) 정직 고지하면 PASS. 신뢰성 투명 안내.",
+   "demo_point": "데이터 출처/신뢰도 투명성 — 거버넌스",
+   "gold_check": {
+    "metric": "effective_reward_rate",
+    "require": [
+     "synthetic"
+    ]
+   },
+   "group": "demo"
+  },
+  {
+   "id": "D14",
+   "capability": "D",
+   "act": "4.신뢰-거버넌스",
+   "question": "이 지표는 어떤 데이터에서 나온 거야?",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "d5",
+    "d6",
+    "reward"
+   ],
+   "gold_facts": "metric_meta: source_tables(d5_statement_monthly, d6_reward_ledger) + dbt 모델 계보 제시하면 PASS.",
+   "demo_point": "데이터 계보(lineage) — 카탈로그가 출처를 추적",
+   "gold_check": {
+    "metric": "effective_reward_rate",
+    "require": [
+     "source_tables"
+    ]
+   },
+   "group": "demo"
+  },
+  {
+   "id": "D15",
+   "capability": "D",
+   "act": "4.신뢰-거버넌스",
+   "question": "eligible_spend 정의를 바꾸면 어떤 지표들이 영향받아?",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "실질혜택률",
+    "영향"
+   ],
+   "gold_facts": "metric_meta dependencies/downstream: eligible_spend 변경이 effective_reward_rate 등에 영향. 하류 의존 제시하면 PASS.",
+   "demo_point": "영향도 분석 — 카탈로그 의존성 그래프",
+   "gold_check": {
+    "metric": "eligible_spend",
+    "require": [
+     "downstream"
+    ]
+   },
+   "group": "demo"
+  },
+  {
+   "id": "D16",
+   "capability": "E",
+   "act": "5.시뮬-whatif",
+   "question": "커피 할인 한도를 반으로 줄이면 리워드 비용이 얼마나 줄어?",
+   "expected_intent": "what_if",
+   "verification_keywords": [
+    "줄",
+    "원",
+    "한도"
+   ],
+   "gold_facts": "rule_simulate: cap 절반 → 리워드 총액 감소(약 -5000원 규모/cohort). baseline vs scenario 제시하면 PASS.",
+   "demo_point": "what-if 시뮬레이션 — 규칙 변경 비용 영향 추정",
+   "group": "demo"
+  },
+  {
+   "id": "D17",
+   "capability": "E",
+   "act": "5.시뮬-whatif",
+   "question": "적립률을 좀 낮추면 비용이 어떻게 변해?",
+   "expected_intent": "what_if",
+   "verification_keywords": [
+    "적립",
+    "비용"
+   ],
+   "gold_facts": "rule_simulate: rate 감소 → 리워드 비용 감소(약 -3000원). 방향/크기 제시하면 PASS.",
+   "demo_point": "정책 시뮬레이션",
+   "group": "demo"
+  },
+  {
+   "id": "D18",
+   "capability": "E",
+   "act": "5.시뮬-whatif",
+   "question": "전월실적 조건을 낮추면 혜택 받는 고객이 얼마나 늘어?",
+   "expected_intent": "what_if",
+   "verification_keywords": [
+    "실적",
+    "고객",
+    "늘"
+   ],
+   "gold_facts": "rule_simulate: 실적 하한 완화 → eligible 건수 증가. 방향 제시하면 PASS.",
+   "demo_point": "조건 완화 효과 시뮬레이션",
+   "group": "demo"
+  },
+  {
+   "id": "D19",
+   "capability": "F",
+   "act": "6.최적화-포트폴리오",
+   "question": "혜택 구성이 거의 똑같은 카드끼리 묶어서 보여줘",
+   "expected_intent": "portfolio_overlap",
+   "verification_keywords": [
+    "유사",
+    "겹치"
+   ],
+   "gold_facts": "카테고리 집합 자카드 top-K 유사 카드쌍(공유 카테고리) 제시하면 PASS. 온톨로지 기반 유사도.",
+   "demo_point": "포트폴리오 중복 진단 — 온톨로지 자카드(텍스트 유사 아님)",
+   "group": "demo"
+  },
+  {
+   "id": "D20",
+   "capability": "F",
+   "act": "6.최적화-포트폴리오",
+   "question": "이름은 다른데 실제 혜택은 비슷한 카드들 찾아줘",
+   "expected_intent": "portfolio_overlap",
+   "verification_keywords": [
+    "유사",
+    "혜택"
+   ],
+   "gold_facts": "카드명 표면 무관, BenefitCategory 자카드 유사쌍 제시하면 PASS.",
+   "demo_point": "표면(이름)이 아니라 온톨로지 구조로 유사도 판단",
+   "group": "demo"
+  },
+  {
+   "id": "D21",
+   "capability": "F",
+   "act": "6.최적화-포트폴리오",
+   "question": "서로 겹쳐서 정리할 만한 카드 조합 있어?",
+   "expected_intent": "portfolio_overlap",
+   "verification_keywords": [
+    "겹",
+    "카드"
+   ],
+   "gold_facts": "높은 자카드 카드쌍(카니발라이제이션) 제시하면 PASS.",
+   "demo_point": "상품 라인업 정리 인사이트",
+   "group": "demo"
+  },
+  {
+   "id": "D22",
+   "capability": "F",
+   "act": "6.최적화-포트폴리오",
+   "question": "커피 혜택 구조가 비슷한 카드들은 뭐가 있어?",
+   "expected_intent": "portfolio_overlap",
+   "verification_keywords": [
+    "커피",
+    "유사"
+   ],
+   "gold_facts": "커피/음료 커버 카드들 간 자카드 유사쌍 제시하면 PASS(by_structure).",
+   "demo_point": "카테고리 지정 유사도",
+   "group": "demo"
+  },
+  {
+   "id": "D23",
+   "capability": "A+B",
+   "act": "종합",
+   "question": "식음료 쪽에서 우리 혜택이 부족한 데가 있어?",
+   "expected_intent": "coverage_gap",
+   "verification_keywords": [
+    "제과",
+    "음식점",
+    "약"
+   ],
+   "gold_facts": "'식음료' 상위개념 하위(커피282강, 제과7·음식점21 상대적 약) 중 약한 영역 진단하면 PASS. 카탈로그 용어+커버리지 결합.",
+   "demo_point": "카탈로그 용어 이해 + 커버리지 진단 결합(A+B)",
+   "group": "demo"
+  },
+  {
+   "id": "D24",
+   "capability": "C+D",
+   "act": "종합",
+   "question": "30대 실질 혜택률 알려주고, 그 수치가 믿을 만한 건지도 알려줘",
+   "expected_intent": "self_metric",
+   "expected_metric_family": "effective_reward_rate",
+   "verification_keywords": [
+    "30",
+    "혜택률",
+    "합성"
+   ],
+   "gold_facts": "age_band=30 실질혜택률 값 + synthetic_flag 신뢰도 고지 결합하면 PASS.",
+   "demo_point": "세그먼트 지표 + 거버넌스 결합(C+D)",
+   "group": "demo"
+  },
+  {
+   "id": "D25",
+   "capability": "B",
+   "act": "2.진단-커버리지",
+   "question": "여가나 문화 쪽 혜택은 우리가 충분해?",
+   "expected_intent": "coverage_gap",
+   "verification_keywords": [
+    "여가"
+   ],
+   "gold_facts": "여가 카테고리 커버(118장) — 상대적 충분/부족 진단하면 PASS.",
+   "demo_point": "특정 영역 커버리지 질의",
+   "group": "demo"
+  },
+  {
+   "id": "D26",
+   "capability": "C",
+   "act": "3.분석-정형지표",
+   "question": "여성 고객과 남성 고객의 실질 혜택률 차이가 있어?",
+   "expected_intent": "self_metric",
+   "expected_metric_family": "effective_reward_rate",
+   "verification_keywords": [
+    "여성",
+    "남성"
+   ],
+   "gold_facts": "sex=F, M 세그먼트 실질혜택률 비교 제시하면 PASS.",
+   "demo_point": "성별 세그먼트 비교",
+   "group": "demo"
+  },
+  {
+   "id": "D27",
+   "capability": "A-discovery",
+   "act": "1.탐색-용어이해",
+   "question": "의료 관련해서 우리가 다루는 데이터가 뭐가 있어?",
+   "expected_intent": "category_search",
+   "expected_mode": "catalog_discovery",
+   "verification_keywords": [
+    "의료",
+    "약국",
+    "건강"
+   ],
+   "gold_facts": "데이터 발견(discovery) 질의 — '의료' 상위개념의 하위 카탈로그 카테고리(의료/건강·약국)를 나열/설명하면 PASS. 카드 조회가 아니라 '어떤 데이터가 있는지' 범위 안내.",
+   "demo_point": "카탈로그가 데이터 범위를 현업에게 안내(catalog_discovery mode)",
+   "group": "demo"
+  },
+  {
+   "id": "D28",
+   "capability": "A",
+   "act": "1.탐색-용어이해",
+   "question": "의료 쪽 혜택 있는 카드 보여줘",
+   "expected_intent": "category_search",
+   "verification_keywords": [
+    "의료",
+    "약국",
+    "카드"
+   ],
+   "gold_facts": "'의료' 상위개념→하위(의료/건강·약국) 커버 카드 조회. 해당 카테고리 카드 제시하면 PASS. (D27 discovery와 구분 — 이건 실제 카드 조회)",
+   "demo_point": "의료 상위용어→하위 카테고리 카드 조회(category_search)",
+   "group": "demo"
+  },
+  {
+   "id": "M01",
+   "capability": "H",
+   "act": "마케터-1.제휴대상",
+   "seq": 1,
+   "question": "스타벅스랑 제휴 프로모션 하려는데, 지금 스타벅스 혜택 주는 우리 카드가 뭐가 있어?",
+   "expected_intent": "merchant_reverse",
+   "verification_keywords": [
+    "스타벅스",
+    "카드",
+    "혜택"
+   ],
+   "gold_facts": "스타벅스(커피) 혜택 제공 카드 목록을 제시하면 PASS. 제휴 협상 시 '우리 어느 카드가 이 브랜드 커버하나' 파악.",
+   "demo_point": "[마케터 1/8] 제휴 대상 파악 — 특정 브랜드 혜택 제공 카드를 역방향 조회(가맹점 제휴 협상용)",
+   "group": "demo"
+  },
+  {
+   "id": "M02",
+   "capability": "H",
+   "act": "마케터-2.제휴범위",
+   "seq": 2,
+   "question": "커피 혜택 주는 카드는 다 뭐가 있어?",
+   "expected_intent": "category_search",
+   "verification_keywords": [
+    "커피",
+    "카드"
+   ],
+   "gold_facts": "커피 카테고리 혜택 카드 목록 제시하면 PASS. 제휴 범위(경쟁 브랜드 포함) 파악.",
+   "demo_point": "[마케터 2/8] 제휴 범위 — 커피 카테고리 전체 혜택 카드로 제휴 포트폴리오 확인",
+   "group": "demo"
+  },
+  {
+   "id": "M03",
+   "capability": "C",
+   "act": "마케터-3.타겟발굴",
+   "seq": 3,
+   "question": "커피 소비층을 겨냥하려는데, 연령대별 실질 혜택률 비교해줘",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "연령",
+    "실질 혜택률",
+    "비교"
+   ],
+   "gold_facts": "연령대별 실질혜택률 세그먼트 비교 제시하면 PASS(sum/sum 재계산).",
+   "demo_point": "[마케터 3/8] 타겟 발굴 — 어느 연령층이 혜택을 잘 받는지 세그먼트 지표로 프로모션 타겟 결정",
+   "group": "demo"
+  },
+  {
+   "id": "M04",
+   "capability": "C",
+   "act": "마케터-4.타겟확정",
+   "seq": 4,
+   "question": "그중 20대 실질 혜택률은 어느 정도야?",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "20대",
+    "실질 혜택률"
+   ],
+   "gold_facts": "20대(age_band=20) 세그먼트 실질혜택률 값 제시하면 PASS.",
+   "demo_point": "[마케터 4/8] 타겟 확정 — 프로모션 대상 세그먼트 단일 지표 확인",
+   "group": "demo"
+  },
+  {
+   "id": "M05",
+   "capability": "C",
+   "act": "마케터-5.규모산정",
+   "seq": 5,
+   "question": "20대 혜택 대상 소비 규모는 얼마야?",
+   "expected_intent": "self_metric",
+   "verification_keywords": [
+    "20대",
+    "소비",
+    "규모"
+   ],
+   "gold_facts": "20대 혜택대상 소비규모(eligible_spend) 값 제시하면 PASS.",
+   "demo_point": "[마케터 5/8] 규모 산정 — 타겟(20대) 혜택 대상 소비 규모로 프로모션 임팩트 가늠",
+   "group": "demo"
+  },
+  {
+   "id": "M06",
+   "capability": "E",
+   "act": "마케터-6.캠페인비용",
+   "seq": 6,
+   "question": "커피 할인 한도를 반으로 줄이면 리워드 비용이 얼마나 절감돼?",
+   "expected_intent": "what_if",
+   "verification_keywords": [
+    "비용",
+    "절감",
+    "변화"
+   ],
+   "gold_facts": "규칙 변경(한도↓) baseline vs scenario 비용 변화 제시하면 PASS.",
+   "demo_point": "[마케터 6/8] 캠페인 비용 — 혜택 조정 시 리워드 비용 변화를 사전 시뮬레이션",
+   "group": "demo"
+  },
+  {
+   "id": "M07",
+   "capability": "F",
+   "act": "마케터-7.카니발",
+   "seq": 7,
+   "question": "커피 혜택 구조가 비슷한 카드들끼리 묶어서 보여줘",
+   "expected_intent": "portfolio_overlap",
+   "verification_keywords": [
+    "유사",
+    "커피",
+    "카드"
+   ],
+   "gold_facts": "커피 혜택 자카드 유사 카드쌍/그룹 제시하면 PASS. 프로모션 카드 간 자기잠식 점검.",
+   "demo_point": "[마케터 7/8] 카니발 점검 — 프로모션 카드가 자사 다른 카드와 겹쳐 잠식하는지 온톨로지 유사도로 확인",
+   "group": "demo"
+  },
+  {
+   "id": "M08",
+   "capability": "D",
+   "act": "마케터-8.신뢰",
+   "seq": 8,
+   "question": "보고 전에 그 실질 혜택률 숫자는 어떻게 계산된 거야?",
+   "expected_intent": "self_metric",
+   "gold_check": {
+    "metric": "effective_reward_rate",
+    "require": [
+     "formula"
+    ]
+   },
+   "verification_keywords": [
+    "계산",
+    "expected_reward",
+    "eligible_spend"
+   ],
+   "gold_facts": "metric_meta 계산식(sum(expected_reward)/sum(eligible_spend)) 제시하면 PASS.",
+   "demo_point": "[마케터 8/8] 신뢰 — 보고용 지표의 계산식/근거를 카탈로그가 설명",
+   "group": "demo"
+  },
+  {
+   "id": "MC01",
+   "capability": "I",
+   "act": "시장차원-연령",
+   "expected_intent": "market_consumption",
+   "question": "서울 연령대별 시장 소비가 어떻게 돼?",
+   "verification_keywords": [
+    "연령",
+    "소비",
+    "조"
+   ],
+   "gold_facts": "서울 연령대별 소비 규모(60+ 20.7조, 40대 18.2조 등)를 실측 제시하면 PASS. 우리 세그먼트와 동일 연령축.",
+   "demo_point": "[연결A] 서울 시장 소비를 우리 고객 세그먼트와 동일한 연령축으로 조회 — 시장수요↔자사지표 대조 기반",
+   "group": "demo"
+  },
+  {
+   "id": "MC02",
+   "capability": "I",
+   "act": "시장차원-업종연령",
+   "expected_intent": "market_consumption",
+   "question": "서울에서 커피는 주로 몇 대가 많이 소비해?",
+   "verification_keywords": [
+    "커피",
+    "30대",
+    "연령"
+   ],
+   "gold_facts": "커피 업종 연령대별 소비(30대 최다 7,061억)를 실측 제시하면 PASS.",
+   "demo_point": "[연결B] 업종×연령 — '이 업종은 몇 대가 쓰나' 타겟 연령 데이터 근거(서울 공개매출)",
+   "group": "demo"
+  },
+  {
+   "id": "MC03",
+   "capability": "I",
+   "act": "시장차원-성별",
+   "expected_intent": "market_consumption",
+   "question": "의류는 남녀 중 누가 더 많이 소비해?",
+   "verification_keywords": [
+    "의류",
+    "여성",
+    "성별"
+   ],
+   "gold_facts": "의류 성별 소비(여성 우세)를 실측 제시하면 PASS.",
+   "demo_point": "[연결E] 업종×성별 — 성별 타겟 근거",
+   "group": "demo"
+  },
+  {
+   "id": "MC04",
+   "capability": "I",
+   "act": "시장차원-시간대",
+   "expected_intent": "market_consumption",
+   "question": "서울에서 소비가 몰리는 시간대는 언제야?",
+   "verification_keywords": [
+    "시간대",
+    "소비"
+   ],
+   "gold_facts": "시간대별 소비(11~14시·17~21시 피크)를 실측 제시하면 PASS.",
+   "demo_point": "[연결D] 시간대별 소비 — 프로모션 타이밍 근거",
+   "group": "demo"
+  },
+  {
+   "id": "MC05",
+   "capability": "I+C",
+   "act": "시장차원-대조",
+   "expected_intent": "self_metric",
+   "question": "우리 고객은 연령대별 실질 혜택률이 어때?",
+   "verification_keywords": [
+    "연령",
+    "실질 혜택률"
+   ],
+   "gold_facts": "연령대별 실질혜택률 세그먼트 제시하면 PASS. (연결A의 자사지표 절반 — 시장소비와 대조)",
+   "demo_point": "[연결A-2] 시장 연령소비와 대조할 자사 연령별 지표 — 같은 축이라 정합 비교",
+   "group": "demo"
+  },
+  {
+   "id": "POP1",
+   "capability": "J",
+   "act": "수요-소비 대조",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "서울에서 점심에 사람이 제일 많이 모이는 동네 어디야? 거기서 소비도 제일 많이 일어나?",
+   "verification_keywords": [
+    "여의도",
+    "생활인구",
+    "노량진"
+   ],
+   "negative_keywords": [
+    "방문객 수",
+    "실제 인구"
+   ],
+   "gold_facts": "여의도동 점심 생활인구 1위(15.8만/일)·카드소비 13위, 노량진 인구 22위·소비 1위. AreaMapping(상권↔행정동) 연결 명시 + 통신 추계 caveat 동반하면 PASS.",
+   "demo_point": "[S1 여의도 역설] 두 공공 자산의 코드 체계가 달라 직접 join 불가 — AreaMapping 다리가 연결. 오프닝 후킹.",
+   "expected_anatomy": "population:pop_vs_sales",
+   "group": "pop_core"
+  },
+  {
+   "id": "POP2",
+   "capability": "J",
+   "act": "침투율(신규 지표)",
+   "expected_intent": "market_consumption",
+   "expected_action": "penetration",
+   "question": "사람 수 대비 소비가 제일 센 동네는 어디야?",
+   "verification_keywords": [
+    "노량진",
+    "1인당"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "노량진 32.3만원/인 1위(최하위 역삼 1.1만 — 30배). 노량진=수산 도매 상권 객단가 효과 각주 필수. 분모 정의(점심 11~13시 평균) 명시하면 PASS.",
+   "demo_point": "[S1b] 두 공공 데이터만으로 만든 신규 파생 지표(population_penetration) — 도매 각주 없으면 오독.",
+   "expected_anatomy": "population:penetration",
+   "group": "pop_core"
+  },
+  {
+   "id": "POP3",
+   "capability": "J+C",
+   "act": "연령 밀집(3단 대조 ①)",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_by_age",
+   "question": "30대가 많이 모이는 동네 어디야?",
+   "verification_keywords": [
+    "30대",
+    "여의도"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "30대 점심 생활인구 최다 상권 top3(여의도·역삼 등) 제시 + 동일 age_band 축(시장 소비·우리 혜택률과 대조 가능) 언급하면 PASS.",
+   "demo_point": "[S2 ①단] 모이는 곳(인구) — 쓰는 곳(시장 by_age) — 닿는가(혜택률)의 첫 단. 다음은? 체인으로 연결A 승격.",
+   "expected_anatomy": "population:pop_by_age",
+   "group": "pop_core"
+  },
+  {
+   "id": "POPv1",
+   "group": "pop_variant",
+   "capability": "J",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "붐비는 동네일수록 카드 매출도 큰 거야?",
+   "verification_keywords": [
+    "여의도",
+    "노량진"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "인구 순위와 소비 순위의 괴리(여의도/노량진 역설) 제시하면 PASS."
+  },
+  {
+   "id": "POPv2",
+   "group": "pop_variant",
+   "capability": "J",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "유동인구랑 실제 매출이 따로 노는 상권이 있어?",
+   "verification_keywords": [
+    "여의도"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "괴리 상권(여의도: 인구1위/소비13위 또는 역삼, 노량진 역방향) 구체 제시하면 PASS."
+  },
+  {
+   "id": "POPv3",
+   "group": "pop_variant",
+   "capability": "J",
+   "expected_intent": "market_consumption",
+   "expected_action": "penetration",
+   "question": "머릿수 대비 씀씀이가 큰 상권 뽑아줘",
+   "verification_keywords": [
+    "노량진"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "침투율 순위(노량진 1위) + 도매 각주. 정의(연매출÷점심 인구) 언급 가점."
+  },
+  {
+   "id": "POPv4",
+   "group": "pop_variant",
+   "capability": "J",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_by_age",
+   "question": "20대는 주로 어느 동네에 모여 있어?",
+   "verification_keywords": [
+    "20대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "20대 점심 생활인구 최다 상권 top3 제시하면 PASS(인덱스 pop_by_age['20'].top_areas)."
+  },
+  {
+   "id": "POPv5",
+   "group": "pop_variant",
+   "capability": "J",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "강남 쪽은 사람 많은 만큼 소비도 나와?",
+   "verification_keywords": [
+    "강남"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "강남역 focus(인구·소비 순위 병기) 또는 전체 대조표에서 강남 언급하면 PASS."
+  },
+  {
+   "id": "POPv6",
+   "group": "pop_variant",
+   "capability": "J+C",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_by_age",
+   "question": "30대 타겟 프로모션 하려는데, 30대가 모이는 동네부터 알려줘",
+   "verification_keywords": [
+    "30대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "30대 밀집 상권 제시 + (가점) 다음 단계로 시장 소비/자사 지표 대조 제안."
+  },
+  {
+   "id": "POPe1",
+   "group": "pop_edge",
+   "capability": "H",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "생활인구가 그 동네 방문객 수라는 거지? 정확히 몇 명이 왔다는 거야?",
+   "verification_keywords": [
+    "추계"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "정직성 게이트: 생활인구는 통신 기반 '추계'이며 방문객·구매자 수가 아님을 명시하면 PASS. 방문객 수로 단정하면 FAIL."
+  },
+  {
+   "id": "POPe2",
+   "group": "pop_edge",
+   "capability": "H",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "잠실나루 쪽은 사람 대비 소비 어때?",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "인덱스는 상위 25상권만 — 잠실나루 미포함. '해당 상권은 인덱스에 없음(상위 25개만)' 정직 고지하거나 잠실(관광특구/잠실역·잠실새내)로 한정해 답하면 PASS. 잠실나루 수치를 지어내면 FAIL."
+  },
+  {
+   "id": "POPe3",
+   "group": "pop_edge",
+   "capability": "H",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_by_age",
+   "question": "새벽 2시에 사람 많은 동네는 어디야?",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "인덱스는 점심(11~13시) 기준만 사전계산 — 새벽 시간대 미보유를 정직 고지하면 PASS. 새벽 수치를 지어내면 FAIL. (점심 기준으로 대체 제안은 가점)"
+  },
+  {
+   "id": "POPe4",
+   "group": "pop_edge",
+   "capability": "H",
+   "expected_intent": "market_consumption",
+   "expected_action": "penetration",
+   "question": "그 침투율인가 하는 숫자, 어떻게 계산한 거야? 믿어도 돼?",
+   "verification_keywords": [
+    "생활인구"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "정의(연매출÷점심 평균 생활인구×365) + 두 원천(생활인구[공공]·추정매출[집계]) + 한계(추계·시점 불일치) 설명하면 PASS."
+  },
+  {
+   "id": "POPe5",
+   "group": "pop_edge",
+   "capability": "J",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "여의도는 사람이 그렇게 많은데 왜 소비가 적어?",
+   "verification_keywords": [
+    "여의도"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "인구1위/소비13위 사실 제시 + 해석은 데이터 한계 내에서(업종 구성·직장인 통행 가설은 '가능성'으로, 단정 금지). 인덱스에 없는 인과를 단정하면 PARTIAL."
+  },
+  {
+   "id": "POPe6",
+   "group": "pop_edge",
+   "capability": "J",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "question": "사람 많이 모이는 동네 위주로 신규 가맹 제휴를 하면 손해야?",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "침투율/괴리 데이터로 '인구만으로는 소비를 보증 못함'을 근거 제시하면 PASS. 제휴 손익(원가·수수료) 단정은 데이터 밖 — 한계 고지 필요."
+  },
+  {
+   "id": "x1-03",
+   "group": "retry",
+   "capability": "B",
+   "expected_intent": "market_consumption",
+   "expected_action": "by_category",
+   "question": "우리 혜택 카테고리 기준으로 서울 시장을 나눠보면 어디가 제일 커?",
+   "verification_keywords": [
+    "음식점"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "혜택 카테고리별 시장 소비(crosswalk 집계) 순위 제시(음식점/식음료 축 최대). 커버리지 % 동반 가점."
+  },
+  {
+   "id": "x3-03",
+   "group": "retry",
+   "capability": "A",
+   "expected_intent": "category_search",
+   "expected_action": null,
+   "question": "생활 혜택이랑 편의점 혜택이랑 뭐가 달라? 겹치는 거 아냐?",
+   "verification_keywords": [
+    "생활",
+    "편의점"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "편의점 ⊑ 생활(포함관계) 설명 — 생활이 상위(슈퍼마켓/마트·편의점 포함), 편의점은 그 하위. 포함관계를 반대로 말하면 FAIL."
+  },
+  {
+   "id": "x3-05",
+   "group": "retry",
+   "capability": "A",
+   "expected_intent": null,
+   "expected_action": null,
+   "question": "병원 혜택 있어?",
+   "verification_keywords": [
+    "의료"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "'병원'→의료/건강 카테고리 해석. 신한 의료 혜택 카드 존재 여부를 그래프 근거로 답하거나(있으면 카드 제시), 없으면 '의료 카테고리 혜택 카드 없음'을 정직 고지. '확인 필요'만 반환하면 FAIL."
+  },
+  {
+   "id": "x5-02",
+   "group": "retry",
+   "capability": "C",
+   "expected_intent": "eligibility",
+   "expected_action": null,
+   "question": "그럼 스타벅스에서 결제하면? 같은 커피인데 왜 달라?",
+   "preset_card_id": "201903201001",
+   "verification_keywords": [
+    "스타벅스"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "카테고리 혜택(커피)과 지정 가맹점 혜택의 구분 — 스타벅스가 지정 가맹점인지/커피 카테고리에 포함되는지를 약관 근거로 판정. 컨텍스트 없이도 카테고리≠가맹점 구조를 설명하면 PARTIAL 이상."
+  },
+  {
+   "id": "h-08",
+   "group": "retry",
+   "capability": "C",
+   "expected_intent": "eligibility",
+   "expected_action": null,
+   "question": "딥드림 체크로 스타벅스 결제하면 DREAM 적립 되는지 판정해줘",
+   "verification_keywords": [
+    "DREAM"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "딥드림 DREAM 영역 판정 — DREAM 지정 영역(dream_areas) 근거로 스타벅스 포함 여부 판정. 미매핑이면 '판정 불가 사유'를 정직 고지(h-08 원래 정직성 시나리오)."
+  },
+  {
+   "id": "x6-02",
+   "group": "retry",
+   "capability": "F",
+   "expected_intent": "ontology_map",
+   "expected_action": "complaint",
+   "question": "혜택 미적용 민원들 실제 원인이 뭐야?",
+   "verification_keywords": [
+    "전월실적"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "민원 근본원인 분포(전월실적 미달 최다, 월횟수/월한도) + 정상 거절 vs 재계산 불일치(오류의심) 구분 제시하면 PASS."
+  },
+  {
+   "id": "P2-08",
+   "group": "retry",
+   "capability": "C",
+   "expected_intent": "eligibility",
+   "expected_action": null,
+   "question": "이번 달 할인 한도 아직 남았나요?",
+   "preset_card_id": "201903201001",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "개인 실시간 잔여 한도는 데모 데이터 밖 — 카드의 한도 '구조'(월 통합 한도 등)를 약관 근거로 설명 + 개인 잔액은 확인 불가 정직 고지하면 PASS. 구조 설명 없이 앱 안내만 하면 PARTIAL."
+  },
+  {
+   "id": "P1-06",
+   "group": "retry",
+   "capability": "E",
+   "expected_intent": null,
+   "expected_action": null,
+   "question": "연회비 비싼데 혜택은 별로인 카드 골라줘",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "연회비 대비 혜택 밀도 비교 시도(연회비·혜택 수 데이터 실재) 또는 '가치 판단 기준 필요' 정직 응답. '확인 필요'만 반환하면 FAIL."
+  },
+  {
+   "id": "P3-11",
+   "group": "retry",
+   "capability": "B",
+   "expected_intent": "targeting",
+   "expected_action": null,
+   "question": "이 MCC 코드가 우리 혜택 분류로 어떻게 연결돼?",
+   "verification_keywords": [
+    "MCC"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "MCC↔혜택 공식 crosswalk 부재를 정직 고지(현재 매핑은 서울업종↔혜택 카테고리) + 대안 경로(가맹점/업종 기반) 안내하면 PASS. 가짜 MCC 매핑을 지어내면 FAIL."
+  },
+  {
+   "id": "P3-17",
+   "group": "retry",
+   "capability": "D",
+   "expected_intent": "self_metric",
+   "expected_action": null,
+   "question": "혜택 대상 거래 건수가 얼마나 돼?",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "eligible 거래 규모 — metric(eligible_spend 관련) 또는 거래 롤업(합성 12.6만 중 대상 건수) 수치 제시. '지표 없음'만 반환하면 FAIL(데이터 실재)."
+  },
+  {
+   "id": "P4-06",
+   "group": "retry",
+   "capability": "D",
+   "expected_intent": "self_metric",
+   "expected_action": null,
+   "question": "실질 혜택률 지표 정의 버전이 어떻게 돼?",
+   "verification_keywords": [
+    "버전"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "metric registry의 정의+버전(definition_version) 제시하면 PASS. (원판 질문이 지표명 미지정이라 실질 혜택률로 명시화 — 컨텍스트 의존 제거)"
+  },
+  {
+   "id": "P4-10",
+   "group": "retry",
+   "capability": "D",
+   "expected_intent": "coverage_gap",
+   "expected_action": null,
+   "question": "커버리지 지표 계산에 어떤 소비 데이터가 쓰여?",
+   "verification_keywords": [
+    "서울"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "coverage의 시장 축 = 서울 상권 추정매출(공개-집계) + 내부 축 = 혜택 카드 수. 원천 두 개를 밝히면 PASS. '출처 없음'이면 FAIL."
+  }
+ ]
+}

@@ -1,0 +1,568 @@
+@prefix co: <https://card.ai-ready/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+co:CustomerSegmentSpec a owl:Class ;
+    rdfs:label "CustomerSegmentSpec" .
+
+co:DistrictSales a owl:Class ;
+    rdfs:label "DistrictSales" .
+
+co:age a owl:DatatypeProperty ;
+    rdfs:label "age" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:integer .
+
+co:ageBand a owl:DatatypeProperty ;
+    rdfs:label "age_band" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:string .
+
+co:aliases a owl:DatatypeProperty ;
+    rdfs:label "aliases" ;
+    rdfs:domain co:Merchant ;
+    rdfs:range xsd:string .
+
+co:amount a owl:DatatypeProperty ;
+    rdfs:label "amount" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:integer .
+
+co:annualFeeRaw a owl:DatatypeProperty ;
+    rdfs:label "annual_fee_raw" ;
+    rdfs:domain co:CardProduct ;
+    rdfs:range xsd:string .
+
+co:atMerchant a owl:ObjectProperty ;
+    rdfs:label "atMerchant" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range co:Merchant .
+
+co:benefitCategory a owl:DatatypeProperty ;
+    rdfs:label "benefit_category" ;
+    rdfs:domain co:Benefit ;
+    rdfs:range xsd:string .
+
+co:benefitConditionId a owl:DatatypeProperty ;
+    rdfs:label "benefit_condition_id" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:string .
+
+co:benefitGroupId a owl:DatatypeProperty ;
+    rdfs:label "benefit_group_id" ;
+    rdfs:domain co:Benefit ;
+    rdfs:range xsd:string .
+
+co:benefitId a owl:DatatypeProperty ;
+    rdfs:label "benefit_id" ;
+    rdfs:domain co:Benefit ;
+    rdfs:range xsd:string .
+
+co:billingCycleDay a owl:DatatypeProperty ;
+    rdfs:label "billing_cycle_day" ;
+    rdfs:domain co:Account ;
+    rdfs:range xsd:integer .
+
+co:calculationTrace a owl:DatatypeProperty ;
+    rdfs:label "calculation_trace" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:string .
+
+co:canonicalName a owl:DatatypeProperty ;
+    rdfs:label "canonical_name" ;
+    rdfs:domain co:Merchant ;
+    rdfs:range xsd:string .
+
+co:capAfter a owl:DatatypeProperty ;
+    rdfs:label "cap_after" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:decimal .
+
+co:capBefore a owl:DatatypeProperty ;
+    rdfs:label "cap_before" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:decimal .
+
+co:cardAccountId a owl:DatatypeProperty ;
+    rdfs:label "card_account_id" ;
+    rdfs:domain co:Account ;
+    rdfs:range xsd:string .
+
+co:cardProductId a owl:DatatypeProperty ;
+    rdfs:label "card_product_id" ;
+    rdfs:domain co:CardProduct ;
+    rdfs:range xsd:string .
+
+co:cardType a owl:DatatypeProperty ;
+    rdfs:label "card_type" ;
+    rdfs:domain co:CardProduct ;
+    rdfs:range xsd:string .
+
+co:caseId a owl:DatatypeProperty ;
+    rdfs:label "case_id" ;
+    rdfs:domain co:GoldenEligibilityCase ;
+    rdfs:range xsd:string .
+
+co:channel a owl:DatatypeProperty ;
+    rdfs:label "channel" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:complaintId a owl:DatatypeProperty ;
+    rdfs:label "complaint_id" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:conditionId a owl:DatatypeProperty ;
+    rdfs:label "condition_id" ;
+    rdfs:domain co:BenefitCondition ;
+    rdfs:range xsd:string .
+
+co:creditLimitKrw a owl:DatatypeProperty ;
+    rdfs:label "credit_limit_krw" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:integer .
+
+co:customerId a owl:DatatypeProperty ;
+    rdfs:label "customer_id" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:string .
+
+co:defaultFlag a owl:DatatypeProperty ;
+    rdfs:label "default_flag" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:integer .
+
+co:delinquencyStatus a owl:DatatypeProperty ;
+    rdfs:label "delinquency_status" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:integer .
+
+co:denialReason a owl:DatatypeProperty ;
+    rdfs:label "denial_reason" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:string .
+
+co:edgeCaseType a owl:DatatypeProperty ;
+    rdfs:label "edge_case_type" ;
+    rdfs:domain co:GoldenEligibilityCase ;
+    rdfs:range xsd:string .
+
+co:eligibleForBenefitCategory a owl:ObjectProperty ;
+    rdfs:label "eligibleForBenefitCategory" ;
+    rdfs:domain co:IndustryCategory ;
+    rdfs:range co:BenefitCategory .
+
+co:entityLinkConfidence a owl:DatatypeProperty ;
+    rdfs:label "entity_link_confidence" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:decimal .
+
+co:evidenceRuleId a owl:DatatypeProperty ;
+    rdfs:label "evidence_rule_id" ;
+    rdfs:domain co:GoldenEligibilityCase ;
+    rdfs:range xsd:string .
+
+co:expectedDenialReason a owl:DatatypeProperty ;
+    rdfs:label "expected_denial_reason" ;
+    rdfs:domain co:GoldenEligibilityCase ;
+    rdfs:range xsd:string .
+
+co:expectedEligible a owl:DatatypeProperty ;
+    rdfs:label "expected_eligible" ;
+    rdfs:domain co:GoldenEligibilityCase ;
+    rdfs:range xsd:boolean .
+
+co:expectedReward a owl:DatatypeProperty ;
+    rdfs:label "expected_reward" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:integer .
+
+co:forAccountStmt a owl:ObjectProperty ;
+    rdfs:label "forAccountStmt" ;
+    rdfs:domain co:StatementMonthly ;
+    rdfs:range co:Account .
+
+co:forBenefit a owl:ObjectProperty ;
+    rdfs:label "forBenefit" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range co:Benefit .
+
+co:forProduct a owl:ObjectProperty ;
+    rdfs:label "forProduct" ;
+    rdfs:domain co:Account ;
+    rdfs:range co:CardProduct .
+
+co:forTransaction a owl:ObjectProperty ;
+    rdfs:label "forTransaction" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range co:Transaction .
+
+co:hasBenefit a owl:ObjectProperty ;
+    rdfs:label "hasBenefit" ;
+    rdfs:domain co:CardProduct ;
+    rdfs:range co:Benefit .
+
+co:hasBenefitCategory a owl:ObjectProperty ;
+    rdfs:label "hasBenefitCategory" ;
+    rdfs:domain co:Benefit ;
+    rdfs:range co:BenefitCategory .
+
+co:hasCondition a owl:ObjectProperty ;
+    rdfs:label "hasCondition" ;
+    rdfs:domain co:Benefit ;
+    rdfs:range co:BenefitCondition .
+
+co:hasSpendTier a owl:ObjectProperty ;
+    rdfs:label "hasSpendTier" ;
+    rdfs:domain co:CardProduct ;
+    rdfs:range co:SpendTier .
+
+co:heldBy a owl:ObjectProperty ;
+    rdfs:label "heldBy" ;
+    rdfs:domain co:Account ;
+    rdfs:range co:Customer .
+
+co:industryCode a owl:DatatypeProperty ;
+    rdfs:label "industry_code" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:industryName a owl:DatatypeProperty ;
+    rdfs:label "industry_name" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:injectedErrorType a owl:DatatypeProperty ;
+    rdfs:label "injected_error_type" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:string .
+
+co:installmentMonths a owl:DatatypeProperty ;
+    rdfs:label "installment_months" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:integer .
+
+co:isActive a owl:DatatypeProperty ;
+    rdfs:label "is_active" ;
+    rdfs:domain co:Account ;
+    rdfs:range xsd:boolean .
+
+co:isCancelled a owl:DatatypeProperty ;
+    rdfs:label "is_cancelled" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:boolean .
+
+co:isDiscontinued a owl:DatatypeProperty ;
+    rdfs:label "is_discontinued" ;
+    rdfs:domain co:CardProduct ;
+    rdfs:range xsd:boolean .
+
+co:isRefund a owl:DatatypeProperty ;
+    rdfs:label "is_refund" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:boolean .
+
+co:isSynthetic a owl:DatatypeProperty ;
+    rdfs:label "is_synthetic" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:boolean .
+
+co:issue a owl:DatatypeProperty ;
+    rdfs:label "issue" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:label a owl:DatatypeProperty ;
+    rdfs:label "label" ;
+    rdfs:domain co:Benefit ;
+    rdfs:range xsd:string .
+
+co:ledgerId a owl:DatatypeProperty ;
+    rdfs:label "ledger_id" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:string .
+
+co:limitAmount a owl:DatatypeProperty ;
+    rdfs:label "limit_amount" ;
+    rdfs:domain co:SpendTier ;
+    rdfs:range xsd:integer .
+
+co:linkSource a owl:DatatypeProperty ;
+    rdfs:label "link_source" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:mappingConfidence a owl:DatatypeProperty ;
+    rdfs:label "mapping_confidence" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:decimal .
+
+co:maxSpend a owl:DatatypeProperty ;
+    rdfs:label "max_spend" ;
+    rdfs:domain co:SpendTier ;
+    rdfs:range xsd:decimal .
+
+co:mcc a owl:DatatypeProperty ;
+    rdfs:label "mcc" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:merchantAlias a owl:DatatypeProperty ;
+    rdfs:label "merchant_alias" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:merchantId a owl:DatatypeProperty ;
+    rdfs:label "merchant_id" ;
+    rdfs:domain co:Merchant ;
+    rdfs:range xsd:string .
+
+co:merchantIndustry a owl:ObjectProperty ;
+    rdfs:label "merchantIndustry" ;
+    rdfs:domain co:Merchant ;
+    rdfs:range co:IndustryCategory .
+
+co:merchantName a owl:DatatypeProperty ;
+    rdfs:label "merchant_name" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:minSpend a owl:DatatypeProperty ;
+    rdfs:label "min_spend" ;
+    rdfs:domain co:SpendTier ;
+    rdfs:range xsd:integer .
+
+co:monthlySpendTier a owl:DatatypeProperty ;
+    rdfs:label "monthly_spend_tier" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:string .
+
+co:name a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:domain co:CardProduct ;
+    rdfs:range xsd:string .
+
+co:narrative a owl:DatatypeProperty ;
+    rdfs:label "narrative" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:observedReward a owl:DatatypeProperty ;
+    rdfs:label "observed_reward" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:integer .
+
+co:onAccount a owl:ObjectProperty ;
+    rdfs:label "onAccount" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range co:Account .
+
+co:openDate a owl:DatatypeProperty ;
+    rdfs:label "open_date" ;
+    rdfs:domain co:Account ;
+    rdfs:range xsd:string .
+
+co:parseStatus a owl:DatatypeProperty ;
+    rdfs:label "parse_status" ;
+    rdfs:domain co:BenefitCondition ;
+    rdfs:range xsd:string .
+
+co:parsed a owl:DatatypeProperty ;
+    rdfs:label "parsed" ;
+    rdfs:domain co:BenefitCondition ;
+    rdfs:range xsd:string .
+
+co:performancePeriodEnd a owl:DatatypeProperty ;
+    rdfs:label "performance_period_end" ;
+    rdfs:domain co:StatementMonthly ;
+    rdfs:range xsd:string .
+
+co:performancePeriodStart a owl:DatatypeProperty ;
+    rdfs:label "performance_period_start" ;
+    rdfs:domain co:StatementMonthly ;
+    rdfs:range xsd:string .
+
+co:persona a owl:DatatypeProperty ;
+    rdfs:label "persona" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:string .
+
+co:postedDate a owl:DatatypeProperty ;
+    rdfs:label "posted_date" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:postedMonth a owl:DatatypeProperty ;
+    rdfs:label "posted_month" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:prevMonthEligibleSpend a owl:DatatypeProperty ;
+    rdfs:label "prev_month_eligible_spend" ;
+    rdfs:domain co:StatementMonthly ;
+    rdfs:range xsd:integer .
+
+co:rawText a owl:DatatypeProperty ;
+    rdfs:label "raw_text" ;
+    rdfs:domain co:BenefitCondition ;
+    rdfs:range xsd:string .
+
+co:receivedDate a owl:DatatypeProperty ;
+    rdfs:label "received_date" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:region a owl:DatatypeProperty ;
+    rdfs:label "region" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:string .
+
+co:relatedBenefitId a owl:DatatypeProperty ;
+    rdfs:label "related_benefit_id" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:relatedCardId a owl:DatatypeProperty ;
+    rdfs:label "related_card_id" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:relatedStatementMonth a owl:DatatypeProperty ;
+    rdfs:label "related_statement_month" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:relatedTxnId a owl:DatatypeProperty ;
+    rdfs:label "related_txn_id" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:remainingMonthlyLimit a owl:DatatypeProperty ;
+    rdfs:label "remaining_monthly_limit" ;
+    rdfs:domain co:RewardLedger ;
+    rdfs:range xsd:decimal .
+
+co:rewardType a owl:DatatypeProperty ;
+    rdfs:label "reward_type" ;
+    rdfs:domain co:Benefit ;
+    rdfs:range xsd:string .
+
+co:ruleVersion a owl:DatatypeProperty ;
+    rdfs:label "rule_version" ;
+    rdfs:domain co:BenefitCondition ;
+    rdfs:range xsd:string .
+
+co:scenarioTag a owl:DatatypeProperty ;
+    rdfs:label "scenario_tag" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:sex a owl:DatatypeProperty ;
+    rdfs:label "sex" ;
+    rdfs:domain co:Customer ;
+    rdfs:range xsd:string .
+
+co:spendTierMatched a owl:DatatypeProperty ;
+    rdfs:label "spend_tier_matched" ;
+    rdfs:domain co:StatementMonthly ;
+    rdfs:range xsd:string .
+
+co:statementMonth a owl:DatatypeProperty ;
+    rdfs:label "statement_month" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:subIssue a owl:DatatypeProperty ;
+    rdfs:label "sub_issue" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:string .
+
+co:termsVersion a owl:DatatypeProperty ;
+    rdfs:label "terms_version" ;
+    rdfs:domain co:GoldenEligibilityCase ;
+    rdfs:range xsd:string .
+
+co:tierId a owl:DatatypeProperty ;
+    rdfs:label "tier_id" ;
+    rdfs:domain co:SpendTier ;
+    rdfs:range xsd:string .
+
+co:timely a owl:DatatypeProperty ;
+    rdfs:label "timely" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:boolean .
+
+co:totalSpend a owl:DatatypeProperty ;
+    rdfs:label "total_spend" ;
+    rdfs:domain co:StatementMonthly ;
+    rdfs:range xsd:integer .
+
+co:txnCategory a owl:ObjectProperty ;
+    rdfs:label "txnCategory" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range co:IndustryCategory .
+
+co:txnDatetime a owl:DatatypeProperty ;
+    rdfs:label "txn_datetime" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:txnId a owl:DatatypeProperty ;
+    rdfs:label "txn_id" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:txnStatus a owl:DatatypeProperty ;
+    rdfs:label "txn_status" ;
+    rdfs:domain co:Transaction ;
+    rdfs:range xsd:string .
+
+co:unresolvedEntity a owl:DatatypeProperty ;
+    rdfs:label "unresolved_entity" ;
+    rdfs:domain co:Complaint ;
+    rdfs:range xsd:boolean .
+
+co:BenefitCategory a owl:Class ;
+    rdfs:label "BenefitCategory" .
+
+co:IndustryCategory a owl:Class ;
+    rdfs:label "IndustryCategory" .
+
+co:Merchant a owl:Class ;
+    rdfs:label "Merchant" .
+
+co:SpendTier a owl:Class ;
+    rdfs:label "SpendTier" .
+
+co:BenefitCondition a owl:Class ;
+    rdfs:label "BenefitCondition" .
+
+co:GoldenEligibilityCase a owl:Class ;
+    rdfs:label "GoldenEligibilityCase" .
+
+co:StatementMonthly a owl:Class ;
+    rdfs:label "StatementMonthly" .
+
+co:Account a owl:Class ;
+    rdfs:label "Account" .
+
+co:CardProduct a owl:Class ;
+    rdfs:label "CardProduct" .
+
+co:Benefit a owl:Class ;
+    rdfs:label "Benefit" .
+
+co:Customer a owl:Class ;
+    rdfs:label "Customer" .
+
+co:RewardLedger a owl:Class ;
+    rdfs:label "RewardLedger" .
+
+co:Complaint a owl:Class ;
+    rdfs:label "Complaint" .
+
+co:Transaction a owl:Class ;
+    rdfs:label "Transaction" .
+

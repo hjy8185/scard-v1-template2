@@ -1,0 +1,28 @@
+{
+  "_comment": "U6 하이브리드 사전캐시 (from U1b SMUS glossary / pipeline.catalog.business_names). 미스/blocker 시 U4 registry·U2a TTL fallback.",
+  "terms": {
+    "eligible_spend": {"name": "혜택대상 지출(eligible_spend)", "definition": "혜택 카테고리에 해당하고 전월실적·조건을 충족하는 거래 지출액", "owning_project": "catalog-stewardship"},
+    "effective_reward_rate": {"name": "실질혜택률(effective_reward_rate)", "definition": "지급 리워드 / 대상 지출. 혜택대상거래 기준", "owning_project": "catalog-stewardship"},
+    "redemption_rate": {"name": "리워드 사용률(redemption_rate)", "definition": "사용된 리워드 / 적립 리워드. (정의 실제, 값 합성)", "owning_project": "bi-consumption"},
+    "reward_cost": {"name": "리워드 원가(reward_cost)", "definition": "혜택 지급에 따른 리워드 비용. (정의 실제, 값 합성)", "owning_project": "risk-analytics"},
+    "benefit_category_coverage": {"name": "혜택 카테고리 커버리지", "definition": "혜택이 커버하는 소비 카테고리 비율", "owning_project": "catalog-stewardship"},
+    "r1_benefit": {"name": "카드 혜택", "definition": "카드 상품이 제공하는 혜택(R1)", "owning_project": "card-data-engineering"},
+    "d0_crosswalk_mapping": {"name": "업종-혜택 크로스워크", "definition": "MCC/KSIC/서울업종 ↔ 혜택 카테고리 매핑(D0)", "owning_project": "catalog-stewardship"}
+  },
+  "metric_lineage": {
+    "effective_reward_rate": [
+      {"from": "d6_reward_ledger", "to": "metrics_account_month", "kind": "aggregate"},
+      {"from": "metrics_account_month", "to": "effective_reward_rate", "kind": "derive"},
+      {"from": "effective_reward_rate", "to": "answer", "kind": "serve"}
+    ],
+    "eligible_spend": [
+      {"from": "d4_transaction", "to": "reward_by_account", "kind": "aggregate"},
+      {"from": "reward_by_account", "to": "eligible_spend", "kind": "derive"},
+      {"from": "eligible_spend", "to": "answer", "kind": "serve"}
+    ],
+    "benefit_category_coverage": [
+      {"from": "d0_crosswalk_mapping", "to": "benefit_category_coverage", "kind": "derive"},
+      {"from": "benefit_category_coverage", "to": "answer", "kind": "serve"}
+    ]
+  }
+}

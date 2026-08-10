@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app
+  namespace: card-graphrag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+    spec:
+      containers:
+        - name: frontend-app
+          image: 000000000000.dkr.ecr.us-east-1.amazonaws.com/cg/frontend-app:v52-scenario-fix
+          ports:
+            - containerPort: 3000
+          env:
+            - name: BFF_URL
+              value: "http://bff.card-graphrag.svc.cluster.local:8000"
+            - name: COGNITO_REGION
+              value: "us-east-1"
+            - name: COGNITO_USER_POOL_ID
+              value: "us-east-1_EXAMPLE01"
+            - name: COGNITO_CLIENT_ID
+              value: "620pp7i1da1l4j49f0mpo2bfa3"
+            - name: COGNITO_CLIENT_SECRET
+              value: "dm6ivgs4ilsr67gapfl56qrur64onbp2t4vlfqhg30uiovb8b0t"
+            - name: COGNITO_DOMAIN
+              value: "https://example-app.auth.us-east-1.amazoncognito.com"
+            - name: APP_URL
+              value: "https://EXAMPLEDIST.cloudfront.net"
+          resources:
+            requests:
+              cpu: 128m
+              memory: 256Mi
+            limits:
+              cpu: 256m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /login
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-app
+  namespace: card-graphrag
+spec:
+  selector:
+    app: frontend-app
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: ClusterIP

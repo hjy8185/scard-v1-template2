@@ -1,0 +1,543 @@
+{
+ "meta": {
+  "title": "paraphrase hold-out (측정 전용·튜닝 금지)",
+  "total": 20,
+  "source": "u11_u12_scenarios_v2 X계열 표현변형",
+  "rule": "slot/exemplar/프롬프트 튜닝 금지. UI 비노출. 일반화 측정기.",
+  "note": "acceptance 대비 PASS율 크게 낮으면 과적합 경고(키워드 암기)."
+ },
+ "scenarios": [
+  {
+   "id": "ph-x1-01",
+   "category": "X1",
+   "question": "우리 카드 커피 할인이 먹히는 시장이 서울에 얼마나 되고 어느 연령대가 커피에 돈을 제일 써?",
+   "expected_intent": "market_consumption",
+   "expected_action": "industry_age",
+   "v1_failure": "약관 문구로 카드검색만, 시장규모엔 데이터없음",
+   "required_citation": [
+    "커피-음료",
+    "crosswalk",
+    "30대"
+   ],
+   "verification_keywords": [
+    "커피",
+    "30"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "커피/음료→(crosswalk)→서울 커피-음료 + 30대 최다 7,061억. 연결경로 명시해야 PASS",
+   "source_id": "x1-01",
+   "holdout": true
+  },
+  {
+   "id": "ph-x1-02",
+   "category": "X1",
+   "question": "편의점 혜택 새로 밀려는데 서울 사람들 편의점에 실제로 많이 쓰나?",
+   "expected_intent": "market_consumption",
+   "expected_action": null,
+   "v1_failure": "약관 문구와 통계 업종명이 안 이어짐",
+   "required_citation": [
+    "편의점",
+    "crosswalk"
+   ],
+   "verification_keywords": [
+    "편의점"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "편의점→crosswalk→서울 편의점 업종 매출. 연결 명시",
+   "source_id": "x1-02",
+   "holdout": true
+  },
+  {
+   "id": "ph-x1-03",
+   "category": "X1",
+   "question": "우리가 혜택 주는 분야들로 서울 소비를 갈라보면 뭐가 가장 규모가 커?",
+   "expected_intent": "market_consumption",
+   "expected_action": "by_category",
+   "v1_failure": "서울은 62업종 체계뿐 — 우리 카테고리 뷰 불가",
+   "required_citation": [
+    "음식점",
+    "crosswalk",
+    "커버"
+   ],
+   "verification_keywords": [
+    "음식점"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "by_category=crosswalk 집계 산출물(음식점 1위) + 77.9% 커버 명시",
+   "source_id": "x1-03",
+   "holdout": true
+  },
+  {
+   "id": "ph-x1-04",
+   "category": "X1",
+   "question": "서울 소비는 많은데 정작 우리 카드가 못 챙기는 분야가 뭐야?",
+   "expected_intent": "coverage_gap",
+   "expected_action": null,
+   "v1_failure": "두 시스템 각각 조회는 돼도 gap은 crosswalk join 필수",
+   "required_citation": [
+    "시장",
+    "커버",
+    "crosswalk"
+   ],
+   "verification_keywords": [
+    "시장",
+    "커버"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "집계",
+    "공개-실"
+   ],
+   "gold_facts": "market_gap: 시장크기×커버카드수 같은 축. 연결 근거 명시",
+   "source_id": "x1-04",
+   "holdout": true
+  },
+  {
+   "id": "ph-x1-05",
+   "category": "X1",
+   "question": "스벅 결제는 서울 통계상 어느 업종이고 그게 우리 혜택 어디랑 연결돼?",
+   "expected_intent": "market_consumption",
+   "expected_action": "industry_age",
+   "v1_failure": "가맹점명↔MCC↔업종↔혜택 crosswalk 부재=G3",
+   "required_citation": [
+    "스타벅스",
+    "커피",
+    "crosswalk"
+   ],
+   "verification_keywords": [
+    "커피"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "가맹점 스타벅스→커피/음료→서울 커피-음료 3단 사슬 명시",
+   "source_id": "x1-05",
+   "holdout": true
+  },
+  {
+   "id": "ph-x1-06",
+   "category": "X1",
+   "question": "의료 쪽 혜택 키우면 시장성 있나? 서울 통계엔 의료 업종이 따로 없던데",
+   "expected_intent": "market_consumption",
+   "expected_action": null,
+   "v1_failure": "용어 불일치에서 v1은 없음/추측",
+   "required_citation": [
+    "의료",
+    "의원",
+    "crosswalk"
+   ],
+   "verification_keywords": [
+    "의료"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "의료→crosswalk→일반의원·치과 복수매핑 + 미매핑 정직",
+   "source_id": "x1-06",
+   "holdout": true
+  },
+  {
+   "id": "ph-x2-01a",
+   "category": "X2",
+   "question": "서울서 제일 돈 많이 쓰는 연령대가 60대라던데 규모가 얼마야?",
+   "expected_intent": "market_consumption",
+   "expected_action": "by_age",
+   "v1_failure": "챗봇은 내부만·포털은 외부만",
+   "required_citation": [
+    "60",
+    "20.7조"
+   ],
+   "verification_keywords": [
+    "60"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "시장 60+ 20.7조[집계]",
+   "source_id": "x2-01a",
+   "holdout": true
+  },
+  {
+   "id": "ph-x2-01b",
+   "category": "X2",
+   "question": "우리 60대 회원들 실질혜택률은 그 시장 규모에 걸맞게 나오고 있어?",
+   "expected_intent": "self_metric",
+   "expected_action": null,
+   "v1_failure": "한 답에 정합 대조 불가",
+   "required_citation": [
+    "60",
+    "실질혜택률"
+   ],
+   "verification_keywords": [
+    "60"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "합성"
+   ],
+   "gold_facts": "실질혜택률 age_band[합성], 동일 연령축 대조",
+   "source_id": "x2-01b",
+   "holdout": true
+  },
+  {
+   "id": "ph-x2-02",
+   "category": "X2",
+   "question": "커피 판촉 대상 나이대를 시장 데이터로 정하면 몇 살대가 맞아?",
+   "expected_intent": "market_consumption",
+   "expected_action": "industry_age",
+   "v1_failure": "두 시스템 수동 대조, 축 정합성 미보장",
+   "required_citation": [
+    "커피",
+    "30대"
+   ],
+   "verification_keywords": [
+    "커피"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "커피=30대 시장근거",
+   "source_id": "x2-02",
+   "holdout": true
+  },
+  {
+   "id": "ph-x2-04",
+   "category": "X2",
+   "question": "여성 겨냥 캠페인이면 어느 업종을 골라야 시장이 받쳐줘?",
+   "expected_intent": "market_consumption",
+   "expected_action": null,
+   "v1_failure": "성별소비(통계)→혜택카드(약관) 연결불가",
+   "required_citation": [
+    "여성",
+    "의류"
+   ],
+   "verification_keywords": [
+    "여"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "의류 여성 우세",
+   "source_id": "x2-04",
+   "holdout": true
+  },
+  {
+   "id": "ph-x3-01",
+   "category": "X3",
+   "question": "메뉴에 '식음료' 혜택이 따로 없는데 식음료 물으면 커피랑 밥집이 왜 뜨는 거야?",
+   "expected_intent": "category_search",
+   "expected_action": null,
+   "v1_failure": "식음료 카드 없음 또는 키워드 우연일치, 왜를 못설명",
+   "required_citation": [
+    "식음료",
+    "커피",
+    "음식점",
+    "포함"
+   ],
+   "verification_keywords": [
+    "커피",
+    "음식점"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "공개-실"
+   ],
+   "gold_facts": "식음료⊑커피/음료·음식점 subsumption 경로 설명해야 PASS",
+   "source_id": "x3-01",
+   "holdout": true
+  },
+  {
+   "id": "ph-x3-02",
+   "category": "X3",
+   "question": "쇼핑 혜택이 뭐뭐를 아우르는 건지 분류 기준까지 설명해줘",
+   "expected_intent": "category_search",
+   "expected_action": null,
+   "v1_failure": "카테고리 정의 시스템마다 달라 전체그림 불가",
+   "required_citation": [
+    "쇼핑",
+    "포함"
+   ],
+   "verification_keywords": [
+    "포함"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "공개-실"
+   ],
+   "gold_facts": "taxonomy 하위 나열+분류기준",
+   "source_id": "x3-02",
+   "holdout": true
+  },
+  {
+   "id": "ph-x3-03",
+   "category": "X3",
+   "question": "편의점 혜택하고 생활 혜택은 별개야 아니면 편의점이 생활에 들어가?",
+   "expected_intent": "category_search",
+   "expected_action": null,
+   "v1_failure": "계층 없이 다른 카테고리 2개로 오답",
+   "required_citation": [
+    "편의점",
+    "생활",
+    "포함"
+   ],
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "expected_grades": [
+    "공개-실"
+   ],
+   "gold_facts": "편의점⊑생활 포함관계 명시",
+   "source_id": "x3-03",
+   "holdout": true
+  },
+  {
+   "id": "ph-x3-04",
+   "category": "X3",
+   "question": "식음료 전체로 보면 서울 시장이 얼마나 큰 거야?",
+   "expected_intent": "market_consumption",
+   "expected_action": null,
+   "v1_failure": "상위어+외부데이터 조합 — 두 연결 다 있어야 답 존재",
+   "required_citation": [
+    "식음료",
+    "커피",
+    "음식점"
+   ],
+   "verification_keywords": [],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "taxonomy확장+crosswalk 2단 연쇄",
+   "source_id": "x3-04",
+   "holdout": true
+  },
+  {
+   "id": "ph-x3-05",
+   "category": "X3",
+   "question": "병원에서 쓰는 혜택 되는 카드 있어?",
+   "expected_intent": "market_consumption",
+   "expected_action": "industry_age",
+   "v1_failure": "자연어-데이터 어휘 불일치시 빈결과",
+   "required_citation": [
+    "병원",
+    "의원"
+   ],
+   "verification_keywords": [],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "병원→의원/의료 alias 해석",
+   "source_id": "x3-05",
+   "holdout": true
+  },
+  {
+   "id": "ph-x4-01",
+   "category": "X4",
+   "question": "방금 그 혜택률, 뭘 나누고 뭘 곱한 거고 데이터는 어느 테이블서 와?",
+   "expected_intent": "self_metric",
+   "expected_action": null,
+   "v1_failure": "LLM이 정의를 그럴듯하게 지어냄",
+   "required_citation": [
+    "expected_reward",
+    "eligible_spend",
+    "d5",
+    "d6"
+   ],
+   "verification_keywords": [
+    "계산"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "합성"
+   ],
+   "gold_facts": "metric 정의(분모 D5·분자 D6)+source_tables/dbt_node",
+   "source_id": "x4-01",
+   "holdout": true
+  },
+  {
+   "id": "ph-x4-03",
+   "category": "X4",
+   "question": "서울 소비 수치랑 우리 혜택률 수치, 출처가 각각 뭐고 어디까지 신뢰돼?",
+   "expected_intent": "market_consumption",
+   "expected_action": null,
+   "v1_failure": "챗봇 답변엔 출처계보 없음",
+   "required_citation": [
+    "공공",
+    "집계",
+    "합성"
+   ],
+   "verification_keywords": [
+    "집계"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "집계"
+   ],
+   "gold_facts": "출처 2계보: 서울공공[집계] vs 자사[합성]",
+   "source_id": "x4-03",
+   "holdout": true
+  },
+  {
+   "id": "ph-x5-01",
+   "category": "X5",
+   "question": "저번달 40만 채웠고 스타벅스서 3만 긁었는데 커피 할인 되는 거 맞아? 약관 근거도",
+   "expected_intent": "eligibility",
+   "expected_action": null,
+   "v1_failure": "AICC는 스크립트검색까지, 거래단위 판정+조항인용 불가",
+   "required_citation": [
+    "스타벅스",
+    "커피",
+    "실적",
+    "약관"
+   ],
+   "verification_keywords": [
+    "혜택"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "공개-실"
+   ],
+   "gold_facts": "스벅→커피 subsumption+SpendTier+약관 raw_text 인용",
+   "source_id": "x5-01",
+   "holdout": true
+  },
+  {
+   "id": "ph-x5-02",
+   "category": "X5",
+   "question": "리저브 매장은 같은 스벅인데 왜 혜택이 다르게 잡혀?",
+   "expected_intent": "eligibility",
+   "expected_action": null,
+   "v1_failure": "상담원마다 답 다름(67% 불일치)",
+   "required_citation": [
+    "리저브",
+    "제외"
+   ],
+   "verification_keywords": [
+    "리저브"
+   ],
+   "negative_keywords": [],
+   "expected_grades": [
+    "공개-실"
+   ],
+   "gold_facts": "제외조건 노드, 포함과 제외 같은 그래프",
+   "source_id": "x5-02",
+   "holdout": true
+  },
+  {
+   "id": "ph-x6-02",
+   "category": "X6",
+   "question": "혜택 안 들어왔다는 민원들, 실제로 왜 그런 거야?",
+   "expected_intent": "ontology_map",
+   "expected_action": "complaint",
+   "v1_failure": "연결 F — 민원텍스트↔거래↔약관 단절(G6/G9)",
+   "required_citation": [
+    "실적",
+    "원인",
+    "민원"
+   ],
+   "verification_keywords": [
+    "원인"
+   ],
+   "negative_keywords": [
+    "실 신한 고객",
+    "건수 조작"
+   ],
+   "expected_grades": [
+    "합성"
+   ],
+   "gold_facts": "원장연결 근본원인(실적미달/횟수/한도)+오류의심 11건. 4단 체인",
+   "source_id": "x6-02",
+   "holdout": true
+  },
+  {
+   "id": "ph-pop-01",
+   "category": "J",
+   "question": "붐비는 동네일수록 카드 매출도 큰 거야?",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "v1_failure": "생활인구 데이터 자체가 없어 답변 불가",
+   "required_citation": [
+    "AreaMapping",
+    "생활인구"
+   ]
+  },
+  {
+   "id": "ph-pop-02",
+   "category": "J",
+   "question": "사람이 몰리는 시간에 그 동네 매출이 실제로 따라와?",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_vs_sales",
+   "v1_failure": "생활인구 데이터 자체가 없어 답변 불가",
+   "required_citation": [
+    "AreaMapping"
+   ]
+  },
+  {
+   "id": "ph-pop-03",
+   "category": "J",
+   "question": "머릿수 대비 씀씀이가 큰 상권 뽑아줘",
+   "expected_intent": "market_consumption",
+   "expected_action": "penetration",
+   "v1_failure": "1인당 소비 지표 부재",
+   "required_citation": [
+    "1인당",
+    "노량진"
+   ]
+  },
+  {
+   "id": "ph-pop-04",
+   "category": "J",
+   "question": "젊은 사람들 20대는 주로 어느 동네에 모여 있어?",
+   "expected_intent": "market_consumption",
+   "expected_action": "pop_by_age",
+   "v1_failure": "연령별 인구 분포 데이터 부재",
+   "required_citation": [
+    "20대"
+   ]
+  }
+ ]
+}

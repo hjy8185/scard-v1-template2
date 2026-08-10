@@ -1,0 +1,1496 @@
+{
+ "version": "1.0",
+ "note": "U8 Tier2 semantic router train exemplars. supported intent only (unsupported 제외). eval 100·calibration과 문장 겹침 0. 각 utterance는 canonical 표현으로 신규 작성. +U11/U12 신규 intent exemplar(market_consumption 10·ontology_map 8, tier2 등록). +거래단위 자격판정 exemplar 4(preset 없는 금액/매장/실적, P2). | U27: 생활인구(수요) 질의 8건 추가(mkt-16~23)",
+ "exemplars": [
+  {
+   "id": "elig-01",
+   "utterance": "제가 가진 이 카드로 편의점에서 결제하면 할인 대상에 들어가나요",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "card_ctx",
+    "merchant"
+   ]
+  },
+  {
+   "id": "elig-02",
+   "utterance": "이 카드 전월 실적을 채웠는지 보고 혜택 받을 수 있는지 판정해줘",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "spend_tier"
+   ]
+  },
+  {
+   "id": "elig-03",
+   "utterance": "보유 카드로 온라인 쇼핑할 때 적립 조건을 충족하는지 확인하고 싶어",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "condition"
+   ]
+  },
+  {
+   "id": "elig-04",
+   "utterance": "이 카드 지금 남은 할인 한도 안에서 혜택이 적용되는지 알려줘",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "limit"
+   ]
+  },
+  {
+   "id": "elig-05",
+   "utterance": "내 카드로 이 가맹점 결제가 혜택 제외 대상인지 판단해줘",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "exclusion"
+   ]
+  },
+  {
+   "id": "elig-06",
+   "utterance": "이 카드로 특정 업종에서 쓰면 실적 인정이 되는 건지 궁금해",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "spend_tier"
+   ]
+  },
+  {
+   "id": "elig-07",
+   "utterance": "가입한 카드로 대중교통 이용 시 캐시백 받을 자격이 되나",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "merchant"
+   ]
+  },
+  {
+   "id": "elig-08",
+   "utterance": "이 카드 조건상 내가 이번 달 혜택을 받을 수 있는 상태인지 봐줘",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "condition"
+   ]
+  },
+  {
+   "id": "elig-09",
+   "utterance": "이 카드로 특정 브랜드에서 결제한 게 해당 카테고리 혜택에 포함되는지 그리고 왜 그런지",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "merchant",
+    "why"
+   ]
+  },
+  {
+   "id": "elig-10",
+   "utterance": "이번 달 실적이 얼마인데 이 금액을 결제하면 할인 상한이 어떻게 되는지 판정",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "amount",
+    "limit"
+   ]
+  },
+  {
+   "id": "elig-11",
+   "utterance": "이 카드로 소액을 결제해도 해당 혜택 적용 대상이 되는지 확인",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "amount"
+   ]
+  },
+  {
+   "id": "elig-12",
+   "utterance": "이 가맹점 결제가 이 카드 혜택 적용 범위에 들어가는지 판단해줘",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "merchant",
+    "scope"
+   ]
+  },
+  {
+   "id": "covgap-01",
+   "utterance": "고객 지출은 많은데 우리 카드 혜택이 부족한 영역을 찾아줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "gap"
+   ]
+  },
+  {
+   "id": "covgap-02",
+   "utterance": "혜택 커버리지가 약한 소비 카테고리가 어디인지 분석해줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "coverage"
+   ]
+  },
+  {
+   "id": "covgap-03",
+   "utterance": "수요 대비 우리 혜택이 못 따라가는 업종 갭을 짚어줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "gap"
+   ]
+  },
+  {
+   "id": "covgap-04",
+   "utterance": "저활용되고 있는 혜택 영역과 보강이 필요한 곳을 알려줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "coverage"
+   ]
+  },
+  {
+   "id": "covgap-05",
+   "utterance": "소비 규모는 큰데 혜택 매칭이 빈약한 구간을 찾아줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "gap"
+   ]
+  },
+  {
+   "id": "covgap-06",
+   "utterance": "우리 상품이 시장 수요를 얼마나 커버하고 어디가 비었는지 봐줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "coverage"
+   ]
+  },
+  {
+   "id": "covgap-07",
+   "utterance": "혜택 사각지대에 해당하는 카테고리를 진단해줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "gap"
+   ]
+  },
+  {
+   "id": "covgap-08",
+   "utterance": "지출 대비 커버가 낮은 부분을 우선순위로 정리해줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "coverage"
+   ]
+  },
+  {
+   "id": "covgap-09",
+   "utterance": "우리 특정 혜택이 그 지역 같은 업종 소비와 맞물려 잘 커버되고 있는지 분석",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "coverage",
+    "region"
+   ]
+  },
+  {
+   "id": "covgap-10",
+   "utterance": "이 카테고리 혜택이 해당 시장 소비 규모에 적합하게 대응하는지",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "coverage",
+    "fit"
+   ]
+  },
+  {
+   "id": "covgap-11",
+   "utterance": "카테고리 커버리지 지표가 실제로 무엇을 측정하는 값인지 설명해줘",
+   "intent": "coverage_gap",
+   "question_kind": "gap",
+   "tags": [
+    "coverage",
+    "definition"
+   ]
+  },
+  {
+   "id": "tgt-01",
+   "utterance": "특정 소비 패턴을 가진 고객을 겨냥할 혜택 카테고리를 매핑해줘",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "crosswalk"
+   ]
+  },
+  {
+   "id": "tgt-02",
+   "utterance": "이 업종 코드가 우리 혜택 분류로 어떻게 연결되는지 알려줘",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "crosswalk",
+    "mcc"
+   ]
+  },
+  {
+   "id": "tgt-03",
+   "utterance": "서울 지역 특정 상권 지출을 어느 혜택으로 겨냥하면 좋을지",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "region"
+   ]
+  },
+  {
+   "id": "tgt-04",
+   "utterance": "MCC 기준 소비를 우리 카테고리 체계로 분류하면 뭐가 되나",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "mcc"
+   ]
+  },
+  {
+   "id": "tgt-05",
+   "utterance": "이 세그먼트 지출 성향에 맞춰 어떤 혜택으로 타겟팅할까",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "segment"
+   ]
+  },
+  {
+   "id": "tgt-06",
+   "utterance": "업종 표준코드와 우리 혜택 스킴 사이 대응 관계를 보여줘",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "ksic",
+    "crosswalk"
+   ]
+  },
+  {
+   "id": "tgt-07",
+   "utterance": "이 소비 카테고리를 커버하는 혜택이 어느 상품에 있는지 매핑",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "crosswalk"
+   ]
+  },
+  {
+   "id": "tgt-08",
+   "utterance": "고객 지출 상권을 겨냥해 매칭되는 혜택 업종을 찾아줘",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "region"
+   ]
+  },
+  {
+   "id": "tgt-09",
+   "utterance": "이 가맹점이 우리 혜택 체계에서 어느 카테고리로 분류되는지",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "merchant",
+    "classify"
+   ]
+  },
+  {
+   "id": "tgt-10",
+   "utterance": "이 브랜드 결제가 배달 카테고리로 잡히는지 아니면 PG 경유로 새는지 분류 확인",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "merchant",
+    "classify",
+    "mcc"
+   ]
+  },
+  {
+   "id": "tgt-11",
+   "utterance": "신생 브랜드가 어느 카테고리로 매핑되는지 못 잡으면 어떻게 되는지",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "classify",
+    "unmapped"
+   ]
+  },
+  {
+   "id": "tgt-12",
+   "utterance": "우리 특정 혜택이 커버하는 그 지역 업종 목록을 뽑아줘",
+   "intent": "targeting",
+   "question_kind": "lookup",
+   "tags": [
+    "region",
+    "crosswalk"
+   ]
+  },
+  {
+   "id": "port-01",
+   "utterance": "혜택 구조가 서로 겹치는 카드 조합을 찾아줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap"
+   ]
+  },
+  {
+   "id": "port-02",
+   "utterance": "이름은 다르지만 실질 혜택이 사실상 같은 카드쌍을 알려줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap"
+   ]
+  },
+  {
+   "id": "port-03",
+   "utterance": "포트폴리오에서 서로 잠식하는 상품 조합이 뭐가 있어",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "cannibalization"
+   ]
+  },
+  {
+   "id": "port-04",
+   "utterance": "여러 카테고리에서 동시에 중복되는 카드들을 묶어줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap"
+   ]
+  },
+  {
+   "id": "port-05",
+   "utterance": "혜택 구성이 유사해서 카니발라이제이션 우려가 있는 카드는",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "cannibalization"
+   ]
+  },
+  {
+   "id": "port-06",
+   "utterance": "월 한도와 적립 구조가 비슷한 카드끼리 그룹으로 보여줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap"
+   ]
+  },
+  {
+   "id": "port-07",
+   "utterance": "구조적으로 동일한 혜택을 제공하는 상품 페어를 추출해줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap"
+   ]
+  },
+  {
+   "id": "port-08",
+   "utterance": "서로 대체 가능한 수준으로 겹치는 카드 목록을 정리해줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap"
+   ]
+  },
+  {
+   "id": "port-09",
+   "utterance": "이름은 전혀 다르지만 실제 혜택 구조가 사실상 동일한 카드 페어를 찾아줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap",
+    "structure"
+   ]
+  },
+  {
+   "id": "port-10",
+   "utterance": "특정 카테고리 혜택 구조가 유사한 카드들을 묶어서 보여줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap",
+    "category"
+   ]
+  },
+  {
+   "id": "port-11",
+   "utterance": "서로 고객을 잠식하는 카니발 관계의 카드 조합을 찾아줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "cannibalization"
+   ]
+  },
+  {
+   "id": "port-12",
+   "utterance": "여러 카테고리에 걸쳐 동시에 중복되는 카드 세트를 알려줘",
+   "intent": "portfolio_overlap",
+   "question_kind": "comparison",
+   "tags": [
+    "overlap",
+    "multi"
+   ]
+  },
+  {
+   "id": "sm-erate-01",
+   "utterance": "세그먼트 기준 실질 혜택률 수치를 뽑아줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "effective_reward_rate"
+   ]
+  },
+  {
+   "id": "sm-erate-02",
+   "utterance": "실질 혜택률 지표의 정의와 버전을 알려줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "effective_reward_rate",
+    "definition"
+   ]
+  },
+  {
+   "id": "sm-erate-03",
+   "utterance": "실질 혜택률이 월별로 어떻게 변해왔는지 추이를 보여줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "effective_reward_rate"
+   ]
+  },
+  {
+   "id": "sm-elig-01",
+   "utterance": "혜택 적격 소비 금액 지표를 계좌와 월 단위로 조회해줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "eligible"
+   ]
+  },
+  {
+   "id": "sm-elig-02",
+   "utterance": "적격 거래 건수 지표 값이 얼마인지 확인해줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "eligible"
+   ]
+  },
+  {
+   "id": "sm-amt-01",
+   "utterance": "예상 리워드와 실제 관측 리워드 차이 지표를 보여줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "reward_amounts"
+   ]
+  },
+  {
+   "id": "sm-amt-02",
+   "utterance": "리워드 차액 지표 데이터를 조회해줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "reward_amounts"
+   ]
+  },
+  {
+   "id": "sm-cov-01",
+   "utterance": "카테고리 커버리지 지표를 스킴별로 뽑아줘",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "category_coverage"
+   ]
+  },
+  {
+   "id": "sm-meta-01",
+   "utterance": "우리가 셀프서비스로 조회 가능한 지표 목록이 뭐가 있어",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "catalog"
+   ]
+  },
+  {
+   "id": "wif-01",
+   "utterance": "혜택 한도를 절반으로 낮추면 어떤 고객군이 영향을 받아",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta_cap"
+   ]
+  },
+  {
+   "id": "wif-02",
+   "utterance": "적립률을 몇 퍼센트로 조정하면 리워드 비용이 어떻게 변해",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta_rate"
+   ]
+  },
+  {
+   "id": "wif-03",
+   "utterance": "특정 매장을 혜택 제외로 추가하면 영향받는 거래가 얼마야",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta_exclusion"
+   ]
+  },
+  {
+   "id": "wif-04",
+   "utterance": "월 한도를 늘리면 혜택 지급액이 어떻게 달라질지 시뮬레이션해줘",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta_cap"
+   ]
+  },
+  {
+   "id": "wif-05",
+   "utterance": "규칙값을 바꿨을 때 세그먼트별 타격을 예측해줘",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta"
+   ]
+  },
+  {
+   "id": "wif-06",
+   "utterance": "혜택 조건을 되돌리면 결과가 어떻게 변하는지 보고 싶어",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta"
+   ]
+  },
+  {
+   "id": "wif-07",
+   "utterance": "적립 상한을 제한하면 어느 고객이 가장 손해를 보나",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta_cap"
+   ]
+  },
+  {
+   "id": "wif-08",
+   "utterance": "이 규칙을 변경하면 전체 리워드 지출이 얼마나 움직여",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "delta"
+   ]
+  },
+  {
+   "id": "fee-01",
+   "utterance": "이 카드 연회비가 얼마인지 알려줘",
+   "intent": "card_fee",
+   "question_kind": "lookup",
+   "tags": [
+    "fee"
+   ]
+  },
+  {
+   "id": "fee-02",
+   "utterance": "연회비가 무료이거나 저렴한 카드를 알려줘",
+   "intent": "card_fee",
+   "question_kind": "lookup",
+   "tags": [
+    "fee"
+   ]
+  },
+  {
+   "id": "fee-03",
+   "utterance": "이 상품 연회비 조건을 알려줄 수 있어",
+   "intent": "card_fee",
+   "question_kind": "lookup",
+   "tags": [
+    "fee"
+   ]
+  },
+  {
+   "id": "fee-04",
+   "utterance": "연회비 부담이 적은 카드 위주로 보여줘",
+   "intent": "card_fee",
+   "question_kind": "lookup",
+   "tags": [
+    "fee"
+   ]
+  },
+  {
+   "id": "cmp-01",
+   "utterance": "이 두 카드의 혜택과 연회비 차이를 비교해줘",
+   "intent": "card_comparison",
+   "question_kind": "comparison",
+   "tags": [
+    "compare"
+   ]
+  },
+  {
+   "id": "cmp-02",
+   "utterance": "두 상품 중에 어느 쪽이 더 나은지 비교해서 알려줘",
+   "intent": "card_comparison",
+   "question_kind": "comparison",
+   "tags": [
+    "compare"
+   ]
+  },
+  {
+   "id": "cmp-03",
+   "utterance": "이 카드와 저 카드의 적립 구조가 어떻게 다른지 대비해줘",
+   "intent": "card_comparison",
+   "question_kind": "comparison",
+   "tags": [
+    "compare"
+   ]
+  },
+  {
+   "id": "cmp-04",
+   "utterance": "두 카드 혜택 범위를 나란히 놓고 차이점을 정리해줘",
+   "intent": "card_comparison",
+   "question_kind": "comparison",
+   "tags": [
+    "compare"
+   ]
+  },
+  {
+   "id": "mrev-01",
+   "utterance": "이 가맹점에서 할인되는 카드가 있는지 찾아줘",
+   "intent": "merchant_reverse",
+   "question_kind": "lookup",
+   "tags": [
+    "merchant"
+   ]
+  },
+  {
+   "id": "mrev-02",
+   "utterance": "특정 브랜드 결제 시 적립되는 카드를 알려줘",
+   "intent": "merchant_reverse",
+   "question_kind": "lookup",
+   "tags": [
+    "merchant"
+   ]
+  },
+  {
+   "id": "mrev-03",
+   "utterance": "이 매장에서 이 카드로 결제하면 할인 혜택이 있는지",
+   "intent": "merchant_reverse",
+   "question_kind": "negative",
+   "tags": [
+    "merchant",
+    "check"
+   ]
+  },
+  {
+   "id": "mrev-04",
+   "utterance": "이 결제처에서 혜택 받을 수 있는 카드를 추천해줘",
+   "intent": "merchant_reverse",
+   "question_kind": "lookup",
+   "tags": [
+    "merchant"
+   ]
+  },
+  {
+   "id": "mrev-05",
+   "utterance": "이 카드로 특정 가맹점 결제 시 할인이 되는지 확인만 해줘",
+   "intent": "merchant_reverse",
+   "question_kind": "negative",
+   "tags": [
+    "merchant",
+    "check"
+   ]
+  },
+  {
+   "id": "mrev-06",
+   "utterance": "이 브랜드 매장에서 결제하면 할인 혜택이 있는지 없는지 확인",
+   "intent": "merchant_reverse",
+   "question_kind": "negative",
+   "tags": [
+    "merchant",
+    "exist"
+   ]
+  },
+  {
+   "id": "mrev-07",
+   "utterance": "이 특정 장소에서 할인해주는 카드가 있으면 알려주고 없으면 없다고 해줘",
+   "intent": "merchant_reverse",
+   "question_kind": "lookup",
+   "tags": [
+    "merchant",
+    "exist"
+   ]
+  },
+  {
+   "id": "mrev-08",
+   "utterance": "이 카드로 여기서 결제하면 포인트 적립이 되는지 여부만",
+   "intent": "merchant_reverse",
+   "question_kind": "negative",
+   "tags": [
+    "merchant",
+    "check"
+   ]
+  },
+  {
+   "id": "mrev-09",
+   "utterance": "잘 알려지지 않은 가맹점에서 할인되는 카드가 존재하는지",
+   "intent": "merchant_reverse",
+   "question_kind": "lookup",
+   "tags": [
+    "merchant",
+    "exist"
+   ]
+  },
+  {
+   "id": "csrch-01",
+   "utterance": "이 소비 카테고리에 혜택을 주는 카드들을 알려줘",
+   "intent": "category_search",
+   "question_kind": "lookup",
+   "tags": [
+    "category"
+   ]
+  },
+  {
+   "id": "csrch-02",
+   "utterance": "특정 업종 혜택이 있는 카드 전체를 찾아줘",
+   "intent": "category_search",
+   "question_kind": "lookup",
+   "tags": [
+    "category"
+   ]
+  },
+  {
+   "id": "csrch-03",
+   "utterance": "이 분야 지출에 유리한 카드가 어떤 게 있는지",
+   "intent": "category_search",
+   "question_kind": "lookup",
+   "tags": [
+    "category"
+   ]
+  },
+  {
+   "id": "csrch-04",
+   "utterance": "해당 카테고리 관련 혜택을 제공하는 상품을 모아줘",
+   "intent": "category_search",
+   "question_kind": "lookup",
+   "tags": [
+    "category"
+   ]
+  },
+  {
+   "id": "ball-01",
+   "utterance": "이 카드가 제공하는 혜택 전체를 정리해서 알려줘",
+   "intent": "card_benefit_all",
+   "question_kind": "lookup",
+   "tags": [
+    "all_benefit"
+   ]
+  },
+  {
+   "id": "ball-02",
+   "utterance": "이 상품의 모든 혜택 내용을 한눈에 보여줘",
+   "intent": "card_benefit_all",
+   "question_kind": "lookup",
+   "tags": [
+    "all_benefit"
+   ]
+  },
+  {
+   "id": "ball-03",
+   "utterance": "이 카드 혜택을 빠짐없이 전부 안내해줘",
+   "intent": "card_benefit_all",
+   "question_kind": "lookup",
+   "tags": [
+    "all_benefit"
+   ]
+  },
+  {
+   "id": "ball-04",
+   "utterance": "이 카드로 받을 수 있는 혜택을 종류별로 다 알려줘",
+   "intent": "card_benefit_all",
+   "question_kind": "lookup",
+   "tags": [
+    "all_benefit"
+   ]
+  },
+  {
+   "id": "bspec-01",
+   "utterance": "이 카드의 특정 혜택 조건을 자세히 설명해줘",
+   "intent": "card_benefit_specific",
+   "question_kind": "lookup",
+   "tags": [
+    "specific_benefit"
+   ]
+  },
+  {
+   "id": "bspec-02",
+   "utterance": "이 카드에서 이 혜택을 받으려면 어떤 조건이 필요해",
+   "intent": "card_benefit_specific",
+   "question_kind": "lookup",
+   "tags": [
+    "specific_benefit"
+   ]
+  },
+  {
+   "id": "bspec-03",
+   "utterance": "이 상품의 그 혜택이 구체적으로 어떻게 적용되는지",
+   "intent": "card_benefit_specific",
+   "question_kind": "lookup",
+   "tags": [
+    "specific_benefit"
+   ]
+  },
+  {
+   "id": "bspec-04",
+   "utterance": "이 카드 해당 혜택의 적립 방식과 한도를 알려줘",
+   "intent": "card_benefit_specific",
+   "question_kind": "lookup",
+   "tags": [
+    "specific_benefit"
+   ]
+  },
+  {
+   "id": "mkt-01",
+   "utterance": "서울에서 매출이 가장 큰 업종이 뭐야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-02",
+   "utterance": "서울 상권별로 소비 규모 순위 좀 보여줘",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-03",
+   "utterance": "이 지역 상권은 어떤 업종 매출이 높아",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-04",
+   "utterance": "혜택 카테고리 기준으로 서울 시장 규모가 어떻게 나뉘어",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-05",
+   "utterance": "서울 연령대별로 소비가 얼마나 차이나",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-06",
+   "utterance": "이 업종은 서울에서 주로 어느 나이대가 소비해",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-07",
+   "utterance": "서울 소비가 하루 중 어느 시간에 몰려",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-08",
+   "utterance": "주중이랑 주말 중 언제 소비가 더 커",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-09",
+   "utterance": "이 업종은 남녀 중 누가 더 많이 소비하나",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "mkt-10",
+   "utterance": "서울 시장 전체 소비 규모가 얼마나 되고 출처가 뭐야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "external"
+   ]
+  },
+  {
+   "id": "onto-01",
+   "utterance": "혜택이 왜 적용 안 됐다는 민원이 많은데 실제 원인이 뭐야",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "onto-02",
+   "utterance": "그 민원들 중에 우리 계산 오류인 건 얼마나 돼",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "onto-03",
+   "utterance": "전월실적 조건이 없는 카드만 골라줄 수 있어",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "onto-04",
+   "utterance": "우리 카드 약관들이 어떤 조건 유형으로 구성돼 있어",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "onto-05",
+   "utterance": "우리 회원들이 실제로 어느 혜택 카테고리에 지출하나",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "onto-06",
+   "utterance": "혜택에서 빠지는 가맹점이나 업종이 뭐가 있어",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "onto-07",
+   "utterance": "이 민원 원인이 어느 약관 조건 때문인지 짚어줘",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "onto-08",
+   "utterance": "적용 제외되는 카테고리 목록 좀 보여줘",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "ontology_map"
+   ]
+  },
+  {
+   "id": "elig-tx-01",
+   "utterance": "전월 실적 40만원 채웠는데 스타벅스에서 3만원 결제하면 커피 혜택 대상이야 어느 약관 때문인지도",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "txn_level",
+    "amount",
+    "merchant"
+   ]
+  },
+  {
+   "id": "elig-tx-02",
+   "utterance": "이번 달 실적 채운 상태로 편의점에서 2만원 쓰면 할인 받을 수 있어 조건이 뭐야",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "txn_level",
+    "amount",
+    "merchant"
+   ]
+  },
+  {
+   "id": "elig-tx-03",
+   "utterance": "전월에 50만원 썼고 이번에 카페에서 결제했는데 적립 되는지 판정해줘",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "txn_level",
+    "amount",
+    "merchant"
+   ]
+  },
+  {
+   "id": "elig-tx-04",
+   "utterance": "실적 조건 채웠는지 보고 이 거래가 혜택 받는 건지 근거까지 알려줘",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "txn_level",
+    "amount",
+    "merchant"
+   ]
+  },
+  {
+   "id": "mkt-11",
+   "utterance": "우리 혜택이 노리는 시장이 서울에서 얼마나 커",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "혜택관점",
+    "캠페인타겟"
+   ]
+  },
+  {
+   "id": "mkt-12",
+   "utterance": "이 혜택 카테고리가 겨냥하는 시장 규모가 어느 정도야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "혜택관점",
+    "캠페인타겟"
+   ]
+  },
+  {
+   "id": "mkt-13",
+   "utterance": "캠페인 타겟으로 잡을 업종이 서울에서 뭐가 좋아",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "혜택관점",
+    "캠페인타겟"
+   ]
+  },
+  {
+   "id": "mkt-14",
+   "utterance": "여성 타겟 프로모션 하려는데 어떤 업종이 소비가 커",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "혜택관점",
+    "캠페인타겟"
+   ]
+  },
+  {
+   "id": "mkt-15",
+   "utterance": "우리 카드 혜택이 겨냥하는 외식 시장이 서울에서 얼마나 돼",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "혜택관점",
+    "캠페인타겟"
+   ]
+  },
+  {
+   "id": "elig-cas-01",
+   "utterance": "이 카드로 편의점에서 결제하면 할인 받을 수 있나요",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "eligibility",
+    "캐주얼",
+    "이카드로"
+   ]
+  },
+  {
+   "id": "elig-cas-02",
+   "utterance": "이 카드로 카페에서 쓰면 할인 받을 수 있어",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "eligibility",
+    "캐주얼",
+    "이카드로"
+   ]
+  },
+  {
+   "id": "elig-cas-03",
+   "utterance": "내 카드로 마트에서 결제하면 혜택 받을 수 있나요",
+   "intent": "eligibility",
+   "question_kind": "eligibility_check",
+   "tags": [
+    "eligibility",
+    "캐주얼",
+    "이카드로"
+   ]
+  },
+  {
+   "id": "mkt-16",
+   "utterance": "점심에 사람이 제일 많이 모이는 동네가 어디야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-17",
+   "utterance": "사람 많이 모이는 곳에서 소비도 그만큼 일어나",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-18",
+   "utterance": "강남에 유동인구 많은데 카드 소비도 많아",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-19",
+   "utterance": "생활인구 대비 매출이 높은 상권이 어디야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-20",
+   "utterance": "사람 수 대비 소비가 제일 센 동네 알려줘",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-21",
+   "utterance": "1인당 소비가 높은 지역은 어디야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-22",
+   "utterance": "30대가 많이 모이는 동네가 어디야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-23",
+   "utterance": "붐비는 동네랑 돈 쓰는 동네가 같아 달라",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "population",
+    "u27"
+   ]
+  },
+  {
+   "id": "met-x1",
+   "utterance": "리워드로 나가는 비용 지표가 총 얼마나 돼",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "metric",
+    "u27"
+   ]
+  },
+  {
+   "id": "met-x2",
+   "utterance": "리워드 지급 비용 지표 총액이 얼마야",
+   "intent": "self_metric",
+   "question_kind": "lookup",
+   "tags": [
+    "metric",
+    "u27"
+   ]
+  },
+  {
+   "id": "cat-x1",
+   "utterance": "커피 카테고리 혜택 주는 카드는 다 뭐가 있어",
+   "intent": "category_search",
+   "question_kind": "lookup",
+   "tags": [
+    "category",
+    "u27"
+   ]
+  },
+  {
+   "id": "cat-x2",
+   "utterance": "이 카테고리 혜택 있는 카드 전부 보여줘",
+   "intent": "category_search",
+   "question_kind": "lookup",
+   "tags": [
+    "category",
+    "u27"
+   ]
+  },
+  {
+   "id": "wif-x1",
+   "utterance": "전월실적 자격 조건을 낮추면 혜택 대상 고객이 얼마나 늘어",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "whatif",
+    "u27"
+   ]
+  },
+  {
+   "id": "wif-x2",
+   "utterance": "실적 자격 기준을 완화하면 대상 고객이 몇 명 늘어나",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "whatif",
+    "u27"
+   ]
+  },
+  {
+   "id": "mkt-24",
+   "utterance": "요즘 온라인에서 뭐가 제일 빠르게 크고 있어",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "trend",
+    "u28"
+   ]
+  },
+  {
+   "id": "mkt-25",
+   "utterance": "최근 소비 성장세가 큰 상품군이 뭐야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "trend",
+    "u28"
+   ]
+  },
+  {
+   "id": "mkt-26",
+   "utterance": "전년 대비 거래액이 많이 늘어난 업종 알려줘",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "trend",
+    "u28"
+   ]
+  },
+  {
+   "id": "mkt-27",
+   "utterance": "카드 시장 전체 규모가 얼마나 돼",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "total",
+    "u28"
+   ]
+  },
+  {
+   "id": "mkt-28",
+   "utterance": "시장 전체에서 우리 포트폴리오는 어느 정도 위치야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "total",
+    "u28"
+   ]
+  },
+  {
+   "id": "mkt-29",
+   "utterance": "업계 전체 카드 승인금액이 한 달에 얼마야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "market",
+    "total",
+    "u28"
+   ]
+  },
+  {
+   "id": "cov-x1",
+   "utterance": "화장품 시장이 크는 것 같은데 우리 뷰티 혜택 커버는 어때",
+   "intent": "coverage_gap",
+   "question_kind": "coverage",
+   "tags": [
+    "coverage",
+    "u28"
+   ]
+  },
+  {
+   "id": "cov-x2",
+   "utterance": "시장이 커지는 영역에서 우리 혜택이 충분한지 봐줘",
+   "intent": "coverage_gap",
+   "question_kind": "coverage",
+   "tags": [
+    "coverage",
+    "u28"
+   ]
+  },
+  {
+   "id": "omp-x1",
+   "utterance": "이 민원 데이터 진짜야 믿어도 돼",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "complaint",
+    "u29"
+   ]
+  },
+  {
+   "id": "omp-x2",
+   "utterance": "우리 민원 수준이 업계랑 비교하면 어때",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "complaint",
+    "u29"
+   ]
+  },
+  {
+   "id": "wif-x3",
+   "utterance": "적립률을 올리고 상한도 같이 올리면 비용이 얼마나 늘어",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "whatif",
+    "u35"
+   ]
+  },
+  {
+   "id": "wif-x4",
+   "utterance": "전월실적 자격 조건을 20만원으로 낮추면 대상 고객이 얼마나 늘어",
+   "intent": "what_if",
+   "question_kind": "simulation",
+   "tags": [
+    "whatif",
+    "u35"
+   ]
+  },
+  {
+   "id": "xw-x3",
+   "utterance": "매핑 만들고 나서 검증은 어떻게 했어 그냥 두고 끝이야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "crosswalk",
+    "trust",
+    "u36"
+   ]
+  },
+  {
+   "id": "chn-x1",
+   "utterance": "역삼은 사람이 많은데 소비가 안 잡히는 이유가 뭐야",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "chain",
+    "u37"
+   ]
+  },
+  {
+   "id": "chn-x2",
+   "utterance": "요즘 화장품 시장 뜨는데 우리 카드 포트폴리오로 잡을 수 있어 문제 없어",
+   "intent": "market_consumption",
+   "question_kind": "lookup",
+   "tags": [
+    "chain",
+    "u37"
+   ]
+  },
+  {
+   "id": "chn-x3",
+   "utterance": "혜택 미적용 민원의 근본 원인이 뭐고 상품 구조에서 뭘 바꿔야 해",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "chain",
+    "u37"
+   ]
+  },
+  {
+   "id": "chn-x4",
+   "utterance": "우리 고객이 실제로 제일 많이 쓰는 소비처에 카드 대응이 잘 되어 있나",
+   "intent": "ontology_map",
+   "question_kind": "lookup",
+   "tags": [
+    "chain",
+    "u37"
+   ]
+  }
+ ]
+}

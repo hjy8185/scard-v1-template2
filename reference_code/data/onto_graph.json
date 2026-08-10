@@ -1,0 +1,5756 @@
+{
+ "industry_terms": [
+  {
+   "name": "가전제품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00023",
+   "local": "N00023",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "핸드폰",
+   "iri": "https://card.ai-ready/scheme/seoul#N00078",
+   "local": "N00078",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "여관",
+   "iri": "https://card.ai-ready/scheme/seoul#N00047",
+   "local": "N00047",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "자전거 및 기타운송장비",
+   "iri": "https://card.ai-ready/scheme/seoul#N00062",
+   "local": "N00062",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "육류판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00052",
+   "local": "N00052",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "의류/패션",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00014",
+   "local": "N00014",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "뷰티",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00015",
+   "local": "N00015",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "수산물판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00038",
+   "local": "N00038",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "일반교습학원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00056",
+   "local": "N00056",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "전자상거래업",
+   "iri": "https://card.ai-ready/scheme/seoul#N00063",
+   "local": "N00063",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "스포츠 강습",
+   "iri": "https://card.ai-ready/scheme/seoul#N00040",
+   "local": "N00040",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "화초",
+   "iri": "https://card.ai-ready/scheme/seoul#N00081",
+   "local": "N00081",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "의료기기",
+   "iri": "https://card.ai-ready/scheme/seoul#N00053",
+   "local": "N00053",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "커피-음료",
+   "iri": "https://card.ai-ready/scheme/seoul#N00071",
+   "local": "N00071",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "커피/음료",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00001",
+   "local": "N00001",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "청과상",
+   "iri": "https://card.ai-ready/scheme/seoul#N00068",
+   "local": "N00068",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "문구",
+   "iri": "https://card.ai-ready/scheme/seoul#N00029",
+   "local": "N00029",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "일반의원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00058",
+   "local": "N00058",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "슈퍼마켓/마트",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00008",
+   "local": "N00008",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "편의점",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00006",
+   "local": "N00006",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "음식점",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00004",
+   "local": "N00004",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "당구장",
+   "iri": "https://card.ai-ready/scheme/seoul#N00028",
+   "local": "N00028",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "조명용품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00065",
+   "local": "N00065",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "치과의원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00069",
+   "local": "N00069",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "패스트푸드점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00073",
+   "local": "N00073",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "교육",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00017",
+   "local": "N00017",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "여가",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00019",
+   "local": "N00019",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "완구",
+   "iri": "https://card.ai-ready/scheme/seoul#N00049",
+   "local": "N00049",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "안경",
+   "iri": "https://card.ai-ready/scheme/seoul#N00044",
+   "local": "N00044",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "교육/학원",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00016",
+   "local": "N00016",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "시계및귀금속",
+   "iri": "https://card.ai-ready/scheme/seoul#N00042",
+   "local": "N00042",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "제과/베이커리",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00003",
+   "local": "N00003",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "부동산중개업",
+   "iri": "https://card.ai-ready/scheme/seoul#N00033",
+   "local": "N00033",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "화장품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00080",
+   "local": "N00080",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "자동차미용",
+   "iri": "https://card.ai-ready/scheme/seoul#N00060",
+   "local": "N00060",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "생활",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00007",
+   "local": "N00007",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "미용실",
+   "iri": "https://card.ai-ready/scheme/seoul#N00031",
+   "local": "N00031",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "패스트푸드",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00005",
+   "local": "N00005",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "가구",
+   "iri": "https://card.ai-ready/scheme/seoul#N00021",
+   "local": "N00021",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "의약품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00054",
+   "local": "N00054",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "노래방",
+   "iri": "https://card.ai-ready/scheme/seoul#N00027",
+   "local": "N00027",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "중식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00066",
+   "local": "N00066",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "가방",
+   "iri": "https://card.ai-ready/scheme/seoul#N00022",
+   "local": "N00022",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "신발",
+   "iri": "https://card.ai-ready/scheme/seoul#N00043",
+   "local": "N00043",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "분식전문점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00034",
+   "local": "N00034",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "PC방",
+   "iri": "https://card.ai-ready/scheme/seoul#N00020",
+   "local": "N00020",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "미곡판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00030",
+   "local": "N00030",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "골프연습장",
+   "iri": "https://card.ai-ready/scheme/seoul#N00025",
+   "local": "N00025",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "반찬가게",
+   "iri": "https://card.ai-ready/scheme/seoul#N00032",
+   "local": "N00032",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "피부관리실",
+   "iri": "https://card.ai-ready/scheme/seoul#N00075",
+   "local": "N00075",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "한식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00076",
+   "local": "N00076",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "편의점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00074",
+   "local": "N00074",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "세탁소",
+   "iri": "https://card.ai-ready/scheme/seoul#N00037",
+   "local": "N00037",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "치킨전문점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00070",
+   "local": "N00070",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "서적",
+   "iri": "https://card.ai-ready/scheme/seoul#N00035",
+   "local": "N00035",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "제과점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00064",
+   "local": "N00064",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "의료/건강",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00010",
+   "local": "N00010",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "인테리어",
+   "iri": "https://card.ai-ready/scheme/seoul#N00055",
+   "local": "N00055",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "스포츠클럽",
+   "iri": "https://card.ai-ready/scheme/seoul#N00041",
+   "local": "N00041",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "주류/유흥",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00018",
+   "local": "N00018",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "일식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00059",
+   "local": "N00059",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "쇼핑",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00013",
+   "local": "N00013",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "애완동물",
+   "iri": "https://card.ai-ready/scheme/seoul#N00045",
+   "local": "N00045",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "일반의류",
+   "iri": "https://card.ai-ready/scheme/seoul#N00057",
+   "local": "N00057",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "컴퓨터및주변장치판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00072",
+   "local": "N00072",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "온라인쇼핑",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00012",
+   "local": "N00012",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "호프-간이주점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00079",
+   "local": "N00079",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "슈퍼마켓",
+   "iri": "https://card.ai-ready/scheme/seoul#N00039",
+   "local": "N00039",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "철물점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00067",
+   "local": "N00067",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "네일숍",
+   "iri": "https://card.ai-ready/scheme/seoul#N00026",
+   "local": "N00026",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "식음료",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00002",
+   "local": "N00002",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "예술학원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00048",
+   "local": "N00048",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "외국어학원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00050",
+   "local": "N00050",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "한의원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00077",
+   "local": "N00077",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "섬유제품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00036",
+   "local": "N00036",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "운동/경기용품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00051",
+   "local": "N00051",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "자동차수리",
+   "iri": "https://card.ai-ready/scheme/seoul#N00061",
+   "local": "N00061",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "양식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00046",
+   "local": "N00046",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "약국",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00011",
+   "local": "N00011",
+   "scheme": "shinhan_category"
+  },
+  {
+   "name": "가전제품수리",
+   "iri": "https://card.ai-ready/scheme/seoul#N00024",
+   "local": "N00024",
+   "scheme": "seoul_industry"
+  },
+  {
+   "name": "의료",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00009",
+   "local": "N00009",
+   "scheme": "shinhan_category"
+  }
+ ],
+ "taxonomy_nodes": [
+  {
+   "name": "가방",
+   "iri": "https://card.ai-ready/scheme/seoul#N00022",
+   "local": "N00022"
+  },
+  {
+   "name": "수산물판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00038",
+   "local": "N00038"
+  },
+  {
+   "name": "약국",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00011",
+   "local": "N00011"
+  },
+  {
+   "name": "패스트푸드",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00005",
+   "local": "N00005"
+  },
+  {
+   "name": "패스트푸드점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00073",
+   "local": "N00073"
+  },
+  {
+   "name": "서적",
+   "iri": "https://card.ai-ready/scheme/seoul#N00035",
+   "local": "N00035"
+  },
+  {
+   "name": "노래방",
+   "iri": "https://card.ai-ready/scheme/seoul#N00027",
+   "local": "N00027"
+  },
+  {
+   "name": "슈퍼마켓",
+   "iri": "https://card.ai-ready/scheme/seoul#N00039",
+   "local": "N00039"
+  },
+  {
+   "name": "치킨전문점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00070",
+   "local": "N00070"
+  },
+  {
+   "name": "자동차미용",
+   "iri": "https://card.ai-ready/scheme/seoul#N00060",
+   "local": "N00060"
+  },
+  {
+   "name": "뷰티",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00015",
+   "local": "N00015"
+  },
+  {
+   "name": "온라인쇼핑",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00012",
+   "local": "N00012"
+  },
+  {
+   "name": "의료기기",
+   "iri": "https://card.ai-ready/scheme/seoul#N00053",
+   "local": "N00053"
+  },
+  {
+   "name": "애완동물",
+   "iri": "https://card.ai-ready/scheme/seoul#N00045",
+   "local": "N00045"
+  },
+  {
+   "name": "가전제품수리",
+   "iri": "https://card.ai-ready/scheme/seoul#N00024",
+   "local": "N00024"
+  },
+  {
+   "name": "조명용품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00065",
+   "local": "N00065"
+  },
+  {
+   "name": "화초",
+   "iri": "https://card.ai-ready/scheme/seoul#N00081",
+   "local": "N00081"
+  },
+  {
+   "name": "중식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00066",
+   "local": "N00066"
+  },
+  {
+   "name": "슈퍼마켓/마트",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00008",
+   "local": "N00008"
+  },
+  {
+   "name": "제과점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00064",
+   "local": "N00064"
+  },
+  {
+   "name": "편의점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00074",
+   "local": "N00074"
+  },
+  {
+   "name": "네일숍",
+   "iri": "https://card.ai-ready/scheme/seoul#N00026",
+   "local": "N00026"
+  },
+  {
+   "name": "안경",
+   "iri": "https://card.ai-ready/scheme/seoul#N00044",
+   "local": "N00044"
+  },
+  {
+   "name": "양식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00046",
+   "local": "N00046"
+  },
+  {
+   "name": "당구장",
+   "iri": "https://card.ai-ready/scheme/seoul#N00028",
+   "local": "N00028"
+  },
+  {
+   "name": "가전제품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00023",
+   "local": "N00023"
+  },
+  {
+   "name": "제과/베이커리",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00003",
+   "local": "N00003"
+  },
+  {
+   "name": "음식점",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00004",
+   "local": "N00004"
+  },
+  {
+   "name": "신발",
+   "iri": "https://card.ai-ready/scheme/seoul#N00043",
+   "local": "N00043"
+  },
+  {
+   "name": "컴퓨터및주변장치판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00072",
+   "local": "N00072"
+  },
+  {
+   "name": "여가",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00019",
+   "local": "N00019"
+  },
+  {
+   "name": "교육",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00017",
+   "local": "N00017"
+  },
+  {
+   "name": "일식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00059",
+   "local": "N00059"
+  },
+  {
+   "name": "운동/경기용품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00051",
+   "local": "N00051"
+  },
+  {
+   "name": "주류/유흥",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00018",
+   "local": "N00018"
+  },
+  {
+   "name": "문구",
+   "iri": "https://card.ai-ready/scheme/seoul#N00029",
+   "local": "N00029"
+  },
+  {
+   "name": "일반의류",
+   "iri": "https://card.ai-ready/scheme/seoul#N00057",
+   "local": "N00057"
+  },
+  {
+   "name": "스포츠클럽",
+   "iri": "https://card.ai-ready/scheme/seoul#N00041",
+   "local": "N00041"
+  },
+  {
+   "name": "반찬가게",
+   "iri": "https://card.ai-ready/scheme/seoul#N00032",
+   "local": "N00032"
+  },
+  {
+   "name": "철물점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00067",
+   "local": "N00067"
+  },
+  {
+   "name": "가구",
+   "iri": "https://card.ai-ready/scheme/seoul#N00021",
+   "local": "N00021"
+  },
+  {
+   "name": "자전거 및 기타운송장비",
+   "iri": "https://card.ai-ready/scheme/seoul#N00062",
+   "local": "N00062"
+  },
+  {
+   "name": "커피/음료",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00001",
+   "local": "N00001"
+  },
+  {
+   "name": "편의점",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00006",
+   "local": "N00006"
+  },
+  {
+   "name": "한식음식점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00076",
+   "local": "N00076"
+  },
+  {
+   "name": "시계및귀금속",
+   "iri": "https://card.ai-ready/scheme/seoul#N00042",
+   "local": "N00042"
+  },
+  {
+   "name": "한의원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00077",
+   "local": "N00077"
+  },
+  {
+   "name": "의료",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00009",
+   "local": "N00009"
+  },
+  {
+   "name": "핸드폰",
+   "iri": "https://card.ai-ready/scheme/seoul#N00078",
+   "local": "N00078"
+  },
+  {
+   "name": "쇼핑",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00013",
+   "local": "N00013"
+  },
+  {
+   "name": "자동차수리",
+   "iri": "https://card.ai-ready/scheme/seoul#N00061",
+   "local": "N00061"
+  },
+  {
+   "name": "의료/건강",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00010",
+   "local": "N00010"
+  },
+  {
+   "name": "미용실",
+   "iri": "https://card.ai-ready/scheme/seoul#N00031",
+   "local": "N00031"
+  },
+  {
+   "name": "분식전문점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00034",
+   "local": "N00034"
+  },
+  {
+   "name": "일반교습학원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00056",
+   "local": "N00056"
+  },
+  {
+   "name": "청과상",
+   "iri": "https://card.ai-ready/scheme/seoul#N00068",
+   "local": "N00068"
+  },
+  {
+   "name": "식음료",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00002",
+   "local": "N00002"
+  },
+  {
+   "name": "여관",
+   "iri": "https://card.ai-ready/scheme/seoul#N00047",
+   "local": "N00047"
+  },
+  {
+   "name": "치과의원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00069",
+   "local": "N00069"
+  },
+  {
+   "name": "골프연습장",
+   "iri": "https://card.ai-ready/scheme/seoul#N00025",
+   "local": "N00025"
+  },
+  {
+   "name": "미곡판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00030",
+   "local": "N00030"
+  },
+  {
+   "name": "부동산중개업",
+   "iri": "https://card.ai-ready/scheme/seoul#N00033",
+   "local": "N00033"
+  },
+  {
+   "name": "커피-음료",
+   "iri": "https://card.ai-ready/scheme/seoul#N00071",
+   "local": "N00071"
+  },
+  {
+   "name": "피부관리실",
+   "iri": "https://card.ai-ready/scheme/seoul#N00075",
+   "local": "N00075"
+  },
+  {
+   "name": "의류/패션",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00014",
+   "local": "N00014"
+  },
+  {
+   "name": "일반의원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00058",
+   "local": "N00058"
+  },
+  {
+   "name": "교육/학원",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00016",
+   "local": "N00016"
+  },
+  {
+   "name": "세탁소",
+   "iri": "https://card.ai-ready/scheme/seoul#N00037",
+   "local": "N00037"
+  },
+  {
+   "name": "생활",
+   "iri": "https://card.ai-ready/scheme/shinhan#N00007",
+   "local": "N00007"
+  },
+  {
+   "name": "완구",
+   "iri": "https://card.ai-ready/scheme/seoul#N00049",
+   "local": "N00049"
+  },
+  {
+   "name": "전자상거래업",
+   "iri": "https://card.ai-ready/scheme/seoul#N00063",
+   "local": "N00063"
+  },
+  {
+   "name": "예술학원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00048",
+   "local": "N00048"
+  },
+  {
+   "name": "PC방",
+   "iri": "https://card.ai-ready/scheme/seoul#N00020",
+   "local": "N00020"
+  },
+  {
+   "name": "의약품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00054",
+   "local": "N00054"
+  },
+  {
+   "name": "인테리어",
+   "iri": "https://card.ai-ready/scheme/seoul#N00055",
+   "local": "N00055"
+  },
+  {
+   "name": "섬유제품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00036",
+   "local": "N00036"
+  },
+  {
+   "name": "스포츠 강습",
+   "iri": "https://card.ai-ready/scheme/seoul#N00040",
+   "local": "N00040"
+  },
+  {
+   "name": "화장품",
+   "iri": "https://card.ai-ready/scheme/seoul#N00080",
+   "local": "N00080"
+  },
+  {
+   "name": "육류판매",
+   "iri": "https://card.ai-ready/scheme/seoul#N00052",
+   "local": "N00052"
+  },
+  {
+   "name": "외국어학원",
+   "iri": "https://card.ai-ready/scheme/seoul#N00050",
+   "local": "N00050"
+  },
+  {
+   "name": "호프-간이주점",
+   "iri": "https://card.ai-ready/scheme/seoul#N00079",
+   "local": "N00079"
+  }
+ ],
+ "taxonomy_edges": [
+  {
+   "narrower": "커피/음료",
+   "broader": "식음료",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "의류/패션",
+   "broader": "쇼핑",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "패스트푸드",
+   "broader": "식음료",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "음식점",
+   "broader": "식음료",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "온라인쇼핑",
+   "broader": "쇼핑",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "교육/학원",
+   "broader": "교육",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "주류/유흥",
+   "broader": "여가",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "약국",
+   "broader": "의료/건강",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "슈퍼마켓/마트",
+   "broader": "생활",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "의료",
+   "broader": "의료/건강",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "편의점",
+   "broader": "생활",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "뷰티",
+   "broader": "쇼핑",
+   "source": "taxonomy.ttl"
+  },
+  {
+   "narrower": "제과/베이커리",
+   "broader": "식음료",
+   "source": "taxonomy.ttl"
+  }
+ ],
+ "mappings": [
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00080/N00015",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00080",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00015",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:화장품→뷰티",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "뷰티",
+   "source_name": "화장품",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00032/N00008",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00032",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00008",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:반찬가게→슈퍼마켓/마트",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "슈퍼마켓/마트",
+   "source_name": "반찬가게",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn3%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn3:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00058/N00009",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00058",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00009",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:일반의원→의료",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "의료",
+   "source_name": "일반의원",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn1%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn1:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00048/N00016",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00048",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00016",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:예술학원→교육/학원",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "교육/학원",
+   "source_name": "예술학원",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn1%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn1:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "keyword:주유|no_matching_shinhan_category(주유)",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201512100001%3Abn3%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201512100001:bn3:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn4%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn4:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201512100001%3Abn3%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201512100001:bn3:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn4%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn4:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn2%3A0/%EC%BB%A4%ED%94%BC%2F%EC%9D%8C%EB%A3%8C",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn2:0",
+   "target_scheme": "shinhan_category",
+   "target_code": "커피/음료",
+   "mapping_type": "rule",
+   "confidence": 0.95,
+   "review_status": "approved",
+   "evidence": "keyword:커피",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn1%3A2/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn1:2",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00031/N00015",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00031",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00015",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:미용실→뷰티",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "뷰티",
+   "source_name": "미용실",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn4%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn4:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00059/N00004",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00059",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00004",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:일식음식점→음식점",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "음식점",
+   "source_name": "일식음식점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn3%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn3:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00056/N00016",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00056",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00016",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:일반교습학원→교육/학원",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "교육/학원",
+   "source_name": "일반교습학원",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201611290001%3Abn4%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201611290001:bn4:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn2%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn2:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00050/N00016",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00050",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00016",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:외국어학원→교육/학원",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "교육/학원",
+   "source_name": "외국어학원",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00027/N00018",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00027",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00018",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:노래방→주류/유흥",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "주류/유흥",
+   "source_name": "노래방",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201512100001%3Abn2%3A0/%ED%8E%B8%EC%9D%98%EC%A0%90",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201512100001:bn2:0",
+   "target_scheme": "shinhan_category",
+   "target_code": "편의점",
+   "mapping_type": "rule",
+   "confidence": 0.95,
+   "review_status": "approved",
+   "evidence": "keyword:GS25",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn1%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn1:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn2%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn2:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn2%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn2:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn5%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn5:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00026/N00015",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00026",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00015",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:네일숍→뷰티",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "뷰티",
+   "source_name": "네일숍",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn1%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn1:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "keyword:주유|no_matching_shinhan_category(주유)",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00043/N00014",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00043",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00014",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:신발→의류/패션",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "의류/패션",
+   "source_name": "신발",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00073/N00005",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00073",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00005",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:패스트푸드점→패스트푸드",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "패스트푸드",
+   "source_name": "패스트푸드점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201512100001%3Abn1%3A0/%EC%98%A8%EB%9D%BC%EC%9D%B8%EC%87%BC%ED%95%91",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201512100001:bn1:0",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "keyword:G마켓",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A200712210001%3Abn3%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:200712210001:bn3:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "keyword:주유|no_matching_shinhan_category(주유)",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn1%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn1:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00063/N00012",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00063",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00012",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:전자상거래업→온라인쇼핑",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "온라인쇼핑",
+   "source_name": "전자상거래업",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00054/N00011",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00054",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00011",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:의약품→약국",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "약국",
+   "source_name": "의약품",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00070/N00005",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00070",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00005",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:치킨전문점→패스트푸드",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "패스트푸드",
+   "source_name": "치킨전문점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00066/N00004",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00066",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00004",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:중식음식점→음식점",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "음식점",
+   "source_name": "중식음식점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A200712210001%3Abn2%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:200712210001:bn2:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00057/N00014",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00057",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00014",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:일반의류→의류/패션",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "의류/패션",
+   "source_name": "일반의류",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn2%3A1/%EC%9D%8C%EC%8B%9D%EC%A0%90",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn2:1",
+   "target_scheme": "shinhan_category",
+   "target_code": "음식점",
+   "mapping_type": "rule",
+   "confidence": 0.8,
+   "review_status": "approved",
+   "evidence": "keyword:외식",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00075/N00015",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00075",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00015",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:피부관리실→뷰티",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "뷰티",
+   "source_name": "피부관리실",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201512100001%3Abn2%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201512100001:bn2:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn5%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn5:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00071/N00001",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00071",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00001",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:커피-음료→커피/음료",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "커피/음료",
+   "source_name": "커피-음료",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00064/N00003",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00064",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00003",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:제과점→제과/베이커리",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "제과/베이커리",
+   "source_name": "제과점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn1%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn1:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00046/N00004",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00046",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00004",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:양식음식점→음식점",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "음식점",
+   "source_name": "양식음식점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00079/N00018",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00079",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00018",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:호프-간이주점→주류/유흥",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "주류/유흥",
+   "source_name": "호프-간이주점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A200712210001%3Abn1%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:200712210001:bn1:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A200712210001%3Abn2%3A2/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:200712210001:bn2:2",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00077/N00009",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00077",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00009",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:한의원→의료",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "의료",
+   "source_name": "한의원",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn2%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn2:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00022/N00014",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00022",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00014",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:가방→의류/패션",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "의류/패션",
+   "source_name": "가방",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn2%3A3/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn2:3",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00076/N00004",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00076",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00004",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:한식음식점→음식점",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "음식점",
+   "source_name": "한식음식점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00035/N00016",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00035",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00016",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:서적→교육/학원",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "교육/학원",
+   "source_name": "서적",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00034/N00004",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00034",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00004",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:분식전문점→음식점",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "음식점",
+   "source_name": "분식전문점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A200712210001%3Abn2%3A1/%EC%98%A8%EB%9D%BC%EC%9D%B8%EC%87%BC%ED%95%91",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:200712210001:bn2:1",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "keyword:온라인",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn7%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn7:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn3%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn3:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn2%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn2:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn6%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn6:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn3%3A0/%EC%97%AC%EA%B0%80",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn3:0",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.75,
+   "review_status": "approved",
+   "evidence": "keyword:영화",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201611290001%3Abn6%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201611290001:bn6:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn2%3A4/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn2:4",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn5%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn5:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00039/N00008",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00039",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00008",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:슈퍼마켓→슈퍼마켓/마트",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "슈퍼마켓/마트",
+   "source_name": "슈퍼마켓",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn2%3A2/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn2:2",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn4%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn4:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00074/N00006",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00074",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00006",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:편의점→편의점",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "편의점",
+   "source_name": "편의점",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201512100001%3Abn1%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201512100001:bn1:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201611290001%3Abn7%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201611290001:bn7:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn1%3A0/%ED%8E%B8%EC%9D%98%EC%A0%90",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn1:0",
+   "target_scheme": "shinhan_category",
+   "target_code": "편의점",
+   "mapping_type": "rule",
+   "confidence": 0.95,
+   "review_status": "approved",
+   "evidence": "keyword:편의점",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00068/N00008",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00068",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00008",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:청과상→슈퍼마켓/마트",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "슈퍼마켓/마트",
+   "source_name": "청과상",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00069/N00009",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00069",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00009",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:치과의원→의료",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "의료",
+   "source_name": "치과의원",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201611290001%3Abn5%3A0/%EC%97%AC%EA%B0%80",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201611290001:bn5:0",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.75,
+   "review_status": "approved",
+   "evidence": "keyword:영화",
+   "created_by": "rule",
+   "version": "1.0",
+   "note": "source는 CARD_Benefit id — 그래프 대조는 M4",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202205130001%3Abn2%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202205130001:bn2:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202207140001%3Abn3%3A1/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202207140001:bn3:1",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A201510150001%3Abn1%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:201510150001:bn1:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/seoul_industry/N00020/N00019",
+   "source_scheme": "seoul_industry",
+   "source_code": "N00020",
+   "target_scheme": "shinhan_category",
+   "target_code": "N00019",
+   "mapping_type": "exact",
+   "confidence": 0.9,
+   "review_status": "auto",
+   "evidence": "rule:PC방→여가",
+   "created_by": "human",
+   "version": "v1",
+   "target_name": "여가",
+   "source_name": "PC방",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_label/CARD_Benefit%3A202309190001%3Abn3%3A0/None",
+   "source_scheme": "benefit_label",
+   "source_code": "CARD_Benefit:202309190001:bn3:0",
+   "target_scheme": "",
+   "target_code": "",
+   "mapping_type": "unmapped",
+   "confidence": 0.0,
+   "review_status": "unmapped",
+   "evidence": "no_rule_match|no_matching_rule",
+   "created_by": "rule",
+   "version": "1.0",
+   "verified": {
+    "ok": true,
+    "note": "unmapped — 작업 목록으로 담는다"
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/영푸드/음식점",
+   "source_scheme": "benefit_tag",
+   "source_code": "영푸드",
+   "source_name": "영푸드",
+   "target_scheme": "shinhan_category",
+   "target_code": "음식점",
+   "target_name": "음식점",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:영푸드|실측 54건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/더본/음식점",
+   "source_scheme": "benefit_tag",
+   "source_code": "더본",
+   "source_name": "더본",
+   "target_scheme": "shinhan_category",
+   "target_code": "음식점",
+   "target_name": "음식점",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:더본|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/밀딜리버리/음식점",
+   "source_scheme": "benefit_tag",
+   "source_code": "밀딜리버리",
+   "source_name": "밀딜리버리",
+   "target_scheme": "shinhan_category",
+   "target_code": "음식점",
+   "target_name": "음식점",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:밀딜리버리|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/생활서비스/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "생활서비스",
+   "source_name": "생활서비스",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:생활서비스|실측 13건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/생활비/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "생활비",
+   "source_name": "생활비",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:생활비|실측 14건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/생활 적립/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "생활 적립",
+   "source_name": "생활 적립",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:생활 적립|실측 10건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/생활 캐시백/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "생활 캐시백",
+   "source_name": "생활 캐시백",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:생활 캐시백|실측 5건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/일상 생활비/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "일상 생활비",
+   "source_name": "일상 생활비",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:일상 생활비|실측 11건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/생활잡화/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "생활잡화",
+   "source_name": "생활잡화",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:생활잡화|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/생활월납/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "생활월납",
+   "source_name": "생활월납",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:생활월납|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/생활가맹점/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "생활가맹점",
+   "source_name": "생활가맹점",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:생활가맹점|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/홈Life/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "홈Life",
+   "source_name": "홈Life",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:홈Life|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/홈DIY/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "홈DIY",
+   "source_name": "홈DIY",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:홈DIY|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/SOCAR/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "SOCAR",
+   "source_name": "SOCAR",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:SOCAR|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/차량/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "차량",
+   "source_name": "차량",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:차량|실측 7건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/타이어/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "타이어",
+   "source_name": "타이어",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:타이어|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/보안서비스/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "보안서비스",
+   "source_name": "보안서비스",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:보안서비스|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/에스원/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "에스원",
+   "source_name": "에스원",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:에스원|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/Pet/생활",
+   "source_scheme": "benefit_tag",
+   "source_code": "Pet",
+   "source_name": "Pet",
+   "target_scheme": "shinhan_category",
+   "target_code": "생활",
+   "target_name": "생활",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:Pet|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/유가보조금/주유/충전",
+   "source_scheme": "benefit_tag",
+   "source_code": "유가보조금",
+   "source_name": "유가보조금",
+   "target_scheme": "shinhan_category",
+   "target_code": "주유/충전",
+   "target_name": "주유/충전",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:유가보조금|실측 17건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/유류세/주유/충전",
+   "source_scheme": "benefit_tag",
+   "source_code": "유류세",
+   "source_name": "유류세",
+   "target_scheme": "shinhan_category",
+   "target_code": "주유/충전",
+   "target_name": "주유/충전",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:유류세|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/엔크린/주유/충전",
+   "source_scheme": "benefit_tag",
+   "source_code": "엔크린",
+   "source_name": "엔크린",
+   "target_scheme": "shinhan_category",
+   "target_code": "주유/충전",
+   "target_name": "주유/충전",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:엔크린|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/내트럭/주유/충전",
+   "source_scheme": "benefit_tag",
+   "source_code": "내트럭",
+   "source_name": "내트럭",
+   "target_scheme": "shinhan_category",
+   "target_code": "주유/충전",
+   "target_name": "주유/충전",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:내트럭|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/교통 할인/대중교통",
+   "source_scheme": "benefit_tag",
+   "source_code": "교통 할인",
+   "source_name": "교통 할인",
+   "target_scheme": "shinhan_category",
+   "target_code": "대중교통",
+   "target_name": "대중교통",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:교통 할인|실측 7건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/레일리지/대중교통",
+   "source_scheme": "benefit_tag",
+   "source_code": "레일리지",
+   "source_name": "레일리지",
+   "target_scheme": "shinhan_category",
+   "target_code": "대중교통",
+   "target_name": "대중교통",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:레일리지|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/카카오T/대중교통",
+   "source_scheme": "benefit_tag",
+   "source_code": "카카오T",
+   "source_name": "카카오T",
+   "target_scheme": "shinhan_category",
+   "target_code": "대중교통",
+   "target_name": "대중교통",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:카카오T|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/주차/대중교통",
+   "source_scheme": "benefit_tag",
+   "source_code": "주차",
+   "source_name": "주차",
+   "target_scheme": "shinhan_category",
+   "target_code": "대중교통",
+   "target_name": "대중교통",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:주차|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/Weverse/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "Weverse",
+   "source_name": "Weverse",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:Weverse|실측 10건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/HYBE/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "HYBE",
+   "source_name": "HYBE",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:HYBE|실측 10건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/콘서트/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "콘서트",
+   "source_name": "콘서트",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:콘서트|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/음원/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "음원",
+   "source_name": "음원",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:음원|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/스트리밍/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "스트리밍",
+   "source_name": "스트리밍",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:스트리밍|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/야구/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "야구",
+   "source_name": "야구",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:야구|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/트윈스/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "트윈스",
+   "source_name": "트윈스",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:트윈스|실측 4건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/이글스/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "이글스",
+   "source_name": "이글스",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:이글스|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/웨딩/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "웨딩",
+   "source_name": "웨딩",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:웨딩|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/숙박/여가",
+   "source_scheme": "benefit_tag",
+   "source_code": "숙박",
+   "source_name": "숙박",
+   "target_scheme": "shinhan_category",
+   "target_code": "여가",
+   "target_name": "여가",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:숙박|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/관리비/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "관리비",
+   "source_name": "관리비",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:관리비|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/임대료/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "임대료",
+   "source_name": "임대료",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:임대료|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/구독료/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "구독료",
+   "source_name": "구독료",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:구독료|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/월회비/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "월회비",
+   "source_name": "월회비",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:월회비|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/월납/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "월납",
+   "source_name": "월납",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:월납|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/렌탈/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "렌탈",
+   "source_name": "렌탈",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:렌탈|실측 6건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/렌터카/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "렌터카",
+   "source_name": "렌터카",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:렌터카|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/구독 적립/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "구독 적립",
+   "source_name": "구독 적립",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:구독 적립|실측 12건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/구독 할인/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "구독 할인",
+   "source_name": "구독 할인",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:구독 할인|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/정기구독/자동납부",
+   "source_scheme": "benefit_tag",
+   "source_code": "정기구독",
+   "source_name": "정기구독",
+   "target_scheme": "shinhan_category",
+   "target_code": "자동납부",
+   "target_name": "자동납부",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:정기구독|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/헬로비전/통신",
+   "source_scheme": "benefit_tag",
+   "source_code": "헬로비전",
+   "source_name": "헬로비전",
+   "target_scheme": "shinhan_category",
+   "target_code": "통신",
+   "target_name": "통신",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:헬로비전|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/우주패스/통신",
+   "source_scheme": "benefit_tag",
+   "source_code": "우주패스",
+   "source_name": "우주패스",
+   "target_scheme": "shinhan_category",
+   "target_code": "통신",
+   "target_name": "통신",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:우주패스|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/T 우주/통신",
+   "source_scheme": "benefit_tag",
+   "source_code": "T 우주",
+   "source_name": "T 우주",
+   "target_scheme": "shinhan_category",
+   "target_code": "통신",
+   "target_name": "통신",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:T 우주|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/땡겨요/배달",
+   "source_scheme": "benefit_tag",
+   "source_code": "땡겨요",
+   "source_name": "땡겨요",
+   "target_scheme": "shinhan_category",
+   "target_code": "배달",
+   "target_name": "배달",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:땡겨요|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/요기패스/배달",
+   "source_scheme": "benefit_tag",
+   "source_code": "요기패스",
+   "source_name": "요기패스",
+   "target_scheme": "shinhan_category",
+   "target_code": "배달",
+   "target_name": "배달",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:요기패스|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/리디북스/온라인쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "리디북스",
+   "source_name": "리디북스",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "target_name": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:리디북스|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/오아시스/온라인쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "오아시스",
+   "source_name": "오아시스",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "target_name": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:오아시스|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/온라인몰/온라인쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "온라인몰",
+   "source_name": "온라인몰",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "target_name": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:온라인몰|실측 5건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/몰링/온라인쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "몰링",
+   "source_name": "몰링",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "target_name": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:몰링|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/언박싱/온라인쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "언박싱",
+   "source_name": "언박싱",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "target_name": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:언박싱|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/O2O/온라인쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "O2O",
+   "source_name": "O2O",
+   "target_scheme": "shinhan_category",
+   "target_code": "온라인쇼핑",
+   "target_name": "온라인쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:O2O|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/다이소/슈퍼마켓/마트",
+   "source_scheme": "benefit_tag",
+   "source_code": "다이소",
+   "source_name": "다이소",
+   "target_scheme": "shinhan_category",
+   "target_code": "슈퍼마켓/마트",
+   "target_name": "슈퍼마켓/마트",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:다이소|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/GS리테일/슈퍼마켓/마트",
+   "source_scheme": "benefit_tag",
+   "source_code": "GS리테일",
+   "source_name": "GS리테일",
+   "target_scheme": "shinhan_category",
+   "target_code": "슈퍼마켓/마트",
+   "target_name": "슈퍼마켓/마트",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:GS리테일|실측 4건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/hyFresh/슈퍼마켓/마트",
+   "source_scheme": "benefit_tag",
+   "source_code": "hyFresh",
+   "source_name": "hyFresh",
+   "target_scheme": "shinhan_category",
+   "target_code": "슈퍼마켓/마트",
+   "target_name": "슈퍼마켓/마트",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:hyFresh|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/AK플라자/쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "AK플라자",
+   "source_name": "AK플라자",
+   "target_scheme": "shinhan_category",
+   "target_code": "쇼핑",
+   "target_name": "쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:AK플라자|실측 1건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/IKEA/쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "IKEA",
+   "source_name": "IKEA",
+   "target_scheme": "shinhan_category",
+   "target_code": "쇼핑",
+   "target_name": "쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:IKEA|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/아울렛/쇼핑",
+   "source_scheme": "benefit_tag",
+   "source_code": "아울렛",
+   "source_name": "아울렛",
+   "target_scheme": "shinhan_category",
+   "target_code": "쇼핑",
+   "target_name": "쇼핑",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:아울렛|실측 3건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/benefit_tag/아모레퍼시픽/뷰티",
+   "source_scheme": "benefit_tag",
+   "source_code": "아모레퍼시픽",
+   "source_name": "아모레퍼시픽",
+   "target_scheme": "shinhan_category",
+   "target_code": "뷰티",
+   "target_name": "뷰티",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "bb_tag:아모레퍼시픽|실측 2건",
+   "created_by": "u81_tag_map",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/더클래식/The CLASSIC",
+   "source_scheme": "surface_form",
+   "source_code": "더클래식",
+   "source_name": "더클래식",
+   "target_scheme": "canonical_name",
+   "target_code": "The CLASSIC",
+   "target_name": "The CLASSIC",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 6장 · 카드명 8회 · 한글 본문 2회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/더베스트/The BEST",
+   "source_scheme": "surface_form",
+   "source_code": "더베스트",
+   "source_name": "더베스트",
+   "target_scheme": "canonical_name",
+   "target_code": "The BEST",
+   "target_name": "The BEST",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 6장 · 카드명 7회 · 한글 본문 7회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/딥드림/Deep Dream",
+   "source_scheme": "surface_form",
+   "source_code": "딥드림",
+   "source_name": "딥드림",
+   "target_scheme": "canonical_name",
+   "target_code": "Deep Dream",
+   "target_name": "Deep Dream",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 3장 · 카드명 13회 · 한글 본문 12회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/딥오일/Deep Oil",
+   "source_scheme": "surface_form",
+   "source_code": "딥오일",
+   "source_name": "딥오일",
+   "target_scheme": "canonical_name",
+   "target_code": "Deep Oil",
+   "target_name": "Deep Oil",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 3장 · 카드명 4회 · 한글 본문 1회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/포인트플랜/Point Plan",
+   "source_scheme": "surface_form",
+   "source_code": "포인트플랜",
+   "source_name": "포인트플랜",
+   "target_scheme": "canonical_name",
+   "target_code": "Point Plan",
+   "target_name": "Point Plan",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 2장 · 카드명 9회 · 한글 본문 5회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/글로버스/Globus",
+   "source_scheme": "surface_form",
+   "source_code": "글로버스",
+   "source_name": "글로버스",
+   "target_scheme": "canonical_name",
+   "target_code": "Globus",
+   "target_name": "Globus",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 10회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/더클래식플러스/The CLASSIC+",
+   "source_scheme": "surface_form",
+   "source_code": "더클래식플러스",
+   "source_name": "더클래식플러스",
+   "target_scheme": "canonical_name",
+   "target_code": "The CLASSIC+",
+   "target_name": "The CLASSIC+",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 0회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/호시노리조트/Hoshino Resorts",
+   "source_scheme": "surface_form",
+   "source_code": "호시노리조트",
+   "source_name": "호시노리조트",
+   "target_scheme": "canonical_name",
+   "target_code": "Hoshino Resorts",
+   "target_name": "Hoshino Resorts",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 1회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/디스카운트플랜/Discount Plan",
+   "source_scheme": "surface_form",
+   "source_code": "디스카운트플랜",
+   "source_name": "디스카운트플랜",
+   "target_scheme": "canonical_name",
+   "target_code": "Discount Plan",
+   "target_name": "Discount Plan",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 2회 · 한글 본문 3회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/에어원/Air One",
+   "source_scheme": "surface_form",
+   "source_code": "에어원",
+   "source_name": "에어원",
+   "target_scheme": "canonical_name",
+   "target_code": "Air One",
+   "target_name": "Air One",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 0회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/엑스오/XO",
+   "source_scheme": "surface_form",
+   "source_code": "엑스오",
+   "source_name": "엑스오",
+   "target_scheme": "canonical_name",
+   "target_code": "XO",
+   "target_name": "XO",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 1회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/심플플랜/Simple Plan",
+   "source_scheme": "surface_form",
+   "source_code": "심플플랜",
+   "source_name": "심플플랜",
+   "target_scheme": "canonical_name",
+   "target_code": "Simple Plan",
+   "target_name": "Simple Plan",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 2회 · 한글 본문 0회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/심플플랜플러스/Simple Plan+",
+   "source_scheme": "surface_form",
+   "source_code": "심플플랜플러스",
+   "source_name": "심플플랜플러스",
+   "target_scheme": "canonical_name",
+   "target_code": "Simple Plan+",
+   "target_name": "Simple Plan+",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 0회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/애니버스/ANNIVERSE",
+   "source_scheme": "surface_form",
+   "source_code": "애니버스",
+   "source_name": "애니버스",
+   "target_scheme": "canonical_name",
+   "target_code": "ANNIVERSE",
+   "target_name": "ANNIVERSE",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 1회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/더베스트플러스/The BEST+",
+   "source_scheme": "surface_form",
+   "source_code": "더베스트플러스",
+   "source_name": "더베스트플러스",
+   "target_scheme": "canonical_name",
+   "target_code": "The BEST+",
+   "target_name": "The BEST+",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 1회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/라이트/Lite",
+   "source_scheme": "surface_form",
+   "source_code": "라이트",
+   "source_name": "라이트",
+   "target_scheme": "canonical_name",
+   "target_code": "Lite",
+   "target_name": "Lite",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 70회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/디스카운트플랜플러스/Discount Plan+",
+   "source_scheme": "surface_form",
+   "source_code": "디스카운트플랜플러스",
+   "source_name": "디스카운트플랜플러스",
+   "target_scheme": "canonical_name",
+   "target_code": "Discount Plan+",
+   "target_name": "Discount Plan+",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "U41 tier1 카드명 1장 · 카드명 1회 · 한글 본문 1회",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "card_name"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/LG유플러스/LG U+",
+   "source_scheme": "surface_form",
+   "source_code": "LG유플러스",
+   "source_name": "LG유플러스",
+   "target_scheme": "canonical_name",
+   "target_code": "LG U+",
+   "target_name": "LG U+",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "원천 187회 · 사전은 'LGU' 표기 — 공백·+ 차이",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "brand"
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#map/surface_form/엘지유플러스/LG U+",
+   "source_scheme": "surface_form",
+   "source_code": "엘지유플러스",
+   "source_name": "엘지유플러스",
+   "target_scheme": "canonical_name",
+   "target_code": "LG U+",
+   "target_name": "LG U+",
+   "mapping_type": "rule",
+   "confidence": 0.9,
+   "review_status": "approved",
+   "evidence": "원천 187회 · 한글 음차",
+   "created_by": "u81_alias",
+   "version": "v1",
+   "verified": {
+    "ok": true,
+    "problems": []
+   },
+   "alias_kind": "brand"
+  }
+ ],
+ "segments": [
+  {
+   "name": "persona_medical_high_spend",
+   "iri": "https://card.ai-ready/ontology#segment/persona_medical_high_spend",
+   "axis": "persona",
+   "predicate": "persona = 'medical_high_spend'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 174
+   }
+  },
+  {
+   "name": "persona_family_grocery",
+   "iri": "https://card.ai-ready/ontology#segment/persona_family_grocery",
+   "axis": "persona",
+   "predicate": "persona = 'family_grocery'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 163
+   }
+  },
+  {
+   "name": "spend_mid",
+   "iri": "https://card.ai-ready/ontology#segment/spend_mid",
+   "axis": "monthly_spend_tier",
+   "predicate": "monthly_spend_tier = 'mid'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 482
+   }
+  },
+  {
+   "name": "persona_online_shopper",
+   "iri": "https://card.ai-ready/ontology#segment/persona_online_shopper",
+   "axis": "persona",
+   "predicate": "persona = 'online_shopper'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 153
+   }
+  },
+  {
+   "name": "spend_low",
+   "iri": "https://card.ai-ready/ontology#segment/spend_low",
+   "axis": "monthly_spend_tier",
+   "predicate": "monthly_spend_tier = 'low'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 275
+   }
+  },
+  {
+   "name": "persona_study_family",
+   "iri": "https://card.ai-ready/ontology#segment/persona_study_family",
+   "axis": "persona",
+   "predicate": "persona = 'study_family'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 155
+   }
+  },
+  {
+   "name": "spend_high",
+   "iri": "https://card.ai-ready/ontology#segment/spend_high",
+   "axis": "monthly_spend_tier",
+   "predicate": "monthly_spend_tier = 'high'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 243
+   }
+  },
+  {
+   "name": "persona_coffee_commuter",
+   "iri": "https://card.ai-ready/ontology#segment/persona_coffee_commuter",
+   "axis": "persona",
+   "predicate": "persona = 'coffee_commuter'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 184
+   }
+  },
+  {
+   "name": "persona_dining_social",
+   "iri": "https://card.ai-ready/ontology#segment/persona_dining_social",
+   "axis": "persona",
+   "predicate": "persona = 'dining_social'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 171
+   }
+  },
+  {
+   "name": "age_senior",
+   "iri": "https://card.ai-ready/ontology#segment/age_senior",
+   "axis": "age_band",
+   "predicate": "age_band = '60_이상'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 238
+   }
+  },
+  {
+   "name": "age_20s",
+   "iri": "https://card.ai-ready/ontology#segment/age_20s",
+   "axis": "age_band",
+   "predicate": "age_band = '20'",
+   "verified": {
+    "ok": true,
+    "table": "d1_customer",
+    "rows": 96
+   }
+  }
+ ],
+ "areas": [
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EB%8F%99%EC%84%9C%EC%8B%9C%EC%9E%A5",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "동서시장",
+   "target_scheme": "admin_dong",
+   "target_code": "11230545",
+   "target_label": "제기동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%A2%85%EB%A1%9C%C2%B7%EC%B2%AD%EA%B3%84%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "종로·청계 관광특구",
+   "target_scheme": "admin_dong",
+   "target_code": "11110615",
+   "target_label": "종로1·2·3·4가동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%8B%A0%EC%82%AC%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "신사역",
+   "target_scheme": "admin_dong",
+   "target_code": "11650540",
+   "target_label": "잠원동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EA%B5%AC%EB%A1%9C%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "구로역",
+   "target_scheme": "admin_dong",
+   "target_code": "11530530",
+   "target_label": "구로2동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EB%AA%85%EB%8F%99%20%EB%82%A8%EB%8C%80%EB%AC%B8%20%EB%B6%81%EC%B0%BD%EB%8F%99%20%EB%8B%A4%EB%8F%99%20%EB%AC%B4%EA%B5%90%EB%8F%99%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "명동 남대문 북창동 다동 무교동 관광특구",
+   "target_scheme": "admin_dong",
+   "target_code": "11140520",
+   "target_label": "소공동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EB%85%B8%EC%9B%90%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "노원역",
+   "target_scheme": "admin_dong",
+   "target_code": "11350640",
+   "target_label": "상계2동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%97%AC%EC%9D%98%EB%8F%84%EC%97%AD%28%EC%97%AC%EC%9D%98%EB%8F%84%29",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "여의도역(여의도)",
+   "target_scheme": "admin_dong",
+   "target_code": "11560540",
+   "target_label": "여의동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%B2%AD%EB%9F%89%EB%A6%AC%EC%B2%AD%EA%B3%BC%EB%AC%BC%EC%8B%9C%EC%9E%A5",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "청량리청과물시장",
+   "target_scheme": "admin_dong",
+   "target_code": "11230545",
+   "target_label": "제기동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%9E%A0%EC%8B%A4%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "잠실역",
+   "target_scheme": "admin_dong",
+   "target_code": "11710710",
+   "target_label": "잠실6동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%9A%A9%EC%82%B0%EC%A0%84%EC%9E%90%EC%83%81%EA%B0%80%28%EC%9A%A9%EC%82%B0%EC%97%AD%29",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "용산전자상가(용산역)",
+   "target_scheme": "admin_dong",
+   "target_code": "11170625",
+   "target_label": "한강로동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EB%85%B8%EB%9F%89%EC%A7%84%EC%97%AD%28%EB%85%B8%EB%9F%89%EC%A7%84%29",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "노량진역(노량진)",
+   "target_scheme": "admin_dong",
+   "target_code": "11590510",
+   "target_label": "노량진1동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EA%B0%80%EB%9D%BD%EC%8B%9C%EC%9E%A5",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "가락시장",
+   "target_scheme": "admin_dong",
+   "target_code": "11710631",
+   "target_label": "가락1동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%98%81%EB%93%B1%ED%8F%AC%EC%97%AD%28%EC%98%81%EB%93%B1%ED%8F%AC%29",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "영등포역(영등포)",
+   "target_scheme": "admin_dong",
+   "target_code": "11560535",
+   "target_label": "영등포동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%B2%AD%EB%9F%89%EB%A6%AC%EC%A2%85%ED%95%A9%EC%8B%9C%EC%9E%A5",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "청량리종합시장",
+   "target_scheme": "admin_dong",
+   "target_code": "11230545",
+   "target_label": "제기동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EB%8F%99%EB%8C%80%EB%AC%B8%ED%8C%A8%EC%85%98%ED%83%80%EC%9A%B4%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "동대문패션타운 관광특구",
+   "target_scheme": "admin_dong",
+   "target_code": "11140590",
+   "target_label": "광희동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%9E%A0%EC%8B%A4%EC%83%88%EB%82%B4%EC%97%AD%28%EC%8B%A0%EC%B2%9C%29",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "잠실새내역(신천)",
+   "target_scheme": "admin_dong",
+   "target_code": "11710650",
+   "target_label": "잠실본동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%9E%A0%EC%8B%A4%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "잠실 관광특구",
+   "target_scheme": "admin_dong",
+   "target_code": "11710562",
+   "target_label": "방이2동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%95%95%EA%B5%AC%EC%A0%95%EB%A1%9C%EB%8D%B0%EC%98%A4%EC%97%AD%28%EC%95%95%EA%B5%AC%EC%A0%95%EB%A1%9C%EB%8D%B0%EC%98%A4%29",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "압구정로데오역(압구정로데오)",
+   "target_scheme": "admin_dong",
+   "target_code": "11680545",
+   "target_label": "압구정동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%97%AD%EC%82%BC%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "역삼역",
+   "target_scheme": "admin_dong",
+   "target_code": "11680640",
+   "target_label": "역삼1동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EA%B0%80%EC%82%B0%EB%94%94%EC%A7%80%ED%84%B8%EB%8B%A8%EC%A7%80",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "가산디지털단지",
+   "target_scheme": "admin_dong",
+   "target_code": "11545510",
+   "target_label": "가산동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EB%8F%85%EC%82%B0%EB%8F%99%20%EC%9A%B0%EC%8B%9C%EC%9E%A5",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "독산동 우시장",
+   "target_scheme": "admin_dong",
+   "target_code": "11545610",
+   "target_label": "독산1동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EA%B0%95%EB%82%A8%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "강남역",
+   "target_scheme": "admin_dong",
+   "target_code": "11650520",
+   "target_label": "서초2동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%A2%85%EB%A1%9C3%EA%B0%80%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "종로3가역",
+   "target_scheme": "admin_dong",
+   "target_code": "11110615",
+   "target_label": "종로1·2·3·4가동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%ED%99%8D%EB%8C%80%EC%9E%85%EA%B5%AC%EC%97%AD%28%ED%99%8D%EB%8C%80%29",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "홍대입구역(홍대)",
+   "target_scheme": "admin_dong",
+   "target_code": "11440660",
+   "target_label": "서교동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "iri": "https://card.ai-ready/ontology#areamap/%EC%95%95%EA%B5%AC%EC%A0%95%EC%97%AD",
+   "source_scheme": "seoul_trade_area",
+   "source_code": "압구정역",
+   "target_scheme": "admin_dong",
+   "target_code": "11680510",
+   "target_label": "신사동",
+   "mapping_type": "name_match",
+   "confidence": 1.0,
+   "review_status": "verified",
+   "evidence": "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD",
+   "verified": {
+    "ok": true,
+    "problems": []
+   }
+  }
+ ],
+ "classes": [
+  {
+   "name": "DistrictSales",
+   "iri": "https://card.ai-ready/ontology#DistrictSales",
+   "local": "DistrictSales",
+   "lpg_label": ""
+  },
+  {
+   "name": "StatementMonthly",
+   "iri": "https://card.ai-ready/ontology#StatementMonthly",
+   "local": "StatementMonthly",
+   "lpg_label": ""
+  },
+  {
+   "name": "GoldenEligibilityCase",
+   "iri": "https://card.ai-ready/ontology#GoldenEligibilityCase",
+   "local": "GoldenEligibilityCase",
+   "lpg_label": ""
+  },
+  {
+   "name": "Transaction",
+   "iri": "https://card.ai-ready/ontology#Transaction",
+   "local": "Transaction",
+   "lpg_label": ""
+  },
+  {
+   "name": "IndustryCategory",
+   "iri": "https://card.ai-ready/ontology#IndustryCategory",
+   "local": "IndustryCategory",
+   "lpg_label": ""
+  },
+  {
+   "name": "Customer",
+   "iri": "https://card.ai-ready/ontology#Customer",
+   "local": "Customer",
+   "lpg_label": ""
+  },
+  {
+   "name": "CustomerSegmentSpec",
+   "iri": "https://card.ai-ready/ontology#CustomerSegmentSpec",
+   "local": "CustomerSegmentSpec",
+   "lpg_label": ""
+  },
+  {
+   "name": "Benefit",
+   "iri": "https://card.ai-ready/ontology#Benefit",
+   "local": "Benefit",
+   "lpg_label": "Clean_Benefit"
+  },
+  {
+   "name": "Account",
+   "iri": "https://card.ai-ready/ontology#Account",
+   "local": "Account",
+   "lpg_label": ""
+  },
+  {
+   "name": "SpendTier",
+   "iri": "https://card.ai-ready/ontology#SpendTier",
+   "local": "SpendTier",
+   "lpg_label": "CARD_SpendTier"
+  },
+  {
+   "name": "RewardLedger",
+   "iri": "https://card.ai-ready/ontology#RewardLedger",
+   "local": "RewardLedger",
+   "lpg_label": ""
+  },
+  {
+   "name": "Merchant",
+   "iri": "https://card.ai-ready/ontology#Merchant",
+   "local": "Merchant",
+   "lpg_label": "MERCHANT"
+  },
+  {
+   "name": "Complaint",
+   "iri": "https://card.ai-ready/ontology#Complaint",
+   "local": "Complaint",
+   "lpg_label": ""
+  },
+  {
+   "name": "BenefitCategory",
+   "iri": "https://card.ai-ready/ontology#BenefitCategory",
+   "local": "BenefitCategory",
+   "lpg_label": "BenefitCategory"
+  },
+  {
+   "name": "BenefitCondition",
+   "iri": "https://card.ai-ready/ontology#BenefitCondition",
+   "local": "BenefitCondition",
+   "lpg_label": ""
+  },
+  {
+   "name": "CardProduct",
+   "iri": "https://card.ai-ready/ontology#CardProduct",
+   "local": "CardProduct",
+   "lpg_label": "CARD_Product"
+  },
+  {
+   "name": "CleanCard",
+   "iri": "https://card.ai-ready/ontology#CleanCard",
+   "local": "CleanCard",
+   "lpg_label": "Clean_Card"
+  },
+  {
+   "name": "CleanCategory",
+   "iri": "https://card.ai-ready/ontology#CleanCategory",
+   "local": "CleanCategory",
+   "lpg_label": "Clean_Category"
+  }
+ ],
+ "properties": [
+  {
+   "name": "benefit_group_id",
+   "iri": "https://card.ai-ready/ontology#benefitGroupId",
+   "local": "benefitGroupId",
+   "kind": "datatype",
+   "domain": "Benefit",
+   "range": "string"
+  },
+  {
+   "name": "cap_after",
+   "iri": "https://card.ai-ready/ontology#capAfter",
+   "local": "capAfter",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "decimal"
+  },
+  {
+   "name": "posted_date",
+   "iri": "https://card.ai-ready/ontology#postedDate",
+   "local": "postedDate",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "forTransaction",
+   "iri": "https://card.ai-ready/ontology#forTransaction",
+   "local": "forTransaction",
+   "kind": "object",
+   "domain": "RewardLedger",
+   "range": "Transaction"
+  },
+  {
+   "name": "max_spend",
+   "iri": "https://card.ai-ready/ontology#maxSpend",
+   "local": "maxSpend",
+   "kind": "datatype",
+   "domain": "SpendTier",
+   "range": "decimal"
+  },
+  {
+   "name": "statement_month",
+   "iri": "https://card.ai-ready/ontology#statementMonth",
+   "local": "statementMonth",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "forAccountStmt",
+   "iri": "https://card.ai-ready/ontology#forAccountStmt",
+   "local": "forAccountStmt",
+   "kind": "object",
+   "domain": "StatementMonthly",
+   "range": "Account"
+  },
+  {
+   "name": "raw_text",
+   "iri": "https://card.ai-ready/ontology#rawText",
+   "local": "rawText",
+   "kind": "datatype",
+   "domain": "BenefitCondition",
+   "range": "string"
+  },
+  {
+   "name": "calculation_trace",
+   "iri": "https://card.ai-ready/ontology#calculationTrace",
+   "local": "calculationTrace",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "string"
+  },
+  {
+   "name": "expected_eligible",
+   "iri": "https://card.ai-ready/ontology#expectedEligible",
+   "local": "expectedEligible",
+   "kind": "datatype",
+   "domain": "GoldenEligibilityCase",
+   "range": "boolean"
+  },
+  {
+   "name": "canonical_name",
+   "iri": "https://card.ai-ready/ontology#canonicalName",
+   "local": "canonicalName",
+   "kind": "datatype",
+   "domain": "Merchant",
+   "range": "string"
+  },
+  {
+   "name": "benefit_category",
+   "iri": "https://card.ai-ready/ontology#benefitCategory",
+   "local": "benefitCategory",
+   "kind": "datatype",
+   "domain": "Benefit",
+   "range": "string"
+  },
+  {
+   "name": "annual_fee_raw",
+   "iri": "https://card.ai-ready/ontology#annualFeeRaw",
+   "local": "annualFeeRaw",
+   "kind": "datatype",
+   "domain": "CardProduct",
+   "range": "string"
+  },
+  {
+   "name": "forBenefit",
+   "iri": "https://card.ai-ready/ontology#forBenefit",
+   "local": "forBenefit",
+   "kind": "object",
+   "domain": "RewardLedger",
+   "range": "Benefit"
+  },
+  {
+   "name": "age_band",
+   "iri": "https://card.ai-ready/ontology#ageBand",
+   "local": "ageBand",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "string"
+  },
+  {
+   "name": "is_discontinued",
+   "iri": "https://card.ai-ready/ontology#isDiscontinued",
+   "local": "isDiscontinued",
+   "kind": "datatype",
+   "domain": "CardProduct",
+   "range": "boolean"
+  },
+  {
+   "name": "aliases",
+   "iri": "https://card.ai-ready/ontology#aliases",
+   "local": "aliases",
+   "kind": "datatype",
+   "domain": "Merchant",
+   "range": "string"
+  },
+  {
+   "name": "heldBy",
+   "iri": "https://card.ai-ready/ontology#heldBy",
+   "local": "heldBy",
+   "kind": "object",
+   "domain": "Account",
+   "range": "Customer"
+  },
+  {
+   "name": "complaint_id",
+   "iri": "https://card.ai-ready/ontology#complaintId",
+   "local": "complaintId",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "case_id",
+   "iri": "https://card.ai-ready/ontology#caseId",
+   "local": "caseId",
+   "kind": "datatype",
+   "domain": "GoldenEligibilityCase",
+   "range": "string"
+  },
+  {
+   "name": "parsed",
+   "iri": "https://card.ai-ready/ontology#parsed",
+   "local": "parsed",
+   "kind": "datatype",
+   "domain": "BenefitCondition",
+   "range": "string"
+  },
+  {
+   "name": "timely",
+   "iri": "https://card.ai-ready/ontology#timely",
+   "local": "timely",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "boolean"
+  },
+  {
+   "name": "billing_cycle_day",
+   "iri": "https://card.ai-ready/ontology#billingCycleDay",
+   "local": "billingCycleDay",
+   "kind": "datatype",
+   "domain": "Account",
+   "range": "integer"
+  },
+  {
+   "name": "benefit_id",
+   "iri": "https://card.ai-ready/ontology#benefitId",
+   "local": "benefitId",
+   "kind": "datatype",
+   "domain": "Benefit",
+   "range": "string"
+  },
+  {
+   "name": "narrative",
+   "iri": "https://card.ai-ready/ontology#narrative",
+   "local": "narrative",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "merchant_name",
+   "iri": "https://card.ai-ready/ontology#merchantName",
+   "local": "merchantName",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "is_refund",
+   "iri": "https://card.ai-ready/ontology#isRefund",
+   "local": "isRefund",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "boolean"
+  },
+  {
+   "name": "condition_id",
+   "iri": "https://card.ai-ready/ontology#conditionId",
+   "local": "conditionId",
+   "kind": "datatype",
+   "domain": "BenefitCondition",
+   "range": "string"
+  },
+  {
+   "name": "limit_amount",
+   "iri": "https://card.ai-ready/ontology#limitAmount",
+   "local": "limitAmount",
+   "kind": "datatype",
+   "domain": "SpendTier",
+   "range": "integer"
+  },
+  {
+   "name": "monthly_spend_tier",
+   "iri": "https://card.ai-ready/ontology#monthlySpendTier",
+   "local": "monthlySpendTier",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "string"
+  },
+  {
+   "name": "age",
+   "iri": "https://card.ai-ready/ontology#age",
+   "local": "age",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "integer"
+  },
+  {
+   "name": "mapping_confidence",
+   "iri": "https://card.ai-ready/ontology#mappingConfidence",
+   "local": "mappingConfidence",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "decimal"
+  },
+  {
+   "name": "txnCategory",
+   "iri": "https://card.ai-ready/ontology#txnCategory",
+   "local": "txnCategory",
+   "kind": "object",
+   "domain": "Transaction",
+   "range": "IndustryCategory"
+  },
+  {
+   "name": "evidence_rule_id",
+   "iri": "https://card.ai-ready/ontology#evidenceRuleId",
+   "local": "evidenceRuleId",
+   "kind": "datatype",
+   "domain": "GoldenEligibilityCase",
+   "range": "string"
+  },
+  {
+   "name": "received_date",
+   "iri": "https://card.ai-ready/ontology#receivedDate",
+   "local": "receivedDate",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "hasBenefitCategory",
+   "iri": "https://card.ai-ready/ontology#hasBenefitCategory",
+   "local": "hasBenefitCategory",
+   "kind": "object",
+   "domain": "Benefit",
+   "range": "BenefitCategory"
+  },
+  {
+   "name": "customer_id",
+   "iri": "https://card.ai-ready/ontology#customerId",
+   "local": "customerId",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "string"
+  },
+  {
+   "name": "performance_period_end",
+   "iri": "https://card.ai-ready/ontology#performancePeriodEnd",
+   "local": "performancePeriodEnd",
+   "kind": "datatype",
+   "domain": "StatementMonthly",
+   "range": "string"
+  },
+  {
+   "name": "persona",
+   "iri": "https://card.ai-ready/ontology#persona",
+   "local": "persona",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "string"
+  },
+  {
+   "name": "min_spend",
+   "iri": "https://card.ai-ready/ontology#minSpend",
+   "local": "minSpend",
+   "kind": "datatype",
+   "domain": "SpendTier",
+   "range": "integer"
+  },
+  {
+   "name": "scenario_tag",
+   "iri": "https://card.ai-ready/ontology#scenarioTag",
+   "local": "scenarioTag",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "card_product_id",
+   "iri": "https://card.ai-ready/ontology#cardProductId",
+   "local": "cardProductId",
+   "kind": "datatype",
+   "domain": "CardProduct",
+   "range": "string"
+  },
+  {
+   "name": "related_txn_id",
+   "iri": "https://card.ai-ready/ontology#relatedTxnId",
+   "local": "relatedTxnId",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "total_spend",
+   "iri": "https://card.ai-ready/ontology#totalSpend",
+   "local": "totalSpend",
+   "kind": "datatype",
+   "domain": "StatementMonthly",
+   "range": "integer"
+  },
+  {
+   "name": "related_benefit_id",
+   "iri": "https://card.ai-ready/ontology#relatedBenefitId",
+   "local": "relatedBenefitId",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "edge_case_type",
+   "iri": "https://card.ai-ready/ontology#edgeCaseType",
+   "local": "edgeCaseType",
+   "kind": "datatype",
+   "domain": "GoldenEligibilityCase",
+   "range": "string"
+  },
+  {
+   "name": "sex",
+   "iri": "https://card.ai-ready/ontology#sex",
+   "local": "sex",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "string"
+  },
+  {
+   "name": "ledger_id",
+   "iri": "https://card.ai-ready/ontology#ledgerId",
+   "local": "ledgerId",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "string"
+  },
+  {
+   "name": "prev_month_eligible_spend",
+   "iri": "https://card.ai-ready/ontology#prevMonthEligibleSpend",
+   "local": "prevMonthEligibleSpend",
+   "kind": "datatype",
+   "domain": "StatementMonthly",
+   "range": "integer"
+  },
+  {
+   "name": "txn_status",
+   "iri": "https://card.ai-ready/ontology#txnStatus",
+   "local": "txnStatus",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "rule_version",
+   "iri": "https://card.ai-ready/ontology#ruleVersion",
+   "local": "ruleVersion",
+   "kind": "datatype",
+   "domain": "BenefitCondition",
+   "range": "string"
+  },
+  {
+   "name": "credit_limit_krw",
+   "iri": "https://card.ai-ready/ontology#creditLimitKrw",
+   "local": "creditLimitKrw",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "integer"
+  },
+  {
+   "name": "related_card_id",
+   "iri": "https://card.ai-ready/ontology#relatedCardId",
+   "local": "relatedCardId",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "txn_datetime",
+   "iri": "https://card.ai-ready/ontology#txnDatetime",
+   "local": "txnDatetime",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "industry_code",
+   "iri": "https://card.ai-ready/ontology#industryCode",
+   "local": "industryCode",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "entity_link_confidence",
+   "iri": "https://card.ai-ready/ontology#entityLinkConfidence",
+   "local": "entityLinkConfidence",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "decimal"
+  },
+  {
+   "name": "terms_version",
+   "iri": "https://card.ai-ready/ontology#termsVersion",
+   "local": "termsVersion",
+   "kind": "datatype",
+   "domain": "GoldenEligibilityCase",
+   "range": "string"
+  },
+  {
+   "name": "txn_id",
+   "iri": "https://card.ai-ready/ontology#txnId",
+   "local": "txnId",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "installment_months",
+   "iri": "https://card.ai-ready/ontology#installmentMonths",
+   "local": "installmentMonths",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "integer"
+  },
+  {
+   "name": "spend_tier_matched",
+   "iri": "https://card.ai-ready/ontology#spendTierMatched",
+   "local": "spendTierMatched",
+   "kind": "datatype",
+   "domain": "StatementMonthly",
+   "range": "string"
+  },
+  {
+   "name": "expected_denial_reason",
+   "iri": "https://card.ai-ready/ontology#expectedDenialReason",
+   "local": "expectedDenialReason",
+   "kind": "datatype",
+   "domain": "GoldenEligibilityCase",
+   "range": "string"
+  },
+  {
+   "name": "mcc",
+   "iri": "https://card.ai-ready/ontology#mcc",
+   "local": "mcc",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "related_statement_month",
+   "iri": "https://card.ai-ready/ontology#relatedStatementMonth",
+   "local": "relatedStatementMonth",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "eligibleForBenefitCategory",
+   "iri": "https://card.ai-ready/ontology#eligibleForBenefitCategory",
+   "local": "eligibleForBenefitCategory",
+   "kind": "object",
+   "domain": "IndustryCategory",
+   "range": "BenefitCategory"
+  },
+  {
+   "name": "denial_reason",
+   "iri": "https://card.ai-ready/ontology#denialReason",
+   "local": "denialReason",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "string"
+  },
+  {
+   "name": "tier_id",
+   "iri": "https://card.ai-ready/ontology#tierId",
+   "local": "tierId",
+   "kind": "datatype",
+   "domain": "SpendTier",
+   "range": "string"
+  },
+  {
+   "name": "merchant_alias",
+   "iri": "https://card.ai-ready/ontology#merchantAlias",
+   "local": "merchantAlias",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "observed_reward",
+   "iri": "https://card.ai-ready/ontology#observedReward",
+   "local": "observedReward",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "integer"
+  },
+  {
+   "name": "industry_name",
+   "iri": "https://card.ai-ready/ontology#industryName",
+   "local": "industryName",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "hasCondition",
+   "iri": "https://card.ai-ready/ontology#hasCondition",
+   "local": "hasCondition",
+   "kind": "object",
+   "domain": "Benefit",
+   "range": "BenefitCondition"
+  },
+  {
+   "name": "merchant_id",
+   "iri": "https://card.ai-ready/ontology#merchantId",
+   "local": "merchantId",
+   "kind": "datatype",
+   "domain": "Merchant",
+   "range": "string"
+  },
+  {
+   "name": "hasSpendTier",
+   "iri": "https://card.ai-ready/ontology#hasSpendTier",
+   "local": "hasSpendTier",
+   "kind": "object",
+   "domain": "CardProduct",
+   "range": "SpendTier"
+  },
+  {
+   "name": "is_cancelled",
+   "iri": "https://card.ai-ready/ontology#isCancelled",
+   "local": "isCancelled",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "boolean"
+  },
+  {
+   "name": "card_account_id",
+   "iri": "https://card.ai-ready/ontology#cardAccountId",
+   "local": "cardAccountId",
+   "kind": "datatype",
+   "domain": "Account",
+   "range": "string"
+  },
+  {
+   "name": "label",
+   "iri": "https://card.ai-ready/ontology#label",
+   "local": "label",
+   "kind": "datatype",
+   "domain": "Benefit",
+   "range": "string"
+  },
+  {
+   "name": "parse_status",
+   "iri": "https://card.ai-ready/ontology#parseStatus",
+   "local": "parseStatus",
+   "kind": "datatype",
+   "domain": "BenefitCondition",
+   "range": "string"
+  },
+  {
+   "name": "posted_month",
+   "iri": "https://card.ai-ready/ontology#postedMonth",
+   "local": "postedMonth",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "remaining_monthly_limit",
+   "iri": "https://card.ai-ready/ontology#remainingMonthlyLimit",
+   "local": "remainingMonthlyLimit",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "decimal"
+  },
+  {
+   "name": "link_source",
+   "iri": "https://card.ai-ready/ontology#linkSource",
+   "local": "linkSource",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "forProduct",
+   "iri": "https://card.ai-ready/ontology#forProduct",
+   "local": "forProduct",
+   "kind": "object",
+   "domain": "Account",
+   "range": "CardProduct"
+  },
+  {
+   "name": "name",
+   "iri": "https://card.ai-ready/ontology#name",
+   "local": "name",
+   "kind": "datatype",
+   "domain": "CardProduct",
+   "range": "string"
+  },
+  {
+   "name": "cap_before",
+   "iri": "https://card.ai-ready/ontology#capBefore",
+   "local": "capBefore",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "decimal"
+  },
+  {
+   "name": "merchantIndustry",
+   "iri": "https://card.ai-ready/ontology#merchantIndustry",
+   "local": "merchantIndustry",
+   "kind": "object",
+   "domain": "Merchant",
+   "range": "IndustryCategory"
+  },
+  {
+   "name": "atMerchant",
+   "iri": "https://card.ai-ready/ontology#atMerchant",
+   "local": "atMerchant",
+   "kind": "object",
+   "domain": "Transaction",
+   "range": "Merchant"
+  },
+  {
+   "name": "delinquency_status",
+   "iri": "https://card.ai-ready/ontology#delinquencyStatus",
+   "local": "delinquencyStatus",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "integer"
+  },
+  {
+   "name": "unresolved_entity",
+   "iri": "https://card.ai-ready/ontology#unresolvedEntity",
+   "local": "unresolvedEntity",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "boolean"
+  },
+  {
+   "name": "channel",
+   "iri": "https://card.ai-ready/ontology#channel",
+   "local": "channel",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "string"
+  },
+  {
+   "name": "onAccount",
+   "iri": "https://card.ai-ready/ontology#onAccount",
+   "local": "onAccount",
+   "kind": "object",
+   "domain": "Transaction",
+   "range": "Account"
+  },
+  {
+   "name": "open_date",
+   "iri": "https://card.ai-ready/ontology#openDate",
+   "local": "openDate",
+   "kind": "datatype",
+   "domain": "Account",
+   "range": "string"
+  },
+  {
+   "name": "expected_reward",
+   "iri": "https://card.ai-ready/ontology#expectedReward",
+   "local": "expectedReward",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "integer"
+  },
+  {
+   "name": "performance_period_start",
+   "iri": "https://card.ai-ready/ontology#performancePeriodStart",
+   "local": "performancePeriodStart",
+   "kind": "datatype",
+   "domain": "StatementMonthly",
+   "range": "string"
+  },
+  {
+   "name": "issue",
+   "iri": "https://card.ai-ready/ontology#issue",
+   "local": "issue",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "benefit_condition_id",
+   "iri": "https://card.ai-ready/ontology#benefitConditionId",
+   "local": "benefitConditionId",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "string"
+  },
+  {
+   "name": "region",
+   "iri": "https://card.ai-ready/ontology#region",
+   "local": "region",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "string"
+  },
+  {
+   "name": "is_active",
+   "iri": "https://card.ai-ready/ontology#isActive",
+   "local": "isActive",
+   "kind": "datatype",
+   "domain": "Account",
+   "range": "boolean"
+  },
+  {
+   "name": "amount",
+   "iri": "https://card.ai-ready/ontology#amount",
+   "local": "amount",
+   "kind": "datatype",
+   "domain": "Transaction",
+   "range": "integer"
+  },
+  {
+   "name": "injected_error_type",
+   "iri": "https://card.ai-ready/ontology#injectedErrorType",
+   "local": "injectedErrorType",
+   "kind": "datatype",
+   "domain": "RewardLedger",
+   "range": "string"
+  },
+  {
+   "name": "default_flag",
+   "iri": "https://card.ai-ready/ontology#defaultFlag",
+   "local": "defaultFlag",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "integer"
+  },
+  {
+   "name": "reward_type",
+   "iri": "https://card.ai-ready/ontology#rewardType",
+   "local": "rewardType",
+   "kind": "datatype",
+   "domain": "Benefit",
+   "range": "string"
+  },
+  {
+   "name": "is_synthetic",
+   "iri": "https://card.ai-ready/ontology#isSynthetic",
+   "local": "isSynthetic",
+   "kind": "datatype",
+   "domain": "Customer",
+   "range": "boolean"
+  },
+  {
+   "name": "sub_issue",
+   "iri": "https://card.ai-ready/ontology#subIssue",
+   "local": "subIssue",
+   "kind": "datatype",
+   "domain": "Complaint",
+   "range": "string"
+  },
+  {
+   "name": "hasBenefit",
+   "iri": "https://card.ai-ready/ontology#hasBenefit",
+   "local": "hasBenefit",
+   "kind": "object",
+   "domain": "CardProduct",
+   "range": "Benefit"
+  },
+  {
+   "name": "card_type",
+   "iri": "https://card.ai-ready/ontology#cardType",
+   "local": "cardType",
+   "kind": "datatype",
+   "domain": "CardProduct",
+   "range": "string"
+  },
+  {
+   "name": "hasCleanBenefit",
+   "iri": "https://card.ai-ready/ontology#hasCleanBenefit",
+   "local": "hasCleanBenefit",
+   "kind": "object",
+   "domain": "CleanCard",
+   "range": "Benefit",
+   "lpg_edge_label": "HAS_BENEFIT"
+  },
+  {
+   "name": "inCleanCategory",
+   "iri": "https://card.ai-ready/ontology#inCleanCategory",
+   "local": "inCleanCategory",
+   "kind": "object",
+   "domain": "Benefit",
+   "range": "CleanCategory",
+   "lpg_edge_label": "IN_CATEGORY"
+  },
+  {
+   "name": "childOfCategory",
+   "iri": "https://card.ai-ready/ontology#childOfCategory",
+   "local": "childOfCategory",
+   "kind": "object",
+   "domain": "CleanCategory",
+   "range": "CleanCategory",
+   "lpg_edge_label": "CHILD_OF"
+  }
+ ],
+ "table_mapping": [
+  {
+   "table_yaml": "R0_card_product",
+   "rdf_class": "co:CardProduct",
+   "lpg_label": "CardProduct",
+   "serving_target": "lpg",
+   "a_box_policy": "full",
+   "pk": "card_product_id",
+   "fk": [],
+   "sensitivity": "public",
+   "n_columns": 5,
+   "table": "r0_card_product"
+  },
+  {
+   "table_yaml": "R1_benefit",
+   "rdf_class": "co:Benefit",
+   "lpg_label": "Benefit",
+   "serving_target": "lpg",
+   "a_box_policy": "full",
+   "pk": "benefit_id",
+   "fk": [
+    "card_product_id"
+   ],
+   "sensitivity": "public",
+   "n_columns": 6,
+   "table": "r1_benefit"
+  },
+  {
+   "table_yaml": "R2_benefit_condition",
+   "rdf_class": "co:BenefitCondition",
+   "lpg_label": "BenefitCondition",
+   "serving_target": "lpg",
+   "a_box_policy": "full",
+   "pk": "condition_id",
+   "fk": [
+    "benefit_id"
+   ],
+   "sensitivity": "public",
+   "n_columns": 6,
+   "table": "r2_benefit_condition"
+  },
+  {
+   "table_yaml": "R3_spend_tier",
+   "rdf_class": "co:SpendTier",
+   "lpg_label": "SpendTier",
+   "serving_target": "lpg",
+   "a_box_policy": "full",
+   "pk": "tier_id",
+   "fk": [
+    "card_product_id"
+   ],
+   "sensitivity": "public",
+   "n_columns": 5,
+   "table": "r3_spend_tier"
+  },
+  {
+   "table_yaml": "R4_merchant_reference",
+   "rdf_class": "co:Merchant",
+   "lpg_label": "Merchant",
+   "serving_target": "lpg",
+   "a_box_policy": "full",
+   "pk": "merchant_id",
+   "fk": [],
+   "sensitivity": "public",
+   "n_columns": 3,
+   "table": "r4_merchant_reference"
+  },
+  {
+   "table_yaml": "D1_customer",
+   "rdf_class": "co:Customer",
+   "lpg_label": "Customer",
+   "serving_target": "sql_only",
+   "a_box_policy": "none",
+   "pk": "customer_id",
+   "fk": [],
+   "sensitivity": "synthetic",
+   "n_columns": 11,
+   "table": "d1_customer"
+  },
+  {
+   "table_yaml": "D2_account",
+   "rdf_class": "co:Account",
+   "lpg_label": "Account",
+   "serving_target": "sql_only",
+   "a_box_policy": "none",
+   "pk": "card_account_id",
+   "fk": [
+    "customer_id",
+    "card_product_id"
+   ],
+   "sensitivity": "synthetic",
+   "n_columns": 7,
+   "table": "d2_account"
+  },
+  {
+   "table_yaml": "D4_transaction",
+   "rdf_class": "co:Transaction",
+   "lpg_label": "Transaction",
+   "serving_target": "sql_only",
+   "a_box_policy": "none",
+   "pk": "txn_id",
+   "fk": [
+    "card_account_id",
+    "card_product_id"
+   ],
+   "sensitivity": "synthetic",
+   "n_columns": 22,
+   "table": "d4_transaction"
+  },
+  {
+   "table_yaml": "D5_statement_monthly",
+   "rdf_class": "co:StatementMonthly",
+   "lpg_label": "StatementMonthly",
+   "serving_target": "sql_only",
+   "a_box_policy": "none",
+   "pk": null,
+   "fk": [
+    "card_account_id"
+   ],
+   "sensitivity": "synthetic",
+   "n_columns": 11,
+   "table": "d5_statement_monthly"
+  },
+  {
+   "table_yaml": "D6_reward_ledger",
+   "rdf_class": "co:RewardLedger",
+   "lpg_label": "RewardLedger",
+   "serving_target": "sql_only",
+   "a_box_policy": "none",
+   "pk": "ledger_id",
+   "fk": [
+    "txn_id",
+    "benefit_id"
+   ],
+   "sensitivity": "synthetic",
+   "n_columns": 15,
+   "table": "d6_reward_ledger"
+  },
+  {
+   "table_yaml": "D7_complaint",
+   "rdf_class": "co:Complaint",
+   "lpg_label": "Complaint",
+   "serving_target": "sql_only",
+   "a_box_policy": "none",
+   "pk": "complaint_id",
+   "fk": [],
+   "sensitivity": "synthetic",
+   "n_columns": 14,
+   "table": "d7_complaint"
+  },
+  {
+   "table_yaml": "D8_golden_eligibility_case",
+   "rdf_class": "co:GoldenEligibilityCase",
+   "lpg_label": "GoldenEligibilityCase",
+   "serving_target": "sql_only",
+   "a_box_policy": "seed_only",
+   "pk": "case_id",
+   "fk": [
+    "txn_id"
+   ],
+   "sensitivity": "synthetic",
+   "n_columns": 11,
+   "table": "d8_golden_eligibility_case"
+  },
+  {
+   "table_yaml": "D0_category",
+   "rdf_class": "co:BenefitCategory / co:IndustryCategory",
+   "lpg_label": "Category",
+   "serving_target": "lpg",
+   "a_box_policy": "full",
+   "pk": "node_id",
+   "fk": [],
+   "sensitivity": "public",
+   "n_columns": 0,
+   "table": ""
+  }
+ ],
+ "_meta": {
+  "source": "ontology/ (U2a·U2b 산출물)",
+  "note": "값 검증은 scripts/verify_onto_values.py(M1)가 한다",
+  "verified": true,
+  "u81_benefit_tag": {
+   "added": 65,
+   "why": "bb1~bb12 원천 태그 → 혜택 카테고리. 매핑은 데이터여야 한다 — 파이썬 낱말 사전(clean_graph.CATEGORY_KEYWORDS)은 배포가 필요하고 evidence·confidence를 못 남기고 lookup_ontology가 못 본다",
+   "basis": "원천 jsonl bb 태그 745종 전수. offer+unknown 2,231건 중 미분류 809건을 전수 검토해 실제 업종이 있는 것만 골랐다. 재현: data/u81_benefit_tag_map.json",
+   "excluded": [
+    "생활 할인(→쇼핑·여가 가로챔)",
+    "메리어트(→포인트/적립일반)",
+    "신세계(→여가)",
+    "몰테일(→해외이용)",
+    "T 멤버십(→주유/충전)"
+   ],
+   "note": "가로챔 0건을 추가 전 전수 대조로 확인. 낱말 규칙은 U71에서 두 번 정상 데이터를 죽였다(P5)"
+  },
+  "u81_surface_form": {
+   "added": 19,
+   "why": "한영 표기 격차. 질문은 '딥드림'이고 데이터는 'Deep Dream'이라 0건이 났다. v1 hybrid_searcher에는 synonym이 있었고 v2에는 없었다.",
+   "scope": "**U41 tier1(대표) 49장의 카드명 표기만.** tier2 416·tier3 229 제외. 근거: 카드고릴라 연결산·2026 TOP100·공식 프리미엄 섹션(FD §28.1).",
+   "excluded_and_why": {
+    "업종어(편의점↔CU·영화↔CGV·이케아↔IKEA·통신↔SKT·스트리밍↔OTT)": "**이미 CATEGORY_KEYWORDS 또는 Onto_Mapping benefit_tag에 있다**(실측). 넣으면 세 곳에 같은 사실이 되고, 그것이 오늘 카테고리 사고의 구조였다",
+    "넷플릭스·티빙·웨이브": "원천에 **한글로** 있다(110·37·33회) — 표기 격차가 아니다",
+    "일반어(페이·포인트·하이·더)": "혜택 본문에 2,290·5,547·198·771회 — 오탐(레슨 P5)",
+    "코스트코·소노·아웃백·Netflix": "원천에 영문이 **0회** — 매핑해도 못 찾는다"
+   }
+  },
+  "tbox_realization_version": 1,
+  "obqc_scope": "v2_clean_only",
+  "u98_tbox_v2": {
+   "added_classes": [
+    "CleanCard",
+    "CleanCategory"
+   ],
+   "added_properties": [
+    "hasCleanBenefit",
+    "inCleanCategory",
+    "childOfCategory"
+   ],
+   "why": "v1 property 3건(hasBenefitCategory·hasSpendTier·hasBenefit)의 domain/range가 v1 라벨을 가리켜 v2 검증에 쓸 수 없다. 고치면 v1 도메인 의미가 틀려지므로 v2용을 신설한다 — v1 27,453 불변 계약(U71) 유지. 기존 14 object property에는 lpg_edge_label을 채우지 않는다 → realization map에 들어가지 않는다 → v2 정상 쿼리를 차단하지 않는다",
+   "decision": "aidlc-docs/v3/decision-v3-tbox-v2-alignment.md"
+  }
+ }
+}

@@ -1,0 +1,13 @@
+@prefix co: <https://card.ai-ready/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://card.ai-ready/id/r0_card_product/SEED001> a co:CardProduct ;
+    co:cardProductId "SEED001" ;
+    co:isCheckCard true ;
+    co:isDiscontinued false ;
+    co:name "seed card" .
+
+<https://card.ai-ready/id/r1_benefit/SEEDBN1> a co:Benefit ;
+    co:benefitId "SEEDBN1" ;
+    co:rewardType "적립" .
+

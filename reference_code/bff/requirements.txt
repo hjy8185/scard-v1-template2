@@ -1,0 +1,11 @@
+fastapi>=0.115.0
+uvicorn>=0.34.0
+httpx>=0.28.0
+boto3>=1.36.0
+botocore>=1.36.0
+pydantic>=2.0.0
+redis>=5.0  # U22 B1: Valkey 세그먼트 metric 조회(compare 인사이트)
+pyyaml>=6.0  # U53: 캐시 워밍이 재사용하는 에이전트 라우팅(metric registry.yml 로드)
+pytest>=8.0.0
+pytest-asyncio>=0.24.0
+httpx  # also used as test client via httpx.ASGITransport

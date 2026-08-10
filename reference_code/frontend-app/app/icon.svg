@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- U55: favicon(404 제거). 데모 톤 — ink-900 배경 + jade/aqua 온톨로지 노드 모티프.
+       두 자산 노드를 연결선이 잇는 형태 = 이 데모의 논지(연결이 답을 만든다). -->
+  <rect width="32" height="32" rx="7" fill="#070B0E"/>
+  <line x1="10" y1="21" x2="22" y2="11" stroke="#38C7E0" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="10" cy="21" r="4.6" fill="#2BE8A5"/>
+  <circle cx="22" cy="11" r="4.6" fill="#38C7E0"/>
+</svg>

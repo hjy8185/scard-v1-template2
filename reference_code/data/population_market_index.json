@@ -1,0 +1,890 @@
+{
+ "meta": {
+  "source": "서울 생활인구(내국인·행정동, 공공누리 1유형) × 상권 추정매출[집계]",
+  "pop_month": "202606",
+  "n_days": 30,
+  "sales_year": "2025",
+  "join_rule": "상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD (AreaMapping) · 침투율 분모=점심(11~13시) 평균 생활인구",
+  "unmapped_areas": [],
+  "caveat": "생활인구는 통신 기반 추계 — 방문객·구매자 수 아님. 매출은 연간, 인구는 대표월 — as_of 병기 필요.",
+  "provenance": "공개-집계"
+ },
+ "area_stats": [
+  {
+   "area": "노량진역(노량진)",
+   "dong_code": "11590510",
+   "dong_name": "노량진1동",
+   "lunch_pop_avg": 33109,
+   "sales_krw": 3904896644926,
+   "penetration_krw": 323122,
+   "age_pop": {
+    "10": 2116,
+    "20": 10441,
+    "30": 5921,
+    "40": 4176,
+    "50": 3765,
+    "60_이상": 2425
+   },
+   "pop_rank": 22,
+   "sales_rank": 1,
+   "gap": 21
+  },
+  {
+   "area": "가산디지털단지",
+   "dong_code": "11545510",
+   "dong_name": "가산동",
+   "lunch_pop_avg": 88675,
+   "sales_krw": 3100968732376,
+   "penetration_krw": 95808,
+   "age_pop": {
+    "10": 1165,
+    "20": 17257,
+    "30": 24524,
+    "40": 19997,
+    "50": 14736,
+    "60_이상": 6534
+   },
+   "pop_rank": 5,
+   "sales_rank": 2,
+   "gap": 3
+  },
+  {
+   "area": "용산전자상가(용산역)",
+   "dong_code": "11170625",
+   "dong_name": "한강로동",
+   "lunch_pop_avg": 69404,
+   "sales_krw": 2416960434079,
+   "penetration_krw": 95410,
+   "age_pop": {
+    "10": 3217,
+    "20": 14031,
+    "30": 16549,
+    "40": 14341,
+    "50": 9611,
+    "60_이상": 4961
+   },
+   "pop_rank": 7,
+   "sales_rank": 3,
+   "gap": 4
+  },
+  {
+   "area": "명동 남대문 북창동 다동 무교동 관광특구",
+   "dong_code": "11140520",
+   "dong_name": "소공동",
+   "lunch_pop_avg": 52079,
+   "sales_krw": 1948063154215,
+   "penetration_krw": 102483,
+   "age_pop": {
+    "10": 2414,
+    "20": 7200,
+    "30": 12523,
+    "40": 12576,
+    "50": 8884,
+    "60_이상": 3704
+   },
+   "pop_rank": 12,
+   "sales_rank": 4,
+   "gap": 8
+  },
+  {
+   "area": "가락시장",
+   "dong_code": "11710631",
+   "dong_name": "가락1동",
+   "lunch_pop_avg": 26204,
+   "sales_krw": 1743838504832,
+   "penetration_krw": 182327,
+   "age_pop": {
+    "10": 2542,
+    "20": 2121,
+    "30": 4169,
+    "40": 4989,
+    "50": 3799,
+    "60_이상": 3019
+   },
+   "pop_rank": 25,
+   "sales_rank": 5,
+   "gap": 20
+  },
+  {
+   "area": "강남역",
+   "dong_code": "11650520",
+   "dong_name": "서초2동",
+   "lunch_pop_avg": 61114,
+   "sales_krw": 1645215630717,
+   "penetration_krw": 73755,
+   "age_pop": {
+    "10": 3950,
+    "20": 10046,
+    "30": 15362,
+    "40": 13464,
+    "50": 8514,
+    "60_이상": 3563
+   },
+   "pop_rank": 9,
+   "sales_rank": 6,
+   "gap": 3
+  },
+  {
+   "area": "잠실 관광특구",
+   "dong_code": "11710562",
+   "dong_name": "방이2동",
+   "lunch_pop_avg": 36830,
+   "sales_krw": 1470000010563,
+   "penetration_krw": 109350,
+   "age_pop": {
+    "10": 2206,
+    "20": 6163,
+    "30": 8217,
+    "40": 6907,
+    "50": 4867,
+    "60_이상": 3247
+   },
+   "pop_rank": 15,
+   "sales_rank": 7,
+   "gap": 8
+  },
+  {
+   "area": "종로3가역",
+   "dong_code": "11110615",
+   "dong_name": "종로1·2·3·4가동",
+   "lunch_pop_avg": 103086,
+   "sales_krw": 1269283939350,
+   "penetration_krw": 33734,
+   "age_pop": {
+    "10": 2160,
+    "20": 15596,
+    "30": 22032,
+    "40": 22948,
+    "50": 18584,
+    "60_이상": 10189
+   },
+   "pop_rank": 3,
+   "sales_rank": 8,
+   "gap": -5
+  },
+  {
+   "area": "잠실역",
+   "dong_code": "11710710",
+   "dong_name": "잠실6동",
+   "lunch_pop_avg": 56267,
+   "sales_krw": 1240947369742,
+   "penetration_krw": 60424,
+   "age_pop": {
+    "10": 3470,
+    "20": 9972,
+    "30": 12648,
+    "40": 11875,
+    "50": 7524,
+    "60_이상": 4084
+   },
+   "pop_rank": 10,
+   "sales_rank": 9,
+   "gap": 1
+  },
+  {
+   "area": "종로·청계 관광특구",
+   "dong_code": "11110615",
+   "dong_name": "종로1·2·3·4가동",
+   "lunch_pop_avg": 103086,
+   "sales_krw": 978727867459,
+   "penetration_krw": 26012,
+   "age_pop": {
+    "10": 2160,
+    "20": 15596,
+    "30": 22032,
+    "40": 22948,
+    "50": 18584,
+    "60_이상": 10189
+   },
+   "pop_rank": 4,
+   "sales_rank": 10,
+   "gap": -6
+  },
+  {
+   "area": "청량리청과물시장",
+   "dong_code": "11230545",
+   "dong_name": "제기동",
+   "lunch_pop_avg": 33202,
+   "sales_krw": 795280929324,
+   "penetration_krw": 65625,
+   "age_pop": {
+    "10": 2411,
+    "20": 7804,
+    "30": 3702,
+    "40": 4157,
+    "50": 4821,
+    "60_이상": 3907
+   },
+   "pop_rank": 19,
+   "sales_rank": 11,
+   "gap": 8
+  },
+  {
+   "area": "청량리종합시장",
+   "dong_code": "11230545",
+   "dong_name": "제기동",
+   "lunch_pop_avg": 33202,
+   "sales_krw": 772908923938,
+   "penetration_krw": 63778,
+   "age_pop": {
+    "10": 2411,
+    "20": 7804,
+    "30": 3702,
+    "40": 4157,
+    "50": 4821,
+    "60_이상": 3907
+   },
+   "pop_rank": 20,
+   "sales_rank": 12,
+   "gap": 8
+  },
+  {
+   "area": "여의도역(여의도)",
+   "dong_code": "11560540",
+   "dong_name": "여의동",
+   "lunch_pop_avg": 157934,
+   "sales_krw": 767463045838,
+   "penetration_krw": 13313,
+   "age_pop": {
+    "10": 4816,
+    "20": 24327,
+    "30": 41543,
+    "40": 40037,
+    "50": 25387,
+    "60_이상": 9633
+   },
+   "pop_rank": 1,
+   "sales_rank": 13,
+   "gap": -12
+  },
+  {
+   "area": "독산동 우시장",
+   "dong_code": "11545610",
+   "dong_name": "독산1동",
+   "lunch_pop_avg": 35955,
+   "sales_krw": 724248615957,
+   "penetration_krw": 55186,
+   "age_pop": {
+    "10": 1789,
+    "20": 5304,
+    "30": 7025,
+    "40": 5919,
+    "50": 5556,
+    "60_이상": 3843
+   },
+   "pop_rank": 16,
+   "sales_rank": 14,
+   "gap": 2
+  },
+  {
+   "area": "잠실새내역(신천)",
+   "dong_code": "11710650",
+   "dong_name": "잠실본동",
+   "lunch_pop_avg": 32284,
+   "sales_krw": 637386156849,
+   "penetration_krw": 54091,
+   "age_pop": {
+    "10": 2412,
+    "20": 4747,
+    "30": 6115,
+    "40": 6048,
+    "50": 4784,
+    "60_이상": 3019
+   },
+   "pop_rank": 23,
+   "sales_rank": 15,
+   "gap": 8
+  },
+  {
+   "area": "압구정역",
+   "dong_code": "11680510",
+   "dong_name": "신사동",
+   "lunch_pop_avg": 45226,
+   "sales_krw": 619347749494,
+   "penetration_krw": 37519,
+   "age_pop": {
+    "10": 3875,
+    "20": 7894,
+    "30": 9709,
+    "40": 9447,
+    "50": 6315,
+    "60_이상": 3309
+   },
+   "pop_rank": 13,
+   "sales_rank": 16,
+   "gap": -3
+  },
+  {
+   "area": "홍대입구역(홍대)",
+   "dong_code": "11440660",
+   "dong_name": "서교동",
+   "lunch_pop_avg": 84656,
+   "sales_krw": 618734645396,
+   "penetration_krw": 20024,
+   "age_pop": {
+    "10": 5627,
+    "20": 25772,
+    "30": 19305,
+    "40": 14189,
+    "50": 9275,
+    "60_이상": 4544
+   },
+   "pop_rank": 6,
+   "sales_rank": 17,
+   "gap": -11
+  },
+  {
+   "area": "영등포역(영등포)",
+   "dong_code": "11560535",
+   "dong_name": "영등포동",
+   "lunch_pop_avg": 68508,
+   "sales_krw": 596852591555,
+   "penetration_krw": 23869,
+   "age_pop": {
+    "10": 2136,
+    "20": 11161,
+    "30": 15679,
+    "40": 13373,
+    "50": 10699,
+    "60_이상": 6467
+   },
+   "pop_rank": 8,
+   "sales_rank": 18,
+   "gap": -10
+  },
+  {
+   "area": "동서시장",
+   "dong_code": "11230545",
+   "dong_name": "제기동",
+   "lunch_pop_avg": 33202,
+   "sales_krw": 580491073586,
+   "penetration_krw": 47901,
+   "age_pop": {
+    "10": 2411,
+    "20": 7804,
+    "30": 3702,
+    "40": 4157,
+    "50": 4821,
+    "60_이상": 3907
+   },
+   "pop_rank": 21,
+   "sales_rank": 19,
+   "gap": 2
+  },
+  {
+   "area": "역삼역",
+   "dong_code": "11680640",
+   "dong_name": "역삼1동",
+   "lunch_pop_avg": 141943,
+   "sales_krw": 574143557329,
+   "penetration_krw": 11082,
+   "age_pop": {
+    "10": 4840,
+    "20": 30251,
+    "30": 41313,
+    "40": 31410,
+    "50": 18263,
+    "60_이상": 8014
+   },
+   "pop_rank": 2,
+   "sales_rank": 20,
+   "gap": -18
+  },
+  {
+   "area": "신사역",
+   "dong_code": "11650540",
+   "dong_name": "잠원동",
+   "lunch_pop_avg": 37881,
+   "sales_krw": 568956233018,
+   "penetration_krw": 41149,
+   "age_pop": {
+    "10": 3886,
+    "20": 5050,
+    "30": 6653,
+    "40": 7733,
+    "50": 5453,
+    "60_이상": 3011
+   },
+   "pop_rank": 14,
+   "sales_rank": 21,
+   "gap": -7
+  },
+  {
+   "area": "구로역",
+   "dong_code": "11530530",
+   "dong_name": "구로2동",
+   "lunch_pop_avg": 34416,
+   "sales_krw": 563261340108,
+   "penetration_krw": 44839,
+   "age_pop": {
+    "10": 1702,
+    "20": 4067,
+    "30": 5831,
+    "40": 6462,
+    "50": 6686,
+    "60_이상": 4759
+   },
+   "pop_rank": 18,
+   "sales_rank": 22,
+   "gap": -4
+  },
+  {
+   "area": "동대문패션타운 관광특구",
+   "dong_code": "11140590",
+   "dong_name": "광희동",
+   "lunch_pop_avg": 34831,
+   "sales_krw": 547611473770,
+   "penetration_krw": 43074,
+   "age_pop": {
+    "10": 1332,
+    "20": 5535,
+    "30": 7031,
+    "40": 7007,
+    "50": 5837,
+    "60_이상": 3892
+   },
+   "pop_rank": 17,
+   "sales_rank": 23,
+   "gap": -6
+  },
+  {
+   "area": "노원역",
+   "dong_code": "11350640",
+   "dong_name": "상계2동",
+   "lunch_pop_avg": 26220,
+   "sales_krw": 545684673585,
+   "penetration_krw": 57019,
+   "age_pop": {
+    "10": 2265,
+    "20": 3971,
+    "30": 3653,
+    "40": 3878,
+    "50": 4346,
+    "60_이상": 3256
+   },
+   "pop_rank": 24,
+   "sales_rank": 24,
+   "gap": 0
+  },
+  {
+   "area": "압구정로데오역(압구정로데오)",
+   "dong_code": "11680545",
+   "dong_name": "압구정동",
+   "lunch_pop_avg": 55290,
+   "sales_krw": 541143796633,
+   "penetration_krw": 26815,
+   "age_pop": {
+    "10": 4440,
+    "20": 9289,
+    "30": 11647,
+    "40": 11313,
+    "50": 7341,
+    "60_이상": 4058
+   },
+   "pop_rank": 11,
+   "sales_rank": 25,
+   "gap": -14
+  }
+ ],
+ "pop_by_age": {
+  "10": {
+   "share": 0.0544,
+   "top_areas": [
+    {
+     "area": "홍대입구역(홍대)",
+     "dong_name": "서교동",
+     "pop": 5627
+    },
+    {
+     "area": "역삼역",
+     "dong_name": "역삼1동",
+     "pop": 4840
+    },
+    {
+     "area": "여의도역(여의도)",
+     "dong_name": "여의동",
+     "pop": 4816
+    }
+   ]
+  },
+  "20": {
+   "share": 0.204,
+   "top_areas": [
+    {
+     "area": "역삼역",
+     "dong_name": "역삼1동",
+     "pop": 30251
+    },
+    {
+     "area": "홍대입구역(홍대)",
+     "dong_name": "서교동",
+     "pop": 25772
+    },
+    {
+     "area": "여의도역(여의도)",
+     "dong_name": "여의동",
+     "pop": 24327
+    }
+   ]
+  },
+  "30": {
+   "share": 0.2505,
+   "top_areas": [
+    {
+     "area": "여의도역(여의도)",
+     "dong_name": "여의동",
+     "pop": 41543
+    },
+    {
+     "area": "역삼역",
+     "dong_name": "역삼1동",
+     "pop": 41313
+    },
+    {
+     "area": "가산디지털단지",
+     "dong_name": "가산동",
+     "pop": 24524
+    }
+   ]
+  },
+  "40": {
+   "share": 0.23,
+   "top_areas": [
+    {
+     "area": "여의도역(여의도)",
+     "dong_name": "여의동",
+     "pop": 40037
+    },
+    {
+     "area": "역삼역",
+     "dong_name": "역삼1동",
+     "pop": 31410
+    },
+    {
+     "area": "종로3가역",
+     "dong_name": "종로1·2·3·4가동",
+     "pop": 22948
+    }
+   ]
+  },
+  "50": {
+   "share": 0.1692,
+   "top_areas": [
+    {
+     "area": "여의도역(여의도)",
+     "dong_name": "여의동",
+     "pop": 25387
+    },
+    {
+     "area": "종로3가역",
+     "dong_name": "종로1·2·3·4가동",
+     "pop": 18584
+    },
+    {
+     "area": "종로·청계 관광특구",
+     "dong_name": "종로1·2·3·4가동",
+     "pop": 18584
+    }
+   ]
+  },
+  "60_이상": {
+   "share": 0.092,
+   "top_areas": [
+    {
+     "area": "종로3가역",
+     "dong_name": "종로1·2·3·4가동",
+     "pop": 10189
+    },
+    {
+     "area": "종로·청계 관광특구",
+     "dong_name": "종로1·2·3·4가동",
+     "pop": 10189
+    },
+    {
+     "area": "여의도역(여의도)",
+     "dong_name": "여의동",
+     "pop": 9633
+    }
+   ]
+  }
+ },
+ "penetration_ranking": [
+  {
+   "area": "노량진역(노량진)",
+   "dong_name": "노량진1동",
+   "penetration_krw": 323122
+  },
+  {
+   "area": "가락시장",
+   "dong_name": "가락1동",
+   "penetration_krw": 182327
+  },
+  {
+   "area": "잠실 관광특구",
+   "dong_name": "방이2동",
+   "penetration_krw": 109350
+  },
+  {
+   "area": "명동 남대문 북창동 다동 무교동 관광특구",
+   "dong_name": "소공동",
+   "penetration_krw": 102483
+  },
+  {
+   "area": "가산디지털단지",
+   "dong_name": "가산동",
+   "penetration_krw": 95808
+  },
+  {
+   "area": "용산전자상가(용산역)",
+   "dong_name": "한강로동",
+   "penetration_krw": 95410
+  },
+  {
+   "area": "강남역",
+   "dong_name": "서초2동",
+   "penetration_krw": 73755
+  },
+  {
+   "area": "청량리청과물시장",
+   "dong_name": "제기동",
+   "penetration_krw": 65625
+  },
+  {
+   "area": "청량리종합시장",
+   "dong_name": "제기동",
+   "penetration_krw": 63778
+  },
+  {
+   "area": "잠실역",
+   "dong_name": "잠실6동",
+   "penetration_krw": 60424
+  },
+  {
+   "area": "노원역",
+   "dong_name": "상계2동",
+   "penetration_krw": 57019
+  },
+  {
+   "area": "독산동 우시장",
+   "dong_name": "독산1동",
+   "penetration_krw": 55186
+  },
+  {
+   "area": "잠실새내역(신천)",
+   "dong_name": "잠실본동",
+   "penetration_krw": 54091
+  },
+  {
+   "area": "동서시장",
+   "dong_name": "제기동",
+   "penetration_krw": 47901
+  },
+  {
+   "area": "구로역",
+   "dong_name": "구로2동",
+   "penetration_krw": 44839
+  },
+  {
+   "area": "동대문패션타운 관광특구",
+   "dong_name": "광희동",
+   "penetration_krw": 43074
+  },
+  {
+   "area": "신사역",
+   "dong_name": "잠원동",
+   "penetration_krw": 41149
+  },
+  {
+   "area": "압구정역",
+   "dong_name": "신사동",
+   "penetration_krw": 37519
+  },
+  {
+   "area": "종로3가역",
+   "dong_name": "종로1·2·3·4가동",
+   "penetration_krw": 33734
+  },
+  {
+   "area": "압구정로데오역(압구정로데오)",
+   "dong_name": "압구정동",
+   "penetration_krw": 26815
+  },
+  {
+   "area": "종로·청계 관광특구",
+   "dong_name": "종로1·2·3·4가동",
+   "penetration_krw": 26012
+  },
+  {
+   "area": "영등포역(영등포)",
+   "dong_name": "영등포동",
+   "penetration_krw": 23869
+  },
+  {
+   "area": "홍대입구역(홍대)",
+   "dong_name": "서교동",
+   "penetration_krw": 20024
+  },
+  {
+   "area": "여의도역(여의도)",
+   "dong_name": "여의동",
+   "penetration_krw": 13313
+  },
+  {
+   "area": "역삼역",
+   "dong_name": "역삼1동",
+   "penetration_krw": 11082
+  }
+ ],
+ "gap_ranking": [
+  {
+   "area": "역삼역",
+   "pop_rank": 2,
+   "sales_rank": 20,
+   "gap": -18
+  },
+  {
+   "area": "압구정로데오역(압구정로데오)",
+   "pop_rank": 11,
+   "sales_rank": 25,
+   "gap": -14
+  },
+  {
+   "area": "여의도역(여의도)",
+   "pop_rank": 1,
+   "sales_rank": 13,
+   "gap": -12
+  },
+  {
+   "area": "홍대입구역(홍대)",
+   "pop_rank": 6,
+   "sales_rank": 17,
+   "gap": -11
+  },
+  {
+   "area": "영등포역(영등포)",
+   "pop_rank": 8,
+   "sales_rank": 18,
+   "gap": -10
+  },
+  {
+   "area": "신사역",
+   "pop_rank": 14,
+   "sales_rank": 21,
+   "gap": -7
+  },
+  {
+   "area": "종로·청계 관광특구",
+   "pop_rank": 4,
+   "sales_rank": 10,
+   "gap": -6
+  },
+  {
+   "area": "동대문패션타운 관광특구",
+   "pop_rank": 17,
+   "sales_rank": 23,
+   "gap": -6
+  },
+  {
+   "area": "종로3가역",
+   "pop_rank": 3,
+   "sales_rank": 8,
+   "gap": -5
+  },
+  {
+   "area": "구로역",
+   "pop_rank": 18,
+   "sales_rank": 22,
+   "gap": -4
+  },
+  {
+   "area": "압구정역",
+   "pop_rank": 13,
+   "sales_rank": 16,
+   "gap": -3
+  },
+  {
+   "area": "노원역",
+   "pop_rank": 24,
+   "sales_rank": 24,
+   "gap": 0
+  },
+  {
+   "area": "잠실역",
+   "pop_rank": 10,
+   "sales_rank": 9,
+   "gap": 1
+  },
+  {
+   "area": "독산동 우시장",
+   "pop_rank": 16,
+   "sales_rank": 14,
+   "gap": 2
+  },
+  {
+   "area": "동서시장",
+   "pop_rank": 21,
+   "sales_rank": 19,
+   "gap": 2
+  },
+  {
+   "area": "가산디지털단지",
+   "pop_rank": 5,
+   "sales_rank": 2,
+   "gap": 3
+  },
+  {
+   "area": "강남역",
+   "pop_rank": 9,
+   "sales_rank": 6,
+   "gap": 3
+  },
+  {
+   "area": "용산전자상가(용산역)",
+   "pop_rank": 7,
+   "sales_rank": 3,
+   "gap": 4
+  },
+  {
+   "area": "명동 남대문 북창동 다동 무교동 관광특구",
+   "pop_rank": 12,
+   "sales_rank": 4,
+   "gap": 8
+  },
+  {
+   "area": "잠실 관광특구",
+   "pop_rank": 15,
+   "sales_rank": 7,
+   "gap": 8
+  },
+  {
+   "area": "청량리청과물시장",
+   "pop_rank": 19,
+   "sales_rank": 11,
+   "gap": 8
+  },
+  {
+   "area": "청량리종합시장",
+   "pop_rank": 20,
+   "sales_rank": 12,
+   "gap": 8
+  },
+  {
+   "area": "잠실새내역(신천)",
+   "pop_rank": 23,
+   "sales_rank": 15,
+   "gap": 8
+  },
+  {
+   "area": "가락시장",
+   "pop_rank": 25,
+   "sales_rank": 5,
+   "gap": 20
+  },
+  {
+   "area": "노량진역(노량진)",
+   "pop_rank": 22,
+   "sales_rank": 1,
+   "gap": 21
+  }
+ ]
+}

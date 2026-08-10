@@ -1,0 +1,265 @@
+{
+ "taken_at": "2026-07-29",
+ "domain": "dzd-EXAMPLEDOMAINID",
+ "glossary_terms": [
+  {
+   "id": "cez5ut8x1orac0",
+   "name": "커피/음료",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\":\"https://card.ai-ready/scheme/shinhan#N00001\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "5cfp5kh26gum4w",
+   "name": "식음료",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00002\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "bjaz10ysb5afps",
+   "name": "제과/베이커리",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00003\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "64mabxmqnksxlc",
+   "name": "음식점",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00004\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "beeawy95uqo100",
+   "name": "패스트푸드",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00005\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "cu8obtyswg9ztc",
+   "name": "편의점",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00006\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "3o2jckp9fnqnio",
+   "name": "생활",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00007\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "brucjso58a93bk",
+   "name": "의료",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00009\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "65slu5kgy9wwi8",
+   "name": "슈퍼마켓/마트",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00008\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "dnroe54h4o6mq8",
+   "name": "의료/건강",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00010\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "6hdk72p8bes234",
+   "name": "약국",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00011\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "bkl54y4lmjrh8w",
+   "name": "온라인쇼핑",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00012\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "as64zsypo2518w",
+   "name": "쇼핑",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00013\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "am4dom2hssnvo0",
+   "name": "뷰티",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00015\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "6w7cfsiw0e5swg",
+   "name": "의류/패션",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00014\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "drxr52kroip11s",
+   "name": "교육",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00017\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "cy2jt92reeg9lc",
+   "name": "교육/학원",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00016\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "afjg8jks0vsols",
+   "name": "주류/유흥",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00018\"}",
+   "status": "ENABLED"
+  },
+  {
+   "id": "bg0rkrqepfs174",
+   "name": "여가",
+   "glossaryId": "6buhn9uw9eq74g",
+   "shortDescription": null,
+   "longDescription": "{\"skos_exactMatch\": \"https://card.ai-ready/scheme/shinhan#N00019\"}",
+   "status": "ENABLED"
+  }
+ ],
+ "listings": [
+  {
+   "listingId": "5op5syiolt4gwg",
+   "entityId": "51jcjs17alcgb4",
+   "entityType": "GlueTableAssetType",
+   "name": "d0_category_node",
+   "description": null
+  },
+  {
+   "listingId": "3ragzxcztk5bio",
+   "entityId": "di2o6kxjdy2428",
+   "entityType": "GlueTableAssetType",
+   "name": "d1_customer",
+   "description": null
+  },
+  {
+   "listingId": "44vainpyenpukw",
+   "entityId": "dlouhppn1utukw",
+   "entityType": "GlueTableAssetType",
+   "name": "d8_golden_eligibility_case",
+   "description": null
+  },
+  {
+   "listingId": "bmnl9qtz444y34",
+   "entityId": "61hbpbpcpjuk5s",
+   "entityType": "GlueTableAssetType",
+   "name": "d4_transaction",
+   "description": null
+  },
+  {
+   "listingId": "53se7gf6y107f4",
+   "entityId": "b0lho0y2xlaefk",
+   "entityType": "GlueTableAssetType",
+   "name": "d2_account",
+   "description": null
+  },
+  {
+   "listingId": "c3hs2bo2180hw0",
+   "entityId": "6c09vdjh39zf2o",
+   "entityType": "GlueTableAssetType",
+   "name": "r0_card_product",
+   "description": null
+  },
+  {
+   "listingId": "ckbv1677rfvswg",
+   "entityId": "cydeew0na2c7ww",
+   "entityType": "GlueTableAssetType",
+   "name": "d5_statement_monthly",
+   "description": null
+  },
+  {
+   "listingId": "4izgyimolrlsi8",
+   "entityId": "arxgg7vbhxm6c0",
+   "entityType": "GlueTableAssetType",
+   "name": "d0_category_relation",
+   "description": null
+  },
+  {
+   "listingId": "an642x6avejxjk",
+   "entityId": "5kxoub0a1gaw0g",
+   "entityType": "GlueTableAssetType",
+   "name": "r3_spend_tier",
+   "description": null
+  },
+  {
+   "listingId": "5lnze3ms38uemo",
+   "entityId": "4fpysqb98om974",
+   "entityType": "GlueTableAssetType",
+   "name": "r4_merchant_reference",
+   "description": null
+  },
+  {
+   "listingId": "amevx0qexjfkwg",
+   "entityId": "dr95kpshcqf7rk",
+   "entityType": "GlueTableAssetType",
+   "name": "r1_benefit",
+   "description": null
+  },
+  {
+   "listingId": "bji22h0ld7bxxs",
+   "entityId": "46b121ac5ua840",
+   "entityType": "GlueTableAssetType",
+   "name": "r2_benefit_condition",
+   "description": null
+  },
+  {
+   "listingId": "c7f35zvrfnzbbk",
+   "entityId": "5xkob2g6klfymo",
+   "entityType": "GlueTableAssetType",
+   "name": "d7_complaint",
+   "description": null
+  },
+  {
+   "listingId": "du7u8hikcqeuts",
+   "entityId": "4v1bmbl8yaoh00",
+   "entityType": "GlueTableAssetType",
+   "name": "d0_crosswalk_mapping",
+   "description": null
+  },
+  {
+   "listingId": "3xl0wpoipvqoeo",
+   "entityId": "dp2c8vwlv7mt1s",
+   "entityType": "GlueTableAssetType",
+   "name": "d6_reward_ledger",
+   "description": null
+  }
+ ]
+}

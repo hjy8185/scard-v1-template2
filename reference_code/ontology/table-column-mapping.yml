@@ -1,0 +1,607 @@
+version: 1
+tables:
+  R0_card_product:
+    rdf_class: co:CardProduct
+    lpg_label: CardProduct
+    serving_target: lpg
+    a_box_policy: full
+    pk: card_product_id
+    fk: []
+    synthetic_flag: null
+    sensitivity: public
+    columns:
+      card_product_id:
+        rdf_property: co:cardProductId
+        logical_type: string
+        required: true
+      name:
+        rdf_property: co:name
+        logical_type: string
+        required: true
+      card_type:
+        rdf_property: co:cardType
+        logical_type: string
+        required: false
+      annual_fee_raw:
+        rdf_property: co:annualFeeRaw
+        logical_type: string
+        required: false
+      is_discontinued:
+        rdf_property: co:isDiscontinued
+        logical_type: bool
+        required: true
+  R1_benefit:
+    rdf_class: co:Benefit
+    lpg_label: Benefit
+    serving_target: lpg
+    a_box_policy: full
+    pk: benefit_id
+    fk:
+    - card_product_id
+    synthetic_flag: null
+    sensitivity: public
+    columns:
+      benefit_id:
+        rdf_property: co:benefitId
+        logical_type: string
+        required: true
+      card_product_id:
+        rdf_property: co:cardProductId
+        logical_type: string
+        required: true
+      benefit_group_id:
+        rdf_property: co:benefitGroupId
+        logical_type: string
+        required: false
+      benefit_category:
+        rdf_property: co:benefitCategory
+        logical_type: string
+        required: false
+      reward_type:
+        rdf_property: co:rewardType
+        logical_type: string
+        required: false
+      label:
+        rdf_property: co:label
+        logical_type: string
+        required: true
+  R2_benefit_condition:
+    rdf_class: co:BenefitCondition
+    lpg_label: BenefitCondition
+    serving_target: lpg
+    a_box_policy: full
+    pk: condition_id
+    fk:
+    - benefit_id
+    synthetic_flag: null
+    sensitivity: public
+    columns:
+      condition_id:
+        rdf_property: co:conditionId
+        logical_type: string
+        required: true
+      benefit_id:
+        rdf_property: co:benefitId
+        logical_type: string
+        required: true
+      raw_text:
+        rdf_property: co:rawText
+        logical_type: string
+        required: true
+      parsed:
+        rdf_property: co:parsed
+        logical_type: struct
+        required: false
+      parse_status:
+        rdf_property: co:parseStatus
+        logical_type: string
+        required: true
+      rule_version:
+        rdf_property: co:ruleVersion
+        logical_type: string
+        required: false
+  R3_spend_tier:
+    rdf_class: co:SpendTier
+    lpg_label: SpendTier
+    serving_target: lpg
+    a_box_policy: full
+    pk: tier_id
+    fk:
+    - card_product_id
+    synthetic_flag: null
+    sensitivity: public
+    columns:
+      tier_id:
+        rdf_property: co:tierId
+        logical_type: string
+        required: true
+      card_product_id:
+        rdf_property: co:cardProductId
+        logical_type: string
+        required: true
+      min_spend:
+        rdf_property: co:minSpend
+        logical_type: int64
+        required: true
+      max_spend:
+        rdf_property: co:maxSpend
+        logical_type: double
+        required: false
+      limit_amount:
+        rdf_property: co:limitAmount
+        logical_type: int64
+        required: true
+  R4_merchant_reference:
+    rdf_class: co:Merchant
+    lpg_label: Merchant
+    serving_target: lpg
+    a_box_policy: full
+    pk: merchant_id
+    fk: []
+    synthetic_flag: null
+    sensitivity: public
+    columns:
+      merchant_id:
+        rdf_property: co:merchantId
+        logical_type: string
+        required: true
+      canonical_name:
+        rdf_property: co:canonicalName
+        logical_type: string
+        required: true
+      aliases:
+        rdf_property: co:aliases
+        logical_type: list
+        required: false
+  D1_customer:
+    rdf_class: co:Customer
+    lpg_label: Customer
+    serving_target: sql_only
+    a_box_policy: none
+    pk: customer_id
+    fk: []
+    synthetic_flag: is_synthetic
+    sensitivity: synthetic
+    columns:
+      customer_id:
+        rdf_property: co:customerId
+        logical_type: string
+        required: true
+      age:
+        rdf_property: co:age
+        logical_type: int64
+        required: true
+      age_band:
+        rdf_property: co:ageBand
+        logical_type: string
+        required: false
+      sex:
+        rdf_property: co:sex
+        logical_type: string
+        required: false
+      region:
+        rdf_property: co:region
+        logical_type: string
+        required: false
+      credit_limit_krw:
+        rdf_property: co:creditLimitKrw
+        logical_type: int64
+        required: false
+      delinquency_status:
+        rdf_property: co:delinquencyStatus
+        logical_type: int64
+        required: false
+      default_flag:
+        rdf_property: co:defaultFlag
+        logical_type: int64
+        required: false
+      monthly_spend_tier:
+        rdf_property: co:monthlySpendTier
+        logical_type: string
+        required: false
+      persona:
+        rdf_property: co:persona
+        logical_type: string
+        required: false
+      is_synthetic:
+        rdf_property: co:isSynthetic
+        logical_type: bool
+        required: true
+  D2_account:
+    rdf_class: co:Account
+    lpg_label: Account
+    serving_target: sql_only
+    a_box_policy: none
+    pk: card_account_id
+    fk:
+    - customer_id
+    - card_product_id
+    synthetic_flag: is_synthetic
+    sensitivity: synthetic
+    columns:
+      card_account_id:
+        rdf_property: co:cardAccountId
+        logical_type: string
+        required: true
+      customer_id:
+        rdf_property: co:customerId
+        logical_type: string
+        required: true
+      card_product_id:
+        rdf_property: co:cardProductId
+        logical_type: string
+        required: true
+      billing_cycle_day:
+        rdf_property: co:billingCycleDay
+        logical_type: int64
+        required: false
+      open_date:
+        rdf_property: co:openDate
+        logical_type: string
+        required: false
+      is_active:
+        rdf_property: co:isActive
+        logical_type: bool
+        required: false
+      is_synthetic:
+        rdf_property: co:isSynthetic
+        logical_type: bool
+        required: true
+  D4_transaction:
+    rdf_class: co:Transaction
+    lpg_label: Transaction
+    serving_target: sql_only
+    a_box_policy: none
+    pk: txn_id
+    fk:
+    - card_account_id
+    - card_product_id
+    synthetic_flag: is_synthetic
+    sensitivity: synthetic
+    columns:
+      txn_id:
+        rdf_property: co:txnId
+        logical_type: string
+        required: true
+      customer_id:
+        rdf_property: co:customerId
+        logical_type: string
+        required: true
+      card_account_id:
+        rdf_property: co:cardAccountId
+        logical_type: string
+        required: true
+      card_product_id:
+        rdf_property: co:cardProductId
+        logical_type: string
+        required: true
+      txn_datetime:
+        rdf_property: co:txnDatetime
+        logical_type: string
+        required: false
+      posted_date:
+        rdf_property: co:postedDate
+        logical_type: string
+        required: false
+      posted_month:
+        rdf_property: co:postedMonth
+        logical_type: string
+        required: false
+      statement_month:
+        rdf_property: co:statementMonth
+        logical_type: string
+        required: false
+      merchant_name:
+        rdf_property: co:merchantName
+        logical_type: string
+        required: false
+      merchant_alias:
+        rdf_property: co:merchantAlias
+        logical_type: string
+        required: false
+      mcc:
+        rdf_property: co:mcc
+        logical_type: string
+        required: false
+      industry_code:
+        rdf_property: co:industryCode
+        logical_type: string
+        required: false
+      industry_name:
+        rdf_property: co:industryName
+        logical_type: string
+        required: false
+      amount:
+        rdf_property: co:amount
+        logical_type: int64
+        required: true
+      channel:
+        rdf_property: co:channel
+        logical_type: string
+        required: false
+      txn_status:
+        rdf_property: co:txnStatus
+        logical_type: string
+        required: false
+      is_cancelled:
+        rdf_property: co:isCancelled
+        logical_type: bool
+        required: false
+      is_refund:
+        rdf_property: co:isRefund
+        logical_type: bool
+        required: false
+      installment_months:
+        rdf_property: co:installmentMonths
+        logical_type: int64
+        required: false
+      mapping_confidence:
+        rdf_property: co:mappingConfidence
+        logical_type: double
+        required: false
+      scenario_tag:
+        rdf_property: co:scenarioTag
+        logical_type: string
+        required: false
+      is_synthetic:
+        rdf_property: co:isSynthetic
+        logical_type: bool
+        required: true
+  D5_statement_monthly:
+    rdf_class: co:StatementMonthly
+    lpg_label: StatementMonthly
+    serving_target: sql_only
+    a_box_policy: none
+    pk: null
+    fk:
+    - card_account_id
+    synthetic_flag: is_synthetic
+    sensitivity: synthetic
+    columns:
+      customer_id:
+        rdf_property: co:customerId
+        logical_type: string
+        required: true
+      card_account_id:
+        rdf_property: co:cardAccountId
+        logical_type: string
+        required: true
+      statement_month:
+        rdf_property: co:statementMonth
+        logical_type: string
+        required: true
+      billing_cycle_day:
+        rdf_property: co:billingCycleDay
+        logical_type: int64
+        required: false
+      performance_period_start:
+        rdf_property: co:performancePeriodStart
+        logical_type: string
+        required: false
+      performance_period_end:
+        rdf_property: co:performancePeriodEnd
+        logical_type: string
+        required: false
+      posted_month:
+        rdf_property: co:postedMonth
+        logical_type: string
+        required: false
+      prev_month_eligible_spend:
+        rdf_property: co:prevMonthEligibleSpend
+        logical_type: int64
+        required: false
+      total_spend:
+        rdf_property: co:totalSpend
+        logical_type: int64
+        required: false
+      spend_tier_matched:
+        rdf_property: co:spendTierMatched
+        logical_type: string
+        required: false
+      is_synthetic:
+        rdf_property: co:isSynthetic
+        logical_type: bool
+        required: true
+  D6_reward_ledger:
+    rdf_class: co:RewardLedger
+    lpg_label: RewardLedger
+    serving_target: sql_only
+    a_box_policy: none
+    pk: ledger_id
+    fk:
+    - txn_id
+    - benefit_id
+    synthetic_flag: is_synthetic
+    sensitivity: synthetic
+    columns:
+      ledger_id:
+        rdf_property: co:ledgerId
+        logical_type: string
+        required: true
+      txn_id:
+        rdf_property: co:txnId
+        logical_type: string
+        required: true
+      benefit_id:
+        rdf_property: co:benefitId
+        logical_type: string
+        required: true
+      benefit_condition_id:
+        rdf_property: co:benefitConditionId
+        logical_type: string
+        required: false
+      rule_version:
+        rdf_property: co:ruleVersion
+        logical_type: string
+        required: false
+      reward_type:
+        rdf_property: co:rewardType
+        logical_type: string
+        required: false
+      expected_reward:
+        rdf_property: co:expectedReward
+        logical_type: int64
+        required: true
+      calculation_trace:
+        rdf_property: co:calculationTrace
+        logical_type: struct
+        required: false
+      cap_before:
+        rdf_property: co:capBefore
+        logical_type: double
+        required: false
+      cap_after:
+        rdf_property: co:capAfter
+        logical_type: double
+        required: false
+      remaining_monthly_limit:
+        rdf_property: co:remainingMonthlyLimit
+        logical_type: double
+        required: false
+      denial_reason:
+        rdf_property: co:denialReason
+        logical_type: string
+        required: false
+      observed_reward:
+        rdf_property: co:observedReward
+        logical_type: int64
+        required: false
+      injected_error_type:
+        rdf_property: co:injectedErrorType
+        logical_type: string
+        required: false
+      is_synthetic:
+        rdf_property: co:isSynthetic
+        logical_type: bool
+        required: true
+  D7_complaint:
+    rdf_class: co:Complaint
+    lpg_label: Complaint
+    serving_target: sql_only
+    a_box_policy: none
+    pk: complaint_id
+    fk: []
+    synthetic_flag: is_synthetic
+    sensitivity: synthetic
+    columns:
+      complaint_id:
+        rdf_property: co:complaintId
+        logical_type: string
+        required: true
+      issue:
+        rdf_property: co:issue
+        logical_type: string
+        required: true
+      sub_issue:
+        rdf_property: co:subIssue
+        logical_type: string
+        required: false
+      narrative:
+        rdf_property: co:narrative
+        logical_type: string
+        required: true
+      received_date:
+        rdf_property: co:receivedDate
+        logical_type: string
+        required: false
+      timely:
+        rdf_property: co:timely
+        logical_type: bool
+        required: false
+      link_source:
+        rdf_property: co:linkSource
+        logical_type: string
+        required: false
+      related_txn_id:
+        rdf_property: co:relatedTxnId
+        logical_type: string
+        required: false
+      related_statement_month:
+        rdf_property: co:relatedStatementMonth
+        logical_type: string
+        required: false
+      related_card_id:
+        rdf_property: co:relatedCardId
+        logical_type: string
+        required: false
+      related_benefit_id:
+        rdf_property: co:relatedBenefitId
+        logical_type: string
+        required: false
+      entity_link_confidence:
+        rdf_property: co:entityLinkConfidence
+        logical_type: double
+        required: false
+      unresolved_entity:
+        rdf_property: co:unresolvedEntity
+        logical_type: bool
+        required: false
+      is_synthetic:
+        rdf_property: co:isSynthetic
+        logical_type: bool
+        required: true
+  D8_golden_eligibility_case:
+    rdf_class: co:GoldenEligibilityCase
+    lpg_label: GoldenEligibilityCase
+    serving_target: sql_only
+    a_box_policy: seed_only
+    pk: case_id
+    fk:
+    - txn_id
+    synthetic_flag: is_synthetic
+    sensitivity: synthetic
+    columns:
+      case_id:
+        rdf_property: co:caseId
+        logical_type: string
+        required: true
+      customer_id:
+        rdf_property: co:customerId
+        logical_type: string
+        required: false
+      card_account_id:
+        rdf_property: co:cardAccountId
+        logical_type: string
+        required: false
+      txn_id:
+        rdf_property: co:txnId
+        logical_type: string
+        required: true
+      expected_eligible:
+        rdf_property: co:expectedEligible
+        logical_type: bool
+        required: true
+      expected_reward:
+        rdf_property: co:expectedReward
+        logical_type: int64
+        required: false
+      expected_denial_reason:
+        rdf_property: co:expectedDenialReason
+        logical_type: string
+        required: false
+      evidence_rule_id:
+        rdf_property: co:evidenceRuleId
+        logical_type: string
+        required: false
+      terms_version:
+        rdf_property: co:termsVersion
+        logical_type: string
+        required: false
+      edge_case_type:
+        rdf_property: co:edgeCaseType
+        logical_type: string
+        required: false
+      is_synthetic:
+        rdf_property: co:isSynthetic
+        logical_type: bool
+        required: true
+  D0_category:
+    rdf_class: co:BenefitCategory / co:IndustryCategory
+    lpg_label: Category
+    serving_target: lpg
+    a_box_policy: full
+    pk: node_id
+    fk: []
+    synthetic_flag: null
+    sensitivity: public
+    note: subClassOf=SUBCATEGORY_OF(U2b), crosswalk=ELIGIBLE_FOR_CATEGORY

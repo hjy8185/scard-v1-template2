@@ -1,0 +1,1188 @@
+{
+ "concepts": [
+  {
+   "concept": "서울 상권 매출",
+   "kind": "measure",
+   "surface_forms": [
+    "매출",
+    "매출액",
+    "추정매출",
+    "상권 매출",
+    "시장 규모",
+    "장사 규모",
+    "얼마나 팔리",
+    "매출 규모"
+   ],
+   "columns": [
+    "seoul_area_sales.sales_amount",
+    "v_market_size_category_year.sales_krw",
+    "v_market_size_by_age_year.sales_krw",
+    "v_market_size_by_hour_year.sales_krw",
+    "v_market_penetration_dong.sales_krw"
+   ],
+   "note": "seoul_area_sales.sales_amount는 상권×업종×분기 추정 매출액(원)이며 파생 뷰들이 연간·카테고리로 합산해 담는다."
+  },
+  {
+   "concept": "결제 건수",
+   "kind": "measure",
+   "surface_forms": [
+    "결제 건수",
+    "결제 횟수",
+    "구매 건수",
+    "건수",
+    "몇 건",
+    "이용 건수"
+   ],
+   "columns": [
+    "seoul_area_sales.sales_count",
+    "v_market_size_category_year.sales_count",
+    "d4_txn_category_rollup.txn_count"
+   ],
+   "note": "sales_count는 추정 결제 건수, txn_count는 거래 건수."
+  },
+  {
+   "concept": "내부 카드 거래 금액",
+   "kind": "measure",
+   "surface_forms": [
+    "거래 금액",
+    "카드 사용액",
+    "결제 금액",
+    "승인 금액",
+    "우리 고객 소비",
+    "내부 거래액"
+   ],
+   "columns": [
+    "d4_transaction.amount",
+    "d4_txn_category_rollup.krw",
+    "d5_statement_monthly.total_spend"
+   ],
+   "note": "d4_transaction.amount는 거래 금액(원), d4_txn_category_rollup.krw는 카테고리별 합계."
+  },
+  {
+   "concept": "건당 평균 금액",
+   "kind": "measure",
+   "surface_forms": [
+    "건당 평균",
+    "평균 결제액",
+    "객단가",
+    "1건당 금액",
+    "평균 단가"
+   ],
+   "columns": [
+    "d4_txn_category_rollup.avg_txn_krw"
+   ],
+   "note": "avg_txn_krw = 건당 평균 금액(원)."
+  },
+  {
+   "concept": "적립 대상 사용액",
+   "kind": "measure",
+   "surface_forms": [
+    "적립 대상 사용액",
+    "실적 인정 금액",
+    "혜택 대상 금액",
+    "전월실적",
+    "인정 실적"
+   ],
+   "columns": [
+    "metrics_customer_month.eligible_spend",
+    "metrics_segment_month.eligible_spend",
+    "metrics_account_month.eligible_spend",
+    "d5_statement_monthly.prev_month_eligible_spend"
+   ],
+   "note": "eligible_spend는 적립 대상 사용액(원)."
+  },
+  {
+   "concept": "기대 적립액",
+   "kind": "measure",
+   "surface_forms": [
+    "기대 적립액",
+    "받아야 할 혜택",
+    "약관대로 적립액",
+    "예상 리워드",
+    "기대 리워드"
+   ],
+   "columns": [
+    "metrics_customer_month.expected_reward_amount",
+    "metrics_segment_month.expected_reward_amount",
+    "metrics_account_month.expected_reward_amount",
+    "reward_by_account.expected_reward_amount",
+    "d6_reward_ledger.expected_reward"
+   ],
+   "note": "expected_reward_amount = 약관대로라면 적립돼야 할 금액."
+  },
+  {
+   "concept": "실제 적립액",
+   "kind": "measure",
+   "surface_forms": [
+    "실제 적립액",
+    "적립된 금액",
+    "받은 혜택",
+    "실적립",
+    "관측 리워드"
+   ],
+   "columns": [
+    "metrics_customer_month.observed_reward_amount",
+    "metrics_segment_month.observed_reward_amount",
+    "metrics_account_month.observed_reward_amount",
+    "reward_by_account.observed_reward_amount",
+    "d6_reward_ledger.observed_reward"
+   ],
+   "note": "observed_reward_amount = 실제 적립된 금액."
+  },
+  {
+   "concept": "적립 차이",
+   "kind": "measure",
+   "surface_forms": [
+    "적립 차이",
+    "혜택 누락액",
+    "덜 적립",
+    "적립 격차",
+    "차액",
+    "리워드 갭"
+   ],
+   "columns": [
+    "metrics_customer_month.reward_delta_amount",
+    "metrics_segment_month.reward_delta_amount",
+    "metrics_account_month.reward_delta_amount",
+    "reward_by_account.reward_delta_amount"
+   ],
+   "note": "reward_delta_amount = observed − expected, 음수면 기대보다 덜 적립."
+  },
+  {
+   "concept": "실질 혜택률",
+   "kind": "measure",
+   "surface_forms": [
+    "실질 혜택률",
+    "혜택률",
+    "실질 적립률",
+    "체감 적립률",
+    "실제 비율"
+   ],
+   "columns": [
+    "metrics_customer_month.effective_reward_rate",
+    "metrics_segment_month.effective_reward_rate",
+    "metrics_account_month.effective_reward_rate"
+   ],
+   "note": "effective_reward_rate = observed_reward_amount / eligible_spend, 상한·제외 반영."
+  },
+  {
+   "concept": "적립 대상 거래 건수",
+   "kind": "measure",
+   "surface_forms": [
+    "적립 대상 건수",
+    "혜택 받은 건수",
+    "적립 건수",
+    "인정 건수"
+   ],
+   "columns": [
+    "metrics_customer_month.eligible_transaction_count",
+    "metrics_segment_month.eligible_transaction_count",
+    "metrics_account_month.eligible_transaction_count",
+    "reward_by_account.eligible_transaction_count"
+   ],
+   "note": "eligible_transaction_count = 적립 대상 거래 건수."
+  },
+  {
+   "concept": "생활인구",
+   "kind": "measure",
+   "surface_forms": [
+    "생활인구",
+    "사람",
+    "사람 수",
+    "유동인구",
+    "인구",
+    "붐비는",
+    "인구 규모",
+    "체류 인구"
+   ],
+   "columns": [
+    "seoul_living_population.population",
+    "seoul_living_population.total_population",
+    "v_living_population_hourly_avg.avg_population_per_hour",
+    "v_living_population_dong_hour.population_per_hour",
+    "v_market_penetration_dong.pop_per_hour"
+   ],
+   "note": "통신 기반 추계 인구이며 방문객·구매자 수가 아니라고 명시됨."
+  },
+  {
+   "concept": "1인당 소비",
+   "kind": "measure",
+   "surface_forms": [
+    "1인당 소비",
+    "인당 소비액",
+    "인구 대비 소비",
+    "시장 침투",
+    "침투율",
+    "1인당 지출"
+   ],
+   "columns": [
+    "v_market_penetration_dong.krw_per_person_year"
+   ],
+   "note": "krw_per_person_year = sales_krw / (pop_per_hour × 365), 인구 대비 소비(침투)."
+  },
+  {
+   "concept": "온라인쇼핑 거래액",
+   "kind": "measure",
+   "surface_forms": [
+    "온라인쇼핑 거래액",
+    "KOSIS 거래액",
+    "상품군 거래액",
+    "온라인 시장 규모"
+   ],
+   "columns": [
+    "market_trend_group.latest_krw"
+   ],
+   "note": "KOSIS 온라인쇼핑 상품군별 최신 1개월 거래액(공개 실측)."
+  },
+  {
+   "concept": "전년동월비 증감율",
+   "kind": "measure",
+   "surface_forms": [
+    "전년동월비",
+    "YoY",
+    "증감율",
+    "성장률",
+    "전년 대비",
+    "성장세"
+   ],
+   "columns": [
+    "market_trend_group.yoy_pct"
+   ],
+   "note": "yoy_pct = 전년동월비 증감율(%), 양수면 성장."
+  },
+  {
+   "concept": "민원 건수",
+   "kind": "measure",
+   "surface_forms": [
+    "민원 건수",
+    "불만 건수",
+    "컴플레인 수",
+    "사례 수",
+    "민원 비중"
+   ],
+   "columns": [
+    "d7_complaint_root_cause.n_cases",
+    "d7_complaint_root_cause.pct",
+    "d7_complaint_case.complaint_id",
+    "d7_complaint.complaint_id"
+   ],
+   "note": "d7_complaint_root_cause는 거절 사유별 사례 수·비율을 담는다."
+  },
+  {
+   "concept": "혜택 카테고리 커버리지",
+   "kind": "measure",
+   "surface_forms": [
+    "커버리지",
+    "커버 상태",
+    "혜택 커버",
+    "커버 범위"
+   ],
+   "columns": [
+    "benefit_category_coverage.benefit_category_coverage"
+   ],
+   "note": "카테고리 체계별 커버리지 값."
+  },
+  {
+   "concept": "매핑 신뢰도",
+   "kind": "measure",
+   "surface_forms": [
+    "신뢰도",
+    "매핑 확신도",
+    "confidence",
+    "매칭 정확도"
+   ],
+   "columns": [
+    "d0_market_crosswalk.confidence",
+    "d0_crosswalk_mapping.confidence",
+    "d0_category_relation.confidence",
+    "d4_transaction.mapping_confidence",
+    "d7_complaint.entity_link_confidence"
+   ],
+   "note": "매핑·관계별 신뢰도 표기 컬럼."
+  },
+  {
+   "concept": "신용 한도",
+   "kind": "measure",
+   "surface_forms": [
+    "신용 한도",
+    "이용 한도",
+    "카드 한도",
+    "한도 금액"
+   ],
+   "columns": [
+    "d1_customer.credit_limit_krw",
+    "r3_spend_tier.limit_amount"
+   ],
+   "note": "d1_customer.credit_limit_krw = 신용 한도(원)."
+  },
+  {
+   "concept": "연회비",
+   "kind": "measure",
+   "surface_forms": [
+    "연회비",
+    "회비",
+    "연간 수수료"
+   ],
+   "columns": [
+    "r0_card_product.annual_fee_raw"
+   ],
+   "note": "카드 상품의 연회비 원본값."
+  },
+  {
+   "concept": "상권 면적",
+   "kind": "measure",
+   "surface_forms": [
+    "상권 면적",
+    "면적",
+    "제곱미터",
+    "넓이"
+   ],
+   "columns": [
+    "seoul_trade_area.area_m2"
+   ],
+   "note": "area_m2 = 상권 면적(㎡)."
+  },
+  {
+   "concept": "혜택 카테고리",
+   "kind": "axis",
+   "surface_forms": [
+    "혜택 카테고리",
+    "혜택 분류",
+    "카테고리",
+    "혜택 영역",
+    "혜택 종류"
+   ],
+   "columns": [
+    "d4_txn_category_rollup.benefit_category",
+    "r1_card_category.benefit_category",
+    "v_market_size_category_year.benefit_category",
+    "v_market_size_by_age_year.benefit_category",
+    "v_market_size_by_hour_year.benefit_category",
+    "d0_market_crosswalk.shinhan_category",
+    "market_trend_group.mapped_category"
+   ],
+   "note": "신한카드 혜택 카테고리명(음식점, 커피/음료, 뷰티 등)."
+  },
+  {
+   "concept": "업종",
+   "kind": "axis",
+   "surface_forms": [
+    "업종",
+    "업종명",
+    "업태",
+    "가게 종류",
+    "한식음식점",
+    "커피-음료",
+    "편의점 업종"
+   ],
+   "columns": [
+    "seoul_area_sales.industry_name",
+    "seoul_area_sales.industry_cd",
+    "d4_transaction.industry_name",
+    "d4_transaction.industry_code",
+    "d4_transaction.merchant_name",
+    "d0_market_crosswalk.seoul_industry",
+    "v_market_size_category_year.seoul_industries"
+   ],
+   "note": "서울시 통계 업종명이며 d4_transaction.merchant_name도 실제로는 업종명이다."
+  },
+  {
+   "concept": "가맹점",
+   "kind": "axis",
+   "surface_forms": [
+    "가맹점",
+    "가맹점명",
+    "가맹점 코드",
+    "MCC",
+    "가맹점 별칭"
+   ],
+   "columns": [
+    "d4_transaction.mcc",
+    "d4_transaction.merchant_alias",
+    "r4_merchant_reference.merchant_id",
+    "r4_merchant_reference.canonical_name",
+    "r4_merchant_reference.aliases"
+   ],
+   "note": "MCC·별칭 코드와 r4_merchant_reference의 정규 가맹점명."
+  },
+  {
+   "concept": "카드 상품",
+   "kind": "axis",
+   "surface_forms": [
+    "카드 상품",
+    "카드명",
+    "상품명",
+    "카드 종류",
+    "카드 유형",
+    "단종 여부"
+   ],
+   "columns": [
+    "r0_card_product.card_product_id",
+    "r0_card_product.name",
+    "r0_card_product.card_type",
+    "r0_card_product.is_discontinued",
+    "r1_card_category.card_id",
+    "d4_transaction.card_product_id",
+    "r2_card_condition_type.card_name",
+    "d7_complaint_case.card_id"
+   ],
+   "note": "r0_card_product가 카드 상품 기준정보를 담는다."
+  },
+  {
+   "concept": "고객",
+   "kind": "axis",
+   "surface_forms": [
+    "고객",
+    "회원",
+    "고객 ID",
+    "고객 단위",
+    "사람별"
+   ],
+   "columns": [
+    "d1_customer.customer_id",
+    "metrics_customer_month.customer_id",
+    "d4_transaction.customer_id",
+    "d2_account.customer_id",
+    "d5_statement_monthly.customer_id"
+   ],
+   "note": "d1_customer 1행 = 고객, customer_id로 조인."
+  },
+  {
+   "concept": "카드 계정",
+   "kind": "axis",
+   "surface_forms": [
+    "카드 계정",
+    "계좌",
+    "계정 단위",
+    "결제일",
+    "개설일"
+   ],
+   "columns": [
+    "d2_account.card_account_id",
+    "d2_account.billing_cycle_day",
+    "d2_account.open_date",
+    "d2_account.is_active",
+    "metrics_account_month.card_account_id",
+    "reward_by_account.card_account_id"
+   ],
+   "note": "d2_account가 카드 계정 단위 기준정보."
+  },
+  {
+   "concept": "연령대",
+   "kind": "axis",
+   "surface_forms": [
+    "연령대",
+    "나이",
+    "나이대",
+    "연령",
+    "20대",
+    "30대",
+    "60대 이상"
+   ],
+   "columns": [
+    "d1_customer.age",
+    "d1_customer.age_band",
+    "seoul_living_population.age_band",
+    "v_living_population_hourly_avg.age_band",
+    "v_market_size_by_age_year.age_band",
+    "d4_txn_category_rollup.top_age_band",
+    "seoul_area_sales.age_20_amount",
+    "seoul_area_sales.age_30_amount",
+    "seoul_area_sales.age_60_plus_amount"
+   ],
+   "note": "표기가 테이블마다 달라 '30','60_plus','60_이상' 등으로 저장된다."
+  },
+  {
+   "concept": "성별",
+   "kind": "axis",
+   "surface_forms": [
+    "성별",
+    "남성",
+    "여성",
+    "남녀",
+    "남자",
+    "여자"
+   ],
+   "columns": [
+    "d1_customer.sex",
+    "seoul_living_population.sex",
+    "v_living_population_hourly_avg.sex",
+    "seoul_area_sales.male_amount",
+    "seoul_area_sales.female_amount",
+    "seoul_area_sales.male_count",
+    "seoul_area_sales.female_count"
+   ],
+   "note": "실측 도메인 F, M."
+  },
+  {
+   "concept": "세그먼트",
+   "kind": "axis",
+   "surface_forms": [
+    "세그먼트",
+    "구간별",
+    "집단",
+    "그룹 구분",
+    "세그먼트 축"
+   ],
+   "columns": [
+    "metrics_segment_month.segment_type",
+    "metrics_segment_month.segment_value"
+   ],
+   "note": "segment_type은 age_band·sex 등 축, segment_value는 그 값."
+  },
+  {
+   "concept": "페르소나",
+   "kind": "axis",
+   "surface_forms": [
+    "페르소나",
+    "고객 유형",
+    "라이프스타일 유형",
+    "dining_social",
+    "coffee_commuter"
+   ],
+   "columns": [
+    "d1_customer.persona"
+   ],
+   "note": "합성 데이터 생성 시 부여한 페르소나 유형."
+  },
+  {
+   "concept": "월 사용액 구간",
+   "kind": "axis",
+   "surface_forms": [
+    "사용액 구간",
+    "지출 등급",
+    "실적 구간",
+    "스펜드 티어",
+    "티어"
+   ],
+   "columns": [
+    "d1_customer.monthly_spend_tier",
+    "d5_statement_monthly.spend_tier_matched",
+    "r3_spend_tier.tier_id",
+    "r3_spend_tier.min_spend",
+    "r3_spend_tier.max_spend"
+   ],
+   "note": "월 사용액 구간과 r3_spend_tier의 실적 구간 정의."
+  },
+  {
+   "concept": "연체·부실 상태",
+   "kind": "axis",
+   "surface_forms": [
+    "연체",
+    "연체 상태",
+    "부실",
+    "디폴트",
+    "미납"
+   ],
+   "columns": [
+    "d1_customer.delinquency_status",
+    "d1_customer.default_flag"
+   ],
+   "note": "delinquency_status = 연체 상태, default_flag."
+  },
+  {
+   "concept": "거주 지역",
+   "kind": "axis",
+   "surface_forms": [
+    "거주 지역",
+    "사는 곳",
+    "지역",
+    "자치구",
+    "구별"
+   ],
+   "columns": [
+    "d1_customer.region",
+    "seoul_trade_area.signgu_cd"
+   ],
+   "note": "d1_customer.region = 거주 지역, signgu_cd = 자치구 코드."
+  },
+  {
+   "concept": "행정동",
+   "kind": "axis",
+   "surface_forms": [
+    "행정동",
+    "동",
+    "동네",
+    "동 이름",
+    "행정동 코드",
+    "역삼1동"
+   ],
+   "columns": [
+    "seoul_trade_area.adstrd_cd",
+    "seoul_trade_area.adstrd_name",
+    "seoul_living_population.adstrd_cd",
+    "v_living_population_dong_hour.adstrd_name",
+    "v_living_population_hourly_avg.adstrd_name",
+    "v_market_penetration_dong.adstrd_name"
+   ],
+   "note": "행정동 코드 8자리, 이름은 seoul_trade_area에서 붙인다."
+  },
+  {
+   "concept": "상권",
+   "kind": "axis",
+   "surface_forms": [
+    "상권",
+    "상권명",
+    "상권 코드",
+    "상권 유형",
+    "골목상권",
+    "발달상권",
+    "역세권"
+   ],
+   "columns": [
+    "seoul_area_sales.trdar_cd",
+    "seoul_area_sales.area_name",
+    "seoul_area_sales.area_type",
+    "seoul_area_sales.area_type_cd",
+    "seoul_trade_area.trdar_cd",
+    "seoul_trade_area.area_name"
+   ],
+   "note": "trdar_cd 7자리 상권 코드와 상권명·상권 유형."
+  },
+  {
+   "concept": "분기",
+   "kind": "axis",
+   "surface_forms": [
+    "분기",
+    "분기별",
+    "몇 분기",
+    "1분기",
+    "4분기",
+    "분기 키"
+   ],
+   "columns": [
+    "seoul_area_sales.year_quarter",
+    "v_market_size_category_year.n_quarters",
+    "v_market_size_by_age_year.n_quarters"
+   ],
+   "note": "year_quarter는 'YYYYQ' 문자열, 실측 20211~20254."
+  },
+  {
+   "concept": "연도",
+   "kind": "axis",
+   "surface_forms": [
+    "연도",
+    "연간",
+    "몇 년도",
+    "해",
+    "2025년",
+    "연 단위"
+   ],
+   "columns": [
+    "v_market_size_category_year.year",
+    "v_market_size_by_age_year.year",
+    "v_market_size_by_hour_year.year",
+    "v_market_penetration_dong.year",
+    "v_market_size_category_year.is_full_year"
+   ],
+   "note": "year는 4자리 문자열, 실측 2021~2025."
+  },
+  {
+   "concept": "명세 기준월",
+   "kind": "axis",
+   "surface_forms": [
+    "명세월",
+    "청구월",
+    "명세 기준월",
+    "결제월",
+    "월별"
+   ],
+   "columns": [
+    "metrics_customer_month.statement_month",
+    "metrics_segment_month.statement_month",
+    "metrics_account_month.statement_month",
+    "d4_transaction.statement_month",
+    "d5_statement_monthly.statement_month",
+    "reward_by_account.statement_month"
+   ],
+   "note": "statement_month는 YYYYMM 명세 기준월."
+  },
+  {
+   "concept": "매입 월",
+   "kind": "axis",
+   "surface_forms": [
+    "매입월",
+    "매입 일자",
+    "거래 일시",
+    "거래 날짜",
+    "posted_month"
+   ],
+   "columns": [
+    "d4_transaction.posted_month",
+    "d4_transaction.posted_date",
+    "d4_transaction.txn_datetime",
+    "d5_statement_monthly.posted_month"
+   ],
+   "note": "posted_month 실측 도메인 202509~202512."
+  },
+  {
+   "concept": "인구 기준월",
+   "kind": "axis",
+   "surface_forms": [
+    "인구 기준월",
+    "생활인구 월",
+    "year_month",
+    "월 키"
+   ],
+   "columns": [
+    "seoul_living_population.year_month",
+    "v_living_population_dong_hour.year_month",
+    "v_living_population_hourly_avg.year_month",
+    "v_market_penetration_dong.year_month",
+    "market_trend_group.latest_month"
+   ],
+   "note": "year_month 실측 도메인 202501~202606."
+  },
+  {
+   "concept": "시간대",
+   "kind": "axis",
+   "surface_forms": [
+    "시간대",
+    "시각",
+    "몇 시",
+    "점심 시간대",
+    "저녁 시간대",
+    "심야",
+    "시간별"
+   ],
+   "columns": [
+    "seoul_living_population.hour_slot",
+    "v_living_population_dong_hour.hour_slot",
+    "v_living_population_hourly_avg.hour_slot",
+    "v_market_penetration_dong.hour_slot",
+    "v_market_size_by_hour_year.hour_bucket",
+    "seoul_area_sales.time_11_14_amount",
+    "seoul_area_sales.time_17_21_amount",
+    "seoul_area_sales.time_00_06_amount"
+   ],
+   "note": "hour_slot 0~23, hour_bucket은 6개 구간, 점심은 11,12,13."
+  },
+  {
+   "concept": "요일·주중주말",
+   "kind": "axis",
+   "surface_forms": [
+    "요일",
+    "요일별",
+    "주중",
+    "주말",
+    "평일",
+    "토요일",
+    "일요일"
+   ],
+   "columns": [
+    "seoul_area_sales.mon_amount",
+    "seoul_area_sales.sat_amount",
+    "seoul_area_sales.sun_amount",
+    "seoul_area_sales.weekday_amount",
+    "seoul_area_sales.weekend_amount",
+    "seoul_area_sales.weekday_count",
+    "seoul_area_sales.weekend_count"
+   ],
+   "note": "요일별·주중/주말 분해 컬럼이 존재한다."
+  },
+  {
+   "concept": "결제 채널",
+   "kind": "axis",
+   "surface_forms": [
+    "채널",
+    "온라인",
+    "오프라인",
+    "결제 채널",
+    "온라인 결제",
+    "대면"
+   ],
+   "columns": [
+    "d4_transaction.channel",
+    "r1_card_exclusion.exclusion_kind"
+   ],
+   "note": "channel = 결제 채널(온라인/오프라인 등)."
+  },
+  {
+   "concept": "거래 상태",
+   "kind": "axis",
+   "surface_forms": [
+    "거래 상태",
+    "취소",
+    "환불",
+    "취소 거래",
+    "환불 거래",
+    "할부",
+    "일시불"
+   ],
+   "columns": [
+    "d4_transaction.txn_status",
+    "d4_transaction.is_cancelled",
+    "d4_transaction.is_refund",
+    "d4_transaction.installment_months"
+   ],
+   "note": "취소·환불 여부와 할부 개월(0이면 일시불)."
+  },
+  {
+   "concept": "혜택 미적용 사유",
+   "kind": "axis",
+   "surface_forms": [
+    "미적용 사유",
+    "거절 사유",
+    "적립 실패 이유",
+    "전월실적 미달",
+    "월 한도 소진",
+    "월 횟수 초과",
+    "근본 원인"
+   ],
+   "columns": [
+    "d7_complaint_case.denial_reason",
+    "d7_complaint_case.denial_reason_ko",
+    "d7_complaint_root_cause.denial_reason",
+    "d6_reward_ledger.denial_reason",
+    "d8_golden_eligibility_case.expected_denial_reason",
+    "r2_condition_type_stat.denial_reasons"
+   ],
+   "note": "denial_reason_ko로 원인 분포를 집계한다고 명시."
+  },
+  {
+   "concept": "민원 유형",
+   "kind": "axis",
+   "surface_forms": [
+    "민원 유형",
+    "민원 분류",
+    "불만 유형",
+    "적립 누락",
+    "혜택 미적용",
+    "이슈 분류"
+   ],
+   "columns": [
+    "d7_complaint.issue",
+    "d7_complaint.sub_issue",
+    "d7_complaint_case.issue",
+    "d7_complaint_case.sub_issue"
+   ],
+   "note": "issue 대분류·sub_issue 소분류 (적립 누락, 혜택 미적용 등)."
+  },
+  {
+   "concept": "민원 원문",
+   "kind": "axis",
+   "surface_forms": [
+    "민원 원문",
+    "민원 내용",
+    "고객 진술",
+    "서술 텍스트",
+    "narrative"
+   ],
+   "columns": [
+    "d7_complaint.narrative",
+    "d7_complaint_case.narrative",
+    "d7_complaint_case.text"
+   ],
+   "note": "narrative는 민원 원문 텍스트(비정형)."
+  },
+  {
+   "concept": "약관 조건 유형",
+   "kind": "axis",
+   "surface_forms": [
+    "약관 조건",
+    "조건 유형",
+    "전월실적조건",
+    "월횟수한도",
+    "건당한도",
+    "적립률조건",
+    "채널조건"
+   ],
+   "columns": [
+    "d7_complaint_case.condition_type",
+    "r2_card_condition_type.condition_type",
+    "r2_condition_type_stat.condition_type",
+    "r2_condition_type_stat.n_clauses"
+   ],
+   "note": "condition_type 실측값 전월실적조건·월횟수한도·건당리워드한도 등."
+  },
+  {
+   "concept": "약관 조항",
+   "kind": "axis",
+   "surface_forms": [
+    "약관 조항",
+    "약관 원문",
+    "혜택 조건",
+    "조건 파싱",
+    "룰 버전",
+    "최소 실적"
+   ],
+   "columns": [
+    "r2_benefit_condition.condition_id",
+    "r2_benefit_condition.raw_text",
+    "r2_benefit_condition.parsed",
+    "r2_benefit_condition.parse_status",
+    "r2_benefit_condition.rule_version"
+   ],
+   "note": "raw_text 약관 원문과 parsed 구조(min_spend, rate_pct, cap 등)."
+  },
+  {
+   "concept": "혜택",
+   "kind": "axis",
+   "surface_forms": [
+    "혜택",
+    "베네핏",
+    "혜택 항목",
+    "혜택 라벨",
+    "적립 유형",
+    "할인 유형"
+   ],
+   "columns": [
+    "r1_benefit.benefit_id",
+    "r1_benefit.label",
+    "r1_benefit.reward_type",
+    "r1_benefit.benefit_group_id",
+    "d6_reward_ledger.benefit_id",
+    "d6_reward_ledger.reward_type"
+   ],
+   "note": "r1_benefit이 카드별 혜택 항목과 리워드 유형을 담는다."
+  },
+  {
+   "concept": "혜택 제외 대상",
+   "kind": "axis",
+   "surface_forms": [
+    "제외 대상",
+    "적립 제외",
+    "예외 항목",
+    "제외 업종",
+    "제외 조건"
+   ],
+   "columns": [
+    "r1_card_exclusion.exclusion_kind",
+    "r1_card_exclusion.exclusion_target"
+   ],
+   "note": "카드별 제외 종류·제외 대상."
+  },
+  {
+   "concept": "리워드 원장 한도",
+   "kind": "axis",
+   "surface_forms": [
+    "한도 소진",
+    "잔여 한도",
+    "월 한도",
+    "cap",
+    "상한 잔량"
+   ],
+   "columns": [
+    "d6_reward_ledger.cap_before",
+    "d6_reward_ledger.cap_after",
+    "d6_reward_ledger.remaining_monthly_limit",
+    "d6_reward_ledger.calculation_trace"
+   ],
+   "note": "원장에 cap 전후 값과 남은 월 한도, 계산 추적 구조가 있다."
+  },
+  {
+   "concept": "카테고리 매핑",
+   "kind": "axis",
+   "surface_forms": [
+    "매핑",
+    "크로스워크",
+    "연결 표",
+    "대응 관계",
+    "매핑 유형",
+    "검수 상태"
+   ],
+   "columns": [
+    "d0_market_crosswalk.match_type",
+    "d0_market_crosswalk.review_status",
+    "d0_market_crosswalk.reviewed_in",
+    "d0_crosswalk_mapping.mapping_type",
+    "d0_crosswalk_mapping.review_status",
+    "d0_category_relation.relation_type",
+    "d0_category_relation.review_status"
+   ],
+   "note": "규칙 매칭 초안 후 사람이 검수한 매핑 표(match_type, review_status)."
+  },
+  {
+   "concept": "카테고리 노드",
+   "kind": "axis",
+   "surface_forms": [
+    "카테고리 노드",
+    "분류 체계",
+    "체계 식별자",
+    "노드 코드",
+    "분류명"
+   ],
+   "columns": [
+    "d0_category_node.node_id",
+    "d0_category_node.system",
+    "d0_category_node.code",
+    "d0_category_node.name",
+    "benefit_category_coverage.scheme"
+   ],
+   "note": "d0_category_node가 체계(system)별 분류 노드를 담는다."
+  },
+  {
+   "concept": "KOSIS 상품군",
+   "kind": "axis",
+   "surface_forms": [
+    "상품군",
+    "KOSIS 상품군",
+    "온라인쇼핑 품목",
+    "품목군",
+    "의복",
+    "가방"
+   ],
+   "columns": [
+    "market_trend_group.kosis_group"
+   ],
+   "note": "kosis_group = KOSIS 온라인쇼핑 상품군명."
+  },
+  {
+   "concept": "합성 데이터 표시",
+   "kind": "axis",
+   "surface_forms": [
+    "합성 데이터",
+    "가상 데이터",
+    "synthetic",
+    "실데이터 여부",
+    "시나리오 태그"
+   ],
+   "columns": [
+    "d1_customer.is_synthetic",
+    "d4_transaction.is_synthetic",
+    "d4_transaction.scenario_tag",
+    "metrics_customer_month.synthetic_flag",
+    "metrics_segment_month.synthetic_flag",
+    "benefit_category_coverage.synthetic_flag",
+    "d7_complaint_case.error_flag"
+   ],
+   "note": "각 표에 합성 데이터 표시 플래그가 있다."
+  },
+  {
+   "concept": "추적 가능성",
+   "kind": "axis",
+   "surface_forms": [
+    "추적 가능",
+    "연결 여부",
+    "원장 연결",
+    "미해결 엔터티",
+    "추적 키"
+   ],
+   "columns": [
+    "d7_complaint_case.traceable",
+    "d7_complaint_case.ledger_linked",
+    "d7_complaint_case.related_txn_id",
+    "d7_complaint.related_txn_id",
+    "d7_complaint.unresolved_entity",
+    "d7_complaint.link_source"
+   ],
+   "note": "거래·약관까지 추적 가능한 건인지 표시."
+  },
+  {
+   "concept": "정답 검증 사례",
+   "kind": "axis",
+   "surface_forms": [
+    "골든 사례",
+    "검증 케이스",
+    "기대 적격",
+    "엣지 케이스",
+    "정답 세트"
+   ],
+   "columns": [
+    "d8_golden_eligibility_case.case_id",
+    "d8_golden_eligibility_case.expected_eligible",
+    "d8_golden_eligibility_case.expected_reward",
+    "d8_golden_eligibility_case.edge_case_type",
+    "d8_golden_eligibility_case.evidence_rule_id",
+    "d8_golden_eligibility_case.terms_version"
+   ],
+   "note": "적격 판정 기대값과 엣지 케이스 유형을 담는 검증 표."
+  }
+ ],
+ "broader": [
+  {
+   "narrower": "적립 대상 사용액",
+   "broader": "내부 카드 거래 금액"
+  },
+  {
+   "narrower": "기대 적립액",
+   "broader": "혜택"
+  },
+  {
+   "narrower": "실제 적립액",
+   "broader": "혜택"
+  },
+  {
+   "narrower": "적립 차이",
+   "broader": "혜택"
+  },
+  {
+   "narrower": "실질 혜택률",
+   "broader": "혜택"
+  },
+  {
+   "narrower": "적립 대상 거래 건수",
+   "broader": "결제 건수"
+  },
+  {
+   "narrower": "1인당 소비",
+   "broader": "서울 상권 매출"
+  },
+  {
+   "narrower": "업종",
+   "broader": "혜택 카테고리"
+  },
+  {
+   "narrower": "가맹점",
+   "broader": "업종"
+  },
+  {
+   "narrower": "상권",
+   "broader": "행정동"
+  },
+  {
+   "narrower": "분기",
+   "broader": "연도"
+  },
+  {
+   "narrower": "혜택 미적용 사유",
+   "broader": "약관 조건 유형"
+  },
+  {
+   "narrower": "약관 조항",
+   "broader": "혜택"
+  },
+  {
+   "narrower": "혜택 제외 대상",
+   "broader": "약관 조건 유형"
+  },
+  {
+   "narrower": "민원 원문",
+   "broader": "민원 유형"
+  },
+  {
+   "narrower": "KOSIS 상품군",
+   "broader": "카테고리 노드"
+  },
+  {
+   "narrower": "혜택 카테고리",
+   "broader": "카테고리 노드"
+  },
+  {
+   "narrower": "세그먼트",
+   "broader": "고객"
+  },
+  {
+   "narrower": "페르소나",
+   "broader": "고객"
+  },
+  {
+   "narrower": "월 사용액 구간",
+   "broader": "고객"
+  },
+  {
+   "narrower": "카드 계정",
+   "broader": "고객"
+  },
+  {
+   "narrower": "명세 기준월",
+   "broader": "매입 월"
+  }
+ ],
+ "_meta": {
+  "model": "global.anthropic.claude-opus-5",
+  "n_concepts": 58,
+  "catalog_chars": 21384,
+  "note": "카탈로그만 입력. 평가 질문(41·100문항)은 보여주지 않았다."
+ }
+}

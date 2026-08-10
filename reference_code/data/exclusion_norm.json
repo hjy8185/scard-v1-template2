@@ -1,0 +1,4950 @@
+{
+  "meta": {
+    "source": "CARD_Exclusion 텍스트 정규화(가맹점/카테고리 노드 매칭)",
+    "total_exclusions_unique": 3801,
+    "normalized": 1815,
+    "perf_exclusion": 181,
+    "unmapped": 1805,
+    "note": "제외문을 가맹점/카테고리로 정규화. 실적제외 문구(수수료/기프트 등)는 M2 제외조건, 매칭 실패는 unmapped 정직 표기."
+  },
+  "excludes_merchant_top": {
+    "상품권": 939,
+    "백화점입점": 492,
+    "할인점": 424,
+    "주유": 228,
+    "온라인": 228,
+    "이마트": 70,
+    "홈플러스": 69,
+    "배달앱": 62,
+    "면세점": 45,
+    "스타벅스": 28,
+    "GS칼텍스": 17,
+    "롯데마트": 15,
+    "해외스타벅스": 10,
+    "다이소": 7,
+    "땡겨요": 6,
+    "쿠팡이츠": 6
+  },
+  "excludes_category_top": {
+    "대중교통": 91,
+    "문화센터": 38,
+    "보험": 31,
+    "주차장": 31,
+    "약국": 18,
+    "정비소": 8,
+    "미용실": 7,
+    "여행사": 7
+  },
+  "card_exclusions": {
+    "201512100001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205130001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "문화센터",
+        "미용실",
+        "보험",
+        "약국",
+        "여행사",
+        "정비소",
+        "주차장"
+      ]
+    },
+    "202207140001": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202309190001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "200712210001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201510150001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "201611290001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "200903020001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202010130001": {
+      "excludes_merchants": [
+        "상품권",
+        "스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "201802220001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "약국"
+      ]
+    },
+    "201405080002": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202004020001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201010010001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202004200001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "201511230001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202004090001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "202309140004": {
+      "excludes_merchants": [
+        "다이소",
+        "땡겨요",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "온라인",
+        "쿠팡이츠",
+        "할인점",
+        "해외스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "200803120001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202309260003": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201704010003": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "199902110018": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201709110001": {
+      "excludes_merchants": [
+        "롯데마트",
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "약국"
+      ]
+    },
+    "201711300002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201804090001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202303080002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201103200001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201812010001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201003010001": {
+      "excludes_merchants": [
+        "면세점",
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201105110001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202303080003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201007190001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202009110001": {
+      "excludes_merchants": [
+        "땡겨요",
+        "상품권"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202311240001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202212290001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201105010001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201303190002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "약국"
+      ]
+    },
+    "202401080030": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080031": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "200404010001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201702060001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202205240001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202104130001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "미용실",
+        "보험",
+        "약국",
+        "여행사",
+        "주차장"
+      ]
+    },
+    "202104140001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201403100001": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "201710250001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201612090001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202112140002": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202105040002": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": [
+        "정비소",
+        "주차장"
+      ]
+    },
+    "202105040001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "문화센터"
+      ]
+    },
+    "202103120001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202006250001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201109140002": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202309190002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201604040001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201305060004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201611160001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "199902110075": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202012280001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201709180002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201405080001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201807090001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201507220001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202211300002": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "202107080001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "주차장"
+      ]
+    },
+    "202204250006": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "201510020001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201706200001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201507300002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "주유"
+      ],
+      "excludes_categories": [
+        "미용실"
+      ]
+    },
+    "202311130001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201907110001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "문화센터",
+        "미용실",
+        "보험",
+        "약국",
+        "여행사",
+        "정비소",
+        "주차장"
+      ]
+    },
+    "202304100004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202304100001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202312150002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201507230001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202304130005": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202307270002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201611290002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202001160004": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201605180001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202309140003": {
+      "excludes_merchants": [
+        "다이소",
+        "땡겨요",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "온라인",
+        "쿠팡이츠",
+        "할인점",
+        "해외스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202208030001": {
+      "excludes_merchants": [
+        "면세점",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201711100001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202303030001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201804090002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201309240001": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "보험"
+      ]
+    },
+    "202212290002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202302100002": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201707170003": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201301300001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201806290001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401050001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310170003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202012040001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "200501070001": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201507220002": {
+      "excludes_merchants": [
+        "롯데마트",
+        "상품권",
+        "이마트",
+        "주유",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "약국"
+      ]
+    },
+    "201712040001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201507270002": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "199902110130": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201807200001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401080029": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202304240001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202206280001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202111160001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202309070004": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "202206280002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201709110002": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202106040001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202308110001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "199902110187": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202105030001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202006220002": {
+      "excludes_merchants": [
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "202103120002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202310060001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202112140001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202210200001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202112220001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202203150004": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150011": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202111040001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "202102220003": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "정비소"
+      ]
+    },
+    "202304100005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201807100001": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "201907110002": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "문화센터",
+        "미용실",
+        "보험",
+        "약국",
+        "여행사",
+        "정비소",
+        "주차장"
+      ]
+    },
+    "201807260001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "202101270001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205030004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202005150001": {
+      "excludes_merchants": [
+        "상품권",
+        "스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202205030003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201802130001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": [
+        "정비소",
+        "주차장"
+      ]
+    },
+    "202205030005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205030006": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202001290002": {
+      "excludes_merchants": [
+        "상품권",
+        "스타벅스",
+        "해외스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202206130002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202206080003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202206080002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202307170002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202307050001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "보험",
+        "주차장"
+      ]
+    },
+    "202204180004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202112010001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "이마트",
+        "주유",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202204180005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204180006": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204070001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204070002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204070003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204070004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202207110004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202207110003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202207110002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202207110001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202311130002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202109060001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201503090003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202406130001": {
+      "excludes_merchants": [
+        "면세점",
+        "배달앱",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202203140001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201512300001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202309140002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201510270002": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202103160001": {
+      "excludes_merchants": [
+        "면세점",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202309070003": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "201605310001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202006220001": {
+      "excludes_merchants": [
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "202304280001": {
+      "excludes_merchants": [
+        "배달앱",
+        "쿠팡이츠"
+      ],
+      "excludes_categories": []
+    },
+    "202212130001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "이마트",
+        "할인점",
+        "해외스타벅스",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "201704010001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "202303080010": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "202109080002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202108100001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201702200001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "201306050002": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202210200002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202210120001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202203150018": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150019": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150020": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150022": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203230001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203230002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202204060002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202204060003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202204250001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202204250002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202111080005": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202111080004": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203100001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202411040001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150007": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150012": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202103160002": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202203150016": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "201608230001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202206080005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204070005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204070006": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204070007": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204180001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204180002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204180003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202207110005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201304300002": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202207110007": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "199902110244": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202311290001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202312150001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202304100006": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201910160001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202303300002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202109170001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202002130006": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202309140001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201412010001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202304040003": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202304130004": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201605020001": {
+      "excludes_merchants": [
+        "상품권",
+        "스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202304100002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401080001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202401080002": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "202008280001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "201509030001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "약국"
+      ]
+    },
+    "202410250002": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202203100003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "199902110104": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202310170011": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310180004": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310310001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310310002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202311100001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202312010004": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310180007": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310180003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080005": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202403180002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202402160001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401040001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202404220001": {
+      "excludes_merchants": [
+        "배달앱",
+        "상품권",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "주차장"
+      ]
+    },
+    "202401040002": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202206030001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201604270001": {
+      "excludes_merchants": [
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "201807230001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202411280002": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202411280001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202411280004": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202403280003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202403060001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202101270003": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202110070001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "보험"
+      ]
+    },
+    "202411280003": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202412030001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202001160012": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202410250001": {
+      "excludes_merchants": [
+        "면세점",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "문화센터",
+        "주차장"
+      ]
+    },
+    "202501310002": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202106280001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "202209130001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202502110001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300017": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300019": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202301170001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202208040001": {
+      "excludes_merchants": [
+        "배달앱"
+      ],
+      "excludes_categories": []
+    },
+    "202205190002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202502140001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202101270002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202006020001": {
+      "excludes_merchants": [
+        "다이소",
+        "땡겨요",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "온라인",
+        "쿠팡이츠",
+        "할인점",
+        "해외스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202401300020": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201900000001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "202204250007": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202303080006": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202308140001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202310170010": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202404020001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202005220001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202401300010": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401260001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401260002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401260003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401260004": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401300002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202208180001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401300012": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202504080002": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202504080001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202303290001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202303100001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202209140001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202303280001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202002130001": {
+      "excludes_merchants": [
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202201070001": {
+      "excludes_merchants": [
+        "면세점",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202107060003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202001290003": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202403220005": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202403220004": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202303160001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202402020001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201707240002": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202307170003": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "202105060001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202111080001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204260001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202309260001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201507300001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202402190001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201307010001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201907220001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201907220002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401030001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201610190001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "201704200001": {
+      "excludes_merchants": [
+        "상품권",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201704200002": {
+      "excludes_merchants": [
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201910140001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "할인점",
+        "해외스타벅스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202307180001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202204060004": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202403180001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202204060001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202303300003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080028": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202302280003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150006": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080009": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202312140001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080011": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202304130001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080013": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202211290001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080015": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150005": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080018": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080020": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310170007": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202506250001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202310170009": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202506250002": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202506170001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401080023": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202308030001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202102020001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "199902110001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202401080027": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202506190002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401080032": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080034": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202404150001": {
+      "excludes_merchants": [
+        "면세점",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202402260001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201806080001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401300011": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201911010001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205170001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201609010001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201912100001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201904240001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202001200001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401290004": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202310180002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202311160001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080004": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080007": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080008": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202411080001": {
+      "excludes_merchants": [
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201704010002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202207070001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": [
+        "정비소",
+        "주차장"
+      ]
+    },
+    "202503280001": {
+      "excludes_merchants": [
+        "배달앱",
+        "주유"
+      ],
+      "excludes_categories": [
+        "미용실",
+        "약국"
+      ]
+    },
+    "202406240001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202307260001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202309200001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "201507220003": {
+      "excludes_merchants": [
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202504150001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202508040001": {
+      "excludes_merchants": [
+        "상품권",
+        "스타벅스",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "약국"
+      ]
+    },
+    "202507040001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "주차장"
+      ]
+    },
+    "201807110001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201308020002": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201305060002": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "201905230001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202508180003": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202304130007": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202304130006": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202508290001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202509150002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201704280001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202004130001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202509150001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202006100001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202007270001": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202510100003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202108120001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202510220001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "200710250001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202510220002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202510220003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202510220004": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202408120001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202204250004": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202204250003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202509240001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202009140001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202108190002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "202511240001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202510270001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201309240002": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "보험"
+      ]
+    },
+    "202509090002": {
+      "excludes_merchants": [
+        "다이소",
+        "땡겨요",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "온라인",
+        "쿠팡이츠",
+        "할인점",
+        "해외스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202501150002": {
+      "excludes_merchants": [
+        "면세점",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202512050001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202001290004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205190001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202509090003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202309050001": {
+      "excludes_merchants": [
+        "다이소",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202212160001": {
+      "excludes_merchants": [
+        "다이소",
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "199902110097": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202108090001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202103120003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202004220001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202108200001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201306050001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202010190001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "주차장"
+      ]
+    },
+    "202112220002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150009": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "201601250001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202203150014": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "201502100001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202007030001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202205030002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205030001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202001290001": {
+      "excludes_merchants": [
+        "상품권",
+        "스타벅스",
+        "해외스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202205030007": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202206130001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202206080004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202207110006": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201707240001": {
+      "excludes_merchants": [
+        "상품권",
+        "스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202110120001": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "201612270001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202102250002": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "보험"
+      ]
+    },
+    "201711300001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202304100003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205240002": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202310160002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202311280001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202303080001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202303100002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202307270001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202206130005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401300003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300006": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300004": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300005": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300007": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401290001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202401290002": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202401300009": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300013": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300015": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202311080001": {
+      "excludes_merchants": [
+        "배달앱",
+        "상품권",
+        "스타벅스",
+        "주유"
+      ],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "202207070002": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202401080021": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300008": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401290003": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202401300016": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401290005": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202401300021": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300022": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300023": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300024": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300025": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300026": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300027": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300028": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300029": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202303220001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201905170002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202205230001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202312010006": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300014": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202201070002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202004090002": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "201612010001": {
+      "excludes_merchants": [
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202201070003": {
+      "excludes_merchants": [
+        "백화점입점",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201706200002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "202007010001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202301180001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "199902110186": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201711230001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201406090001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "보험"
+      ]
+    },
+    "201906250001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "200503080001": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "백화점입점",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201502010001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202309260002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201903080001": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201112090002": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202008130001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "202303080005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201312130001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201405080004": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201807110002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201811090001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201902270001": {
+      "excludes_merchants": [
+        "면세점",
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "200506010001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202311100002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202302150001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202303080004": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "199902110006": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201106290001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201510260001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "199902110078": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "200804080001": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201802280001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "보험",
+        "약국"
+      ]
+    },
+    "202310060002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201204170001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202001200002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201510260002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201410310001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202004090003": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "보험"
+      ]
+    },
+    "200404010002": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202004070001": {
+      "excludes_merchants": [
+        "배달앱",
+        "상품권"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "200501070002": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201507270001": {
+      "excludes_merchants": [
+        "GS칼텍스",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202401080019": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "199902110129": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201510270001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202401300018": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201307090001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202503040001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202211280003": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202109270001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202206130004": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "199909130002": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202303080007": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202203290001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201610050001": {
+      "excludes_merchants": [
+        "면세점",
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201311270001": {
+      "excludes_merchants": [
+        "상품권",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "201001250001": {
+      "excludes_merchants": [
+        "롯데마트",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202001290005": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202303080008": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "201704050001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202401080017": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080006": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202102250001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인"
+      ],
+      "excludes_categories": []
+    },
+    "199909130001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201802220003": {
+      "excludes_merchants": [
+        "상품권",
+        "이마트",
+        "주유",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "주차장"
+      ]
+    },
+    "202303290002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202307210001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202307210002": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202110010001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202205230002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "이마트",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "201303190001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202108190001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202207270003": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202201200001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202211280002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202505210001": {
+      "excludes_merchants": [
+        "다이소",
+        "땡겨요",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "온라인",
+        "쿠팡이츠",
+        "할인점",
+        "해외스타벅스"
+      ],
+      "excludes_categories": []
+    },
+    "202301020001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202301020002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202302230001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202204190001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "문화센터"
+      ]
+    },
+    "202012030003": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "스타벅스",
+        "할인점",
+        "해외스타벅스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201109140001": {
+      "excludes_merchants": [
+        "온라인"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202005180001": {
+      "excludes_merchants": [
+        "상품권",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202501240002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202111080003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150008": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150015": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401090002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202206130003": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202207270001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202203100002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401300030": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202312200001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202303300001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "201904150001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202306010001": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080033": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150021": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080010": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150013": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080012": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202203150010": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080014": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202111080002": {
+      "excludes_merchants": [
+        "백화점입점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080016": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202506090001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202310170006": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202506040001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202310170008": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202506240002": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202001310001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": [
+        "정비소",
+        "주차장"
+      ]
+    },
+    "202408300001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080022": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080024": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080025": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202401080026": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202311030002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202501240001": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202503280002": {
+      "excludes_merchants": [
+        "배달앱",
+        "주유",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "미용실",
+        "약국",
+        "주차장"
+      ]
+    },
+    "202311030001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202507080001": {
+      "excludes_merchants": [
+        "상품권"
+      ],
+      "excludes_categories": []
+    },
+    "202402220001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "202108270001": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권"
+      ],
+      "excludes_categories": [
+        "문화센터",
+        "보험"
+      ]
+    },
+    "202211210005": {
+      "excludes_merchants": [
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201711100002": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "할인점"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "201906030001": {
+      "excludes_merchants": [
+        "롯데마트",
+        "면세점",
+        "백화점입점",
+        "상품권",
+        "이마트",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통",
+        "보험",
+        "약국"
+      ]
+    },
+    "201304300007": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "주유",
+        "할인점",
+        "홈플러스"
+      ],
+      "excludes_categories": []
+    },
+    "202104070001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202307110001": {
+      "excludes_merchants": [
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202310180001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "상품권",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201308020001": {
+      "excludes_merchants": [
+        "백화점입점",
+        "온라인",
+        "주유"
+      ],
+      "excludes_categories": []
+    },
+    "202504150002": {
+      "excludes_merchants": [
+        "배달앱",
+        "백화점입점",
+        "온라인",
+        "할인점"
+      ],
+      "excludes_categories": []
+    },
+    "201301240001": {
+      "excludes_merchants": [
+        "상품권",
+        "온라인",
+        "이마트",
+        "홈플러스"
+      ],
+      "excludes_categories": [
+        "대중교통"
+      ]
+    },
+    "202507310001": {
+      "excludes_merchants": [],
+      "excludes_categories": [
+        "보험"
+      ]
+    }
+  }
+}

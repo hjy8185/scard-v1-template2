@@ -1,0 +1,228 @@
+{
+    "Table": {
+        "Name": "d4_transaction",
+        "DatabaseName": "glue_db_EXAMPLEENVID",
+        "CreateTime": "2026-07-02T05:11:11+00:00",
+        "UpdateTime": "2026-07-02T05:11:11+00:00",
+        "Retention": 0,
+        "StorageDescriptor": {
+            "Columns": [
+                {
+                    "Name": "txn_id",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "1",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "customer_id",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "2",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "card_account_id",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "3",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "card_product_id",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "4",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "txn_datetime",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "5",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "posted_date",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "6",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "posted_month",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "7",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "statement_month",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "8",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "merchant_name",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "9",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "merchant_alias",
+                    "Type": "int",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "10",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "mcc",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "11",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "industry_code",
+                    "Type": "int",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "12",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "industry_name",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "13",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "amount",
+                    "Type": "bigint",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "14",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "channel",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "15",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "txn_status",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "16",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "is_cancelled",
+                    "Type": "boolean",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "17",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "is_refund",
+                    "Type": "boolean",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "18",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "installment_months",
+                    "Type": "bigint",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "19",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "mapping_confidence",
+                    "Type": "double",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "20",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "scenario_tag",
+                    "Type": "string",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "21",
+                        "iceberg.field.optional": "true"
+                    }
+                },
+                {
+                    "Name": "is_synthetic",
+                    "Type": "boolean",
+                    "Parameters": {
+                        "iceberg.field.current": "true",
+                        "iceberg.field.id": "22",
+                        "iceberg.field.optional": "true"
+                    }
+                }
+            ],
+            "Location": "s3://amazon-sagemaker-000000000000-us-west-2-EXAMPLE/dzd-EXAMPLEDOMAINID/EXAMPLEPROJECTID/dev/data/catalogs/d4_transaction",
+            "AdditionalLocations": [],
+            "Compressed": false,
+            "NumberOfBuckets": 0,
+            "SortColumns": [],
+            "StoredAsSubDirectories": false
+        },
+        "TableType": "EXTERNAL_TABLE",
+        "Parameters": {
+            "metadata_location": "s3://amazon-sagemaker-000000000000-us-west-2-EXAMPLE/dzd-EXAMPLEDOMAINID/EXAMPLEPROJECTID/dev/data/catalogs/d4_transaction/metadata/00000-128a490d-cb79-4afa-85cb-980142909d12.metadata.json",
+            "table_type": "ICEBERG"
+        },
+        "CreatedBy": "arn:aws:sts::000000000000:assumed-role/cg-lakehouse-load-role/GlueJobRunnerSession",
+        "IsRegisteredWithLakeFormation": true,
+        "CatalogId": "000000000000",
+        "VersionId": "0",
+        "IsMultiDialectView": false,
+        "IsMaterializedView": false
+    }
+}

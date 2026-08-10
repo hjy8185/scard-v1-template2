@@ -1,0 +1,61 @@
+{
+  "_comment": "U6 하이브리드 사전캐시 (from ontology/taxonomy.ttl·crosswalk.ttl). 미스 시 enrich.py가 U2b Neptune 조회.",
+  "keywords": {
+    "커피": "shc:N00001",
+    "커피전문점": "shc:N00001",
+    "스타벅스": "shc:N00001",
+    "이디야": "shc:N00001",
+    "외식": "shc:N00002",
+    "제과": "shc:N00003",
+    "음식점": "shc:N00004",
+    "주유": "shc:N00010",
+    "온라인": "shc:N00013",
+    "대중교통": "shc:N00017"
+  },
+  "categories": {
+    "shc:N00001": {
+      "iri": "https://card.ai-ready/scheme/shinhan#N00001",
+      "label": "커피/음료",
+      "subClassOf": "shc:N00002",
+      "closure_path": ["shc:N00001", "shc:N00002"],
+      "closure_labels": ["커피/음료", "외식"]
+    },
+    "shc:N00002": {
+      "iri": "https://card.ai-ready/scheme/shinhan#N00002",
+      "label": "외식",
+      "subClassOf": null,
+      "closure_path": ["shc:N00002"],
+      "closure_labels": ["외식"]
+    },
+    "shc:N00010": {
+      "iri": "https://card.ai-ready/scheme/shinhan#N00010",
+      "label": "주유",
+      "subClassOf": null,
+      "closure_path": ["shc:N00010"],
+      "closure_labels": ["주유"]
+    },
+    "shc:N00013": {
+      "iri": "https://card.ai-ready/scheme/shinhan#N00013",
+      "label": "온라인쇼핑",
+      "subClassOf": null,
+      "closure_path": ["shc:N00013"],
+      "closure_labels": ["온라인쇼핑"]
+    },
+    "shc:N00017": {
+      "iri": "https://card.ai-ready/scheme/shinhan#N00017",
+      "label": "대중교통",
+      "subClassOf": null,
+      "closure_path": ["shc:N00017"],
+      "closure_labels": ["대중교통"]
+    }
+  },
+  "crosswalk": {
+    "shc:N00001": [
+      {"from": "shc:N00001", "from_scheme": "shinhan-benefit", "from_label": "커피/음료", "to": "seo:N00071", "to_scheme": "seoul-industry", "to_label": "커피-음료"},
+      {"from": "shc:N00001", "from_scheme": "shinhan-benefit", "from_label": "커피/음료", "to": "mcc:5814", "to_scheme": "mcc", "to_label": "Fast Food Restaurants"}
+    ],
+    "shc:N00010": [
+      {"from": "shc:N00010", "from_scheme": "shinhan-benefit", "from_label": "주유", "to": "mcc:5541", "to_scheme": "mcc", "to_label": "Service Stations"}
+    ]
+  }
+}

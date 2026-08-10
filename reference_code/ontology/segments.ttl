@@ -1,0 +1,58 @@
+@prefix co: <https://card.ai-ready/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://card.ai-ready/ontology#segment/age_20s> a co:CustomerSegmentSpec ;
+    rdfs:label "age_20s" ;
+    co:segmentAxis "age_band" ;
+    co:segmentPredicate "age_band = '20'" .
+
+<https://card.ai-ready/ontology#segment/age_senior> a co:CustomerSegmentSpec ;
+    rdfs:label "age_senior" ;
+    co:segmentAxis "age_band" ;
+    co:segmentPredicate "age_band = '60_이상'" .
+
+<https://card.ai-ready/ontology#segment/persona_coffee_commuter> a co:CustomerSegmentSpec ;
+    rdfs:label "persona_coffee_commuter" ;
+    co:segmentAxis "persona" ;
+    co:segmentPredicate "persona = 'coffee_commuter'" .
+
+<https://card.ai-ready/ontology#segment/persona_dining_social> a co:CustomerSegmentSpec ;
+    rdfs:label "persona_dining_social" ;
+    co:segmentAxis "persona" ;
+    co:segmentPredicate "persona = 'dining_social'" .
+
+<https://card.ai-ready/ontology#segment/persona_family_grocery> a co:CustomerSegmentSpec ;
+    rdfs:label "persona_family_grocery" ;
+    co:segmentAxis "persona" ;
+    co:segmentPredicate "persona = 'family_grocery'" .
+
+<https://card.ai-ready/ontology#segment/persona_medical_high_spend> a co:CustomerSegmentSpec ;
+    rdfs:label "persona_medical_high_spend" ;
+    co:segmentAxis "persona" ;
+    co:segmentPredicate "persona = 'medical_high_spend'" .
+
+<https://card.ai-ready/ontology#segment/persona_online_shopper> a co:CustomerSegmentSpec ;
+    rdfs:label "persona_online_shopper" ;
+    co:segmentAxis "persona" ;
+    co:segmentPredicate "persona = 'online_shopper'" .
+
+<https://card.ai-ready/ontology#segment/persona_study_family> a co:CustomerSegmentSpec ;
+    rdfs:label "persona_study_family" ;
+    co:segmentAxis "persona" ;
+    co:segmentPredicate "persona = 'study_family'" .
+
+<https://card.ai-ready/ontology#segment/spend_high> a co:CustomerSegmentSpec ;
+    rdfs:label "spend_high" ;
+    co:segmentAxis "monthly_spend_tier" ;
+    co:segmentPredicate "monthly_spend_tier = 'high'" .
+
+<https://card.ai-ready/ontology#segment/spend_low> a co:CustomerSegmentSpec ;
+    rdfs:label "spend_low" ;
+    co:segmentAxis "monthly_spend_tier" ;
+    co:segmentPredicate "monthly_spend_tier = 'low'" .
+
+<https://card.ai-ready/ontology#segment/spend_mid> a co:CustomerSegmentSpec ;
+    rdfs:label "spend_mid" ;
+    co:segmentAxis "monthly_spend_tier" ;
+    co:segmentPredicate "monthly_spend_tier = 'mid'" .
+

@@ -1,0 +1,10 @@
+{
+  "g1_shape_syntax": true,
+  "g2_consistency": true,
+  "g3_fixture_shacl": true,
+  "g4_mapping_completeness": true,
+  "g5_coverage_generated": true,
+  "g6_no_subclassof_misuse": true,
+  "findings": [],
+  "all_pass": true
+}

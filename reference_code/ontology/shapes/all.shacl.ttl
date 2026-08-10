@@ -1,0 +1,67 @@
+@prefix co: <https://card.ai-ready/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://card.ai-ready/ontology#shape/Account> a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path co:cardAccountId ] ;
+    sh:targetClass co:Account .
+
+<https://card.ai-ready/ontology#shape/Benefit> a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path co:benefitId ],
+        [ sh:minCount 0 ;
+            sh:path co:hasBenefitCategory ],
+        [ sh:in ( "적립" "할인" "캐시백" "포인트" "마일리지" ) ;
+            sh:path co:rewardType ] ;
+    sh:targetClass co:Benefit .
+
+<https://card.ai-ready/ontology#shape/BenefitCondition> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:integer ;
+            sh:minInclusive 0 ;
+            sh:path co:minSpend ],
+        [ sh:minCount 1 ;
+            sh:path co:conditionId ],
+        [ sh:datatype xsd:integer ;
+            sh:minInclusive 0 ;
+            sh:path co:monthlyCountLimit ],
+        [ sh:in ( "parsed" "partial" "unsupported" ) ;
+            sh:path co:parseStatus ] ;
+    sh:targetClass co:BenefitCondition .
+
+<https://card.ai-ready/ontology#shape/CardProduct> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:boolean ;
+            sh:path co:isCheckCard ],
+        [ sh:datatype xsd:boolean ;
+            sh:path co:isDiscontinued ],
+        [ sh:minCount 1 ;
+            sh:path co:cardProductId ],
+        [ sh:minCount 1 ;
+            sh:path co:name ] ;
+    sh:targetClass co:CardProduct .
+
+<https://card.ai-ready/ontology#shape/Customer> a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path co:customerId ] ;
+    sh:targetClass co:Customer .
+
+<https://card.ai-ready/ontology#shape/RewardLedger> a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path co:ledgerId ],
+        [ sh:in ( "below_min_spend" "count_limit_exceeded" "monthly_cap_exhausted" ) ;
+            sh:minCount 0 ;
+            sh:path co:denialReason ] ;
+    sh:targetClass co:RewardLedger .
+
+<https://card.ai-ready/ontology#shape/SpendTier> a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:integer ;
+            sh:minInclusive 0 ;
+            sh:path co:limitAmount ] ;
+    sh:targetClass co:SpendTier .
+
+<https://card.ai-ready/ontology#shape/Transaction> a sh:NodeShape ;
+    sh:property [ sh:minCount 1 ;
+            sh:path co:txnId ] ;
+    sh:targetClass co:Transaction .
+

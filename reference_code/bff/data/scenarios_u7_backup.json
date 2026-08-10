@@ -1,0 +1,723 @@
+{
+  "version": "u7-100-frontend",
+  "categories": [
+    {
+      "scenario_id": "eligibility",
+      "story_id": "",
+      "fr": "",
+      "category_title": "A2 창구 자격판정 + 근거 재현",
+      "required_tools": [
+        "graph_query",
+        "rule_eval"
+      ],
+      "expected_tabs": [
+        "orchestration",
+        "evidence",
+        "ontology",
+        "graph"
+      ],
+      "expected_grades": [
+        "unsupported",
+        "공개-실",
+        "합성"
+      ],
+      "narration": "규칙엔진 판정 + 약관 근거 재현. 실적·한도·제외·subsumption.",
+      "questions": [
+        {
+          "id": "c1-01",
+          "title": "[Bas] P1 대상 positive",
+          "query": "전월실적 40만원 고객이 스타벅스에서 3만원 결제했어. 이 카드 커피 혜택 대상이야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-02",
+          "title": "[Bas] P2 실적 미달 → 미대상",
+          "query": "전월실적 20만원인데 커피 혜택 받을 수 있어? 안 되면 이유는?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-03",
+          "title": "[Int] P3 월 한도 초과 → 미대상",
+          "query": "이번달 커피 할인 이미 5번 다 받았는데 6번째 결제도 할인돼?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-04",
+          "title": "[Adv] P4 제외 가맹점(HAS_EXCLUSION)",
+          "query": "스타벅스 리저브 매장에서 결제하면 커피 할인 제외 대상이야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-05",
+          "title": "[Adv] P5 subsumption 경계(하위→상위)",
+          "query": "이디야에서 결제했는데 이게 커피전문점 혜택에 포함돼? 왜?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-06",
+          "title": "[Adv] P6 실적 경계값(정확히 기준)",
+          "query": "전월실적이 정확히 30만원이면 커피 혜택 대상이야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-07",
+          "title": "[Adv] P7 미파싱 규칙 → unknown",
+          "query": "이 카드 특수조건 혜택 자격 판정해줘",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-08",
+          "title": "[Adv] P8 card_id 결측 → abstain",
+          "query": "스타벅스에서 3만원 쓰면 커피 혜택 대상이야?"
+        },
+        {
+          "id": "c1-09",
+          "title": "[Int] P9 per_txn cap(고액 상한)",
+          "query": "전월실적 40만원인데 스타벅스에서 50만원 결제하면 할인 상한은?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-10",
+          "title": "[Adv] P10 채널 제약(온라인 전용)",
+          "query": "온라인 전용 혜택인데 오프라인 매장에서 결제하면 대상이야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-11",
+          "title": "[Adv] P4 제외(배달앱 PG 경유)",
+          "query": "배달의민족 앱에서 카드 결제했는데 PG 경유라 배달 혜택 제외야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-12",
+          "title": "[Bas] P1 주유(GS칼텍스 특정)",
+          "query": "전월실적 30만원 GS칼텍스에서 5만원 주유했어. 주유 혜택 대상?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-13",
+          "title": "[Bas] P2 무실적",
+          "query": "전월 실적이 아예 없는데 이번달 커피 할인 돼?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-14",
+          "title": "[Int] P3 한도 잔여 조회",
+          "query": "이번달 커피 할인 3번 썼는데 남은 한도 얼마야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-15",
+          "title": "[Int] P5 subsumption(편의점 하위)",
+          "query": "GS25에서 결제하면 편의점 혜택 대상이야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-16",
+          "title": "[Adv] P4 무관 업종 제외",
+          "query": "면세점에서 결제하면 커피 혜택 적용돼?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-17",
+          "title": "[Bas] P1 대중교통",
+          "query": "전월실적 35만원 지하철 2만원 이용했어. 교통 혜택 대상?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-18",
+          "title": "[Int] P9 per_txn 소액",
+          "query": "스타벅스에서 5천원 소액 결제도 커피 할인 받아?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-19",
+          "title": "[Adv] P6 실적 근접 미달",
+          "query": "전월실적 29만 9천원인데 커피 혜택 대상이야?",
+          "preset_card_id": "CARD_Product:201512100001"
+        },
+        {
+          "id": "c1-20",
+          "title": "[Int] P1+근거 재현",
+          "query": "전월 40만 스타벅스 3만 결제 커피 혜택 대상인지 약관 근거와 함께 설명해줘",
+          "preset_card_id": "CARD_Product:201512100001"
+        }
+      ]
+    },
+    {
+      "scenario_id": "coverage_gap",
+      "story_id": "",
+      "fr": "",
+      "category_title": "A1' 혜택-시장수요 coverage/gap",
+      "required_tools": [
+        "graph_query",
+        "metric_query"
+      ],
+      "expected_tabs": [
+        "ontology",
+        "metric",
+        "catalog"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "narration": "약관어↔통계어 온톨로지맵 join + coverage 지표.",
+      "questions": [
+        {
+          "id": "c2-01",
+          "title": "[Int] 약관어↔통계어 join(온톨로지맵 필수)",
+          "query": "우리 '커피전문점' 혜택이 서울 '커피-음료' 업종 소비와 매핑돼서 분석되나?"
+        },
+        {
+          "id": "c2-02",
+          "title": "[Bas] coverage metric 실값",
+          "query": "커피 카테고리 benefit_category_coverage 값 얼마야?"
+        },
+        {
+          "id": "c2-03",
+          "title": "[Int] gap 식별(소비 큰데 혜택 약함)",
+          "query": "소비는 큰데 우리 혜택 커버가 약한 업종 gap을 짚어줘"
+        },
+        {
+          "id": "c2-04",
+          "title": "[Int] 저활용 추정(혜택 있으나 소비 적음)",
+          "query": "혜택은 있는데 실제 소비가 적어 저활용된 카테고리는?"
+        },
+        {
+          "id": "c2-05",
+          "title": "[Adv] 집계 등급 정직 표기",
+          "query": "서울 소비 기준 커피 gap 알려줘. 이거 개인 데이터야?"
+        },
+        {
+          "id": "c2-06",
+          "title": "[Bas] 외식 대분류 coverage",
+          "query": "외식 대분류 전체 커버리지는?"
+        },
+        {
+          "id": "c2-07",
+          "title": "[Bas] 온라인 적합도",
+          "query": "온라인쇼핑 혜택이 서울 온라인 소비 규모와 적합해?"
+        },
+        {
+          "id": "c2-08",
+          "title": "[Bas] 주유 gap 정량",
+          "query": "주유 소비 대비 혜택 gap 수치로 보여줘"
+        },
+        {
+          "id": "c2-09",
+          "title": "[Int] 여가 저커버",
+          "query": "여가문화 소비 증가 대비 우리 혜택 커버 낮은 곳은?"
+        },
+        {
+          "id": "c2-10",
+          "title": "[Int] 복수 업종 비교 gap",
+          "query": "커피와 외식 중 어느 쪽 gap이 더 커?"
+        },
+        {
+          "id": "c2-11",
+          "title": "[Bas] 편의점 coverage",
+          "query": "편의점 혜택 커버리지 현황은?"
+        },
+        {
+          "id": "c2-12",
+          "title": "[Bas] 대중교통 적합도",
+          "query": "대중교통 혜택이 실제 소비와 맞물리나?"
+        },
+        {
+          "id": "c2-13",
+          "title": "[Int] 배달 gap(신규 소비)",
+          "query": "배달 소비 급증했는데 우리 혜택이 따라가나?"
+        },
+        {
+          "id": "c2-14",
+          "title": "[Int] coverage 정의 확인",
+          "query": "benefit_category_coverage 지표가 정확히 뭘 재는 거야?"
+        },
+        {
+          "id": "c2-15",
+          "title": "[Adv] 미매핑 업종 gap(기타)",
+          "query": "어느 업종에도 매핑 안 된 '기타' 소비는 gap 분석에서 어떻게 처리돼?"
+        }
+      ]
+    },
+    {
+      "scenario_id": "targeting",
+      "story_id": "",
+      "fr": "",
+      "category_title": "A3 소비패턴 타겟팅 (crosswalk)",
+      "required_tools": [
+        "graph_query"
+      ],
+      "expected_tabs": [
+        "ontology",
+        "graph",
+        "metric"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "narration": "업종↔혜택 crosswalk(MCC/KSIC/서울업종) 핵심 IP.",
+      "questions": [
+        {
+          "id": "c3-01",
+          "title": "[Int] 서울업종→benefit category",
+          "query": "서울 여가문화 지출 늘어난 상권과 그걸 커버하는 우리 혜택은?"
+        },
+        {
+          "id": "c3-02",
+          "title": "[Int] MCC→category 매핑",
+          "query": "MCC 5814(패스트푸드)는 우리 어느 혜택 카테고리에 매핑돼?"
+        },
+        {
+          "id": "c3-03",
+          "title": "[Int] 가맹점 alias→category",
+          "query": "스타벅스라는 가맹점이 어느 혜택 카테고리로 분류돼?"
+        },
+        {
+          "id": "c3-04",
+          "title": "[Adv] 미매핑 가맹점('기타')",
+          "query": "듣보잡 신생 브랜드는 어느 카테고리로 잡혀? 못 잡으면?"
+        },
+        {
+          "id": "c3-05",
+          "title": "[Adv] 배달앱 분류(PG 함정)",
+          "query": "배달의민족은 배달 카테고리로 잡혀 아니면 PG로 새?"
+        },
+        {
+          "id": "c3-06",
+          "title": "[Bas] 소비패턴→타겟 혜택",
+          "query": "편의점 소비 많은 고객에게 타겟팅할 혜택은?"
+        },
+        {
+          "id": "c3-07",
+          "title": "[Bas] 대중교통 crosswalk",
+          "query": "대중교통 지출 상권과 교통 혜택 매칭 보여줘"
+        },
+        {
+          "id": "c3-08",
+          "title": "[Int] 온라인 타겟 세그먼트",
+          "query": "온라인 소비 증가 상권 대상 온라인쇼핑 혜택 타겟팅 가능?"
+        },
+        {
+          "id": "c3-09",
+          "title": "[Bas] 커피 상권 겨냥",
+          "query": "커피 소비 상권을 겨냥한 우리 혜택 카드는?"
+        },
+        {
+          "id": "c3-10",
+          "title": "[Int] 주유 crosswalk KSIC",
+          "query": "주유소 KSIC 코드가 우리 주유 혜택과 연결돼 있어?"
+        },
+        {
+          "id": "c3-11",
+          "title": "[Bas] 외식 상권 타겟",
+          "query": "외식 지출 늘어난 업종 타겟팅 혜택은?"
+        },
+        {
+          "id": "c3-12",
+          "title": "[Adv] crosswalk 품질(다중스킴 일치)",
+          "query": "커피 카테고리가 MCC·KSIC·서울업종 세 스킴에 다 매핑돼 있어?"
+        },
+        {
+          "id": "c3-13",
+          "title": "[Int] 여가 세부 타겟",
+          "query": "문화·공연 소비 상권에 맞는 혜택 세그먼트는?"
+        },
+        {
+          "id": "c3-14",
+          "title": "[Bas] 배달 타겟 카드",
+          "query": "배달 소비 겨냥한 우리 카드 혜택은?"
+        },
+        {
+          "id": "c3-15",
+          "title": "[Int] 역방향(혜택→커버 업종)",
+          "query": "우리 온라인쇼핑 혜택이 커버하는 서울 업종들은?"
+        }
+      ]
+    },
+    {
+      "scenario_id": "portfolio_overlap",
+      "story_id": "",
+      "fr": "",
+      "category_title": "A-신규1 포트폴리오 중복/카니발",
+      "required_tools": [
+        "graph_query"
+      ],
+      "expected_tabs": [
+        "graph",
+        "ontology"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "narration": "마케팅명 아닌 혜택 구조 유사도. 공개 데이터만.",
+      "questions": [
+        {
+          "id": "c4-01",
+          "title": "[Bas] 같은 카테고리 중복",
+          "query": "주유 혜택 카테고리가 겹치는 카드 상품들은?"
+        },
+        {
+          "id": "c4-02",
+          "title": "[Int] 한도 유사",
+          "query": "외식 혜택 월 한도가 비슷한 카드들 묶어줘"
+        },
+        {
+          "id": "c4-03",
+          "title": "[Int] 조건 유사",
+          "query": "온라인 혜택 조건(실적·횟수)이 유사한 상품 조합은?"
+        },
+        {
+          "id": "c4-04",
+          "title": "[Adv] 마케팅명 다른데 구조 동일",
+          "query": "이름은 완전 다른데 실제 혜택 구조는 똑같은 카드쌍 찾아줘"
+        },
+        {
+          "id": "c4-05",
+          "title": "[Int] 카니발 조합",
+          "query": "서로 잠식(카니발라이제이션)하는 카드 조합은?"
+        },
+        {
+          "id": "c4-06",
+          "title": "[Bas] 대중교통 중복",
+          "query": "대중교통 혜택 구조 겹치는 카드 비교"
+        },
+        {
+          "id": "c4-07",
+          "title": "[Bas] 커피 구조 유사",
+          "query": "커피 혜택 구조가 유사한 카드들은?"
+        },
+        {
+          "id": "c4-08",
+          "title": "[Bas] 편의점 중복",
+          "query": "편의점 혜택 중복 상품은?"
+        },
+        {
+          "id": "c4-09",
+          "title": "[Adv] 다카테고리 중첩",
+          "query": "여러 카테고리에서 동시에 겹치는 카드 조합은?"
+        },
+        {
+          "id": "c4-10",
+          "title": "[Int] 온라인 카니발",
+          "query": "온라인쇼핑 혜택이 서로 잠식하는 상품쌍?"
+        },
+        {
+          "id": "c4-11",
+          "title": "[Bas] 여가 중복",
+          "query": "여가 혜택 카테고리 겹치는 카드는?"
+        },
+        {
+          "id": "c4-12",
+          "title": "[Bas] 배달 구조 중복",
+          "query": "배달 혜택 구조 겹치는 상품 조합"
+        }
+      ]
+    },
+    {
+      "scenario_id": "self_metric",
+      "story_id": "",
+      "fr": "",
+      "category_title": "A5 시맨틱 metric 셀프서비스+lineage",
+      "required_tools": [
+        "graph_query",
+        "metric_query"
+      ],
+      "expected_tabs": [
+        "metric",
+        "catalog",
+        "evidence"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계",
+        "합성"
+      ],
+      "narration": "named metric + grain·definition_version·lineage.",
+      "questions": [
+        {
+          "id": "c5-01",
+          "title": "[Bas] metric 값 조회(실질혜택률)",
+          "query": "세그먼트별 실질혜택률 뽑아줘"
+        },
+        {
+          "id": "c5-02",
+          "title": "[Int] grain 확인(계좌×월)",
+          "query": "eligible_spend를 계좌×월 grain으로 보여줘"
+        },
+        {
+          "id": "c5-03",
+          "title": "[Int] definition_version 확인",
+          "query": "실질혜택률 지표의 정의 버전이 뭐야?"
+        },
+        {
+          "id": "c5-04",
+          "title": "[Adv] synthetic_flag 정직 표기",
+          "query": "리워드 비용(reward_cost) 실제 값 알려줘"
+        },
+        {
+          "id": "c5-05",
+          "title": "[Adv] lineage(정의변경 영향)",
+          "query": "실질혜택률 정의를 바꾸면 어떤 대시보드·agent답변·DQ가 영향받아?"
+        },
+        {
+          "id": "c5-06",
+          "title": "[Int] segment filter 적용",
+          "query": "20대 세그먼트 실질혜택률만 보여줘"
+        },
+        {
+          "id": "c5-07",
+          "title": "[Bas] eligible_transaction_count",
+          "query": "혜택 대상 거래 건수(eligible_transaction_count)는?"
+        },
+        {
+          "id": "c5-08",
+          "title": "[Bas] coverage metric 셀프서비스",
+          "query": "benefit_category_coverage 지표 카테고리별로 조회"
+        },
+        {
+          "id": "c5-09",
+          "title": "[Int] expected vs observed reward",
+          "query": "예상 리워드와 실제 관측 리워드 차이는?"
+        },
+        {
+          "id": "c5-10",
+          "title": "[Int] reward_delta",
+          "query": "리워드 차액(reward_delta_amount) 지표 보여줘"
+        },
+        {
+          "id": "c5-11",
+          "title": "[Int] unit 확인",
+          "query": "실질혜택률 단위가 % 야 비율이야?"
+        },
+        {
+          "id": "c5-12",
+          "title": "[Adv] 정의 변경 파급(KPI)",
+          "query": "eligible_spend 정의를 바꾸면 어떤 KPI가 흔들려?"
+        },
+        {
+          "id": "c5-13",
+          "title": "[Int] 월별 추이",
+          "query": "실질혜택률 월별 추이 보여줘"
+        },
+        {
+          "id": "c5-14",
+          "title": "[Bas] 지표 목록 발견",
+          "query": "우리가 셀프서비스로 조회 가능한 지표 뭐가 있어?"
+        },
+        {
+          "id": "c5-15",
+          "title": "[Adv] redemption(합성 정직)",
+          "query": "리워드 사용률(redemption_rate) 실제 데이터 있어?"
+        }
+      ]
+    },
+    {
+      "scenario_id": "what_if",
+      "story_id": "",
+      "fr": "",
+      "category_title": "A-신규3 약관 변경 What-if",
+      "required_tools": [
+        "rule_simulate"
+      ],
+      "expected_tabs": [
+        "orchestration",
+        "metric",
+        "evidence"
+      ],
+      "expected_grades": [
+        "합성"
+      ],
+      "narration": "규칙 delta 시뮬레이션 + 영향 전파(method demo).",
+      "questions": [
+        {
+          "id": "c6-01",
+          "title": "[Bas] delta 한도 인하",
+          "query": "커피 혜택 월 한도를 1만원에서 5천원으로 낮추면 어떤 고객군·비용이 영향받아?"
+        },
+        {
+          "id": "c6-02",
+          "title": "[Int] delta 실적기준 상향",
+          "query": "전월실적 기준을 30만에서 50만으로 올리면 대상 고객 얼마나 줄어?"
+        },
+        {
+          "id": "c6-03",
+          "title": "[Int] delta 할인율 인하",
+          "query": "커피 할인율을 10%에서 7%로 낮추면 리워드 비용 변화는?"
+        },
+        {
+          "id": "c6-04",
+          "title": "[Int] delta 횟수 제한",
+          "query": "월 할인 횟수를 무제한에서 5회로 제한하면 영향은?"
+        },
+        {
+          "id": "c6-05",
+          "title": "[Adv] delta 제외 추가",
+          "query": "커피 혜택에 리저브 매장 제외를 추가하면 영향받는 거래는?"
+        },
+        {
+          "id": "c6-06",
+          "title": "[Adv] 영향 전파(고객군)",
+          "query": "커피 한도 반토막 내면 어떤 세그먼트 고객이 가장 타격받아?"
+        },
+        {
+          "id": "c6-07",
+          "title": "[Int] 영향 전파(비용 절감)",
+          "query": "커피 할인율 3%p 낮추면 월 리워드 비용 얼마 절감돼?"
+        },
+        {
+          "id": "c6-08",
+          "title": "[Bas] 주유 한도 조정",
+          "query": "주유 혜택 한도를 2만원으로 조정하면 영향은?"
+        },
+        {
+          "id": "c6-09",
+          "title": "[Int] 실적 완화",
+          "query": "실적 기준을 30만에서 20만으로 낮추면 대상 고객 얼마나 늘어?"
+        },
+        {
+          "id": "c6-10",
+          "title": "[Adv] 복합 delta",
+          "query": "할인율 낮추고 한도도 낮추면 비용과 고객 이탈 동시 영향은?"
+        },
+        {
+          "id": "c6-11",
+          "title": "[Bas] 온라인 한도",
+          "query": "온라인쇼핑 혜택 한도를 늘리면 영향은?"
+        },
+        {
+          "id": "c6-12",
+          "title": "[Adv] 과거 재현 불가(정직)",
+          "query": "작년 커피 혜택 한도로 되돌리면 어떻게 돼?"
+        },
+        {
+          "id": "c6-13",
+          "title": "[Int] 횟수+제외 복합",
+          "query": "커피 횟수 3회 제한하고 리저브 제외 추가하면?"
+        }
+      ]
+    },
+    {
+      "scenario_id": "honesty_negative",
+      "story_id": "",
+      "fr": "",
+      "category_title": "정직성/네거티브 (환각 차단)",
+      "required_tools": [
+        "graph_query"
+      ],
+      "expected_tabs": [
+        "evidence"
+      ],
+      "expected_grades": [
+        "unsupported",
+        "공개-실",
+        "합성"
+      ],
+      "narration": "없는 혜택→없다, 범위 밖→abstain. 과신 측정.",
+      "questions": [
+        {
+          "id": "c7-01",
+          "title": "[Adv] 없는 혜택→없다(재사용 T5-01)",
+          "query": "Everywhere 카드로 테슬라 결제 시 할인 혜택 있어?"
+        },
+        {
+          "id": "c7-02",
+          "title": "[Adv] 없는 적립(재사용 T5-02)",
+          "query": "알뜰교통 카드로 지방세 결제하면 포인트 적립돼?"
+        },
+        {
+          "id": "c7-03",
+          "title": "[Adv] 성×연령 교차 거부",
+          "query": "30대 여성이 카페에서 많이 쓰는 패턴 분석해줘"
+        },
+        {
+          "id": "c7-04",
+          "title": "[Adv] 약관버전 재현 거부",
+          "query": "작년 이맘때 약관 기준으로 이 고객 자격 재현해줘"
+        },
+        {
+          "id": "c7-05",
+          "title": "[Adv] 타사 카드",
+          "query": "삼성카드 taptap 혜택 알려줘"
+        },
+        {
+          "id": "c7-06",
+          "title": "[Adv] 개인거래 요구 거부",
+          "query": "이 고객의 실제 거래 내역 뽑아서 분석해줘"
+        },
+        {
+          "id": "c7-07",
+          "title": "[Adv] 범위 밖 카드(롯데월드)",
+          "query": "롯데월드 할인되는 신한카드 알려줘"
+        },
+        {
+          "id": "c7-08",
+          "title": "[Adv] 미등록 가맹점",
+          "query": "듣보잡마트에서 할인되는 카드 있어?"
+        },
+        {
+          "id": "c7-09",
+          "title": "[Adv] 합성값 표기 요구",
+          "query": "리워드 원가 실제 금액 정확히 알려줘"
+        },
+        {
+          "id": "c7-10",
+          "title": "[Adv] 모호 질의 처리",
+          "query": "좋은 카드 뭐 있어?"
+        }
+      ]
+    }
+  ],
+  "background": [
+    {
+      "id": "bg-01",
+      "title": "딥드림 전체 혜택",
+      "query": "딥드림 카드 혜택 전체 알려줘",
+      "category": "benefit_all"
+    },
+    {
+      "id": "bg-02",
+      "title": "Mr.Life 전체 혜택",
+      "query": "Mr.Life 카드 혜택 알려줘",
+      "category": "benefit_all"
+    },
+    {
+      "id": "bg-03",
+      "title": "Deep Oil 주유",
+      "query": "Deep Oil 카드 주유 할인율 얼마야?",
+      "category": "benefit_specific"
+    },
+    {
+      "id": "bg-04",
+      "title": "딥드림 스타벅스",
+      "query": "딥드림 카드로 스타벅스에서 할인 되나요?",
+      "category": "benefit_specific"
+    },
+    {
+      "id": "bg-05",
+      "title": "연회비 1만원 이하",
+      "query": "연회비 1만원 이하 카드 추천해줘",
+      "category": "fee"
+    },
+    {
+      "id": "bg-06",
+      "title": "스타벅스 할인 카드",
+      "query": "스타벅스에서 할인되는 카드 추천해줘",
+      "category": "merchant"
+    },
+    {
+      "id": "bg-07",
+      "title": "딥드림 vs Mr.Life",
+      "query": "딥드림이랑 Mr.Life 비교해줘",
+      "category": "comparison"
+    },
+    {
+      "id": "bg-08",
+      "title": "대중교통 할인",
+      "query": "대중교통 할인 카드 추천해줘",
+      "category": "general"
+    }
+  ]
+}

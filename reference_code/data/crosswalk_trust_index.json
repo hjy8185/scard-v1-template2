@@ -1,0 +1,439 @@
+{
+ "meta": {
+  "source": "U36 crosswalk 신뢰 인덱스(build_21) — 엣지 라이프사이클 + 조인 검증 실측",
+  "principle": "추론 관계는 confidence·검수상태를 달고, 다리는 실데이터 조인으로 검증한다",
+  "n_edges": 44,
+  "n_promoted": 33,
+  "n_reviewed": 11,
+  "lifecycle": "inferred(자동) → reviewed(사람 검수) → promoted(운영 승격) · 대응 없으면 excluded",
+  "as_of": "2026-07-16"
+ },
+ "edges": [
+  {
+   "from": "PC방",
+   "to": "여가",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "가방",
+   "to": "의류/패션",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "골프연습장",
+   "to": "여가",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "네일숍",
+   "to": "뷰티",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "노래방",
+   "to": "주류/유흥",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "당구장",
+   "to": "여가",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "문구",
+   "to": "교육/학원",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "미곡판매",
+   "to": "슈퍼마켓/마트",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "미용실",
+   "to": "뷰티",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "반찬가게",
+   "to": "슈퍼마켓/마트",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "분식전문점",
+   "to": "음식점",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "서적",
+   "to": "교육/학원",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "수산물판매",
+   "to": "슈퍼마켓/마트",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "슈퍼마켓",
+   "to": "슈퍼마켓/마트",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "스포츠 강습",
+   "to": "여가",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "스포츠클럽",
+   "to": "여가",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "신발",
+   "to": "의류/패션",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "안경",
+   "to": "의료",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "양식음식점",
+   "to": "음식점",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "예술학원",
+   "to": "교육/학원",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "외국어학원",
+   "to": "교육/학원",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "운동/경기용품",
+   "to": "여가",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "육류판매",
+   "to": "슈퍼마켓/마트",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "의료기기",
+   "to": "의료",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "broad",
+   "confidence": 0.7,
+   "status": "reviewed",
+   "reviewed_in": "U19 R5(사람 검수)"
+  },
+  {
+   "from": "의약품",
+   "to": "약국",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "일반교습학원",
+   "to": "교육/학원",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "일반의료",
+   "to": "의료",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "일반의류",
+   "to": "의류/패션",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "일반의원",
+   "to": "의료",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "일식음식점",
+   "to": "음식점",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "전자상거래업",
+   "to": "온라인쇼핑",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "제과점",
+   "to": "제과/베이커리",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "중식음식점",
+   "to": "음식점",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "청과상",
+   "to": "슈퍼마켓/마트",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "치과의원",
+   "to": "의료",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "치킨전문점",
+   "to": "패스트푸드",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "커피-음료",
+   "to": "커피/음료",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "패스트푸드점",
+   "to": "패스트푸드",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "편의점",
+   "to": "편의점",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "피부관리실",
+   "to": "뷰티",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "한식음식점",
+   "to": "음식점",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "한의원",
+   "to": "의료",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "호프-간이주점",
+   "to": "주류/유흥",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  },
+  {
+   "from": "화장품",
+   "to": "뷰티",
+   "scheme": "seoul_industry→shinhan_category",
+   "match_type": "exact",
+   "confidence": 0.9,
+   "status": "promoted",
+   "reviewed_in": "D0(규칙)+U19 R5 검수 통과"
+  }
+ ],
+ "bridges": [
+  {
+   "bridge": "서울 62업종 ↔ 신한 19혜택카테고리 (D0)",
+   "method": "규칙 매칭 + 사람 검수(U19 R5)",
+   "validation": "서울 2025 매출의 90.2%가 매핑된 업종에 속함(빌드 시 전수 집계)",
+   "coverage_pct": 90.2,
+   "status": "promoted 33 · reviewed 11 · 미매핑 업종 정직 제외"
+  },
+  {
+   "bridge": "상권(추정매출) ↔ 행정동(생활인구) — AreaMapping",
+   "method": "상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD 실조인(build_14)",
+   "validation": "인덱스 상권 25곳 중 25곳 shapefile 이름 실매칭(unmapped 0)",
+   "coverage_pct": 100.0,
+   "status": "promoted(조인 실검증)"
+  },
+  {
+   "bridge": "KOSIS 온라인쇼핑 26상품군 ↔ 신한 혜택카테고리",
+   "method": "curated(사람 검수) — KOSIS 상품군↔신한 카테고리, 비1:1 정직 유지",
+   "validation": "20/25 매핑(대응 없는 상품군은 정직 미매핑)",
+   "coverage_pct": 80.0,
+   "status": "reviewed(큐레이션 — 자동추론 아님 명시)"
+  },
+  {
+   "bridge": "국세청 업종코드 ↔ KSIC 11차 (공식 연계표)",
+   "method": "정부 공식 CSV 원본 무변형 참조",
+   "validation": "1,785행 [공개-실] — 우리 추론이 아닌 공식 근거층",
+   "coverage_pct": null,
+   "status": "official(승격 불요 — 공식 레이어)"
+  }
+ ]
+}

@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "source": "서울시 상권분석서비스 추정매출(공개-집계) × D0 crosswalk",
+    "year": "2025",
+    "is_market_aggregate": true,
+    "total_seoul_krw": 92658231006581,
+    "crosswalk_covered_krw": 72225188322817,
+    "crosswalk_coverage_pct": 77.9,
+    "note": "혜택 카테고리별 서울 시장 소비 규모. 개인 데이터 아님(공개 추정매출 집계)."
+  },
+  "categories": {
+    "음식점": {
+      "market_krw": 19616889404163,
+      "market_share": 0.2117,
+      "seoul_industries": [
+        "분식전문점",
+        "양식음식점",
+        "일식음식점",
+        "중식음식점",
+        "한식음식점"
+      ]
+    },
+    "슈퍼마켓/마트": {
+      "market_krw": 11539215201938,
+      "market_share": 0.1245,
+      "seoul_industries": [
+        "반찬가게",
+        "슈퍼마켓",
+        "청과상"
+      ]
+    },
+    "의료": {
+      "market_krw": 9302131985919,
+      "market_share": 0.1004,
+      "seoul_industries": [
+        "일반의원",
+        "치과의원",
+        "한의원"
+      ]
+    },
+    "의류/패션": {
+      "market_krw": 8434769866413,
+      "market_share": 0.091,
+      "seoul_industries": [
+        "가방",
+        "신발",
+        "일반의류"
+      ]
+    },
+    "약국": {
+      "market_krw": 5631963312246,
+      "market_share": 0.0608,
+      "seoul_industries": [
+        "의약품"
+      ]
+    },
+    "교육/학원": {
+      "market_krw": 3819627395935,
+      "market_share": 0.0412,
+      "seoul_industries": [
+        "서적",
+        "예술학원",
+        "외국어학원",
+        "일반교습학원"
+      ]
+    },
+    "주류/유흥": {
+      "market_krw": 3312819336321,
+      "market_share": 0.0358,
+      "seoul_industries": [
+        "노래방",
+        "호프-간이주점"
+      ]
+    },
+    "편의점": {
+      "market_krw": 3251412205729,
+      "market_share": 0.0351,
+      "seoul_industries": [
+        "편의점"
+      ]
+    },
+    "커피/음료": {
+      "market_krw": 2758246271701,
+      "market_share": 0.0298,
+      "seoul_industries": [
+        "커피-음료"
+      ]
+    },
+    "뷰티": {
+      "market_krw": 2483903530757,
+      "market_share": 0.0268,
+      "seoul_industries": [
+        "네일숍",
+        "미용실",
+        "피부관리실",
+        "화장품"
+      ]
+    },
+    "패스트푸드": {
+      "market_krw": 986613650473,
+      "market_share": 0.0106,
+      "seoul_industries": [
+        "치킨전문점",
+        "패스트푸드점"
+      ]
+    },
+    "제과/베이커리": {
+      "market_krw": 785277633836,
+      "market_share": 0.0085,
+      "seoul_industries": [
+        "제과점"
+      ]
+    },
+    "여가": {
+      "market_krw": 160891426470,
+      "market_share": 0.0017,
+      "seoul_industries": [
+        "PC방"
+      ]
+    },
+    "온라인쇼핑": {
+      "market_krw": 141427100916,
+      "market_share": 0.0015,
+      "seoul_industries": [
+        "전자상거래업"
+      ]
+    }
+  }
+}

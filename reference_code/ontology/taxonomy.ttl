@@ -1,0 +1,261 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix seo: <https://card.ai-ready/scheme/seoul#> .
+@prefix shc: <https://card.ai-ready/scheme/shinhan#> .
+
+seo:N00020 a owl:Class ;
+    rdfs:label "PC방" .
+
+seo:N00021 a owl:Class ;
+    rdfs:label "가구" .
+
+seo:N00022 a owl:Class ;
+    rdfs:label "가방" .
+
+seo:N00023 a owl:Class ;
+    rdfs:label "가전제품" .
+
+seo:N00024 a owl:Class ;
+    rdfs:label "가전제품수리" .
+
+seo:N00025 a owl:Class ;
+    rdfs:label "골프연습장" .
+
+seo:N00026 a owl:Class ;
+    rdfs:label "네일숍" .
+
+seo:N00027 a owl:Class ;
+    rdfs:label "노래방" .
+
+seo:N00028 a owl:Class ;
+    rdfs:label "당구장" .
+
+seo:N00029 a owl:Class ;
+    rdfs:label "문구" .
+
+seo:N00030 a owl:Class ;
+    rdfs:label "미곡판매" .
+
+seo:N00031 a owl:Class ;
+    rdfs:label "미용실" .
+
+seo:N00032 a owl:Class ;
+    rdfs:label "반찬가게" .
+
+seo:N00033 a owl:Class ;
+    rdfs:label "부동산중개업" .
+
+seo:N00034 a owl:Class ;
+    rdfs:label "분식전문점" .
+
+seo:N00035 a owl:Class ;
+    rdfs:label "서적" .
+
+seo:N00036 a owl:Class ;
+    rdfs:label "섬유제품" .
+
+seo:N00037 a owl:Class ;
+    rdfs:label "세탁소" .
+
+seo:N00038 a owl:Class ;
+    rdfs:label "수산물판매" .
+
+seo:N00039 a owl:Class ;
+    rdfs:label "슈퍼마켓" .
+
+seo:N00040 a owl:Class ;
+    rdfs:label "스포츠 강습" .
+
+seo:N00041 a owl:Class ;
+    rdfs:label "스포츠클럽" .
+
+seo:N00042 a owl:Class ;
+    rdfs:label "시계및귀금속" .
+
+seo:N00043 a owl:Class ;
+    rdfs:label "신발" .
+
+seo:N00044 a owl:Class ;
+    rdfs:label "안경" .
+
+seo:N00045 a owl:Class ;
+    rdfs:label "애완동물" .
+
+seo:N00046 a owl:Class ;
+    rdfs:label "양식음식점" .
+
+seo:N00047 a owl:Class ;
+    rdfs:label "여관" .
+
+seo:N00048 a owl:Class ;
+    rdfs:label "예술학원" .
+
+seo:N00049 a owl:Class ;
+    rdfs:label "완구" .
+
+seo:N00050 a owl:Class ;
+    rdfs:label "외국어학원" .
+
+seo:N00051 a owl:Class ;
+    rdfs:label "운동/경기용품" .
+
+seo:N00052 a owl:Class ;
+    rdfs:label "육류판매" .
+
+seo:N00053 a owl:Class ;
+    rdfs:label "의료기기" .
+
+seo:N00054 a owl:Class ;
+    rdfs:label "의약품" .
+
+seo:N00055 a owl:Class ;
+    rdfs:label "인테리어" .
+
+seo:N00056 a owl:Class ;
+    rdfs:label "일반교습학원" .
+
+seo:N00057 a owl:Class ;
+    rdfs:label "일반의류" .
+
+seo:N00058 a owl:Class ;
+    rdfs:label "일반의원" .
+
+seo:N00059 a owl:Class ;
+    rdfs:label "일식음식점" .
+
+seo:N00060 a owl:Class ;
+    rdfs:label "자동차미용" .
+
+seo:N00061 a owl:Class ;
+    rdfs:label "자동차수리" .
+
+seo:N00062 a owl:Class ;
+    rdfs:label "자전거 및 기타운송장비" .
+
+seo:N00063 a owl:Class ;
+    rdfs:label "전자상거래업" .
+
+seo:N00064 a owl:Class ;
+    rdfs:label "제과점" .
+
+seo:N00065 a owl:Class ;
+    rdfs:label "조명용품" .
+
+seo:N00066 a owl:Class ;
+    rdfs:label "중식음식점" .
+
+seo:N00067 a owl:Class ;
+    rdfs:label "철물점" .
+
+seo:N00068 a owl:Class ;
+    rdfs:label "청과상" .
+
+seo:N00069 a owl:Class ;
+    rdfs:label "치과의원" .
+
+seo:N00070 a owl:Class ;
+    rdfs:label "치킨전문점" .
+
+seo:N00071 a owl:Class ;
+    rdfs:label "커피-음료" .
+
+seo:N00072 a owl:Class ;
+    rdfs:label "컴퓨터및주변장치판매" .
+
+seo:N00073 a owl:Class ;
+    rdfs:label "패스트푸드점" .
+
+seo:N00074 a owl:Class ;
+    rdfs:label "편의점" .
+
+seo:N00075 a owl:Class ;
+    rdfs:label "피부관리실" .
+
+seo:N00076 a owl:Class ;
+    rdfs:label "한식음식점" .
+
+seo:N00077 a owl:Class ;
+    rdfs:label "한의원" .
+
+seo:N00078 a owl:Class ;
+    rdfs:label "핸드폰" .
+
+seo:N00079 a owl:Class ;
+    rdfs:label "호프-간이주점" .
+
+seo:N00080 a owl:Class ;
+    rdfs:label "화장품" .
+
+seo:N00081 a owl:Class ;
+    rdfs:label "화초" .
+
+shc:N00001 a owl:Class ;
+    rdfs:label "커피/음료" ;
+    rdfs:subClassOf shc:N00002 .
+
+shc:N00003 a owl:Class ;
+    rdfs:label "제과/베이커리" ;
+    rdfs:subClassOf shc:N00002 .
+
+shc:N00004 a owl:Class ;
+    rdfs:label "음식점" ;
+    rdfs:subClassOf shc:N00002 .
+
+shc:N00005 a owl:Class ;
+    rdfs:label "패스트푸드" ;
+    rdfs:subClassOf shc:N00002 .
+
+shc:N00006 a owl:Class ;
+    rdfs:label "편의점" ;
+    rdfs:subClassOf shc:N00007 .
+
+shc:N00008 a owl:Class ;
+    rdfs:label "슈퍼마켓/마트" ;
+    rdfs:subClassOf shc:N00007 .
+
+shc:N00009 a owl:Class ;
+    rdfs:label "의료" ;
+    rdfs:subClassOf shc:N00010 .
+
+shc:N00011 a owl:Class ;
+    rdfs:label "약국" ;
+    rdfs:subClassOf shc:N00010 .
+
+shc:N00012 a owl:Class ;
+    rdfs:label "온라인쇼핑" ;
+    rdfs:subClassOf shc:N00013 .
+
+shc:N00014 a owl:Class ;
+    rdfs:label "의류/패션" ;
+    rdfs:subClassOf shc:N00013 .
+
+shc:N00015 a owl:Class ;
+    rdfs:label "뷰티" ;
+    rdfs:subClassOf shc:N00013 .
+
+shc:N00016 a owl:Class ;
+    rdfs:label "교육/학원" ;
+    rdfs:subClassOf shc:N00017 .
+
+shc:N00018 a owl:Class ;
+    rdfs:label "주류/유흥" ;
+    rdfs:subClassOf shc:N00019 .
+
+shc:N00017 a owl:Class ;
+    rdfs:label "교육" .
+
+shc:N00019 a owl:Class ;
+    rdfs:label "여가" .
+
+shc:N00007 a owl:Class ;
+    rdfs:label "생활" .
+
+shc:N00010 a owl:Class ;
+    rdfs:label "의료/건강" .
+
+shc:N00013 a owl:Class ;
+    rdfs:label "쇼핑" .
+
+shc:N00002 a owl:Class ;
+    rdfs:label "식음료" .
+

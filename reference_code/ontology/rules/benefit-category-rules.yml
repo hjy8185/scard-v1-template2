@@ -1,0 +1,101 @@
+# U2a benefit → shinhan_category 매핑 규칙 (핵심 IP, 버전관리 artifact)
+# 코드가 아닌 데이터. build_crosswalk.py가 로드하여 seed 매핑 생성.
+# target은 반드시 shinhan_category 19종 중 하나(임의 신설 금지).
+# 매칭: label + raw_text에 keyword 포함 → target. negative_keywords 있으면 제외.
+# 경쟁 시 priority 높은 규칙 우선. 미매칭은 unmapped(추측 금지, NFR-5).
+version: "1.0"
+scheme_target: shinhan_category
+
+# shinhan_category 19종 (D0 실측 — target은 이 안에서만)
+valid_targets:
+  - 커피/음료
+  - 식음료
+  - 제과/베이커리
+  - 음식점
+  - 패스트푸드
+  - 편의점
+  - 생활
+  - 슈퍼마켓/마트
+  - 의료
+  - 의료/건강
+  - 약국
+  - 온라인쇼핑
+  - 쇼핑
+  - 의류/패션
+  - 뷰티
+  - 교육/학원
+  - 교육
+  - 주류/유흥
+  - 여가
+
+# 규칙: keyword(포함) → target. priority(큰 값 우선), confidence, negative_keywords.
+rules:
+  - target: 커피/음료
+    keywords: ["커피", "스타벅스", "스타 벅스", "카페", "이디야", "투썸"]
+    priority: 90
+    confidence: 0.95
+  - target: 제과/베이커리
+    keywords: ["베이커리", "파리바게뜨", "뚜레쥬르", "제과"]
+    priority: 85
+    confidence: 0.9
+  - target: 편의점
+    keywords: ["편의점", "GS25", "CU", "세븐일레븐", "이마트24"]
+    priority: 88
+    confidence: 0.95
+  - target: 슈퍼마켓/마트
+    keywords: ["마트", "슈퍼", "이마트", "홈플러스", "롯데마트", "코스트코"]
+    negative_keywords: ["이마트24"]   # 편의점과 충돌 방지
+    priority: 80
+    confidence: 0.9
+  - target: 온라인쇼핑
+    keywords: ["G마켓", "옥션", "11번가", "쿠팡", "온라인", "인터파크", "위메프", "티몬"]
+    priority: 82
+    confidence: 0.9
+  - target: 약국
+    keywords: ["약국"]
+    priority: 84
+    confidence: 0.9
+  - target: 의료/건강
+    keywords: ["병원", "의료", "치과", "건강"]
+    priority: 70
+    confidence: 0.85
+  - target: 뷰티
+    keywords: ["뷰티", "올리브영", "화장품", "미용"]
+    priority: 78
+    confidence: 0.9
+  - target: 의류/패션
+    keywords: ["의류", "패션", "유니클로", "자라"]
+    priority: 72
+    confidence: 0.85
+  - target: 교육/학원
+    keywords: ["학원", "교육", "인강"]
+    priority: 70
+    confidence: 0.8
+  - target: 음식점
+    keywords: ["음식점", "레스토랑", "외식", "다이닝"]
+    priority: 60
+    confidence: 0.8
+  - target: 패스트푸드
+    keywords: ["맥도날드", "버거킹", "롯데리아", "패스트푸드", "KFC"]
+    priority: 75
+    confidence: 0.9
+  - target: 주류/유흥
+    keywords: ["주류", "와인", "펍", "호프"]
+    priority: 65
+    confidence: 0.8
+  # 여가: 영화/문화/레저 — shinhan 19에 '여가'만 존재(영화/통신/주유는 별도 카테고리 없음)
+  - target: 여가
+    keywords: ["영화", "CGV", "메가박스", "롯데시네마", "여가", "문화", "레저", "공연"]
+    priority: 55
+    confidence: 0.75
+
+# 19종에 대응 없는 대표 도메인(unmapped 처리 — 임의 신설 금지):
+#   주유(123), 통신(52), 배달(39) → shinhan_category에 해당 카테고리 부재.
+#   → unmapped + unmapped_reason="no_matching_shinhan_category". A1' coverage gap이 이를 드러냄.
+unmapped_domains:
+  - keywords: ["주유", "GS칼텍스", "SK에너지", "S-OIL"]
+    reason: "no_matching_shinhan_category(주유)"
+  - keywords: ["통신", "SKT", "KT", "LGU", "이동통신"]
+    reason: "no_matching_shinhan_category(통신)"
+  - keywords: ["배달", "요기요", "배달의민족", "쿠팡이츠"]
+    reason: "no_matching_shinhan_category(배달)"

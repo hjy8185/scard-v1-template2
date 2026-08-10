@@ -1,0 +1,246 @@
+{
+  "version": "1.0",
+  "note": "U9 튜닝 전용 dev set. v2/exemplar 겹침 0.",
+  "scenarios": [
+    {
+      "id": "dev-01",
+      "question": "이 카드로 편의점 결제하면 적립돼?",
+      "expected_intent": "eligibility",
+      "expected_entity_status": "known",
+      "preset_card_id": "CARD_Product:201709220001",
+      "note": "known merchant"
+    },
+    {
+      "id": "dev-02",
+      "question": "지하철 탈 때 할인되는 카드 있나",
+      "expected_intent": "category_search",
+      "expected_entity_status": "known",
+      "preset_card_id": null,
+      "note": "지하철→대중교통 known"
+    },
+    {
+      "id": "dev-03",
+      "question": "택시비 혜택 주는 카드 찾아줘",
+      "expected_intent": "category_search",
+      "expected_entity_status": "known",
+      "preset_card_id": null,
+      "note": "택시→대중교통"
+    },
+    {
+      "id": "dev-04",
+      "question": "영화관에서 할인되는 카드",
+      "expected_intent": "category_search",
+      "expected_entity_status": "known",
+      "preset_card_id": null,
+      "note": "영화→여가문화"
+    },
+    {
+      "id": "dev-05",
+      "question": "샤넬 매장에서 할인되는 카드 있어?",
+      "expected_intent": "merchant_reverse",
+      "expected_entity_status": "unknown",
+      "preset_card_id": null,
+      "note": "샤넬 unknown→확인불가"
+    },
+    {
+      "id": "dev-06",
+      "question": "듣도보도못한가게 결제 혜택 있나",
+      "expected_intent": "merchant_reverse",
+      "expected_entity_status": "unknown",
+      "preset_card_id": null,
+      "note": "unknown"
+    },
+    {
+      "id": "dev-07",
+      "question": "이 카드로 그런갤러리 결제 할인돼?",
+      "expected_intent": "eligibility",
+      "expected_entity_status": "unknown",
+      "preset_card_id": "CARD_Product:201510150001",
+      "note": "카드known+merchant unknown"
+    },
+    {
+      "id": "dev-08",
+      "question": "하이포인트랑 딥드림 뭐가 더 좋아",
+      "expected_intent": "card_comparison",
+      "expected_entity_status": "known",
+      "preset_card_id": null,
+      "note": "카드 2개 복수"
+    },
+    {
+      "id": "dev-09",
+      "question": "이 두 카드 혜택 비교 좀",
+      "expected_intent": "card_comparison",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "카드 미지정→ask_clarification degrade"
+    },
+    {
+      "id": "dev-10",
+      "question": "실질 혜택률 수치 보여줘",
+      "expected_intent": "self_metric",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "값 질의→metric_query"
+    },
+    {
+      "id": "dev-11",
+      "question": "실질 혜택률이 정확히 뭘 계산하는 거야",
+      "expected_intent": "self_metric",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "메타 질의→metric_meta"
+    },
+    {
+      "id": "dev-12",
+      "question": "이 지표 바꾸면 어떤 대시보드가 영향받아",
+      "expected_intent": "self_metric",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "dependencies"
+    },
+    {
+      "id": "dev-13",
+      "question": "커버리지 지표 어느 테이블에서 나와",
+      "expected_intent": "self_metric",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "lineage/source"
+    },
+    {
+      "id": "dev-14",
+      "question": "적격 소비 지표 얼마나 자주 갱신돼",
+      "expected_intent": "self_metric",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "freshness"
+    },
+    {
+      "id": "dev-15",
+      "question": "외식 쪽 혜택이 부족한지 봐줘",
+      "expected_intent": "coverage_gap",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "gap"
+    },
+    {
+      "id": "dev-16",
+      "question": "이 가맹점은 어느 혜택 분류로 잡혀",
+      "expected_intent": "targeting",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "가맹점→카테고리"
+    },
+    {
+      "id": "dev-17",
+      "question": "온라인쇼핑 소비를 어느 혜택으로 밀지",
+      "expected_intent": "targeting",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "targeting"
+    },
+    {
+      "id": "dev-18",
+      "question": "적립 한도 깎으면 비용 얼마나 줄어",
+      "expected_intent": "what_if",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "delta"
+    },
+    {
+      "id": "dev-19",
+      "question": "이 조건 완화하면 대상 늘어나나",
+      "expected_intent": "what_if",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "what_if"
+    },
+    {
+      "id": "dev-20",
+      "question": "혜택 판박이 카드끼리 묶어줘",
+      "expected_intent": "portfolio_overlap",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "전역 overlap"
+    },
+    {
+      "id": "dev-21",
+      "question": "서로 잡아먹는 카드 조합 있어",
+      "expected_intent": "portfolio_overlap",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "cannibalization"
+    },
+    {
+      "id": "dev-22",
+      "question": "이 카드 연회비 알려줘",
+      "expected_intent": "card_fee",
+      "expected_entity_status": null,
+      "preset_card_id": "CARD_Product:200803120001",
+      "note": "fee"
+    },
+    {
+      "id": "dev-23",
+      "question": "이 카드 혜택 싹 정리해줘",
+      "expected_intent": "card_benefit_all",
+      "expected_entity_status": null,
+      "preset_card_id": "CARD_Product:201510150001",
+      "note": "benefit_all"
+    },
+    {
+      "id": "dev-24",
+      "question": "이 카드 특정 할인 조건 자세히",
+      "expected_intent": "card_benefit_specific",
+      "expected_entity_status": null,
+      "preset_card_id": "CARD_Product:201510150001",
+      "note": "benefit_specific"
+    },
+    {
+      "id": "dev-25",
+      "question": "오늘 코스피 지수 얼마야",
+      "expected_intent": "unsupported",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "OOD"
+    },
+    {
+      "id": "dev-26",
+      "question": "내일 비 와?",
+      "expected_intent": "unsupported",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "OOD"
+    },
+    {
+      "id": "dev-27",
+      "question": "커피 관련 혜택 다 보여줘",
+      "expected_intent": "category_search",
+      "expected_entity_status": "known",
+      "preset_card_id": null,
+      "note": "커피 category"
+    },
+    {
+      "id": "dev-28",
+      "question": "주유소 할인 카드 추천",
+      "expected_intent": "merchant_reverse",
+      "expected_entity_status": "known",
+      "preset_card_id": null,
+      "note": "주유"
+    },
+    {
+      "id": "dev-29",
+      "question": "이 카드 실적 못 채우면 혜택 못 받아?",
+      "expected_intent": "eligibility",
+      "expected_entity_status": null,
+      "preset_card_id": "CARD_Product:201709220001",
+      "note": "실적 조건"
+    },
+    {
+      "id": "dev-30",
+      "question": "리워드 비용 지표 데이터 있어",
+      "expected_intent": "self_metric",
+      "expected_entity_status": null,
+      "preset_card_id": null,
+      "note": "값 질의"
+    }
+  ]
+}

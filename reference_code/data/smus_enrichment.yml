@@ -1,0 +1,846 @@
+# U64 P5 — 카탈로그·glossary 보강 데이터
+#
+# 원칙: **정답을 주지 않는다.** 갭 원장(gap-ledger.md §3)이 지목한 것만, 그리고 카탈로그가
+# 원래 가지고 있어야 할 메타데이터(무엇의 무엇인지·기간 단위·입도·값 도메인·조인 경로)로만
+# 채운다. "이 질문에는 이렇게 쿼리하라" 같은 문구는 넣지 않는다 — 넣으면 실험이 "카탈로그가
+# 좋아지면 나아지나"가 아니라 "정답을 주면 맞히나"가 된다.
+#
+# 값 도메인은 **Athena로 직접 조회해 확인한 실측치**다(추측 아님).
+#   year_quarter → 20개 분기 20211~20254
+#   year_month   → 202501~202606
+#   age_band     → 0_9,10,20,30,40,50,60_plus
+#   sex          → F,M
+#   hour_slot    → 0~23
+#
+# hold-out(보강 문구를 이 질문들에 맞추지 않는다): POP3, x1-02, x3-03, x6-01, CHN-C, XW2
+
+tables:
+  seoul_area_sales:
+    description: >-
+      서울시 상권분석서비스 추정매출[공개-집계]. 1행 = 상권(trdar_cd) × 업종(industry_name)
+      × 분기(year_quarter) 단위의 매출 집계. 적재 범위는 2021~2025년 20개 분기 전체이므로,
+      특정 기간을 보려면 year_quarter로 반드시 필터해야 한다(필터 없이 합산하면 5개년 합계가 된다).
+      sales_amount/sales_count 외에 연령·성별·요일·시간대별 분해 컬럼을 함께 가진다.
+    columns:
+      year_quarter: >-
+        분기 키(문자열 'YYYYQ' 형태, 예 '20251' = 2025년 1분기). 실측 도메인은 20211~20254의
+        20개 값(2021~2025년 5개년 × 4분기), 최신은 20254. 이 테이블은 전 기간을 담고 있으므로
+        기간 지정이 필요하면 이 컬럼으로 필터한다. **1개 분기 값은 그 해 전체의 약 1/4이다**
+        — 연간 규모를 보려면 그 해 4개 분기를 함께 포함해야 한다(예: LIKE '2025%').
+      trdar_cd: 상권 코드(7자리). 상권명·행정동은 seoul_trade_area와 이 컬럼으로 조인한다.
+      area_name: 상권명(예 '역삼역', '노량진역(노량진)'). 행정동명과는 다른 값이다.
+      area_type: 상권 유형 구분(발달상권·골목상권 등).
+      industry_cd: 서울시 통계 업종 코드.
+      industry_name: >-
+        서울시 통계 업종명(예 '한식음식점', '커피-음료'). 신한카드 혜택 카테고리와는 체계가
+        달라 d0_market_crosswalk를 통해 매핑된다.
+      sales_amount: 해당 상권×업종×분기의 추정 매출액(원). 분기 단위 값이다.
+      sales_count: 해당 구간의 추정 결제 건수.
+      age_10_amount: 10대 추정 매출액(원). age_20/30/40/50_amount, age_60_plus_amount 동일 규칙.
+      age_10_count: 10대 추정 결제 건수. 다른 연령대 컬럼도 동일.
+      male_amount: 남성 추정 매출액(원). female_amount는 여성.
+      male_count: 남성 추정 결제 건수. female_count는 여성.
+      time_00_06_amount: 00~06시 추정 매출액(원). 시간대 구간은 00_06/06_11/11_14/14_17/17_21/21_24 여섯 개.
+      time_06_11_amount: 06~11시 추정 매출액(원).
+      time_11_14_amount: >-
+        11~14시 추정 매출액(원). 점심 시간대 소비를 볼 때 이 컬럼을 쓴다.
+      time_14_17_amount: 14~17시 추정 매출액(원).
+      time_17_21_amount: 17~21시 추정 매출액(원).
+      time_21_24_amount: 21~24시 추정 매출액(원).
+      time_11_14_count: 11~14시 추정 결제 건수. 다른 시간대 _count 컬럼도 동일 규칙.
+      weekday_amount: 주중(월~금) 추정 매출액(원). weekend_amount는 주말(토·일).
+      weekend_amount: 주말 추정 매출액(원).
+      mon_amount: 월요일 추정 매출액(원). tue/wed/thu/fri/sat/sun_amount도 동일 규칙.
+      age_20_amount: 20대 추정 매출액(원).
+      age_30_amount: 30대 추정 매출액(원).
+      age_40_amount: 40대 추정 매출액(원).
+      age_50_amount: 50대 추정 매출액(원).
+      age_60_plus_amount: 60대 이상 추정 매출액(원).
+      female_amount: 여성 추정 매출액(원).
+      female_count: 여성 추정 결제 건수.
+      area_type_cd: 상권 유형 코드.
+      mon_count: >-
+        월요일 결제 건수. 실측: 7요일 count 합이 sales_count와 정확히 일치한다(15,313,199,001).
+      tue_count: >-
+        화요일 결제 건수. 요일 7개 합 = sales_count(실측 일치).
+      wed_count: >-
+        수요일 결제 건수. 요일 7개 합 = sales_count(실측 일치).
+      thu_count: >-
+        목요일 결제 건수. 요일 7개 합 = sales_count(실측 일치).
+      fri_count: >-
+        금요일 결제 건수. 요일 7개 합 = sales_count(실측 일치).
+      sat_count: >-
+        토요일 결제 건수. 요일 7개 합 = sales_count(실측 일치).
+      sun_count: >-
+        일요일 결제 건수. 요일 7개 합 = sales_count(실측 일치).
+      tue_amount: >-
+        화요일 결제 금액(원). 요일 7개 합 = sales_amount(실측 일치).
+      wed_amount: >-
+        수요일 결제 금액(원). 요일 7개 합 = sales_amount(실측 일치).
+      thu_amount: >-
+        목요일 결제 금액(원). 요일 7개 합 = sales_amount(실측 일치).
+      fri_amount: >-
+        금요일 결제 금액(원). 요일 7개 합 = sales_amount(실측 일치).
+      sat_amount: >-
+        토요일 결제 금액(원). 요일 7개 합 = sales_amount(실측 일치).
+      sun_amount: >-
+        일요일 결제 금액(원). 요일 7개 합 = sales_amount(실측 일치).
+      weekday_count: >-
+        주중(월~금) 결제 건수. 실측: weekday_count + weekend_count = sales_count.
+      weekend_count: >-
+        주말(토·일) 결제 건수. 실측: weekday_count + weekend_count = sales_count.
+      time_00_06_count: >-
+        00~06시 결제 건수. 시간대 6구간(00_06·06_11·11_14·14_17·17_21·21_24) 합이 sales_count와 거의 같다(실측 7건 차이).
+      time_06_11_count: >-
+        06~11시 결제 건수. 시간대 6구간 합 ≈ sales_count(실측 7건 차이).
+      time_14_17_count: >-
+        14~17시 결제 건수. 시간대 6구간 합 ≈ sales_count(실측 7건 차이).
+      time_17_21_count: >-
+        17~21시 결제 건수. 시간대 6구간 합 ≈ sales_count(실측 7건 차이).
+      time_21_24_count: >-
+        21~24시 결제 건수. 시간대 6구간 합 ≈ sales_count(실측 7건 차이).
+      age_20_count: >-
+        20대 결제 건수. 연령 6구간(10·20·30·40·50·60_plus) 합은 sales_count보다 4.5% 적다(실측 146.2억 vs 153.1억) — 연령 미상 거래가 빠져 있어 연령 분해로 전체를 재구성하면 과소 집계된다.
+      age_30_count: >-
+        30대 결제 건수. 연령 6구간 합이 sales_count보다 4.5% 적다(연령 미상 제외).
+      age_40_count: >-
+        40대 결제 건수. 연령 6구간 합이 sales_count보다 4.5% 적다(연령 미상 제외).
+      age_50_count: >-
+        50대 결제 건수. 연령 6구간 합이 sales_count보다 4.5% 적다(연령 미상 제외).
+      age_60_plus_count: >-
+        60대 이상 결제 건수. 연령 6구간 합이 sales_count보다 4.5% 적다(연령 미상 제외).
+
+  seoul_living_population:
+    description: >-
+      서울시 생활인구[공개-집계, 통신 기반 추계]. 1행 = 행정동(adstrd_cd) × 날짜(base_date)
+      × 시간(hour_slot) × 성별(sex) × 연령대(age_band)의 인구 추계. **방문객·구매자 수가 아니다.**
+      적재 범위는 202501~202606이므로 특정 시점을 보려면 year_month로 필터한다. 시간당 평균을
+      구하려면 날짜·시간 조합 수로 나눠야 한다(행을 단순 SUM하면 중복 합산된다).
+    columns:
+      year_month: 월 키(문자열 'YYYYMM'). 실측 도메인 202501~202606.
+      base_date: 일자(해당 월의 개별 날짜). 같은 월에 여러 날짜가 들어 있다.
+      hour_slot: >-
+        시(0~23 정수). 예를 들어 점심 시간대는 11,12,13에 해당한다. 여러 시간을 합치면
+        시간 수로 나눠야 시간당 값이 된다.
+      adstrd_cd: >-
+        행정동 코드(8자리). **이 테이블에는 행정동 이름이 없다.** 이름이 필요하면
+        seoul_trade_area.adstrd_cd ↔ adstrd_name으로 조인해야 한다. 단 상권 테이블은 한 행정동에
+        상권이 여러 개일 수 있어 그대로 조인하면 인구가 중복 합산된다(먼저 행정동 단위로 접어야 한다).
+      sex: 성별. 실측 도메인은 'F','M' 두 값.
+      age_band: >-
+        연령대. 실측 도메인은 '0_9','10','20','30','40','50','60_plus' 일곱 값(문자열).
+        '30대'가 아니라 '30'으로 저장돼 있다.
+      population: 해당 행 조건(동×일×시×성별×연령대)의 추계 인구.
+      total_population: 해당 행 조건의 전체 인구(성별·연령 분해 이전 값).
+
+  # 2차 개선 B-1: 원천을 단순 SUM하면 날짜 수만큼 중복 합산된다("역삼1동 203만 명" 실측 오답).
+  # 산식을 프롬프트에 적는 대신 **일별 평균 뷰**를 카탈로그에 등록했다 — 정답 주입이 아니라
+  # 카탈로그 정비이며, v1 정답(여의동 157,934명/시)을 정확히 재현한다(157,933).
+  # 생성 DDL은 scripts/create_v2_views.sql 참조.
+  v_living_population_hourly_avg:
+    description: >-
+      서울 생활인구의 **일별 평균** 뷰[공개-집계, 통신 추계]. 1행 = 행정동×월×시×연령대×성별.
+      원천 seoul_living_population은 날짜별 행이라 단순 SUM하면 일수만큼 중복 합산되는데,
+      이 뷰는 이미 날짜 수로 나눈 시간당 평균을 담는다. 여러 시간대를 합칠 때는 시간 수로
+      나누면 시간당 값이 된다. 행정동 이름도 함께 제공하므로 별도 조인이 필요 없다.
+      방문객·구매자 수가 아니다.
+      ⚠️ **연령대·성별 축이 남아 있다**: 한 동·월·시에 7개 연령대 × 2개 성별 = 최대 14행이
+      존재한다. 따라서 동 전체 인구는 그 14행의 **합**이며, 평균을 내면 실제의 약 1/14이 된다.
+      연령·성별 구분이 필요 없다면 그 축을 이미 접어 둔 v_living_population_dong_hour가
+      같은 값을 1행으로 담고 있다. 적재 범위 202501~202606(18개월).
+    columns:
+      year_month: >-
+        월 키(YYYYMM). 실측 도메인 202501~202606의 18개 값, 최신은 202606. 이 뷰는 전 기간을
+        담고 있으므로 특정 시점을 보려면 이 컬럼으로 필터해야 한다 — 필터 없이 합산하면
+        18개월이 겹쳐 인구가 과대해진다(3차 개선에서 실측: 여의동 276만 명).
+      adstrd_cd: 행정동 코드(8자리).
+      adstrd_name: 행정동 이름. 원천 테이블에는 없어 상권 기준정보로 이어 붙인 값이다.
+      hour_slot: 시(0~23). 점심 시간대는 11,12,13.
+      age_band: >-
+        연령대. 실측 도메인 0_9,10,20,30,40,50,60_plus(문자열, '30대'가 아니라 '30').
+      sex: 성별. 실측 도메인 F,M.
+      avg_population_per_hour: >-
+        그 조건(동×월×시×연령×성별)의 **일별 평균** 추계 인구. 원천의 날짜 수로 이미 나눈
+        값이므로 그대로 쓰면 된다. 단 이 뷰는 여러 월·연령·성별 행을 담으므로, 특정 월의
+        전체 인구를 보려면 year_month를 지정하고 연령·성별은 합산한다.
+      n_days: 평균을 낼 때 쓴 날짜 수(투명성).
+
+  # ── U65 S3: 지표 정의 뷰 ────────────────────────────────────────────────────
+  # "계산은 얼리고 조합은 열어둔다"(문헌: AtScale "The reasoning is flexible. The
+  # calculation is not." / Databricks Genie가 산문 지시를 포기하고 SQL 표현식으로 간 이유).
+  # 얼린 것은 **단위·기간·입도 규약**뿐이다 — 정렬·필터·카테고리 선택은 여전히 LLM이 한다.
+  # DDL: scripts/create_v2_metric_views.sql · 게이트: tests/U64/test_metric_views.py
+  v_market_size_category_year:
+    description: >-
+      혜택 카테고리별·연도별 서울 시장 규모[공개-집계]. 1행 = 혜택 카테고리 × 연도.
+      원천 seoul_area_sales는 분기 단위이고 카테고리 매핑이 d0_market_crosswalk를 거쳐야
+      하는데, 이 뷰는 그 두 단계(분기→연간 합산, crosswalk 조인)를 이미 적용한 값을 담는다.
+      어느 카테고리·어느 해를 볼지는 그대로 선택할 수 있다. 적재 범위 2021~2025년(5개년).
+    columns:
+      benefit_category: 신한카드 혜택 카테고리명. 이 값으로 필터한다.
+      year: >-
+        연도 4자리 문자열(예 '2025'). 실측 범위 2021~2025. 이 컬럼 하나로 연간 값이 되므로
+        분기를 따로 합산할 필요가 없다.
+      sales_krw: >-
+        그 카테고리·그 해의 서울 매출 합계(원). 해당 연도 4개 분기와 매핑된 전 업종이
+        이미 합산돼 있다.
+      sales_count: 같은 범위의 추정 결제 건수.
+      n_quarters: 그 해에 실제로 존재한 분기 수. 4가 아니면 부분 연도다.
+      is_full_year: 4개 분기가 모두 있는지 여부. false면 연간 값으로 쓰기 전에 밝혀야 한다.
+      seoul_industries: 합산에 포함된 서울 통계 업종명 목록('·' 구분).
+      n_industries: 합산에 포함된 업종 수.
+  v_market_penetration_dong:
+    description: >-
+      행정동별 인구 대비 소비(침투)[공개-집계]. 1행 = 행정동 × 월 × 시간대 × 연도.
+      시간당 생활인구와 연 매출은 단위가 달라 그대로 나누면 자릿수가 어긋나는데, 이 뷰의
+      krw_per_person_year는 연 단위로 맞춘 값이다. 어느 월·시간대를 볼지는 선택할 수 있다. 적재 범위 202501~202606(18개월).
+    columns:
+      adstrd_cd: 행정동 코드(8자리).
+      adstrd_name: 행정동 이름.
+      year_month: 인구 기준월(YYYYMM). 실측 202501~202606.
+      hour_slot: 인구 기준 시(0~23). 여러 시간을 보려면 평균한다.
+      year: 매출 기준 연도 4자리.
+      pop_per_hour: 그 동·월·시의 시간당 생활인구(연령·성별 합산). 방문객 수가 아니다.
+      sales_krw: 그 동의 해당 연도 매출 합계(원).
+      krw_per_person_year: >-
+        1인당 연 소비액(원). 산식은 sales_krw / (pop_per_hour × 365)이며, 시간당 인구를
+        연 단위로 환산한 값이다. 이 컬럼을 그대로 쓰면 단위가 맞는다.
+  v_living_population_dong_hour:
+    description: >-
+      행정동·시간대별 생활인구[공개-집계, 통신 추계]. 1행 = 행정동 × 월 × 시.
+      v_living_population_hourly_avg와 같은 원천이되 **연령대·성별 축을 이미 접은** 형태다
+      (그 뷰는 동·월·시마다 최대 14행, 이 뷰는 1행). 연령·성별 구분이 필요한 질문에는
+      v_living_population_hourly_avg를, 동 전체 인구만 필요한 질문에는 이 뷰를 쓸 수 있다.
+      여러 시간대를 보려면 평균한다. 방문객·구매자 수가 아니다. 적재 범위 202501~202606(18개월).
+    columns:
+      year_month: 월 키(YYYYMM). 실측 202501~202606.
+      adstrd_cd: 행정동 코드(8자리).
+      adstrd_name: 행정동 이름.
+      hour_slot: 시(0~23). 점심 시간대는 11,12,13.
+      population_per_hour: >-
+        그 동·월·시의 시간당 생활인구(연령·성별 합산, 일별 평균). 여러 시간을 합칠 때는
+        시간 수로 나누면 시간당 값이 된다.
+      n_days: 일별 평균을 낼 때 쓴 날짜 수(투명성).
+  # ── U66 S9: 연령·시간대 축 시장 규모 ──────────────────────────────────────────
+  # v_market_size_category_year는 카테고리×연도로만 접혀 있어 연령·시간대 질문에 못 쓴다
+  # (실측: x2-01a가 4분기만 5.51조 답했다 — 연간 정답 20.74조 / x2-03이 점심 피크를
+  # 확인 못했다고 자백했다). 같은 규약(연간=4분기 합 + crosswalk)만 얼리고 축은 행으로 남긴다.
+  v_market_size_by_age_year:
+    description: >-
+      혜택 카테고리·연도·연령대별 서울 시장 규모[공개-집계]. 1행 = 카테고리 × 연도 × 연령대.
+      원천 seoul_area_sales의 age_10_amount~age_60_plus_amount 6개 컬럼을 연령대 **행**으로
+      펼쳐 두었고, 분기→연간 합산과 crosswalk 조인도 이미 적용돼 있다. 어느 연령대·어느
+      해를 볼지는 그대로 선택할 수 있다. 적재 범위 2021~2025년(5개년).
+    columns:
+      benefit_category: 신한카드 혜택 카테고리명. 이 값으로 필터한다.
+      year: 연도 4자리 문자열(예 '2025'). 실측 범위 2021~2025.
+      age_band: >-
+        연령대. 실측 도메인 '10','20','30','40','50','60_plus' 여섯 값. 원천 컬럼명의
+        접미사와 같은 표기다('60_이상'이 아니라 '60_plus').
+      sales_krw: 그 카테고리·해·연령대의 서울 매출 합계(원). 해당 연도 4개 분기가 합산돼 있다.
+      n_quarters: 그 해에 실제로 존재한 분기 수. 4가 아니면 부분 연도다.
+      is_full_year: 4개 분기가 모두 있는지 여부.
+  v_market_size_by_hour_year:
+    description: >-
+      혜택 카테고리·연도·시간대별 서울 시장 규모[공개-집계]. 1행 = 카테고리 × 연도 × 시간대.
+      원천의 time_00_06_amount~time_21_24_amount 6개 컬럼을 시간대 **행**으로 펼쳐 두었다.
+      구간을 합치지 않았으므로 어느 구간을 점심·저녁으로 볼지는 그대로 선택할 수 있다. 적재 범위 2021~2025년(5개년).
+    columns:
+      benefit_category: 신한카드 혜택 카테고리명.
+      year: 연도 4자리 문자열.
+      hour_bucket: >-
+        시간대 구간. 실측 도메인 '00-06','06-11','11-14','14-17','17-21','21-24' 여섯 값.
+        원천 컬럼이 이 여섯 구간으로만 쪼개져 있어 그보다 세밀한 시각은 이 축에 없다.
+      sales_krw: 그 카테고리·해·시간대의 서울 매출 합계(원).
+      n_quarters: 그 해에 실제로 존재한 분기 수.
+      is_full_year: 4개 분기가 모두 있는지 여부.
+  seoul_trade_area:
+    description: >-
+      서울시 상권영역 기준정보[공개-실]. **1행 = 상권(trdar_cd)**이다(실측 1,650행 · 행정동 399개 — 한 행정동에 상권이 여러 개다). 상권 코드와 **행정동 코드·이름의 연결 표**다. 상권 매출
+      데이터(seoul_area_sales, trdar_cd)와 생활인구 데이터(seoul_living_population, adstrd_cd)는
+      코드 체계가 달라 직접 조인할 수 없고, 이 표가 그 사이를 잇는다. 한 행정동에 상권이
+      여러 개(최대 17개) 있을 수 있다.
+    columns:
+      trdar_cd: 상권 코드(7자리). seoul_area_sales와 조인하는 키.
+      area_name: 상권명.
+      signgu_cd: 자치구 코드.
+      adstrd_cd: 행정동 코드(8자리). seoul_living_population과 조인하는 키.
+      adstrd_name: 행정동 이름(예 '역삼1동'). 상권명과는 다른 값이다.
+      area_m2: 상권 면적(㎡).
+
+  d0_market_crosswalk:
+    description: >-
+      신한카드 혜택 카테고리 ↔ 서울시 통계 업종명의 매핑 표(crosswalk)[공개-실 + 온톨로지]. **1행 = 혜택 카테고리 × 서울 업종** 짝이다(실측 43행 · 카테고리 14종 · 업종 43종 — 한 카테고리에 여러 업종이 붙는다). 두 체계는 어휘가
+      달라 직접 조인이 불가능하며, 이 표를 거쳐야 "우리 혜택이 노리는 시장"을 계산할 수 있다.
+      규칙 매칭으로 초안을 만든 뒤 사람이 검수한 결과이며, 매핑별 신뢰도 표기를 가진다.
+    columns:
+      shinhan_category: 신한카드 혜택 카테고리명(예 '음식점', '커피/음료').
+      seoul_industry: 대응하는 서울시 통계 업종명. seoul_area_sales.industry_name과 일치한다.
+      match_type: >-
+        매핑 종류. 실측값 exact(1:1 대응)·broad(넓은 대응) 2종.
+      confidence: >-
+        매핑 신뢰도. 건별 산정치가 아니라 match_type별 고정 등급값이다 — 실측: exact=0.9, broad=0.7 두 값만 존재한다.
+      review_status: >-
+        검수 상태. 실측: exact는 promoted, broad는 reviewed(match_type과 1:1 대응한다).
+      reviewed_in: >-
+        검수 출처 기록. 실측값 'D0(규칙)+U19 R5 검수 통과'(exact) · 'U19 R5(사람 검수)'(broad).
+
+  market_trend_group:
+    description: >-
+      시장 시계열 요약[공개-실]. KOSIS 온라인쇼핑 상품군별 거래액을 기준으로 최신 금액과
+      전년동월비(YoY)를 담는다. 1행 = 상품군(kosis_group). 우리 혜택 카테고리로 매핑된 것은
+      mapped_category에 값이 있고, 매핑되지 않은 상품군은 비어 있다(우리 체계 밖이라는 뜻).
+    columns:
+      kosis_group: KOSIS 상품군명.
+      mapped_category: 대응하는 신한카드 혜택 카테고리(없으면 미매핑).
+      latest_krw: >-
+        latest_month(=202605) **1개월** 거래액(원). 누적이 아니다. KOSIS 공개 실측치[공개-실].
+      yoy_pct: 전년동월비 증감율(%). 양수면 성장.
+      latest_month: 최신 기준월. 실측 단일값 202605.
+
+  metrics_segment_month:
+    description: >-
+      세그먼트 월별 리워드 지표[합성 데이터 — 실 고객 아님]. 1행 = 세그먼트 유형·값 ×
+      명세월. 실질 혜택률(effective_reward_rate)은 실제 적립액을 적립 대상 사용액으로 나눈 값이다. 적재 범위 202510~202512(3개월) + 'ALL'(전체 합계) 행.
+    columns:
+      segment_type: 세그먼트 축(예 age_band, sex).
+      segment_value: 그 축의 값.
+      statement_month: >-
+        명세 기준월(YYYYMM). ⚠️ **'ALL' 값이 섞여 있다**(실측: 202510·202511·202512 각
+        42행 + 'ALL' 42행). 'ALL'은 전체 기간 합계 행이므로 월별 집계에 그대로 포함하면
+        값이 두 배가 된다. 월 단위로 보려면 statement_month <> 'ALL'로 걸러야 한다.
+      eligible_spend: 적립 대상 사용액(원).
+      expected_reward_amount: 약관대로라면 적립돼야 할 금액(원).
+      observed_reward_amount: 실제 적립된 금액(원).
+      reward_delta_amount: >-
+        observed − expected. 음수면 약관 기대보다 덜 적립된 것으로, 혜택 누락의 신호다.
+      eligible_transaction_count: 적립 대상 거래 건수.
+      effective_reward_rate: >-
+        실질 혜택률 = observed_reward_amount / eligible_spend. 명목 적립률이 아니라 상한·제외가
+        반영된 실제 비율이다.
+      synthetic_flag: 합성 데이터 표시.
+
+  metrics_customer_month:
+    description: >-
+      고객 월별 리워드 지표[합성 데이터 — 실 고객 아님]. 1행 = 고객 × 명세월.
+      **이 표에는 연령·성별 속성이 없다.** 세그먼트별로 보려면 d1_customer와 customer_id로
+      조인해 age_band·sex를 붙여야 한다. 세그먼트 집계값은 metrics_segment_month에 이미 있다. 적재 범위 202510~202512(3개월).
+    columns:
+      customer_id: 고객 식별자. d1_customer와 조인하는 키.
+      statement_month: 명세 기준월.
+      eligible_spend: 적립 대상 사용액(원).
+      expected_reward_amount: 약관대로라면 적립돼야 할 금액(원).
+      observed_reward_amount: 실제 적립된 금액(원).
+      reward_delta_amount: observed − expected. 음수면 약관 기대보다 덜 적립된 것.
+      eligible_transaction_count: 적립 대상 거래 건수.
+      effective_reward_rate: 실질 혜택률 = observed_reward_amount / eligible_spend.
+      synthetic_flag: 합성 데이터 표시.
+
+  d1_customer:
+    description: >-
+      고객 기준정보[합성 데이터 — 실 고객 아님]. 1행 = 고객. 리워드 지표를 연령·성별로
+      나눠 보려면 metrics_customer_month와 customer_id로 조인해 이 표의 속성을 붙인다.
+    columns:
+      customer_id: 고객 식별자.
+      age: 나이(정수).
+      age_band: >-
+        연령대 구분. 생활인구 테이블의 age_band와 표기가 다를 수 있으므로 값을 확인하고 쓴다.
+      sex: 성별.
+      region: 거주 지역.
+      credit_limit_krw: 신용 한도(원).
+      delinquency_status: 연체 상태.
+      monthly_spend_tier: 월 사용액 구간.
+      persona: 합성 데이터 생성 시 부여한 페르소나 유형.
+      is_synthetic: 합성 데이터 표시.
+      default_flag: >-
+        연체 이력 플래그(0/1). 실측 분포 0=749명 · 1=251명.[합성 데이터]
+
+  # 4차 개선 M3: 이 테이블은 카탈로그에 항목 자체가 없었다(Description·전 컬럼 Comment None).
+  # 실측 결함: LLM이 '스타벅스'를 merchant_name LIKE로 찾다 0행을 받고 "데이터가 없다"고
+  # 답했다(x1-05). 이 컬럼에는 가맹점명이 아니라 업종명이 들어 있다.
+  # ★ U81 정정: 브랜드는 `Clean_Benefit` 이름·조건에 있다(MERCHANT 노드는 U79에 제거).
+  d4_transaction:
+    description: >-
+      내부 카드 거래 원장[합성 데이터 — 실 고객 아님]. 1행 = 거래 1건. 적재 범위는
+      posted_month 202509~202512(4개월, 125,891행)이므로, 기간을 보려면 이 컬럼으로 필터한다.
+      혜택 카테고리 축으로 집계한 값은 d4_txn_category_rollup에 이미 있다.
+    columns:
+      txn_id: 거래 식별자.
+      customer_id: 고객 식별자. d1_customer와 조인하는 키.
+      card_account_id: 카드 계정 식별자. d2_account와 조인하는 키.
+      card_product_id: 카드 상품 식별자. r0_card_product와 조인하는 키.
+      txn_datetime: 거래 일시.
+      posted_date: 매입 일자.
+      posted_month: 매입 월(YYYYMM). 실측 도메인 202509~202512의 4개 값.
+      statement_month: 명세 기준월. metrics_customer_month와 같은 축.
+      merchant_name: >-
+        실측 내용은 **업종명**이다(예 '한식음식점','슈퍼마켓','PC방','치과의원'). 컬럼 이름과
+        달리 개별 가맹점 브랜드명이 아니며, 값 62종이 industry_name과 동일하다.
+        브랜드명(예 '스타벅스')은 이 테이블에 없고 정제 그래프의 혜택 이름·조건 문장에
+        있다(실측 32건). 가맹점 전용 노드는 없다 — 파생물이라 폐기했다.
+      merchant_alias: 가맹점 별칭 코드(정수).
+      mcc: 가맹점 업종 코드(MCC).
+      industry_code: 업종 코드(정수).
+      industry_name: 업종명. merchant_name과 값이 동일하다(실측 62종).
+      amount: 거래 금액(원).
+      channel: 결제 채널(온라인/오프라인 등).
+      txn_status: 거래 상태.
+      is_cancelled: 취소 거래 여부.
+      is_refund: 환불 거래 여부.
+      installment_months: 할부 개월(0이면 일시불).
+      mapping_confidence: 혜택 카테고리 매핑 신뢰도.
+      scenario_tag: 합성 데이터 생성 시 부여한 시나리오 태그.
+      is_synthetic: 합성 데이터 표시.
+
+  d4_txn_category_rollup:
+    description: >-
+      내부 거래를 혜택 카테고리 축으로 롤업한 집계[합성 데이터 — method demo, 실 고객 아님].
+      온톨로지 crosswalk를 내부 거래에도 적용한 결과이므로 서울 시장 소비·혜택 커버와 같은
+      카테고리 축에서 대조할 수 있다. 1행 = 혜택 카테고리.
+    columns:
+      benefit_category: 신한카드 혜택 카테고리명.
+      krw: >-
+        해당 카테고리의 내부 거래 금액 합(원). 원천 d4_transaction의 posted_month
+        202509~202512 **4개월 누적** 합계이며 월 단위 값이 아니다.[합성 데이터]
+      txn_count: 거래 건수.
+      avg_txn_krw: 건당 평균 금액(원).
+      top_age_band: 그 카테고리에서 소비가 가장 많은 연령대.
+
+  r1_card_category:
+    description: >-
+      카드 상품 ↔ 혜택 카테고리 매핑[공개-실 파생]. **1행 = 카드 × 혜택 카테고리** 짝이다(실측 1,058행 · 카드 531장 · 카테고리 14종 — 한 카드가 여러 카테고리를 갖는다). 어떤 카드가 어떤 카테고리 혜택을 갖는지 나타낸다.
+      카테고리별 커버 카드 수는 card_id를 DISTINCT로 세어 구한다.
+    columns:
+      card_id: >-
+        카드 상품 식별자(=pageid). r0_card_product·r1_benefit(card_product_id)과 조인한다.
+      benefit_category: 그 카드가 제공하는 혜택 카테고리명.
+
+  benefit_category_coverage:
+    description: >-
+      혜택 카테고리 커버리지 요약[합성 데이터]. **1행 = 카테고리 체계(scheme)**. 실측 1행뿐이다.
+    columns:
+      scheme: 카테고리 체계 식별자.
+      benefit_category_coverage: 커버리지 값.
+      synthetic_flag: 합성 데이터 표시.
+
+  d7_complaint_case:
+    description: >-
+      혜택 미적용 민원 사례[합성 데이터 — 실 민원 아님]. 1행 = 민원 건. 거절 사유와 관련
+      거래·약관 조건으로 이어지는 추적 키를 가져, 민원의 근본 원인을 약관 조항까지 되짚을 수 있다.
+    columns:
+      complaint_id: 민원 식별자.
+      issue: 민원 대분류.
+      sub_issue: 민원 소분류.
+      narrative: 민원 원문 텍스트(비정형).
+      related_txn_id: 관련 거래 식별자. 있으면 거래·원장까지 추적 가능하다.
+      denial_reason: 혜택 미적용 사유 **영문 코드**. 실측값 'below_min_spend' 94건 · 'count_limit_exceeded' 54건 · 'monthly_cap_exhausted' 41건 · null 314건(전체 503행). ⚠️ d7_complaint_root_cause.denial_reason은 **한글**이라 이름이 같아도 값이 맞지 않는다 — 두 컬럼을 맞추면 0행이다(실측). 한글 대응값은 denial_reason_ko에 있다.
+      denial_reason_ko: 혜택 미적용 사유(한국어). 실측값 '전월실적 미달' 94 · '월 횟수 초과' 54 · '월 한도 소진' 41 · null 314. d7_complaint_root_cause.denial_reason(한글)과 값이 일치한다 — 실측 189행.
+      condition_type: 관련 약관 조건 유형(전월실적·상한·제외 등).
+      traceable: 거래·약관까지 추적 가능한 건인지 표시.
+      card_id: 해당 카드 상품 식별자.
+      error_flag: >-
+        합성 생성 시 넣은 오류 유형. 실측값 none(정상)·overpay(과다 지급)·underpay(과소)·miss(미지급)·n/a.
+      ledger_linked: >-
+        리워드 원장(d6_reward_ledger)에 연결됐는가. 실측: error_flag='n/a'인 행만 false다.
+      text: >-
+        민원 본문 텍스트. Athena 조회가 실패한다(COLUMN_NOT_FOUND) — Glue 스키마에는 있으나 실제 데이터 파일에 없다. narrative를 쓰라.
+
+# ── glossary (SMUS business glossary) ────────────────────────────────────────
+# ⚠️ 기존 term의 longDescription에는 SKOS 매핑 JSON이 들어 있다(실측). **덮어쓰지 않는다.**
+#    v1 데모는 shortDescription만 읽으므로(bff/api/catalog.py:75) 그 필드만 채운다.
+#    → v1 화면에는 카테고리 설명이 채워져 보이고(개선), SKOS 데이터는 보존된다.
+  # ── U74: 카탈로그 공백 19테이블 ─────────────────────────────────────────
+  #
+  # 조사 실측: 38테이블 중 19개가 **설명·컬럼주석 전무**(330컬럼 중 164개만 주석).
+  # 그 19개에 정답 근거가 있었다 — WIF1("적립률 2%p 올리면 비용?")이 기권한 직접
+  # 원인이 `d6_reward_ledger` 컬럼 주석 0개였다. 테이블 이름은 알지만 무엇이
+  # 들었는지 모르니 "시뮬레이션이 필요해 답할 수 없다"고 했다.
+  #
+  # ⚠️ 아래 모든 주석은 **Athena로 실제 값을 조회해 확인한 사실**이다(추측 아님).
+  # U64에서 `d4_transaction.merchant_name`이 실제로는 업종명이었던 것을 그렇게 찾았고,
+  # 이번에도 `r0_card_product.card_type`이 상품코드(`BAAAVN`)임을 조회로 알았다.
+  #
+  # ⚠️ **지시·정답을 넣지 않는다.** "이 테이블로 시뮬레이션하라"·"비용 = A × B" 금지.
+  # 사실만 적고 판단은 LLM에게 남긴다 — 그것이 U64 실험의 전제다.
+
+  d6_reward_ledger:
+    description: >-
+      리워드 계산 원장[합성 데이터 — 실 고객 아님]. 1행 = 거래 1건에 대한 혜택 적용 판정
+      결과. 약관대로 계산한 금액(expected_reward)과 실제 적립된 금액(observed_reward)을
+      나란히 담고, 적용되지 않았으면 그 이유(denial_reason)와 계산 근거(calculation_trace)를
+      남긴다. 혜택 조건(r2_benefit_condition)과 거래(d4_transaction)를 잇는 판정 기록이다. 원천 거래는 d4_transaction posted_month 202509~202512(4개월).
+    columns:
+      ledger_id: 원장 행 식별자(LG로 시작).
+      txn_id: 대상 거래 id. d4_transaction과 조인한다.
+      benefit_id: 적용을 판정한 혜택 id(`CARD_Benefit:` 접두). r1_benefit과 조인한다.
+      benefit_condition_id: 판정에 쓴 조건 id(`CARD_Condition:` 접두). r2_benefit_condition과 조인.
+      rule_version: 판정에 쓴 룰 버전. 실측 단일값 v1.
+      reward_type: 리워드 종류. 실측값 discount·point·cashback·mileage.
+      expected_reward: >-
+        약관대로라면 적립·할인돼야 할 금액(원). 조건을 통과하지 못하면 0이다.
+      calculation_trace: >-
+        계산 근거 **구조체**(문자열 아님 — LIKE 쓰면 TYPE_MISMATCH). 필드:
+        amount(적립 대상 금액) · rate_pct(적용 적립률 %) ·
+        reward_before_monthly_cap(월 상한 적용 전) · reward_final · benefit_id ·
+        fail. `calculation_trace.rate_pct`로 접근한다. 상한 적용 전후 값이 둘 다 있다.
+      cap_before: 이 거래 전의 잔여 한도(원). 한도 개념이 없는 혜택은 비어 있다.
+      cap_after: 이 거래 후의 잔여 한도(원).
+      remaining_monthly_limit: 월 한도 중 남은 금액(원). 월 한도가 없으면 비어 있다.
+      denial_reason: >-
+        적용 안 된 이유(**영문 코드**). 비면 정상. 실측 below_min_spend 35,986 ·
+        count_limit_exceeded 17,807 · monthly_cap_exhausted 15,517 · null 29,968.
+        ⚠️ d7_complaint_root_cause.denial_reason은 한글이라 이름이 같아도 0행이다(실측).
+        짝은 d7_complaint_case.denial_reason_ko다.
+      observed_reward: 실제 적립·할인된 금액(원). expected_reward와 다르면 차이가 있는 것이다.
+      injected_error_type: >-
+        합성 데이터 생성 시 의도적으로 넣은 오류 유형. none이면 오류 없음.
+      is_synthetic: 합성 데이터 표시. 전 행 true.
+
+  r1_benefit:
+    description: >-
+      혜택 마스터[공개-실]. 1행 = 카드 상품의 혜택 1건. 정제 그래프 `Clean_Benefit`
+      (7,812건)과 같은 원천에서 나왔고 id 체계가 같다(`clean:benefit:{꼬리}` ↔ 이 테이블의
+      benefit_id는 접두만 다르다).
+    columns:
+      benefit_id: 혜택 id(`CARD_Benefit:{pageid}:{bn필드}:{순번}` 형태).
+      card_product_id: >-
+        카드 상품 id(=pageid). r0_card_product·r1_card_category(card_id)와 조인한다.
+        ⚠️ 카테고리는 이 테이블의 benefit_category가 아니라 r1_card_category에 있다
+        (benefit_category 컬럼은 대부분 비어 있다 — 실측).
+      benefit_group_id: 혜택 묶음 id. 대부분 비어 있다(실측).
+      benefit_category: >-
+        혜택 카테고리. **대부분 비어 있다**(실측) — 카테고리는 정제 그래프
+        `Clean_Category`(29종)와 `r1_card_category` 테이블에 있고, 이 컬럼으로는
+        카테고리별 집계를 할 수 없다.
+      reward_type: 리워드 종류. 실측값 캐시백·할인·적립·포인트·마일리지.
+      label: 혜택 이름. 약관 제목에서 온 원문이다(예 'G마켓/옥션 15% 캐시백').
+
+  r2_benefit_condition:
+    description: >-
+      혜택 조건[공개-실 + 파싱]. 1행 = 혜택 1건에 붙은 조건 1개. 약관 원문(raw_text)과
+      그것을 구조화한 결과(parsed)를 함께 담고, 파싱이 어디까지 됐는지 밝힌다(parse_status).
+    columns:
+      condition_id: 조건 id(`CARD_Condition:` 접두).
+      benefit_id: 이 조건이 붙은 혜택 id. r1_benefit·d6_reward_ledger와 조인한다.
+      raw_text: >-
+        약관 원문 문장. 실측 예: '월 4회 까지 적용/건당 2만원 매출까지 할인
+        적용(건당 최대 할인금액 3천원)'. 값 끝에 공백이 붙은 행이 있다(원문 그대로 보관).
+      parsed: >-
+        구조화 결과를 담은 맵 문자열(`{channel=null, min_spend=200000, …}` 형태).
+      parse_status: >-
+        파싱 완성도. 실측값 parsed(전부 구조화)·partial(일부만)·failed.
+        partial·failed면 raw_text를 봐야 조건을 알 수 있다.
+      rule_version: 룰 버전. 실측 단일값 v1.
+
+  r3_spend_tier:
+    description: >-
+      전월실적 구간별 한도[공개-실]. 1행 = 카드 상품 × 실적 구간. 전월 이용금액이 어느
+      구간에 들면 얼마까지 혜택을 받는지를 담는다.
+    columns:
+      tier_id: 구간 id(`CARD_SpendTier:` 접두).
+      card_product_id: 카드 상품 id. r0_card_product와 조인한다.
+      min_spend: 이 구간의 전월실적 하한(원, 포함).
+      max_spend: 이 구간의 전월실적 상한(원). 최상위 구간은 비어 있다.
+      limit_amount: 이 구간에서 받을 수 있는 혜택 한도(원).
+
+  r2_card_condition_type:
+    description: >-
+      카드별 조건 유형 요약[공개-실 파생]. 1행 = 카드 × 조건 유형. 그 카드가 어떤 종류의
+      조건을 쓰는지 목록으로 보여준다.
+    columns:
+      card_id: 카드 상품 id.
+      card_name: 카드 이름.
+      condition_type: >-
+        조건 유형. 실측값 전월실적조건·적립률조건·채널조건·건당리워드한도·건당인정한도·
+        월횟수한도·월리워드한도.
+      n_types: 이 카드가 쓰는 조건 유형의 총 개수.
+
+  r2_condition_type_stat:
+    description: >-
+      조건 유형별 전체 통계[공개-실 파생]. 1행 = 조건 유형. 694장 전체에서 그 유형의
+      조항이 몇 건인지와 그 유형이 만드는 거절 사유를 담는다.
+    columns:
+      condition_type: 조건 유형(전월실적조건 등).
+      n_clauses: 그 유형의 조항 수. 실측 전월실적조건 1,602 · 적립률조건 892.
+      denial_reasons: >-
+        이 조건이 걸릴 때 d6_reward_ledger.denial_reason에 기록되는 값. 비어 있으면
+        거절을 만들지 않는 조건이다(예 적립률조건은 금액만 바꾼다).
+
+  r1_card_exclusion:
+    description: >-
+      카드별 제외 항목[공개-실]. 1행 = 카드 × 제외 대상. 혜택이 적용되지 않는 업종·가맹점이다.
+    columns:
+      card_id: 카드 상품 id.
+      exclusion_kind: 제외 종류. 실측값 merchant(가맹점·업종 단위).
+      exclusion_target: 제외 대상 이름(예 '상품권'·'배달앱'·'백화점입점').
+
+  r0_card_product:
+    description: >-
+      카드 상품 마스터[공개-실]. 1행 = 카드 상품 1장. 694장이 들어 있고 id는 pageid다.
+    columns:
+      card_product_id: 카드 상품 id(=pageid, 12자리).
+      name: 카드 이름.
+      card_type: >-
+        **카드 종류가 아니라 내부 상품코드다**(실측값 'BAAAVN'·'BLBCWM'·'ADA40K').
+        신용·체크 구분은 이 컬럼으로 알 수 없다 — 이름이나 온톨로지를 봐야 한다.
+      annual_fee_raw: 연회비 원문. **대부분 비어 있다**(실측).
+      is_discontinued: 신규발급 중단 여부.
+
+  r4_merchant_reference:
+    description: >-
+      가맹점 참조 목록[공개-실 파생]. 1행 = 가맹점 1개.
+      ⚠️ **이름이 오염돼 있다**(실측: canonical_name에 '000'·'000P'·'000원' 같은 값이 있다).
+      약관 문장에서 추출한 값이라 가맹점명이 아닌 조각이 섞인다.
+    columns:
+      merchant_id: 가맹점 id(M으로 시작).
+      canonical_name: 대표 이름. 오염된 값이 섞여 있다(위 설명 참조).
+      aliases: 별칭 목록. 실측 대부분 빈 배열.
+
+  d2_account:
+    description: >-
+      카드 계정[합성 데이터 — 실 고객 아님]. 1행 = 계정 1개. 고객과 카드 상품을 잇는다.
+    columns:
+      card_account_id: 계정 id(CA로 시작).
+      customer_id: 고객 id. d1_customer와 조인한다.
+      card_product_id: 카드 상품 id. r0_card_product와 조인한다.
+      billing_cycle_day: 결제일(일). 실적 산정 기간이 이 날짜로 갈린다.
+      open_date: >-
+        개설일. ⚠️ **실측 전 행이 2020-01-01 한 값이다**(1,996행 · 고유값 1개) —
+        합성 생성 시 고정한 값이므로 가입 시점 분석에 쓸 수 없다.
+      is_active: 사용 중 여부.
+      is_synthetic: 합성 데이터 표시. 전 행 true.
+
+  d5_statement_monthly:
+    description: >-
+      월별 명세[합성 데이터 — 실 고객 아님]. 1행 = 계정 × 명세월. 전월실적 조건 판정에
+      필요한 실적 산정 기간과 그 기간 이용금액을 담는다. 적재 범위 202510~202512(3개월).
+    columns:
+      customer_id: 고객 id.
+      card_account_id: 계정 id. d2_account와 조인한다.
+      statement_month: >-
+        명세 기준월(YYYYMM). 적재 범위는 202510~202512 3개월(실측 5,988행).
+      billing_cycle_day: 결제일(일).
+      performance_period_start: 전월실적 산정 시작일.
+      performance_period_end: 전월실적 산정 종료일.
+      posted_month: 거래가 기록된 월(YYYYMM). statement_month보다 한 달 앞이다.
+      prev_month_eligible_spend: 전월 적립대상 이용금액(원). 전월실적 조건이 이 값을 본다.
+      total_spend: 그 기간 총 이용금액(원).
+      spend_tier_matched: 매칭된 실적 구간 id. r3_spend_tier와 조인한다. 비어 있으면 미달이다.
+      is_synthetic: 합성 데이터 표시. 전 행 true.
+
+  metrics_account_month:
+    description: >-
+      계정 월별 리워드 지표[합성 데이터 — 실 고객 아님]. 1행 = 계정 × 명세월.
+      metrics_segment_month와 같은 지표를 계정 단위로 담는다. 적재 범위 202510~202512(3개월).
+    columns:
+      card_account_id: 계정 id.
+      customer_id: 고객 id.
+      statement_month: >-
+        명세 기준월(YYYYMM). 적재 범위는 202510~202512 3개월(실측 5,988행).
+        reward_by_account는 202509부터라 기간이 다르다.
+      eligible_spend: 적립 대상 이용금액(원). 제외 업종을 차감한 뒤의 금액이다.
+      expected_reward_amount: 약관대로라면 적립돼야 할 금액(원).
+      observed_reward_amount: 실제 적립된 금액(원).
+      reward_delta_amount: 두 금액의 차이(원). 0이 아니면 불일치가 있다.
+      eligible_transaction_count: 적립 대상 거래 건수.
+      effective_reward_rate: >-
+        실질 혜택률 = observed_reward_amount / eligible_spend. eligible_spend가 0이면 비어 있다.
+      synthetic_flag: 합성 데이터 표시.
+
+  reward_by_account:
+    description: >-
+      계정별 리워드 요약[합성 데이터 — 실 고객 아님]. 1행 = 계정 × 명세월.
+      metrics_account_month의 부분집합이고 eligible_spend·effective_reward_rate가 없다. 적재 범위 202509~202512(4개월).
+    columns:
+      card_account_id: 계정 id.
+      customer_id: 고객 id.
+      statement_month: >-
+        명세 기준월(YYYYMM). 적재 범위는 202509~202512 **4개월**이다(실측 5,956행).
+        ⚠️ metrics_account_month·d5_statement_monthly는 202510~202512 3개월이라
+        기간이 다르다 — 조인해 비교할 때 202509가 한쪽에만 있다.
+      expected_reward_amount: 약관대로라면 적립돼야 할 금액(원).
+      observed_reward_amount: 실제 적립된 금액(원).
+      reward_delta_amount: 두 금액의 차이(원).
+      eligible_transaction_count: 적립 대상 거래 건수.
+
+  d8_golden_eligibility_case:
+    description: >-
+      혜택 적용 판정 정답 케이스[합성 데이터 — 실 고객 아님]. 1행 = 검증용 케이스 1건.
+      "이 거래에 이 혜택이 적용되는가"의 기대 결과를 담아 판정 로직을 검증하는 데 쓴다.
+    columns:
+      case_id: 케이스 id(GC로 시작).
+      customer_id: 고객 id.
+      card_account_id: 계정 id.
+      txn_id: 대상 거래 id. d4_transaction과 조인한다.
+      expected_eligible: 적용돼야 하는가(true/false).
+      expected_reward: 적용될 경우의 금액(원).
+      expected_denial_reason: 적용되지 않아야 하는 경우 그 이유. 정상 케이스는 비어 있다.
+      evidence_rule_id: 판정 근거 조건 id(`CARD_Condition:` 접두).
+      terms_version: 약관 버전. 실측 단일값 v1.
+      edge_case_type: >-
+        케이스 성격. 실측값 normal(정상)과 경계 사례 유형들.
+      is_synthetic: 합성 데이터 표시. 전 행 true.
+
+  d7_complaint:
+    description: >-
+      민원 원장[합성 데이터 — 실 고객 아님]. 1행 = 민원 1건. 고객이 쓴 서술(narrative)과
+      그것이 어느 거래·혜택에 연결됐는지, 연결 신뢰도를 함께 담는다. 적재 범위 2025-12-01~2025-12-27(27일).
+    columns:
+      complaint_id: 민원 id(CP로 시작).
+      issue: 민원 대분류. 실측값 '혜택 미적용' 등.
+      sub_issue: 민원 소분류. 실측값 '최소 결제금액 미달'·'월 적용 횟수 초과' 등.
+      narrative: 고객이 쓴 민원 내용.
+      received_date: 접수일.
+      timely: 기한 내 처리 여부.
+      link_source: >-
+        거래·혜택 연결을 어떻게 만들었나. 실측값 derived_from_ledger
+        (d6_reward_ledger의 denial_reason에서 역산).
+      related_txn_id: 연결된 거래 id.
+      related_statement_month: 연결된 명세월.
+      related_card_id: 연결된 카드 상품 id.
+      related_benefit_id: 연결된 혜택 id.
+      entity_link_confidence: 연결 신뢰도(0~1). 낮으면 연결이 추정이다.
+      unresolved_entity: 연결하지 못한 항목이 있는가.
+      is_synthetic: 합성 데이터 표시. 전 행 true.
+
+  d7_complaint_root_cause:
+    description: >-
+      민원 원인 분포[합성 데이터 파생]. 1행 = 거절 사유. 민원이 어느 원인에서 몇 건
+      나오는지 비율과 함께 담는다.
+    columns:
+      denial_reason: >-
+        거절 사유(**한글**). 실측값 '전월실적 미달' 94 · '월 횟수 초과' 54 ·
+        '월 한도 소진' 41(합계 189). ⚠️ d7_complaint_case.denial_reason은 **영문
+        코드**라 맞추면 0행이다 — 한글은 denial_reason_ko이고 건수가 일치한다.
+        ★ 종전 98·53·192는 ETL이 손집계를 옮긴 값이었다(U94-c 수리).
+        d6_reward_ledger.denial_reason도 영문 코드다.
+      n_cases: 그 원인의 민원 건수.
+      pct: 전체 대비 비율(%).
+
+  d0_category_node:
+    description: >-
+      카테고리 노드[공개-실 + 온톨로지]. 1행 = 카테고리 1개. 여러 체계(system)의
+      카테고리를 한 테이블에 담고 노드 id로 관계를 잇는다.
+    columns:
+      node_id: 노드 id(N + 5자리).
+      system: >-
+        어느 체계의 카테고리인가. 실측값 shinhan_category(우리 혜택 카테고리)·
+        seoul_industry(서울 상권 업종).
+      code: 원 체계의 코드. 실측 대부분 비어 있다.
+      name: 카테고리 이름(예 '커피/음료'·'식음료').
+
+  d0_category_relation:
+    description: >-
+      카테고리 계층[온톨로지]. 1행 = 관계 1개. 상하위(broader) 관계를 노드 id로 잇는다.
+    columns:
+      relation_id: 관계 id(REL + 5자리).
+      src_node_id: 하위 노드 id. d0_category_node와 조인한다.
+      dst_node_id: 상위 노드 id.
+      relation_type: 관계 종류. 실측값 broader(src가 dst의 하위).
+      confidence: 신뢰도(0~1). 실측 1.0.
+      evidence: 근거. 실측값 benefit_taxonomy.
+      review_status: 검수 상태. 실측값 reviewed.
+      version: 버전. 실측 v1.
+
+  d0_crosswalk_mapping:
+    description: >-
+      체계 간 매핑[온톨로지]. 1행 = 매핑 1개. 서울 상권 업종을 우리 혜택 카테고리로 잇는다.
+      d0_market_crosswalk와 같은 내용을 노드 id 기준으로 담은 것이다.
+    columns:
+      mapping_id: 매핑 id(MAP + 5자리).
+      source_node_id: 원 체계 노드 id(주로 seoul_industry).
+      benefit_category_node_id: 대응하는 혜택 카테고리 노드 id.
+      mapping_type: >-
+        매핑 종류. 실측값 exact(1:1 대응)·broad(넓은 대응).
+      confidence: >-
+        신뢰도. **건별 산정치가 아니라 mapping_type별 고정 등급값**이다
+        (exact 0.9 · broad 0.7).
+      evidence: 근거 문자열(예 'rule:PC방→여가').
+      review_status: 검수 상태. 실측값 auto(규칙 자동)·reviewed·promoted.
+      version: 버전. 실측 v1.
+
+glossary_short_descriptions:
+  "식음료": 음식·음료 소비 전반을 묶는 상위 혜택 카테고리. 하위에 음식점·커피/음료·제과/베이커리·패스트푸드가 포함된다.
+  "음식점": 한식·양식·일식·중식·분식 등 식사를 제공하는 업종의 혜택 카테고리.
+  "커피/음료": 커피전문점·음료 전문점 업종의 혜택 카테고리. 서울 통계 업종 '커피-음료'에 대응한다.
+  "제과/베이커리": 빵·과자 판매 업종의 혜택 카테고리.
+  "패스트푸드": 즉석 조리 식품 업종의 혜택 카테고리.
+  "편의점": 편의점 업종의 혜택 카테고리. 온톨로지 분류상 '생활'의 하위다.
+  "생활": 편의점·슈퍼마켓 등 일상 구매를 묶는 상위 혜택 카테고리.
+  "의료": 병원·의원·약국 등 의료 관련 업종의 혜택 카테고리.
+  # ── U75-D: 카테고리 정의 11개 추가 ─────────────────────────────────────
+  #
+  # ⚠️ 이 11개가 그래프에서 **고립 노드**였다(엣지 0개). v1 `BenefitCategory` 노드는
+  # 11개 다 있는데 이 YAML에 정의가 없어 `EXPLAINS` 엣지 대상에 못 들었다.
+  # `lookup_term`으로는 찾아지지만 **그래프 탐색으로는 도달 못 한다.**
+  #
+  # 계층·혜택 수는 Neptune 실측(v1 SUBCATEGORY_OF·HAS_CATEGORY), 카드 수는 U73
+  # 정제 그래프(Clean_Category) 실측이다. 추측한 값이 없다.
+  "교육": 학원·교재 등 교육 소비를 묶는 상위 혜택 카테고리. 하위에 교육/학원이 있고 직접 붙은 혜택은 0건이다(순수 상위 노드 — 이 이름만으로 세면 하위를 놓친다).
+  "교육/학원": 학원·과외·교재 업종의 혜택 카테고리. 상위는 교육이며 직접 혜택 26건(실제 혜택 kind='offer' 24건)·커버 카드 15장.
+  "뷰티": 화장품·미용 업종의 혜택 카테고리. 상위는 쇼핑이며 직접 혜택 55건(실제 혜택 kind='offer' 54건)·커버 카드 48장.
+  "쇼핑": 상품 구매 전반을 묶는 상위 혜택 카테고리. 하위에 온라인쇼핑·뷰티·의류/패션이 있고 직접 붙은 혜택은 0건이다(순수 상위 노드).
+  "슈퍼마켓/마트": 대형마트·슈퍼마켓 업종의 혜택 카테고리. 상위는 생활이며 직접 혜택 145건(실제 혜택 kind='offer' 135건)·커버 카드 110장.
+  "약국": 약국 업종의 혜택 카테고리. 상위는 의료/건강이며 직접 혜택 8건·커버 카드 6장.
+  "여가": 영화·테마파크·문화 등 여가 소비의 혜택 카테고리. 하위에 주류/유흥이 있으면서 직접 혜택 644건(실제 혜택 kind='offer' 629건)·커버 카드 252장.
+  "온라인쇼핑": 인터넷 쇼핑몰·오픈마켓 업종의 혜택 카테고리. 상위는 쇼핑이며 직접 혜택 96건(실제 혜택 kind='offer' 86건)·커버 카드 70장.
+  "의료/건강": 병원·약국·건강 관련 소비를 묶는 상위 혜택 카테고리. 하위에 의료·약국이 있으면서 직접 혜택 14건·커버 카드 8장.
+  "의류/패션": 의복·잡화 업종의 혜택 카테고리. 상위는 쇼핑이며 직접 혜택 14건·커버 카드 13장.
+  "주류/유흥": 주류 판매·유흥 업종의 혜택 카테고리. 상위는 여가이며 직접 혜택 2건·커버 카드 2장.
+
+# 신규로 추가할 비즈니스 용어 — 갭 원장이 "지표·매핑의 정의가 없어 틀렸다"고 지목한 것.
+new_terms:
+  - name: crosswalk
+    short: >-
+      서로 다른 어휘 체계를 잇는 매핑 표. 신한카드 혜택 카테고리(약관어)와 서울시 통계
+      업종명(통계어)처럼 직접 조인할 수 없는 두 체계를 연결한다. 규칙 매칭으로 초안을 만든 뒤
+      사람이 검수했고 매핑별 신뢰도를 표기한다. 실측 43건 구성: match_type='exact'는
+      confidence 0.9·review_status='promoted'(32건), 'broad'는 0.7·'reviewed'(11건).
+      confidence는 건별 산정치가 아니라 match_type별 고정 등급값이다.
+  - name: 브랜드를 찾는 곳
+    short: >-
+      브랜드(예 '스타벅스'·'올리브영')는 정제 그래프의 혜택 이름과 조건 문장에 있다
+      (실측: '스타벅스' 32건). 업종어 ↔ 카테고리 매핑은 `Onto_Mapping`에 있다(147건,
+      그중 원천 태그 유래 65건). 테이블 쪽에서는 `d4_transaction.merchant_name`이
+      업종명이라 브랜드로 못 찾고, `r1_benefit`·`r1_card_category`가 혜택·카테고리
+      축이다. ⚠️ **가맹점 전용 노드는 없다** — 원천에 가맹점 필드가 없어 혜택
+      텍스트에서 추출한 파생물이었고 고립 63%·오염 19%여서 폐기했다
+      (실측 예 '전월 실적'이 가맹점명으로 들어가 있었다).
+  - name: 지표 정의 버전
+    short: >-
+      실질 혜택률(effective_reward_rate) = observed_reward_amount / eligible_spend,
+      정의 버전 v1(U4 dbt-athena metric 7종, 2026-07 기준). 원천은 metrics_segment_month
+      (세그먼트 단위)와 metrics_customer_month(고객 단위)이며 두 표의 스케일이 10배 다르다
+      (실측: segment eligible_spend 82,376,163,430 vs customer 8,237,616,343).
+      테이블에 definition_version 컬럼은 없고 이 glossary 항목이 버전의 기록이다.
+  - name: 민원 외부 비교 기준
+    short: >-
+      우리 민원 데이터(d7_complaint·d7_complaint_case·d7_complaint_root_cause)는 합성이므로
+      절대 건수를 업계와 비교할 수 없다. 공개 실측 앵커는 금융감독원 카드사 민원
+      5,974건(전년비 +8.8%)과 한국소비자원 접수 16,802건이며 둘 다 카탈로그 테이블에 없는
+      외부 수치다. 비교는 비율·구조 축에서만 가능하다.
+  - name: 혜택 규칙 시뮬레이션
+    short: >-
+      적립률·한도를 바꿨을 때의 비용 증분을 미리 계산해 둔 결과 테이블은 카탈로그에 없다.
+      다만 계산에 필요한 재료는 있다 — d6_reward_ledger(거래별 적립액·한도 소진 이력),
+      r1_benefit·r1_card_category(혜택과 카테고리 연결), r3_spend_tier(실적 구간별 한도).
+      실측: 뷰티 카테고리 카드의 적립 원장은 7,514건·1,050만원이다(ledger→r1_benefit→
+      r1_card_category 조인). 관련 외부 앵커는 신한카드 포인트부채 2,918억원(DART 공시)이며
+      이것은 카탈로그 밖 수치다.
+  - name: 실질 혜택률
+    short: >-
+      실제 적립액을 적립 대상 사용액으로 나눈 비율(observed_reward_amount / eligible_spend).
+      명목 적립률과 달리 월 상한·제외 가맹점·전월실적 조건이 반영된 결과값이다.
+  - name: 혜택 누락
+    short: >-
+      약관대로라면 적립돼야 할 금액보다 실제 적립이 적은 상태. reward_delta_amount가 음수인
+      경우로 관측하며, 원인은 상한 도달·제외 대상·실적 미달 등이다.
+  - name: 생활인구
+    short: >-
+      통신 데이터 기반으로 추계한 특정 시점·지역의 체류 인구. 방문객 수나 구매자 수가 아니며,
+      소비 데이터와 대조할 때는 이 차이를 밝혀야 한다.
+  - name: 상권-행정동 매핑
+    short: >-
+      상권 코드(7자리)와 행정동 코드(8자리)를 잇는 연결. 상권 매출과 생활인구는 코드 체계가
+      달라 직접 조인이 불가능하고 seoul_trade_area가 이 둘을 잇는다. 한 행정동에 상권이 여러 개
+      있을 수 있어 인구를 다룰 때는 행정동 단위로 먼저 집계해야 중복 합산을 피한다.

@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": {
+      "Federated": "arn:aws:iam::000000000000:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/EXAMPLEOIDCPROVIDERID000000000000"
+    },
+    "Action": "sts:AssumeRoleWithWebIdentity",
+    "Condition": {
+      "StringEquals": {
+        "oidc.eks.us-west-2.amazonaws.com/id/EXAMPLEOIDCPROVIDERID000000000000:sub": "system:serviceaccount:card-graphrag:bff-v2-sa",
+        "oidc.eks.us-west-2.amazonaws.com/id/EXAMPLEOIDCPROVIDERID000000000000:aud": "sts.amazonaws.com"
+      }
+    }
+  }]
+}

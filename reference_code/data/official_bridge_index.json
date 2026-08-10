@@ -1,0 +1,46 @@
+{
+ "meta": {
+  "source": "국세청 업종코드↔KSIC 11차 연계표(홈택스 공개 CSV, 2025 귀속) [공개-실]",
+  "grade": "공개-실",
+  "license": "공개 다운로드 — 원본 무변형 참조(존재 사실·표본만 기록)",
+  "as_of": "2026-07-16"
+ },
+ "official_layer": {
+  "n_rows": 1785,
+  "structure": "국세청 업종코드(6자리) ↔ KSIC 11차 대~세세분류",
+  "samples": [
+   {
+    "nts_code": "154104",
+    "ksic_major": "제조업",
+    "ksic_leaf": "빵류 제조업"
+   },
+   {
+    "nts_code": "154901",
+    "ksic_major": "제조업",
+    "ksic_leaf": "커피 가공업"
+   },
+   {
+    "nts_code": "512273",
+    "ksic_major": "도매 및 소매업",
+    "ksic_leaf": "커피 및 차류 도매업"
+   },
+   {
+    "nts_code": "521992",
+    "ksic_major": "도매 및 소매업",
+    "ksic_leaf": "체인화 편의점"
+   },
+   {
+    "nts_code": "523223",
+    "ksic_major": "도매 및 소매업",
+    "ksic_leaf": "유아용 의류 소매업"
+   }
+  ],
+  "version_gap": "소상공인 상권업종분류=KSIC 10차 기반 vs 이 연계표=11차 — 공식 체계끼리도 버전이 갈라져 중간 다리(10↔11 신구 연계표) 없인 직접 연결 불가"
+ },
+ "curated_layer": {
+  "d0_crosswalk": "서울 62업종↔신한 19카테고리(사람 검수, confidence 0.9, 매출 90.2% 커버)",
+  "kosis_crosswalk": "KOSIS 26상품군↔신한 카테고리(U28 curated, 20 mapped/5 unmapped)",
+  "area_mapping": "상권 25↔행정동(U27, shapefile 유래, verified)"
+ },
+ "narrative": "연결은 2층 — 정부 공식 연계표(존재하되 버전이 갈라짐)와 우리 큐레이션(confidence·검수·미매핑 정직). 그 사이를 잇는 것이 온톨로지의 일."
+}

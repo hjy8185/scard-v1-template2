@@ -1,0 +1,7821 @@
+{
+  "meta": {
+    "source": "R2 benefit_condition parsed struct (신한 약관 파싱)",
+    "parse_coverage": {
+      "parsed": 2882,
+      "partial": 1743,
+      "unsupported": 6908
+    },
+    "note": "약관 조건을 ConditionType 7종으로 개념화. unsupported_rule은 유형미상(정직 처리). | U19 R2: type_examples(변환쌍) — 배포 재빌드 시 R2 parsed 전수에서 유형별 3쌍으로 대체. | U20 W4: benefit_categories를 card_category_signatures(HAS_CATEGORY)로 교체(구 표헤더 오염 제거).",
+    "condition_types": [
+      "전월실적조건",
+      "월횟수한도",
+      "건당인정한도",
+      "건당리워드한도",
+      "적립률조건",
+      "채널조건",
+      "제외조건"
+    ]
+  },
+  "by_type": {
+    "전월실적조건": 1602,
+    "적립률조건": 892,
+    "채널조건": 702,
+    "월횟수한도": 654,
+    "건당인정한도": 113,
+    "건당리워드한도": 3
+  },
+  "denial_to_type": {
+    "below_min_spend": "전월실적조건",
+    "count_limit_exceeded": "월횟수한도",
+    "monthly_cap_exhausted": "건당리워드한도"
+  },
+  "card_conditions": {
+    "201512100001": {
+      "card_name": "G마켓/옥션 신한카드 Smile365 체크",
+      "condition_types": [
+        "건당리워드한도",
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202205130001": {
+      "card_name": "신한카드 Deep Taking(직능경제인단체총연합회)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202207140001": {
+      "card_name": "119 소방사랑 GS칼텍스 신한카드 Big Plus",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202309190001": {
+      "card_name": "신한카드 Pick E 체크(깨댕이)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "200712210001": {
+      "card_name": "삼성증권 CMA 신한카드 Big Plus 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "201510150001": {
+      "card_name": "신한카드 YOLO Tasty",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "201611290001": {
+      "card_name": "EDIYA 신한카드 Tasty",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "200903020001": {
+      "card_name": "큰수레 비즈니스 카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202010130001": {
+      "card_name": "요기요 신한카드",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201802220001": {
+      "card_name": "신한카드 경차사랑 Life",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201703020001": {
+      "card_name": "요기요 신한카드 체크",
+      "condition_types": [
+        "건당인정한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201405080002": {
+      "card_name": "신한카드 S-Line 체크(미니언즈)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202004020001": {
+      "card_name": "LG U+ 사장님 통할인 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201010010001": {
+      "card_name": "GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202004200001": {
+      "card_name": "신한카드 The CLASSIC-S  ",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201511230001": {
+      "card_name": "BC 부자되세요 홈쇼핑 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "음식점",
+        "제과/베이커리",
+        "커피/음료"
+      ]
+    },
+    "202004090001": {
+      "card_name": "LG U+ 스마트플랜 Plus 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202309140004": {
+      "card_name": "신한카드 Hey Young 체크(청소년연맹 임직원)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료",
+        "패스트푸드",
+        "편의점"
+      ]
+    },
+    "200803120001": {
+      "card_name": "신한카드 Hi-Point",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202309260003": {
+      "card_name": "신한카드 Way 체크(부산교육대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "교육/학원",
+        "커피/음료"
+      ]
+    },
+    "201704010003": {
+      "card_name": "신세계 신한카드 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "199902110018": {
+      "card_name": "메가쇼핑 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "201709110001": {
+      "card_name": "신한카드 EV",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201711300002": {
+      "card_name": "더본 신한카드 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "201804090001": {
+      "card_name": "리디 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "의류/패션",
+        "커피/음료"
+      ]
+    },
+    "202303080002": {
+      "card_name": "신한카드 플리(3회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201103200001": {
+      "card_name": "신한카드 The LADY BEST",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가",
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "201812010001": {
+      "card_name": "KT SUPER할부 스마트플랜 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "201003010001": {
+      "card_name": "신한카드 The ACE",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "201105110001": {
+      "card_name": "신한카드 Hi-Point Nano Platinum#",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "교육/학원",
+        "약국",
+        "여가",
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "202303080003": {
+      "card_name": "신한카드 플리(4회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201007190001": {
+      "card_name": "신한카드 Hi-Point Nano f",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "의류/패션",
+        "커피/음료"
+      ]
+    },
+    "202009110001": {
+      "card_name": "카카오페이 신한 콘 체크카드",
+      "condition_types": [
+        "건당인정한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "199902110019": {
+      "card_name": "신한카드 Deep Dream Platinum+(미니언즈)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202012030002": {
+      "card_name": "신한카드 Deep Dream Platinum+(연세대학교 총동문회)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202311240001": {
+      "card_name": "신한카드 Eats More(브릿지엠)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202212290001": {
+      "card_name": "순천매산고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201303190002": {
+      "card_name": "신한카드 Cube",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "약국"
+      ]
+    },
+    "202401080030": {
+      "card_name": "신한카드 Pick E 체크(브니엘예술중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080031": {
+      "card_name": "신한카드 Pick E 체크(진주동중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201709220003": {
+      "card_name": "신한카드 Deep Dream 체크(미니언즈)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "200404010001": {
+      "card_name": "화물운전자복지 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "201702060001": {
+      "card_name": "S-OIL 2UP 화물운전자복지 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202205240001": {
+      "card_name": "신한카드 On 체크(쥬라기)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202104130001": {
+      "card_name": "All New LG전자 베스트샵 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "약국"
+      ]
+    },
+    "202104140001": {
+      "card_name": "LG U+ Bora 신한카드 Big Plus",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가"
+      ]
+    },
+    "201403100001": {
+      "card_name": "외식가족공제 신한카드 Hi-point MyShop",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "음식점",
+        "주류/유흥"
+      ]
+    },
+    "201710250001": {
+      "card_name": "SRT 신한카드 체크",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201612090001": {
+      "card_name": "SRT GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202112140002": {
+      "card_name": "샤넬 복지 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202105040002": {
+      "card_name": "재향경우회 신한카드 Deep Oil",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202105040001": {
+      "card_name": "대덕e로움 신한카드 S-Choice 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202103120001": {
+      "card_name": "탑마트 보너스포인트 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "201502090001": {
+      "card_name": "마이아모레 신한카드 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료"
+      ]
+    },
+    "202006250001": {
+      "card_name": "신한카드 4Tune 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201109140002": {
+      "card_name": "신한카드 S20 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "교육/학원",
+        "여가",
+        "음식점",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202309190002": {
+      "card_name": "신한카드 Pick I 체크(눙눙이)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201604040001": {
+      "card_name": "네이버페이 신한카드 체크",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "201904080001": {
+      "card_name": "성남사랑 신한카드 Deep Dream 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201305060004": {
+      "card_name": "New LG전자 베스트샵 PLUS 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가"
+      ]
+    },
+    "201611160001": {
+      "card_name": "쿠팡 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "199902110075": {
+      "card_name": "신한카드 미래설계 4Tune 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201709220001": {
+      "card_name": "신한카드 Deep Dream 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202012280001": {
+      "card_name": "신한카드 S-Choice(쇼핑형) 체크(SIM형)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201709180002": {
+      "card_name": "KT 신한카드 체크",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "편의점"
+      ]
+    },
+    "201405080001": {
+      "card_name": "신한카드 S-Line 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201807090001": {
+      "card_name": "LG U+ 스마트플랜 신한카드 BigPlus",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가"
+      ]
+    },
+    "201503090001": {
+      "card_name": "신한카드 하이패스(전용) 체크(SIM형)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201503090002": {
+      "card_name": "신한카드 하이패스(전용) 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201507220001": {
+      "card_name": "공무원연금복지 SK에너지 신한카드 Oiling",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202211300002": {
+      "card_name": "신세계사이먼 프리미엄 아울렛 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202204250006": {
+      "card_name": "대전대신중학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "201802220002": {
+      "card_name": "SOL Deep Dream 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201510020001": {
+      "card_name": "SKT Light Plan 신한카드 BigPlus",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "201706200001": {
+      "card_name": "네이버페이 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "201507300002": {
+      "card_name": "신한카드 Air Platinum#",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202311130001": {
+      "card_name": "신한카드 Pick E 선불(벌교고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201907110001": {
+      "card_name": "신한카드 Deep Taking",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202304100004": {
+      "card_name": "경남자동차고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202304100001": {
+      "card_name": "창신고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "199902110017": {
+      "card_name": "메가쇼핑 신한카드 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "202312150002": {
+      "card_name": "신한카드 Pick E 선불(학생증)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201507230001": {
+      "card_name": "신한카드 4Tune 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201807230002": {
+      "card_name": "SOCAR 제휴 SOCAR 신한카드 체크",
+      "condition_types": [
+        "월횟수한도"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202304130005": {
+      "card_name": "신한카드 Pick I 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202307270002": {
+      "card_name": "신한카드 Pick I 체크(포켓몬스터)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201709220002": {
+      "card_name": "신한카드 Deep Dream",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202001160004": {
+      "card_name": "교직원복지 신한카드 LOVE",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201605180001": {
+      "card_name": "신한카드 Always On",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "202309140003": {
+      "card_name": "신한카드 Hey Young 체크(청소년연맹 대학생 교사)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료",
+        "패스트푸드",
+        "편의점"
+      ]
+    },
+    "202208030001": {
+      "card_name": "신세계 The BLOSSOM 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료"
+      ]
+    },
+    "202407120001": {
+      "card_name": "신한카드 Edu Plan+",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "교육/학원",
+        "약국",
+        "여가",
+        "온라인쇼핑",
+        "의료/건강"
+      ]
+    },
+    "201711100001": {
+      "card_name": "다이소 신한카드",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "제과/베이커리",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202303030001": {
+      "card_name": "신한카드 플리(1회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201804090002": {
+      "card_name": "리디 신한카드 체크",
+      "condition_types": [
+        "월횟수한도"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "201309240001": {
+      "card_name": "신한카드 Hi-Point MyShop PLATINUM#",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202212290002": {
+      "card_name": "성복고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202302100002": {
+      "card_name": "신한카드 Way 체크(부산가톨릭대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201707170003": {
+      "card_name": "신한카드 The ACE BLUE LABEL",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "201301300001": {
+      "card_name": "신한카드 S-Choice(선택형) 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201806290001": {
+      "card_name": "청년동행 신한카드 B.Big(삑)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202003310001": {
+      "card_name": "에스원 안심 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202006100002": {
+      "card_name": "네이버페이 라인프렌즈 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202401050001": {
+      "card_name": "신한카드 Pick E 체크(서현고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310170003": {
+      "card_name": "신한카드 Pick E 선불(여수정보과학고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202012040001": {
+      "card_name": "SJ산림조합 신한카드 My SJ ",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "약국"
+      ]
+    },
+    "200501070001": {
+      "card_name": "GS칼텍스 신한카드 BigPlus",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202008270001": {
+      "card_name": "창업진흥원 사업비 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "201507220002": {
+      "card_name": "공무원연금복지 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201712040001": {
+      "card_name": "SK에너지 2MORE 화물복지 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "201507270002": {
+      "card_name": "S.Sing 씽화물복지 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "201907020001": {
+      "card_name": "카카오페이 신한 체크카드",
+      "condition_types": [
+        "건당인정한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "199902110130": {
+      "card_name": "FC서울 유소년축구사랑 신한카드 체크",
+      "condition_types": [
+        "월횟수한도"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가"
+      ]
+    },
+    "201807200001": {
+      "card_name": "CJ ONE 신한카드 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "202401080029": {
+      "card_name": "신한카드 Pick E 체크(브니엘예술고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202304240001": {
+      "card_name": "부산동고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202206280001": {
+      "card_name": "여수화양고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202111160001": {
+      "card_name": "신한카드 S-Line 체크(신용회복위원회)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202309070004": {
+      "card_name": "신세계사이먼 프리미엄 아울렛 신한카드(유미어스)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202206280002": {
+      "card_name": "영진고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201709110002": {
+      "card_name": "신한카드 EV 체크",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202106040001": {
+      "card_name": "LG헬로비전 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202308110001": {
+      "card_name": "카카오뱅크 신한카드 Time",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "199902110187": {
+      "card_name": "대한지방행정공제회 GS칼텍스 신한카드 Big plus",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202105030001": {
+      "card_name": "Z:IN 인테리어 신한카드",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202006220002": {
+      "card_name": "L.PAY 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202103120002": {
+      "card_name": "탑마트 보너스포인트 Plus 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202310060001": {
+      "card_name": "신한카드 Pick E 선불(포켓몬스터)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202112140001": {
+      "card_name": "넷마블 복지 신한카드 Love",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202210200001": {
+      "card_name": "대전대신고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202112220001": {
+      "card_name": "신한카드 Way 체크",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202203150004": {
+      "card_name": "대곡고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150011": {
+      "card_name": "포항동성고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202111040001": {
+      "card_name": "LG U+ 애플리즘 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202102220003": {
+      "card_name": "신한카드 혼디모앙",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202304100005": {
+      "card_name": "한국항공고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201807100001": {
+      "card_name": "신한카드 Deep Store",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201907110002": {
+      "card_name": "신한카드 Deep Making",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "199902110135": {
+      "card_name": "몰테일 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202101270001": {
+      "card_name": "신한카드 국민행복",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "교육/학원",
+        "약국",
+        "온라인쇼핑",
+        "의료/건강"
+      ]
+    },
+    "202205030004": {
+      "card_name": "오상고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202005150001": {
+      "card_name": "신한카드 YaY",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202205030003": {
+      "card_name": "영주동산고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201802130001": {
+      "card_name": "신한카드 Deep Oil",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202205030005": {
+      "card_name": "음성고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202205030006": {
+      "card_name": "인성여자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202001290002": {
+      "card_name": "신한카드 Deep Once Plus",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202206130002": {
+      "card_name": "순천청암고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202206080003": {
+      "card_name": "남지고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202206080002": {
+      "card_name": "김해한일여자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202307170002": {
+      "card_name": "목천고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202307050001": {
+      "card_name": "신한투자증권 알파 플러스 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202204180004": {
+      "card_name": "인창고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202112010001": {
+      "card_name": "넷마블 복지 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "교육/학원",
+        "슈퍼마켓/마트",
+        "약국",
+        "여가",
+        "음식점",
+        "커피/음료"
+      ]
+    },
+    "202204180005": {
+      "card_name": "청원고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204180006": {
+      "card_name": "충주예성여자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204070001": {
+      "card_name": "호남제일고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204070002": {
+      "card_name": "상우고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204070003": {
+      "card_name": "성문고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204070004": {
+      "card_name": "충주고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202207110004": {
+      "card_name": "포항동성고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202207110003": {
+      "card_name": "충렬여자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202207110002": {
+      "card_name": "인제고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202207110001": {
+      "card_name": "경주고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202311130002": {
+      "card_name": "신한카드 Pick E 선불(조선대여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202109060001": {
+      "card_name": "다드림 신한카드 Simple",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "201503090003": {
+      "card_name": "신한투자증권 CMA R+ 신한카드 Love 체크",
+      "condition_types": [
+        "월횟수한도"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가"
+      ]
+    },
+    "202406130001": {
+      "card_name": "신한카드 SOL트래블",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202203140001": {
+      "card_name": "ㅇㅇ고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201512300001": {
+      "card_name": "신한카드 The LADY CLASSIC",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "약국",
+        "여가",
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "202309140002": {
+      "card_name": "카카오페이 신한 춘식이 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202309010001": {
+      "card_name": "CJ ONE 프리즘 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "제과/베이커리"
+      ]
+    },
+    "201510270002": {
+      "card_name": "알뜰주유소 화물운전자복지 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202103160001": {
+      "card_name": "IKEA Family with 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202309070003": {
+      "card_name": "신세계사이먼프리미엄아울렛 신한카드(병약이&핑도리)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "201605310001": {
+      "card_name": "신한카드 Shopping",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료"
+      ]
+    },
+    "202006220001": {
+      "card_name": "L.PAY 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202304280001": {
+      "card_name": "T 멤버십 라이프 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "202212130001": {
+      "card_name": "베베쿡 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "201704010001": {
+      "card_name": "신세계 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202303080010": {
+      "card_name": "건담 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "음식점",
+        "패스트푸드"
+      ]
+    },
+    "202109080002": {
+      "card_name": "LG BEST SHOP 486 신한카드 ",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202108100001": {
+      "card_name": "Homin 신한카드",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "의료/건강"
+      ]
+    },
+    "202409120002": {
+      "card_name": "신한 후불 기후동행 신용카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201702200001": {
+      "card_name": "신한카드 Edu",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "교육/학원",
+        "약국"
+      ]
+    },
+    "201306050002": {
+      "card_name": "부산가족사랑 신한카드 S-Choice 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202210200002": {
+      "card_name": "비봉고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202210120001": {
+      "card_name": "신한카드 알뜰More(알뜰모아)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202203150018": {
+      "card_name": "양영디지털고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150019": {
+      "card_name": "포항여자전자고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150020": {
+      "card_name": "두레자연고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150022": {
+      "card_name": "은광여자고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203230001": {
+      "card_name": "숭신여자고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203230002": {
+      "card_name": "대전대신고등학교 신한카드 틴즈플러스 포니 체크 ",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202204060002": {
+      "card_name": "여수화양고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202204060003": {
+      "card_name": "김해한일여자고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202204250001": {
+      "card_name": "안동중앙고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202204250002": {
+      "card_name": "대구운암고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202111080005": {
+      "card_name": "대진전자통신고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202111080004": {
+      "card_name": "강원예술고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203100001": {
+      "card_name": "수도전기공업고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202411040001": {
+      "card_name": "신한카드 Point Plan 체크 캐릭터형(짱구)",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202203150007": {
+      "card_name": "상문고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150012": {
+      "card_name": "동아공업고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202103160002": {
+      "card_name": "IKEA for Business with 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202203150016": {
+      "card_name": "한봄고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "201608230001": {
+      "card_name": "신한카드 YOLO Triplus 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202206080005": {
+      "card_name": "포항여자전자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204070005": {
+      "card_name": "충주여자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204070006": {
+      "card_name": "성지고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204070007": {
+      "card_name": "죽전고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204180001": {
+      "card_name": "경북기계금속고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204180002": {
+      "card_name": "상서고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202204180003": {
+      "card_name": "양현고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202207110005": {
+      "card_name": "강원고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201304300002": {
+      "card_name": "신한금융그룹 패밀리 신한 S-Choice 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202207110007": {
+      "card_name": "정읍고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202109060002": {
+      "card_name": "신한카드 Puzzle",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202311290001": {
+      "card_name": "신한카드 Pick E 선불(김천중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202312150001": {
+      "card_name": "신한카드 Pick E 체크(학생증)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202304100006": {
+      "card_name": "양영디지털고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201910160001": {
+      "card_name": "신한카드 Deep ECO",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202303300002": {
+      "card_name": "경남자동차고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202109170001": {
+      "card_name": "투썸플레이스 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202002130006": {
+      "card_name": "신한카드 O2O ",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202309140001": {
+      "card_name": "카카오페이 신한 라이언 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201412010001": {
+      "card_name": "olleh 슈퍼 DC(Super DC) 신한카드 빅플러스",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "202304040003": {
+      "card_name": "Olleh Super DC 신한카드 빅플러스(KT 가족만족 DC)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "202304130004": {
+      "card_name": "신한카드 Pick E 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201605020001": {
+      "card_name": "신한카드 YOLO ⓘ",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "제과/베이커리",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202304100002": {
+      "card_name": "경일고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401080001": {
+      "card_name": "롯데마트 맥스 신한카드",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202401080002": {
+      "card_name": "LG U+ 스마트플랜 Plus 신한카드(중고폰 가격 보상)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202008280001": {
+      "card_name": "신한카드 Unboxing",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "의료/건강",
+        "편의점"
+      ]
+    },
+    "201509030001": {
+      "card_name": "신한카드 Mr.Life",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202410250002": {
+      "card_name": "신한카드 SOL글로벌U 체크(쿠로미)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "의료/건강",
+        "커피/음료"
+      ]
+    },
+    "202203100003": {
+      "card_name": "한국항공고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "199902110104": {
+      "card_name": "레일플러스 포인트 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202310170011": {
+      "card_name": "신한카드 Pick E 체크(남녕고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310180004": {
+      "card_name": "신한카드 Pick E 체크(여수정보과학고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310310001": {
+      "card_name": "신한카드 Pick E 체크(벌교고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310310002": {
+      "card_name": "신한카드 Pick E 체크(조선대여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202311100001": {
+      "card_name": "신한카드 Pick E 체크(양정고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202312010004": {
+      "card_name": "신한카드 Pick E 체크(경남로봇고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310180007": {
+      "card_name": "신한카드 Pick E 체크(부산외고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310180003": {
+      "card_name": "신한카드 Pick E 체크(인천연송고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080005": {
+      "card_name": "신한카드 Pick E 체크(영동미래고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202403180002": {
+      "card_name": "수원고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202402160001": {
+      "card_name": "쥬비스 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401040001": {
+      "card_name": "K-패스 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202401040002": {
+      "card_name": "K-패스 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202206030001": {
+      "card_name": "신한카드 래플(Raffle)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201604270001": {
+      "card_name": "신한카드 RPM+ Platinum#",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "201807230001": {
+      "card_name": "SOCAR 제휴 SOCAR 신한카드",
+      "condition_types": [
+        "월횟수한도"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202411280002": {
+      "card_name": "K-패스 신한카드(경남패스) 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202411280001": {
+      "card_name": "K-패스 신한카드(경남패스)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202411280004": {
+      "card_name": "K-패스 신한카드(The 경기패스) 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202403280003": {
+      "card_name": "신한카드 Pick E 체크 캐릭터형(하리보)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202403060001": {
+      "card_name": "신한카드 Pick I 선불(하리보)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202101270003": {
+      "card_name": "SK렌터카 신한카드 MY CAR",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202110070001": {
+      "card_name": "T우주 신한카드 ",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202411280003": {
+      "card_name": "K-패스 신한카드(The 경기패스)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202412030001": {
+      "card_name": "신한카드 Kapick 통신할인",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202001160012": {
+      "card_name": "Preⓘ 선불카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202412060001": {
+      "card_name": "토스페이 플러스 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202410250001": {
+      "card_name": "신한카드 SOL글로벌 체크(산리오캐릭터즈)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "약국",
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "202501310002": {
+      "card_name": "Point Plan 체크(SOL 모임)",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202106280001": {
+      "card_name": "GS Prime 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202209130001": {
+      "card_name": "GS Prime 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202502110001": {
+      "card_name": "신한카드 Point Plan 체크(사학연금)",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202401300017": {
+      "card_name": "신한카드 Pick E 선불(덕원여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300019": {
+      "card_name": "신한카드 Pick E 선불(영동미래고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202301170001": {
+      "card_name": "신한카드 FANtastic S 체크(DRX)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202208040001": {
+      "card_name": "LG트윈스 신한카드 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202205190002": {
+      "card_name": "신한카드 플리(체크)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202502140001": {
+      "card_name": "신한카드 Point Plan(산리오캐릭터즈)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "음식점",
+        "커피/음료"
+      ]
+    },
+    "202101270002": {
+      "card_name": "신한카드 국민행복 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "교육/학원",
+        "약국",
+        "온라인쇼핑",
+        "의료/건강"
+      ]
+    },
+    "202006020001": {
+      "card_name": "신한카드 Hey Young 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료",
+        "패스트푸드",
+        "편의점"
+      ]
+    },
+    "202401300020": {
+      "card_name": "신한카드 Pick E 선불(동해상업고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201900000001": {
+      "card_name": "신한카드 JYP Fan’s EDM 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202204250007": {
+      "card_name": "신한카드 Way 체크 (경남정보대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202303080006": {
+      "card_name": "신한카드 플리(7회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202111180001": {
+      "card_name": "ZEPETO 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202308140001": {
+      "card_name": "KT 가족만족 DC 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202310170010": {
+      "card_name": "신한카드 Pick E 체크(순천매산여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202404020001": {
+      "card_name": "안동중앙고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202005220001": {
+      "card_name": "신한 슈퍼SOL 체크",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "202401300010": {
+      "card_name": "신한카드 Pick E 선불(제주중앙고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401260001": {
+      "card_name": "신한카드 Pick E 선불(브니엘예술고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401260002": {
+      "card_name": "신한카드 Pick E 선불(브니엘예술중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401260003": {
+      "card_name": "신한카드 Pick E 선불(진주동중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401260004": {
+      "card_name": "신한카드 Pick E 선불(선명여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300001": {
+      "card_name": "창원남중학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401300002": {
+      "card_name": "천천중학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202208180001": {
+      "card_name": "요기패스 신한카드 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202401300012": {
+      "card_name": "신한카드 Pick E 선불(선덕중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202504080002": {
+      "card_name": " K-패스 신한카드(인천 i-패스)체크 ",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202504080001": {
+      "card_name": " K-패스 신한카드(인천 i-패스)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "202303290001": {
+      "card_name": "여양고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202303100001": {
+      "card_name": "광영여자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202209140001": {
+      "card_name": "신한카드 핏(Fit)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "온라인쇼핑",
+        "의료/건강",
+        "커피/음료",
+        "패스트푸드",
+        "편의점"
+      ]
+    },
+    "202303280001": {
+      "card_name": "신한카드 Way 체크(한세대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202002130001": {
+      "card_name": "국민내일배움 신한카드 Simple",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "202201070001": {
+      "card_name": "땡겨요 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202107060003": {
+      "card_name": "신한카드 My TeenS",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202001290003": {
+      "card_name": "신한카드 Global + 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202403220005": {
+      "card_name": "신한카드 Pick I 체크 캐릭터형(가비지타임)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202403220004": {
+      "card_name": "신한카드 Pick E 체크 캐릭터형(가비지타임)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202303160001": {
+      "card_name": "신한카드 Globus",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202402020001": {
+      "card_name": "신한카드 Point Plan",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "음식점",
+        "커피/음료"
+      ]
+    },
+    "201707240002": {
+      "card_name": "신한카드 All Pass",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202307170003": {
+      "card_name": "신한라이프 THE PRIDE 신한카드",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    },
+    "202105060001": {
+      "card_name": "신한카드 LABE",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "음식점",
+        "커피/음료"
+      ]
+    },
+    "202111080001": {
+      "card_name": "메리어트 본보이™ 더 클래식 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    },
+    "202204260001": {
+      "card_name": "신한카드 The CLASSIC-V",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202309260001": {
+      "card_name": "신한카드 Pick I 체크 캐릭터형(맹구)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201507300001": {
+      "card_name": "신한카드 The CLASSIC+",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202402190001": {
+      "card_name": "신한카드 Pick I 체크 캐릭터형(한교동)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202110210001": {
+      "card_name": "신한카드 Deep Dream(모베러웍스)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201307010001": {
+      "card_name": "신한카드 The BEST-F",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "제과/베이커리",
+        "커피/음료"
+      ]
+    },
+    "201907220001": {
+      "card_name": "11번가 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "201907220002": {
+      "card_name": "11번가 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202401030001": {
+      "card_name": "신한카드 Pick E 선불(서현고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201610190001": {
+      "card_name": "신한카드 Always FAN",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "뷰티",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201704200001": {
+      "card_name": "마이 홈플러스 신한카드",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201704200002": {
+      "card_name": "마이 홈플러스 신한카드 체크",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "201910140001": {
+      "card_name": "신한카드 D-day",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202307180001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(목천고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202204060004": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(충렬여고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202403180001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(수원고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202204060001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(남지고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202303300003": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(창신고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080028": {
+      "card_name": "신한카드 Pick E 체크(대전대성여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202302280003": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(고림고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202409120001": {
+      "card_name": "CU Npay 카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202408270001": {
+      "card_name": "신한카드 Deep Dream(LG라이프케어패밀리)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202203150006": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(야탑고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080009": {
+      "card_name": "신한카드 Pick E 체크(예산예화여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202312140001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(경덕중 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080011": {
+      "card_name": "신한카드 Pick E 체크(양현고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202304130001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(부산동고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080013": {
+      "card_name": "신한카드 Pick E 체크(도선고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202211290001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(성복고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080015": {
+      "card_name": "신한카드 Pick E 체크(청원중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202203150005": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(광영여고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080018": {
+      "card_name": "신한카드 Pick E 체크(장수고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080020": {
+      "card_name": "신한카드 Pick E 체크(원주삼육고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310170007": {
+      "card_name": "신한카드 Pick E 선불(인천연송고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202506250001": {
+      "card_name": "신한카드 Way 체크(김포대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202310170009": {
+      "card_name": "신한 Pick E 선불(부산외고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202506250002": {
+      "card_name": "신한카드 Way 체크(김포대학교 교직원)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202506170001": {
+      "card_name": "카카오뱅크 줍줍 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202505230002": {
+      "card_name": "스타필드 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "뷰티",
+        "여가",
+        "온라인쇼핑",
+        "의료/건강",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080023": {
+      "card_name": "신한카드 Pick E 체크(청원여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202308030001": {
+      "card_name": "싱가포르항공 크리스플라이어 더 베스트 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "의료/건강",
+        "커피/음료"
+      ]
+    },
+    "202102020001": {
+      "card_name": "메리어트 본보이™ 더 베스트 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "199902110001": {
+      "card_name": "파인애플 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "202401080027": {
+      "card_name": "신한카드 Pick E 체크(부평여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202506190002": {
+      "card_name": "넥센타이어 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401080032": {
+      "card_name": "신한카드 Pick E 체크(경해여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080034": {
+      "card_name": "신한카드 Pick E 체크(군북중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202404150001": {
+      "card_name": "신한카드 처음",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "의류/패션",
+        "커피/음료"
+      ]
+    },
+    "202402260001": {
+      "card_name": "신한카드 Pick E 체크(안남고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201806080001": {
+      "card_name": "신한카드 FANtastic S 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300011": {
+      "card_name": "신한카드 Pick E 선불(건국사대부고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201911010001": {
+      "card_name": "한국야쿠르트 팝 신한카드 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202205170001": {
+      "card_name": "티머니 Pay & GO 신한카드 ",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "201609010001": {
+      "card_name": "개인택시운송사업자 신한카드 T-플러스",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201912100001": {
+      "card_name": "알뜰교통 신한카드 S20 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "편의점"
+      ]
+    },
+    "201904240001": {
+      "card_name": "서울시 청년수당 신한카드 S20 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "교육/학원",
+        "여가",
+        "음식점",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202001200001": {
+      "card_name": "iMND 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202401290004": {
+      "card_name": "SK LPG 화물복지 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202310180002": {
+      "card_name": "신한카드 Pick E 체크(선화여중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202311160001": {
+      "card_name": "신한카드 Pick E 체크(김천중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080003": {
+      "card_name": "신한카드 Pick E 체크(덕원여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080004": {
+      "card_name": "신한카드 Pick E 체크(제주사대부고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080007": {
+      "card_name": "신한카드 Pick E 체크(진남중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080008": {
+      "card_name": "신한카드 Pick E 체크(석정여중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202411080001": {
+      "card_name": "신한카드 Simple+(스포애니)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201704010002": {
+      "card_name": "신세계 신한카드 SKYPASS / Asiana Club",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202207070001": {
+      "card_name": "신한카드 Deep Oil (배민커넥트) ",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202503280001": {
+      "card_name": "신한카드 Discount Plan",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "약국",
+        "커피/음료"
+      ]
+    },
+    "202406240001": {
+      "card_name": "네스프레소 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202307260001": {
+      "card_name": "LG U+ SKYPASS 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202309200001": {
+      "card_name": "신한카드 Applus",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료"
+      ]
+    },
+    "201507220003": {
+      "card_name": "신한카드 Simple+",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202504150001": {
+      "card_name": "여댕냥 PET 신한카드 Point Plan",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "음식점",
+        "커피/음료"
+      ]
+    },
+    "202508040001": {
+      "card_name": "한화이글스 신한카드",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "202507040001": {
+      "card_name": "Npay biz 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "201807110001": {
+      "card_name": "KBO제휴 신한카드 MY KBO",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "199902110034": {
+      "card_name": "LG전자 구독애 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "201308020002": {
+      "card_name": "국세청 신한카드 GS칼텍스 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티"
+      ]
+    },
+    "201305060002": {
+      "card_name": "신한카드 Hi-Point(LG/LX/GS/LS/LIG패밀리)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "201905230001": {
+      "card_name": "신한카드 Air One",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202508180003": {
+      "card_name": "신한카드 SOL Plan",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202304130007": {
+      "card_name": "신한카드 Pick I 선불",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202304130006": {
+      "card_name": "신한카드 Pick E 선불",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202508270001": {
+      "card_name": "GS ALL 패밀리 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202508290001": {
+      "card_name": "신한카드 Simple Platinum# Splendor Plus",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202508180004": {
+      "card_name": "SOL메이트 신한카드 SOL Plan",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202501200001": {
+      "card_name": "신한카드 The BEST-XO",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "약국",
+        "음식점"
+      ]
+    },
+    "201704280001": {
+      "card_name": "신한카드 TEENS(틴즈) PLUS PONEY 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202004130001": {
+      "card_name": "신한카드 TEENS(틴즈) PLUS PONEY 체크 후불교통",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202509150001": {
+      "card_name": "세라젬 신한카드 ",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202006100001": {
+      "card_name": "한국수력원자력 임직원복지 신한카드 LOVE",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202007270001": {
+      "card_name": "신한카드 치과위생사협회 빅플러스 GS칼텍스",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202510100003": {
+      "card_name": "현대큐밍 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202108120001": {
+      "card_name": "GS칼텍스 신한카드 Shine (다드림)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202510220001": {
+      "card_name": "하이마트 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "200710250001": {
+      "card_name": "신한카드 Love",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202510220002": {
+      "card_name": "신세계 신한카드   Best Fit",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202510220003": {
+      "card_name": "신세계 신한카드 Best Fit (임직원용)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202510220004": {
+      "card_name": "신세계 신한카드 Best Fit (신한금융임직원용)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "202408120001": {
+      "card_name": "LGE.COM 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202204250004": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(판교고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202204250003": {
+      "card_name": "김해삼문고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202509240001": {
+      "card_name": "청호나이스 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202009140001": {
+      "card_name": "오아시스 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202011020001": {
+      "card_name": "신한카드 Finnq 체크",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    },
+    "202108190002": {
+      "card_name": "신한카드 GS Prime(LG/LX/GS/LS/LIG패밀리)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202511240001": {
+      "card_name": "스카이라이프 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202510270001": {
+      "card_name": "The CLASSIC NEO",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "약국",
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201808230001": {
+      "card_name": "성남시 아동수당 신한카드 Deep Dream 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201309240002": {
+      "card_name": "신한카드 Hi-Point MyShop",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202509090002": {
+      "card_name": "신한카드 Hey Young 체크(포차코)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료",
+        "패스트푸드",
+        "편의점"
+      ]
+    },
+    "202512050001": {
+      "card_name": "경동나비엔 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202512010002": {
+      "card_name": "GS ALL 신한카드 체크",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "의료/건강",
+        "편의점"
+      ]
+    },
+    "202001290004": {
+      "card_name": "신한카드 Global Air 스카이패스 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202002130002": {
+      "card_name": "카카오페이 신한 체크카드(국민내일배움)",
+      "condition_types": [
+        "건당인정한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202205190001": {
+      "card_name": "신한카드 플리",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202509090003": {
+      "card_name": "신한카드 처음 체크 (마이멜로디)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "약국",
+        "온라인쇼핑",
+        "의료/건강",
+        "커피/음료"
+      ]
+    },
+    "202309050001": {
+      "card_name": "SPOTV NOW 신한카드 구독 좋아요",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202212160001": {
+      "card_name": "신한카드 구독 좋아요",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "199902110097": {
+      "card_name": "신한카드 치과위생사 Lady",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202108090001": {
+      "card_name": "신한카드 LOVE",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202103120003": {
+      "card_name": "탑마트 보너스포인트 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트"
+      ]
+    },
+    "202004220001": {
+      "card_name": "한의플래닛 Simple Platinum#",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "202108200001": {
+      "card_name": "동백전 신한카드 S-Line 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201306050001": {
+      "card_name": "부산가족사랑 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "온라인쇼핑"
+      ]
+    },
+    "202112220002": {
+      "card_name": "신한카드 On 체크",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202203150002": {
+      "card_name": "군산기계공업고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150009": {
+      "card_name": "고창여자고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150014": {
+      "card_name": "순천매산고등학교 신한카드 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "201502100001": {
+      "card_name": "신한카드 B.Big(삑)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202007030001": {
+      "card_name": "신한카드 MY CAR",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202205030002": {
+      "card_name": "영종국제물류학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202205030001": {
+      "card_name": "김천중앙고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202001290001": {
+      "card_name": "신한카드 Deep Once",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202205030007": {
+      "card_name": "인천재능고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202206130001": {
+      "card_name": "세일고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202206080004": {
+      "card_name": "대구운암고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202207110006": {
+      "card_name": "살레시오고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201707240001": {
+      "card_name": "모바일 Tmoney 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202110120001": {
+      "card_name": "사단법인 한국음악협회 신한카드 Deep Store",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201612270001": {
+      "card_name": "HD현대오일뱅크 2UP 화물운전자복지 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202102250002": {
+      "card_name": "아모레퍼시픽 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201711300001": {
+      "card_name": "더본 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "편의점"
+      ]
+    },
+    "202304100003": {
+      "card_name": "이리여자고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202205240002": {
+      "card_name": "신한카드 Way 체크(쥬라기)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202310160002": {
+      "card_name": "신한카드 My TeenS(포차코)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202311280001": {
+      "card_name": "신한카드 Way 체크(선린대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202303080001": {
+      "card_name": "신한카드 플리(2회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202303100002": {
+      "card_name": "대성고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202307270001": {
+      "card_name": "신한카드 Pick E 체크(포켓몬스터)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202206130005": {
+      "card_name": "신한 Meme(밈)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401300003": {
+      "card_name": "신한카드 Pick E 선불(부평여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300006": {
+      "card_name": "신한카드 Pick E 선불(장수고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300004": {
+      "card_name": "신한카드 Pick E 선불(선인중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300005": {
+      "card_name": "신한카드 Pick E 선불(부평서중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300007": {
+      "card_name": "신한카드 Pick E 선불(서강고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401290001": {
+      "card_name": "E1 LPG 화물복지 신한카드",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202401300009": {
+      "card_name": "신한카드 Pick E 선불(선유중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300013": {
+      "card_name": "신한카드 Pick E 선불(청원여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300015": {
+      "card_name": "신한카드 Pick E 선불(군북중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202311080001": {
+      "card_name": "SSG.COM 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202207070002": {
+      "card_name": "신한카드 S-Line 체크(배민커넥트)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401080021": {
+      "card_name": "신한카드 Pick E 체크(건국사대부고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300008": {
+      "card_name": "신한카드 Pick E 선불(청원중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300016": {
+      "card_name": "신한카드 Pick E 선불(경해여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300021": {
+      "card_name": "신한카드 Pick E 선불(진남중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300022": {
+      "card_name": "신한카드 Pick E 선불(석정여중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300023": {
+      "card_name": "신한카드 Pick E 선불(예산예화여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300024": {
+      "card_name": "신한카드 Pick E 선불(조선대부속중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401190001": {
+      "card_name": "신한카드 SOL트래블 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401300025": {
+      "card_name": "신한카드 Pick E 선불(양현고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300026": {
+      "card_name": "신한카드 Pick E 선불(대천여상고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300027": {
+      "card_name": "신한카드 Pick E 선불(도선고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300028": {
+      "card_name": "신한카드 Pick E 선불(서강중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300029": {
+      "card_name": "신한카드 Pick E 선불(원주삼육고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202303220001": {
+      "card_name": "고창고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202304040002": {
+      "card_name": "KT 가족만족 할부 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201905170002": {
+      "card_name": "THE BOON SVIP 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202205230001": {
+      "card_name": "신한카드 On 체크(잔망루피)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202312010006": {
+      "card_name": "신한카드 Pick E 체크(매향중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401300014": {
+      "card_name": "신한카드 Pick E 선불(음성중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201602030001": {
+      "card_name": "신한카드 후불하이패스+ (하이패스 전용)",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202003090001": {
+      "card_name": "스포츠바우처 카카오페이 신한 체크카드(무지)",
+      "condition_types": [
+        "건당인정한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202201070002": {
+      "card_name": "땡겨요 신한카드 체크",
+      "condition_types": [
+        "건당인정한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202004090002": {
+      "card_name": "LG BEST 모바일 Gold 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201612010001": {
+      "card_name": "큰수레 비즈니스 신한카드 Simple+",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "202201070003": {
+      "card_name": "땡겨요 신한카드 체크(라이더형)",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "201706200002": {
+      "card_name": "대한의사협회 The Dr. 신한카드 Simple Platinum#",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "의료/건강",
+        "커피/음료"
+      ]
+    },
+    "202007010001": {
+      "card_name": "나주사랑 신한카드 S-Choice(선택형) 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202301180001": {
+      "card_name": "신한카드 Way 체크(최고심)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202006100003": {
+      "card_name": "네이버페이 신한카드 체크 S2",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "199902110186": {
+      "card_name": "대한지방행정공제회 신한카드 Lady",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "201711230001": {
+      "card_name": "울산현대축구단 신한카드 2030",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "200606010001": {
+      "card_name": "신한카드 The BEST",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201406090001": {
+      "card_name": "신한카드 미래설계",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "약국",
+        "의료/건강"
+      ]
+    },
+    "201906250001": {
+      "card_name": "신한카드 Deep On 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "200503080001": {
+      "card_name": "교직원복지 GS칼텍스 신한카드 빅플러스",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "201502010001": {
+      "card_name": "LG U+ Smart 10 신한카드 Big Plus",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "202309260002": {
+      "card_name": "신한카드 Pick E 체크 캐릭터형(오수)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201903080001": {
+      "card_name": "신한카드 집",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "교육/학원",
+        "슈퍼마켓/마트",
+        "약국"
+      ]
+    },
+    "201112090002": {
+      "card_name": "AK 신한카드 2030 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "202008130001": {
+      "card_name": "신한카드 The CLASSIC-S 한의플래닛",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202303080005": {
+      "card_name": "신한카드 플리(6회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201312130001": {
+      "card_name": "대신증권 CMA 신한카드 S-Choice(선택형) 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201405080004": {
+      "card_name": "신한카드 S-Line 체크(마이펫)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202103050001": {
+      "card_name": "신한카드 후불하이패스+(SIM형)",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201807110002": {
+      "card_name": "KBO 제휴 신한카드 MY KBO 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    },
+    "201811090001": {
+      "card_name": "몰테일 신한카드 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201902270001": {
+      "card_name": "신한카드 The BEST+",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "201807260002": {
+      "card_name": "신한카드 Deep Dream Platinum+",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "200506010001": {
+      "card_name": "신한카드 아름다운",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "커피/음료"
+      ]
+    },
+    "202311100002": {
+      "card_name": "대한간호협회 신한카드 RN",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "교육/학원",
+        "커피/음료"
+      ]
+    },
+    "202302150001": {
+      "card_name": "신한카드 Way 체크(웅지세무대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202303080004": {
+      "card_name": "신한카드 플리(5회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "199902110006": {
+      "card_name": "한국전력공사 복지 신한카드 Love",
+      "condition_types": [
+        "월횟수한도",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201106290001": {
+      "card_name": "CJ ONE 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트"
+      ]
+    },
+    "201510260001": {
+      "card_name": "신한카드 주거래 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "201803300001": {
+      "card_name": "신한카드 The PREMIER GOLD EDITION",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    },
+    "199902110078": {
+      "card_name": "공무원연금복지 신한카드 S-Choice (선택형) 체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201802280001": {
+      "card_name": "노란우산 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "약국",
+        "온라인쇼핑"
+      ]
+    },
+    "202310060002": {
+      "card_name": "신한카드 Pick I 선불(포켓몬스터)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201204170001": {
+      "card_name": "신한카드 Lesson Platinum#",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202001200002": {
+      "card_name": "신한카드 B.Big(마이펫 스노우볼 삑)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "201806280001": {
+      "card_name": "청년동행 신한카드 Deep Dream 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201510260002": {
+      "card_name": "신한카드 주거래 신용",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑"
+      ]
+    },
+    "201410310001": {
+      "card_name": "신한카드 The CLASSIC-Y",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "음식점"
+      ]
+    },
+    "202004090003": {
+      "card_name": "SKT T라이트 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "200404010002": {
+      "card_name": "화물운전자복지 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202004070001": {
+      "card_name": "카카오뱅크 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "200501070002": {
+      "card_name": "GS칼텍스 신한카드 BigPlus Smart",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "201507270001": {
+      "card_name": "S.Sing 씽화물복지 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202401080019": {
+      "card_name": "신한카드 Pick E 체크(제주중앙고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "199902110129": {
+      "card_name": "FC서울 유소년축구사랑 GS칼텍스 신한카드 Shine",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "201510270001": {
+      "card_name": "알뜰주유소 화물운전자복지 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202401300018": {
+      "card_name": "신한카드 Pick E 선불(제주사대부고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201307090001": {
+      "card_name": "신한카드 Simple Platinum#",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202503040001": {
+      "card_name": "코웨이라이프솔루션 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    },
+    "202211280003": {
+      "card_name": "신한카드 플리 체크(산리오캐릭터즈)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202109270001": {
+      "card_name": "투썸플레이스 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202206130004": {
+      "card_name": "신한카드 Way 체크 (동서대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "199909130002": {
+      "card_name": "신한카드 Lady",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202303080007": {
+      "card_name": "신한카드 플리(8회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202203290001": {
+      "card_name": "신한카드 Way 체크 (부산경상대학교 학생증)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201610050001": {
+      "card_name": "신한카드 The BEST-T",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201311270001": {
+      "card_name": "신한카드 The CLASSIC-L",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "201001250001": {
+      "card_name": "신한카드 Ownership",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202001290005": {
+      "card_name": "신한카드 Global Air 아시아나 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202303080008": {
+      "card_name": "신한카드 플리(9회차 우승작)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202504010002": {
+      "card_name": "HD현대오일뱅크 55 화물복지 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202504010001": {
+      "card_name": "S-OIL 55 화물복지 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "201704050001": {
+      "card_name": "아시아나 신한카드 Air 1.5",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401080017": {
+      "card_name": "신한카드 Pick E 체크(선유중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080006": {
+      "card_name": "신한카드 Pick E 체크(동해상업고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202102250001": {
+      "card_name": "(대전신세계 엑스포점)신세계 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "199909130001": {
+      "card_name": "신한카드 2030",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "여가"
+      ]
+    },
+    "201802220003": {
+      "card_name": "신한카드 The CLASSIC-Lite",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "커피/음료"
+      ]
+    },
+    "202303290002": {
+      "card_name": "군산기계공업고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "200704010001": {
+      "card_name": "LG트윈스 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202307210001": {
+      "card_name": "신한카드 Global+ 체크(월리를 찾아라)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202011170001": {
+      "card_name": "Plan YES 신한카드 Global+ 체크",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202307210002": {
+      "card_name": "신한카드 Way 체크(미니언즈 여름)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202110010001": {
+      "card_name": "신한 햇살론카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202205230002": {
+      "card_name": "수소차 충전할인 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "편의점"
+      ]
+    },
+    "201303190001": {
+      "card_name": "신한카드 Cube Platinum#",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "약국"
+      ]
+    },
+    "202108190001": {
+      "card_name": "#Pay 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202207270003": {
+      "card_name": "신한카드 Eats More(곰표)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202201200001": {
+      "card_name": "신한카드 Eats More(이츠모아)",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202211280002": {
+      "card_name": "신한카드 플리(산리오캐릭터즈)",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202505210001": {
+      "card_name": "신한카드 Hey Young 체크(먼작귀)",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "슈퍼마켓/마트",
+        "여가",
+        "온라인쇼핑",
+        "커피/음료",
+        "패스트푸드",
+        "편의점"
+      ]
+    },
+    "202301020001": {
+      "card_name": "강릉제일고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202301020002": {
+      "card_name": "동의공업고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202302230001": {
+      "card_name": "고림고등학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "201612150001": {
+      "card_name": "LF SQUARE 신한카드",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "의류/패션",
+        "커피/음료"
+      ]
+    },
+    "202204190001": {
+      "card_name": "iMND Light 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑"
+      ]
+    },
+    "202012030003": {
+      "card_name": "연세대학교 총동문회 신한카드 D-day",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201109140001": {
+      "card_name": "신한카드 S20 Pink 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "음식점",
+        "커피/음료"
+      ]
+    },
+    "202005180001": {
+      "card_name": "홈플러스 스페셜 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "202501240002": {
+      "card_name": "신한카드 The BEST-F",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "제과/베이커리",
+        "커피/음료"
+      ]
+    },
+    "202111080003": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(경주고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150003": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(경일고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150008": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(고창고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203150015": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(비봉고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401090002": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(천천중 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202206130003": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(대성고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202207270001": {
+      "card_name": "창녕대성고등학교 틴즈플러스 포니 체크",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202203100002": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(인제고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202103230001": {
+      "card_name": "성남사랑 신한카드 Deep Dream 체크(chak)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202401300030": {
+      "card_name": "신한카드 Pick E 선불(대전대성여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202312200001": {
+      "card_name": "경덕중학교 신한 Meme(밈) 학생증 카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202303300001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(이리여고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "201904150001": {
+      "card_name": "청년취업 FANtastic S 신한카드 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202306010001": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(신정중 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080033": {
+      "card_name": "신한카드 Pick E 체크(선명여고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202203150021": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(김천고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080010": {
+      "card_name": "신한카드 Pick E 체크(조선대부속중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202203150013": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(여양고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080012": {
+      "card_name": "신한카드 Pick E 체크(대천여상고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202203150010": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(영진고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080014": {
+      "card_name": "신한카드 Pick E 체크(서강고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202111080002": {
+      "card_name": "신한카드 틴즈플러스 포니 체크(대구여고 학생증카드)",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "패스트푸드"
+      ]
+    },
+    "202401080016": {
+      "card_name": "신한카드 Pick E 체크(서강중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202506090001": {
+      "card_name": "LG전자 The 구독케어 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": []
+    },
+    "202310170006": {
+      "card_name": "신한카드 Pick E 선불(청심국제중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202506040001": {
+      "card_name": "신한카드 Pick E 체크 캐릭터형(신의탑)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202310170008": {
+      "card_name": "신한카드 Pick E 선불(선화여중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202506240002": {
+      "card_name": "New T 우주 신한카드",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202001310001": {
+      "card_name": "신한카드 Deep Oil(KCC오토그룹)",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202408300001": {
+      "card_name": "신한카드 Point Plan 체크 SOL",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202401080022": {
+      "card_name": "신한카드 Pick E 체크(선덕중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202505230001": {
+      "card_name": "GS ALL 신한카드",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "편의점"
+      ]
+    },
+    "202401080024": {
+      "card_name": "신한카드 Pick E 체크(선인중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080025": {
+      "card_name": "신한카드 Pick E 체크(부평서중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202401080026": {
+      "card_name": "신한카드 Pick E 체크(음성중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202311030002": {
+      "card_name": "신한카드 Pick I 체크 캐릭터형(쵸파)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202501240001": {
+      "card_name": "신한카드 Point Plan",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "음식점",
+        "커피/음료"
+      ]
+    },
+    "202503280002": {
+      "card_name": "신한카드 Discount Plan+",
+      "condition_types": [
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "약국",
+        "커피/음료"
+      ]
+    },
+    "202311030001": {
+      "card_name": "신한카드 Pick E 체크 캐릭터형(루피)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202507080001": {
+      "card_name": "코웨이 신한카드",
+      "condition_types": [
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    },
+    "202402220001": {
+      "card_name": "신한카드 Pick E 선불(안남고 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "202108270001": {
+      "card_name": "아모레퍼시픽 신한카드 체크",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "뷰티",
+        "온라인쇼핑",
+        "커피/음료"
+      ]
+    },
+    "202211210005": {
+      "card_name": "신한카드 EVerywhere",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201711100002": {
+      "card_name": "다이소 신한카드 체크",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "여가",
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201906030001": {
+      "card_name": "알뜰교통 신한카드",
+      "condition_types": [
+        "건당인정한도",
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201304300007": {
+      "card_name": "신한카드 The BEST-F(신한금융그룹 패밀리)",
+      "condition_types": [
+        "적립률조건",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "제과/베이커리",
+        "커피/음료"
+      ]
+    },
+    "202104070001": {
+      "card_name": "개인택시운송사업자 신한카드 체크",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": []
+    },
+    "202307110001": {
+      "card_name": "SK 55 화물복지 신한카드",
+      "condition_types": [
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "여가"
+      ]
+    },
+    "202310180001": {
+      "card_name": "신한카드 Pick E 체크(청심국제중 학생증카드)",
+      "condition_types": [
+        "월횟수한도",
+        "전월실적조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료",
+        "편의점"
+      ]
+    },
+    "201308020001": {
+      "card_name": "국세청 신한카드 Lady",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "슈퍼마켓/마트",
+        "온라인쇼핑"
+      ]
+    },
+    "202504150002": {
+      "card_name": "여댕냥 PET 신한카드 Point Plan 체크",
+      "condition_types": [
+        "건당인정한도",
+        "적립률조건",
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "온라인쇼핑",
+        "편의점"
+      ]
+    },
+    "202306070001": {
+      "card_name": "신한카드 KaPick",
+      "condition_types": [
+        "전월실적조건",
+        "채널조건"
+      ],
+      "has_min_spend": true,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "201301240001": {
+      "card_name": "신한카드  S-Choice (LG/GS/LS/LIG 패밀리카드)체크",
+      "condition_types": [
+        "월횟수한도",
+        "적립률조건",
+        "채널조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "커피/음료"
+      ]
+    },
+    "202507310001": {
+      "card_name": "신한라이프 THE PRIDE PLUS 신한카드",
+      "condition_types": [
+        "적립률조건"
+      ],
+      "has_min_spend": false,
+      "benefit_categories": [
+        "의료/건강"
+      ]
+    }
+  },
+  "category_condition_structure": {
+    "교육": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "대중교통": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "마트": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "배달앱": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "백화점": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "베이커리": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "병원": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "소셜몰": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3
+    },
+    "가입 금액": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "가입 대상": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "양도/담보제공": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "예금 과목": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "예금 기간": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "갤러리아": {
+      "월횟수한도": 2,
+      "적립률조건": 4,
+      "전월실적조건": 4,
+      "채널조건": 4
+    },
+    "롯데마트": {
+      "월횟수한도": 2,
+      "적립률조건": 4,
+      "전월실적조건": 4,
+      "채널조건": 4
+    },
+    "롯데백화점": {
+      "월횟수한도": 2,
+      "적립률조건": 4,
+      "전월실적조건": 4,
+      "채널조건": 4
+    },
+    "메가마트": {
+      "월횟수한도": 2,
+      "적립률조건": 4,
+      "전월실적조건": 4,
+      "채널조건": 4
+    },
+    "문화상품권": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "백화점 세이": {
+      "월횟수한도": 2,
+      "적립률조건": 4,
+      "전월실적조건": 4,
+      "채널조건": 4
+    },
+    "이마트": {
+      "월횟수한도": 2,
+      "적립률조건": 4,
+      "전월실적조건": 4,
+      "채널조건": 4
+    },
+    "현대백화점": {
+      "월횟수한도": 2,
+      "적립률조건": 4,
+      "전월실적조건": 4,
+      "채널조건": 4
+    },
+    "대상구간": {
+      "적립률조건": 4,
+      "전월실적조건": 2
+    },
+    "할인대상": {
+      "적립률조건": 4,
+      "전월실적조건": 2
+    },
+    "할인시간(평일기준)": {
+      "적립률조건": 4,
+      "전월실적조건": 2
+    },
+    "터치패스": {
+      "적립률조건": 3,
+      "전월실적조건": 1
+    },
+    "통행료 지불": {
+      "적립률조건": 3,
+      "전월실적조건": 1
+    },
+    "하이패스": {
+      "적립률조건": 3,
+      "전월실적조건": 1
+    },
+    "컬처랜드": {
+      "적립률조건": 3,
+      "전월실적조건": 3,
+      "채널조건": 3,
+      "월횟수한도": 1
+    },
+    "월 횟수 제한": {
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "적립률": {
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "포인트 적립 한도": {
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "실적 대상금액": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "실적 제외금액": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "실적 체크기간": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "캐시백 한도사용기간": {
+      "월횟수한도": 2,
+      "적립률조건": 2,
+      "전월실적조건": 2,
+      "채널조건": 1
+    },
+    "결제금액": {
+      "월횟수한도": 2,
+      "전월실적조건": 2,
+      "채널조건": 1
+    },
+    "요금 구분": {
+      "월횟수한도": 2,
+      "전월실적조건": 2,
+      "채널조건": 1
+    },
+    "자동이체 결제일": {
+      "월횟수한도": 1,
+      "전월실적조건": 1
+    },
+    "통신사": {
+      "월횟수한도": 1,
+      "전월실적조건": 1
+    },
+    "할인 적용금액": {
+      "월횟수한도": 1,
+      "전월실적조건": 1
+    },
+    "SK렌터카 보증금 할부원금": {
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "월 청구금액(이자 포함)": {
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "총 이자(24개월)": {
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "자동납부 결제일": {
+      "월횟수한도": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "할인적용금액": {
+      "월횟수한도": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "계좌충전1": {
+      "적립률조건": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "신한카드충전(신용/체크)": {
+      "적립률조건": 1,
+      "전월실적조건": 1,
+      "채널조건": 1
+    },
+    "대상금액": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1
+    },
+    "대상기간": {
+      "월횟수한도": 1,
+      "적립률조건": 1,
+      "전월실적조건": 1
+    }
+  },
+  "type_examples": {
+    "월횟수한도": [
+      {
+        "raw_text": "월 4회 까지 적용/건당 2만원 매출까지 할인(건당 최대 3천원)",
+        "parsed": {
+          "monthly_count_limit": 4,
+          "per_txn_cap": 20000,
+          "per_txn_reward_cap": 3000
+        },
+        "card_name": "(dataset-catalog 실측 예시)"
+      }
+    ],
+    "전월실적조건": [
+      {
+        "raw_text": "전월 이용금액 20만원 이상 시 제공",
+        "parsed": {
+          "min_spend": 200000
+        },
+        "card_name": "(R3 spend_tier 실측 구간: 20만~50만→한도 5천원)"
+      }
+    ],
+    "건당인정한도": [
+      {
+        "raw_text": "건당 2만원 매출까지 할인",
+        "parsed": {
+          "per_txn_cap": 20000
+        },
+        "card_name": "(dataset-catalog 실측 예시)"
+      }
+    ]
+  }
+}

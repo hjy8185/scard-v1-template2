@@ -1,0 +1,65 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AthenaReadOnlyOwnWorkgroup",
+      "Effect": "Allow",
+      "Action": ["athena:StartQueryExecution", "athena:GetQueryExecution",
+                 "athena:GetQueryResults", "athena:StopQueryExecution",
+                 "athena:GetWorkGroup"],
+      "Resource": "arn:aws:athena:us-west-2:000000000000:workgroup/cg-v2-wg"
+    },
+    {
+      "Sid": "GlueCatalogRead",
+      "Effect": "Allow",
+      "Action": ["glue:GetDatabase", "glue:GetDatabases", "glue:GetTable",
+                 "glue:GetTables", "glue:GetPartition", "glue:GetPartitions"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "LakeFormationRead",
+      "Effect": "Allow",
+      "Action": ["lakeformation:GetDataAccess"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "S3ResultsAndDataRead",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:ListBucket", "s3:GetBucketLocation"],
+      "Resource": [
+        "arn:aws:s3:::cg-west-lakehouse-staging-EXAMPLE",
+        "arn:aws:s3:::cg-west-lakehouse-staging-EXAMPLE/*",
+        "arn:aws:s3:::aws-athena-query-results-000000000000-us-west-2",
+        "arn:aws:s3:::aws-athena-query-results-000000000000-us-west-2/*",
+        "arn:aws:s3:::amazon-sagemaker-000000000000-us-west-2-EXAMPLE",
+        "arn:aws:s3:::amazon-sagemaker-000000000000-us-west-2-EXAMPLE/*"
+      ]
+    },
+    {
+      "Sid": "S3AthenaResultWriteOnlyToV2Prefix",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:AbortMultipartUpload"],
+      "Resource": "arn:aws:s3:::cg-west-lakehouse-staging-EXAMPLE/athena-results-v2/*"
+    },
+    {
+      "Sid": "NeptuneReadOnly",
+      "Effect": "Allow",
+      "Action": ["neptune-db:ReadDataViaQuery", "neptune-db:GetQueryStatus"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DataZoneCatalogRead",
+      "Effect": "Allow",
+      "Action": ["datazone:Search", "datazone:SearchListings", "datazone:GetDomain",
+                 "datazone:GetGlossaryTerm", "datazone:GetAsset", "datazone:GetListing"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "BedrockInvoke",
+      "Effect": "Allow",
+      "Action": ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream",
+                 "bedrock:Converse", "bedrock:ConverseStream"],
+      "Resource": "*"
+    }
+  ]
+}

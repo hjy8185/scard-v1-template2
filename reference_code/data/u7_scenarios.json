@@ -1,0 +1,2162 @@
+{
+  "version": "u7-100-v2",
+  "scenarios": [
+    {
+      "id": "c1-01",
+      "category": "eligibility",
+      "measures": "P1 대상 positive",
+      "difficulty": "Basic",
+      "question": "전월실적 40만원 고객이 스타벅스에서 3만원 결제했어. 이 카드 커피 혜택 대상이야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "대상"
+      ],
+      "negative_keywords": [
+        "대상이 아닙니다"
+      ],
+      "ground_truth_note": "실적충족+커피 subsumption→대상"
+    },
+    {
+      "id": "c1-02",
+      "category": "eligibility",
+      "measures": "P2 실적 미달 → 미대상",
+      "difficulty": "Basic",
+      "question": "전월실적 20만원인데 커피 혜택 받을 수 있어? 안 되면 이유는?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths",
+        "card_spend_tier"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "미달"
+      ],
+      "negative_keywords": [
+        "받을 수 있습니다"
+      ],
+      "ground_truth_note": "실적<기준→below_min_spend"
+    },
+    {
+      "id": "c1-03",
+      "category": "eligibility",
+      "measures": "P3 월 한도 초과 → 미대상",
+      "difficulty": "Intermediate",
+      "question": "이번달 커피 할인 이미 5번 다 받았는데 6번째 결제도 할인돼?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "한도"
+      ],
+      "negative_keywords": [
+        "할인됩니다"
+      ],
+      "ground_truth_note": "count_limit 초과"
+    },
+    {
+      "id": "c1-04",
+      "category": "eligibility",
+      "measures": "P4 제외 가맹점(HAS_EXCLUSION)",
+      "difficulty": "Adversarial",
+      "question": "스타벅스 리저브 매장에서 결제하면 커피 할인 제외 대상이야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_exclusion_check"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "제외"
+      ],
+      "negative_keywords": [
+        "할인 대상입니다"
+      ],
+      "ground_truth_note": "HAS_EXCLUSION 매칭→제외"
+    },
+    {
+      "id": "c1-05",
+      "category": "eligibility",
+      "measures": "P5 subsumption 경계(하위→상위)",
+      "difficulty": "Adversarial",
+      "question": "이디야에서 결제했는데 이게 커피전문점 혜택에 포함돼? 왜?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths",
+        "category_ancestors"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "커피",
+        "포함"
+      ],
+      "negative_keywords": [
+        "포함되지 않습니다"
+      ],
+      "ground_truth_note": "이디야→커피 ancestors closure"
+    },
+    {
+      "id": "c1-06",
+      "category": "eligibility",
+      "measures": "P6 실적 경계값(정확히 기준)",
+      "difficulty": "Adversarial",
+      "question": "전월실적이 정확히 30만원이면 커피 혜택 대상이야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths",
+        "card_spend_tier"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "대상"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "경계값=충족(gte)"
+    },
+    {
+      "id": "c1-07",
+      "category": "eligibility",
+      "measures": "P7 미파싱 규칙 → unknown",
+      "difficulty": "Adversarial",
+      "question": "이 카드 특수조건 혜택 자격 판정해줘",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "확인 필요"
+      ],
+      "negative_keywords": [
+        "확실히 대상"
+      ],
+      "ground_truth_note": "parse_status=unsupported→unknown(NFR-5)"
+    },
+    {
+      "id": "c1-08",
+      "category": "eligibility",
+      "measures": "P8 card_id 결측 → abstain",
+      "difficulty": "Adversarial",
+      "question": "스타벅스에서 3만원 쓰면 커피 혜택 대상이야?",
+      "preset_card_id": null,
+      "expected_intent": "unsupported",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "unsupported"
+      ],
+      "verification_keywords": [
+        "확인 필요"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "target_scope 없음→missing_slot abstain"
+    },
+    {
+      "id": "c1-09",
+      "category": "eligibility",
+      "measures": "P9 per_txn cap(고액 상한)",
+      "difficulty": "Intermediate",
+      "question": "전월실적 40만원인데 스타벅스에서 50만원 결제하면 할인 상한은?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "한도"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "per_txn_reward_cap 적용"
+    },
+    {
+      "id": "c1-10",
+      "category": "eligibility",
+      "measures": "P10 채널 제약(온라인 전용)",
+      "difficulty": "Adversarial",
+      "question": "온라인 전용 혜택인데 오프라인 매장에서 결제하면 대상이야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "제외"
+      ],
+      "negative_keywords": [
+        "대상입니다"
+      ],
+      "ground_truth_note": "channel 제약 위반"
+    },
+    {
+      "id": "c1-11",
+      "category": "eligibility",
+      "measures": "P4 제외(배달앱 PG 경유)",
+      "difficulty": "Adversarial",
+      "question": "배달의민족 앱에서 카드 결제했는데 PG 경유라 배달 혜택 제외야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_exclusion_check"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "제외"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "PG 경유 미매핑→제외 가능"
+    },
+    {
+      "id": "c1-12",
+      "category": "eligibility",
+      "measures": "P1 주유(GS칼텍스 특정)",
+      "difficulty": "Basic",
+      "question": "전월실적 30만원 GS칼텍스에서 5만원 주유했어. 주유 혜택 대상?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "대상"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "주유 자격 positive"
+    },
+    {
+      "id": "c1-13",
+      "category": "eligibility",
+      "measures": "P2 무실적",
+      "difficulty": "Basic",
+      "question": "전월 실적이 아예 없는데 이번달 커피 할인 돼?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths",
+        "card_spend_tier"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "미달"
+      ],
+      "negative_keywords": [
+        "됩니다"
+      ],
+      "ground_truth_note": "무실적→미대상"
+    },
+    {
+      "id": "c1-14",
+      "category": "eligibility",
+      "measures": "P3 한도 잔여 조회",
+      "difficulty": "Intermediate",
+      "question": "이번달 커피 할인 3번 썼는데 남은 한도 얼마야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "한도"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "잔여 한도 계산"
+    },
+    {
+      "id": "c1-15",
+      "category": "eligibility",
+      "measures": "P5 subsumption(편의점 하위)",
+      "difficulty": "Intermediate",
+      "question": "GS25에서 결제하면 편의점 혜택 대상이야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths",
+        "category_ancestors"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "편의점",
+        "대상"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "GS25→편의점 subsumption"
+    },
+    {
+      "id": "c1-16",
+      "category": "eligibility",
+      "measures": "P4 무관 업종 제외",
+      "difficulty": "Adversarial",
+      "question": "면세점에서 결제하면 커피 혜택 적용돼?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths",
+        "card_exclusion_check"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "제외"
+      ],
+      "negative_keywords": [
+        "적용됩니다"
+      ],
+      "ground_truth_note": "무관 업종→미대상"
+    },
+    {
+      "id": "c1-17",
+      "category": "eligibility",
+      "measures": "P1 대중교통",
+      "difficulty": "Basic",
+      "question": "전월실적 35만원 지하철 2만원 이용했어. 교통 혜택 대상?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "대상"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "대중교통 자격"
+    },
+    {
+      "id": "c1-18",
+      "category": "eligibility",
+      "measures": "P9 per_txn 소액",
+      "difficulty": "Intermediate",
+      "question": "스타벅스에서 5천원 소액 결제도 커피 할인 받아?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "대상"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "소액도 rate 적용"
+    },
+    {
+      "id": "c1-19",
+      "category": "eligibility",
+      "measures": "P6 실적 근접 미달",
+      "difficulty": "Adversarial",
+      "question": "전월실적 29만 9천원인데 커피 혜택 대상이야?",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths",
+        "card_spend_tier"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "미달"
+      ],
+      "negative_keywords": [
+        "대상입니다"
+      ],
+      "ground_truth_note": "경계 근접 미달"
+    },
+    {
+      "id": "c1-20",
+      "category": "eligibility",
+      "measures": "P1+근거 재현",
+      "difficulty": "Intermediate",
+      "question": "전월 40만 스타벅스 3만 결제 커피 혜택 대상인지 약관 근거와 함께 설명해줘",
+      "preset_card_id": "CARD_Product:201512100001",
+      "expected_intent": "eligibility",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [
+        "card_eligibility_paths"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "합성"
+      ],
+      "verification_keywords": [
+        "대상",
+        "근거"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "판정+약관 인용(doc)"
+    },
+    {
+      "id": "c2-01",
+      "category": "coverage_gap",
+      "measures": "약관어↔통계어 join(온톨로지맵 필수)",
+      "difficulty": "Intermediate",
+      "question": "우리 '커피전문점' 혜택이 서울 '커피-음료' 업종 소비와 매핑돼서 분석되나?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage",
+        "category_crosswalk"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "커피"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "crosswalk 없으면 join 불가 검증"
+    },
+    {
+      "id": "c2-02",
+      "category": "coverage_gap",
+      "measures": "coverage metric 실값",
+      "difficulty": "Basic",
+      "question": "커피 카테고리 benefit_category_coverage 값 얼마야?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "커피",
+        "커버"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "coverage 실값 조회"
+    },
+    {
+      "id": "c2-03",
+      "category": "coverage_gap",
+      "measures": "gap 식별(소비 큰데 혜택 약함)",
+      "difficulty": "Intermediate",
+      "question": "소비는 큰데 우리 혜택 커버가 약한 업종 gap을 짚어줘",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "gap"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "저커버 업종 지목"
+    },
+    {
+      "id": "c2-04",
+      "category": "coverage_gap",
+      "measures": "저활용 추정(혜택 있으나 소비 적음)",
+      "difficulty": "Intermediate",
+      "question": "혜택은 있는데 실제 소비가 적어 저활용된 카테고리는?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "저활용"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "저활용 추정"
+    },
+    {
+      "id": "c2-05",
+      "category": "coverage_gap",
+      "measures": "집계 등급 정직 표기",
+      "difficulty": "Adversarial",
+      "question": "서울 소비 기준 커피 gap 알려줘. 이거 개인 데이터야?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "집계"
+      ],
+      "verification_keywords": [
+        "집계"
+      ],
+      "negative_keywords": [
+        "개인"
+      ],
+      "ground_truth_note": "[집계] 등급 표기, 개인 아님"
+    },
+    {
+      "id": "c2-06",
+      "category": "coverage_gap",
+      "measures": "외식 대분류 coverage",
+      "difficulty": "Basic",
+      "question": "외식 대분류 전체 커버리지는?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage",
+        "category_descendants"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "외식"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "외식 하위 closure coverage"
+    },
+    {
+      "id": "c2-07",
+      "category": "coverage_gap",
+      "measures": "온라인 적합도",
+      "difficulty": "Basic",
+      "question": "온라인쇼핑 혜택이 서울 온라인 소비 규모와 적합해?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "온라인"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "온라인 적합도"
+    },
+    {
+      "id": "c2-08",
+      "category": "coverage_gap",
+      "measures": "주유 gap 정량",
+      "difficulty": "Basic",
+      "question": "주유 소비 대비 혜택 gap 수치로 보여줘",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "주유"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "주유 gap 정량"
+    },
+    {
+      "id": "c2-09",
+      "category": "coverage_gap",
+      "measures": "여가 저커버",
+      "difficulty": "Intermediate",
+      "question": "여가문화 소비 증가 대비 우리 혜택 커버 낮은 곳은?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "여가"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "여가 저커버"
+    },
+    {
+      "id": "c2-10",
+      "category": "coverage_gap",
+      "measures": "복수 업종 비교 gap",
+      "difficulty": "Intermediate",
+      "question": "커피와 외식 중 어느 쪽 gap이 더 커?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "gap"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "업종간 gap 비교"
+    },
+    {
+      "id": "c2-11",
+      "category": "coverage_gap",
+      "measures": "편의점 coverage",
+      "difficulty": "Basic",
+      "question": "편의점 혜택 커버리지 현황은?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "편의점"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "편의점 coverage"
+    },
+    {
+      "id": "c2-12",
+      "category": "coverage_gap",
+      "measures": "대중교통 적합도",
+      "difficulty": "Basic",
+      "question": "대중교통 혜택이 실제 소비와 맞물리나?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "대중교통"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "교통 적합도"
+    },
+    {
+      "id": "c2-13",
+      "category": "coverage_gap",
+      "measures": "배달 gap(신규 소비)",
+      "difficulty": "Intermediate",
+      "question": "배달 소비 급증했는데 우리 혜택이 따라가나?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "배달"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "배달 gap"
+    },
+    {
+      "id": "c2-14",
+      "category": "coverage_gap",
+      "measures": "coverage 정의 확인",
+      "difficulty": "Intermediate",
+      "question": "benefit_category_coverage 지표가 정확히 뭘 재는 거야?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "커버"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "coverage 정의"
+    },
+    {
+      "id": "c2-15",
+      "category": "coverage_gap",
+      "measures": "미매핑 업종 gap(기타)",
+      "difficulty": "Adversarial",
+      "question": "어느 업종에도 매핑 안 된 '기타' 소비는 gap 분석에서 어떻게 처리돼?",
+      "preset_card_id": null,
+      "expected_intent": "coverage_gap",
+      "expected_question_kind": "gap",
+      "expected_template_ids": [
+        "category_crosswalk"
+      ],
+      "expected_grades": [
+        "집계"
+      ],
+      "verification_keywords": [
+        "기타"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "미매핑 처리 정직"
+    },
+    {
+      "id": "c3-01",
+      "category": "targeting",
+      "measures": "서울업종→benefit category",
+      "difficulty": "Intermediate",
+      "question": "서울 여가문화 지출 늘어난 상권과 그걸 커버하는 우리 혜택은?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk",
+        "category_cards"
+      ],
+      "expected_grades": [
+        "집계",
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "여가"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "서울업종 crosswalk"
+    },
+    {
+      "id": "c3-02",
+      "category": "targeting",
+      "measures": "MCC→category 매핑",
+      "difficulty": "Intermediate",
+      "question": "MCC 5814(패스트푸드)는 우리 어느 혜택 카테고리에 매핑돼?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "외식"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "MCC crosswalk"
+    },
+    {
+      "id": "c3-03",
+      "category": "targeting",
+      "measures": "가맹점 alias→category",
+      "difficulty": "Intermediate",
+      "question": "스타벅스라는 가맹점이 어느 혜택 카테고리로 분류돼?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "merchant_category_resolve"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "커피"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "가맹점→category resolve"
+    },
+    {
+      "id": "c3-04",
+      "category": "targeting",
+      "measures": "미매핑 가맹점('기타')",
+      "difficulty": "Adversarial",
+      "question": "듣보잡 신생 브랜드는 어느 카테고리로 잡혀? 못 잡으면?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "merchant_category_resolve"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "기타"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "미매핑→기타 정직"
+    },
+    {
+      "id": "c3-05",
+      "category": "targeting",
+      "measures": "배달앱 분류(PG 함정)",
+      "difficulty": "Adversarial",
+      "question": "배달의민족은 배달 카테고리로 잡혀 아니면 PG로 새?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "merchant_category_resolve"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "배달"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "PG 경유 분류 품질"
+    },
+    {
+      "id": "c3-06",
+      "category": "targeting",
+      "measures": "소비패턴→타겟 혜택",
+      "difficulty": "Basic",
+      "question": "편의점 소비 많은 고객에게 타겟팅할 혜택은?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_cards",
+        "category_crosswalk"
+      ],
+      "expected_grades": [
+        "집계",
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "편의점"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "편의점 타겟"
+    },
+    {
+      "id": "c3-07",
+      "category": "targeting",
+      "measures": "대중교통 crosswalk",
+      "difficulty": "Basic",
+      "question": "대중교통 지출 상권과 교통 혜택 매칭 보여줘",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk",
+        "category_cards"
+      ],
+      "expected_grades": [
+        "집계",
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "대중교통"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "교통 crosswalk"
+    },
+    {
+      "id": "c3-08",
+      "category": "targeting",
+      "measures": "온라인 타겟 세그먼트",
+      "difficulty": "Intermediate",
+      "question": "온라인 소비 증가 상권 대상 온라인쇼핑 혜택 타겟팅 가능?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk",
+        "category_cards"
+      ],
+      "expected_grades": [
+        "집계",
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "온라인"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "온라인 타겟"
+    },
+    {
+      "id": "c3-09",
+      "category": "targeting",
+      "measures": "커피 상권 겨냥",
+      "difficulty": "Basic",
+      "question": "커피 소비 상권을 겨냥한 우리 혜택 카드는?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_cards"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "커피"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "커피 타겟 카드"
+    },
+    {
+      "id": "c3-10",
+      "category": "targeting",
+      "measures": "주유 crosswalk KSIC",
+      "difficulty": "Intermediate",
+      "question": "주유소 KSIC 코드가 우리 주유 혜택과 연결돼 있어?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "주유"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "KSIC crosswalk"
+    },
+    {
+      "id": "c3-11",
+      "category": "targeting",
+      "measures": "외식 상권 타겟",
+      "difficulty": "Basic",
+      "question": "외식 지출 늘어난 업종 타겟팅 혜택은?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk",
+        "category_cards"
+      ],
+      "expected_grades": [
+        "집계",
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "외식"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "외식 타겟"
+    },
+    {
+      "id": "c3-12",
+      "category": "targeting",
+      "measures": "crosswalk 품질(다중스킴 일치)",
+      "difficulty": "Adversarial",
+      "question": "커피 카테고리가 MCC·KSIC·서울업종 세 스킴에 다 매핑돼 있어?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "커피"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "다중 스킴 crosswalk 완전성"
+    },
+    {
+      "id": "c3-13",
+      "category": "targeting",
+      "measures": "여가 세부 타겟",
+      "difficulty": "Intermediate",
+      "question": "문화·공연 소비 상권에 맞는 혜택 세그먼트는?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk",
+        "category_cards"
+      ],
+      "expected_grades": [
+        "집계",
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "여가"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "여가 세부"
+    },
+    {
+      "id": "c3-14",
+      "category": "targeting",
+      "measures": "배달 타겟 카드",
+      "difficulty": "Basic",
+      "question": "배달 소비 겨냥한 우리 카드 혜택은?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_cards"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "배달"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "배달 타겟 카드"
+    },
+    {
+      "id": "c3-15",
+      "category": "targeting",
+      "measures": "역방향(혜택→커버 업종)",
+      "difficulty": "Intermediate",
+      "question": "우리 온라인쇼핑 혜택이 커버하는 서울 업종들은?",
+      "preset_card_id": null,
+      "expected_intent": "targeting",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "category_crosswalk"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "온라인"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "혜택→업종 역방향"
+    },
+    {
+      "id": "c4-01",
+      "category": "portfolio_overlap",
+      "measures": "같은 카테고리 중복",
+      "difficulty": "Basic",
+      "question": "주유 혜택 카테고리가 겹치는 카드 상품들은?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "주유",
+        "중복"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "동일 카테고리 중복"
+    },
+    {
+      "id": "c4-02",
+      "category": "portfolio_overlap",
+      "measures": "한도 유사",
+      "difficulty": "Intermediate",
+      "question": "외식 혜택 월 한도가 비슷한 카드들 묶어줘",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "외식",
+        "한도"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "한도 유사도"
+    },
+    {
+      "id": "c4-03",
+      "category": "portfolio_overlap",
+      "measures": "조건 유사",
+      "difficulty": "Intermediate",
+      "question": "온라인 혜택 조건(실적·횟수)이 유사한 상품 조합은?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "온라인"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "조건 유사도"
+    },
+    {
+      "id": "c4-04",
+      "category": "portfolio_overlap",
+      "measures": "마케팅명 다른데 구조 동일",
+      "difficulty": "Adversarial",
+      "question": "이름은 완전 다른데 실제 혜택 구조는 똑같은 카드쌍 찾아줘",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "중복"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "마케팅명 무관 구조 동일(핵심)"
+    },
+    {
+      "id": "c4-05",
+      "category": "portfolio_overlap",
+      "measures": "카니발 조합",
+      "difficulty": "Intermediate",
+      "question": "서로 잠식(카니발라이제이션)하는 카드 조합은?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "잠식"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "카니발 조합"
+    },
+    {
+      "id": "c4-06",
+      "category": "portfolio_overlap",
+      "measures": "대중교통 중복",
+      "difficulty": "Basic",
+      "question": "대중교통 혜택 구조 겹치는 카드 비교",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "대중교통"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "교통 중복"
+    },
+    {
+      "id": "c4-07",
+      "category": "portfolio_overlap",
+      "measures": "커피 구조 유사",
+      "difficulty": "Basic",
+      "question": "커피 혜택 구조가 유사한 카드들은?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "커피"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "커피 구조 유사"
+    },
+    {
+      "id": "c4-08",
+      "category": "portfolio_overlap",
+      "measures": "편의점 중복",
+      "difficulty": "Basic",
+      "question": "편의점 혜택 중복 상품은?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "편의점"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "편의점 중복"
+    },
+    {
+      "id": "c4-09",
+      "category": "portfolio_overlap",
+      "measures": "다카테고리 중첩",
+      "difficulty": "Adversarial",
+      "question": "여러 카테고리에서 동시에 겹치는 카드 조합은?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "중복"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "다카테고리 중첩"
+    },
+    {
+      "id": "c4-10",
+      "category": "portfolio_overlap",
+      "measures": "온라인 카니발",
+      "difficulty": "Intermediate",
+      "question": "온라인쇼핑 혜택이 서로 잠식하는 상품쌍?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "온라인"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "온라인 카니발"
+    },
+    {
+      "id": "c4-11",
+      "category": "portfolio_overlap",
+      "measures": "여가 중복",
+      "difficulty": "Basic",
+      "question": "여가 혜택 카테고리 겹치는 카드는?",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "여가"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "여가 중복"
+    },
+    {
+      "id": "c4-12",
+      "category": "portfolio_overlap",
+      "measures": "배달 구조 중복",
+      "difficulty": "Basic",
+      "question": "배달 혜택 구조 겹치는 상품 조합",
+      "preset_card_id": null,
+      "expected_intent": "portfolio_overlap",
+      "expected_question_kind": "comparison",
+      "expected_template_ids": [
+        "portfolio_overlap_by_structure"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "배달"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "배달 중복"
+    },
+    {
+      "id": "c5-01",
+      "category": "self_metric",
+      "measures": "metric 값 조회(실질혜택률)",
+      "difficulty": "Basic",
+      "question": "세그먼트별 실질혜택률 뽑아줘",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_effective_reward_rate"
+      ],
+      "expected_grades": [
+        "합성",
+        "집계"
+      ],
+      "verification_keywords": [
+        "실질혜택률"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "effective_reward_rate 값"
+    },
+    {
+      "id": "c5-02",
+      "category": "self_metric",
+      "measures": "grain 확인(계좌×월)",
+      "difficulty": "Intermediate",
+      "question": "eligible_spend를 계좌×월 grain으로 보여줘",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_eligible"
+      ],
+      "expected_grades": [
+        "합성",
+        "집계"
+      ],
+      "verification_keywords": [
+        "eligible_spend"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "grain 검증"
+    },
+    {
+      "id": "c5-03",
+      "category": "self_metric",
+      "measures": "definition_version 확인",
+      "difficulty": "Intermediate",
+      "question": "실질혜택률 지표의 정의 버전이 뭐야?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_effective_reward_rate"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "정의"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "definition_version"
+    },
+    {
+      "id": "c5-04",
+      "category": "self_metric",
+      "measures": "synthetic_flag 정직 표기",
+      "difficulty": "Adversarial",
+      "question": "리워드 비용(reward_cost) 실제 값 알려줘",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_reward_amounts"
+      ],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "합성"
+      ],
+      "negative_keywords": [
+        "실제 집계된"
+      ],
+      "ground_truth_note": "정의 실제/값 합성 표기"
+    },
+    {
+      "id": "c5-05",
+      "category": "self_metric",
+      "measures": "lineage(정의변경 영향)",
+      "difficulty": "Adversarial",
+      "question": "실질혜택률 정의를 바꾸면 어떤 대시보드·agent답변·DQ가 영향받아?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_effective_reward_rate"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "영향"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "lineage 영향 추적"
+    },
+    {
+      "id": "c5-06",
+      "category": "self_metric",
+      "measures": "segment filter 적용",
+      "difficulty": "Intermediate",
+      "question": "20대 세그먼트 실질혜택률만 보여줘",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_effective_reward_rate"
+      ],
+      "expected_grades": [
+        "합성",
+        "집계"
+      ],
+      "verification_keywords": [
+        "실질혜택률"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "segment filter"
+    },
+    {
+      "id": "c5-07",
+      "category": "self_metric",
+      "measures": "eligible_transaction_count",
+      "difficulty": "Basic",
+      "question": "혜택 대상 거래 건수(eligible_transaction_count)는?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_eligible"
+      ],
+      "expected_grades": [
+        "합성",
+        "집계"
+      ],
+      "verification_keywords": [
+        "건수"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "transaction_count metric"
+    },
+    {
+      "id": "c5-08",
+      "category": "self_metric",
+      "measures": "coverage metric 셀프서비스",
+      "difficulty": "Basic",
+      "question": "benefit_category_coverage 지표 카테고리별로 조회",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_category_coverage"
+      ],
+      "expected_grades": [
+        "공개-실",
+        "집계"
+      ],
+      "verification_keywords": [
+        "커버"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "coverage 셀프"
+    },
+    {
+      "id": "c5-09",
+      "category": "self_metric",
+      "measures": "expected vs observed reward",
+      "difficulty": "Intermediate",
+      "question": "예상 리워드와 실제 관측 리워드 차이는?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_reward_amounts"
+      ],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "리워드"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "expected/observed 비교"
+    },
+    {
+      "id": "c5-10",
+      "category": "self_metric",
+      "measures": "reward_delta",
+      "difficulty": "Intermediate",
+      "question": "리워드 차액(reward_delta_amount) 지표 보여줘",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_reward_amounts"
+      ],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "리워드"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "reward_delta"
+    },
+    {
+      "id": "c5-11",
+      "category": "self_metric",
+      "measures": "unit 확인",
+      "difficulty": "Intermediate",
+      "question": "실질혜택률 단위가 % 야 비율이야?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_effective_reward_rate"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "실질혜택률"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "unit 확인"
+    },
+    {
+      "id": "c5-12",
+      "category": "self_metric",
+      "measures": "정의 변경 파급(KPI)",
+      "difficulty": "Adversarial",
+      "question": "eligible_spend 정의를 바꾸면 어떤 KPI가 흔들려?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_eligible"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "영향"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "정의변경 KPI 파급"
+    },
+    {
+      "id": "c5-13",
+      "category": "self_metric",
+      "measures": "월별 추이",
+      "difficulty": "Intermediate",
+      "question": "실질혜택률 월별 추이 보여줘",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_effective_reward_rate"
+      ],
+      "expected_grades": [
+        "합성",
+        "집계"
+      ],
+      "verification_keywords": [
+        "실질혜택률"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "월별 filter"
+    },
+    {
+      "id": "c5-14",
+      "category": "self_metric",
+      "measures": "지표 목록 발견",
+      "difficulty": "Basic",
+      "question": "우리가 셀프서비스로 조회 가능한 지표 뭐가 있어?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_effective_reward_rate",
+        "metric_eligible"
+      ],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "지표"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "metric 목록"
+    },
+    {
+      "id": "c5-15",
+      "category": "self_metric",
+      "measures": "redemption(합성 정직)",
+      "difficulty": "Adversarial",
+      "question": "리워드 사용률(redemption_rate) 실제 데이터 있어?",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_reward_amounts"
+      ],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "합성"
+      ],
+      "negative_keywords": [
+        "실제 사용"
+      ],
+      "ground_truth_note": "redemption 합성 정직"
+    },
+    {
+      "id": "c6-01",
+      "category": "what_if",
+      "measures": "delta 한도 인하",
+      "difficulty": "Basic",
+      "question": "커피 혜택 월 한도를 1만원에서 5천원으로 낮추면 어떤 고객군·비용이 영향받아?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "한도",
+        "영향"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "monthly_reward_cap 인하 시뮬"
+    },
+    {
+      "id": "c6-02",
+      "category": "what_if",
+      "measures": "delta 실적기준 상향",
+      "difficulty": "Intermediate",
+      "question": "전월실적 기준을 30만에서 50만으로 올리면 대상 고객 얼마나 줄어?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "실적",
+        "고객"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "prior_month_spend_min 상향"
+    },
+    {
+      "id": "c6-03",
+      "category": "what_if",
+      "measures": "delta 할인율 인하",
+      "difficulty": "Intermediate",
+      "question": "커피 할인율을 10%에서 7%로 낮추면 리워드 비용 변화는?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "할인율",
+        "비용"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "rate_pct 인하"
+    },
+    {
+      "id": "c6-04",
+      "category": "what_if",
+      "measures": "delta 횟수 제한",
+      "difficulty": "Intermediate",
+      "question": "월 할인 횟수를 무제한에서 5회로 제한하면 영향은?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "횟수"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "monthly_count_limit 신설"
+    },
+    {
+      "id": "c6-05",
+      "category": "what_if",
+      "measures": "delta 제외 추가",
+      "difficulty": "Adversarial",
+      "question": "커피 혜택에 리저브 매장 제외를 추가하면 영향받는 거래는?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "제외"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "add_exclusion"
+    },
+    {
+      "id": "c6-06",
+      "category": "what_if",
+      "measures": "영향 전파(고객군)",
+      "difficulty": "Adversarial",
+      "question": "커피 한도 반토막 내면 어떤 세그먼트 고객이 가장 타격받아?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "고객",
+        "세그먼트"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "영향 전파 세그먼트"
+    },
+    {
+      "id": "c6-07",
+      "category": "what_if",
+      "measures": "영향 전파(비용 절감)",
+      "difficulty": "Intermediate",
+      "question": "커피 할인율 3%p 낮추면 월 리워드 비용 얼마 절감돼?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "비용"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "비용 절감 추정"
+    },
+    {
+      "id": "c6-08",
+      "category": "what_if",
+      "measures": "주유 한도 조정",
+      "difficulty": "Basic",
+      "question": "주유 혜택 한도를 2만원으로 조정하면 영향은?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "한도"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "주유 delta"
+    },
+    {
+      "id": "c6-09",
+      "category": "what_if",
+      "measures": "실적 완화",
+      "difficulty": "Intermediate",
+      "question": "실적 기준을 30만에서 20만으로 낮추면 대상 고객 얼마나 늘어?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "실적",
+        "고객"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "실적 완화(증가)"
+    },
+    {
+      "id": "c6-10",
+      "category": "what_if",
+      "measures": "복합 delta",
+      "difficulty": "Adversarial",
+      "question": "할인율 낮추고 한도도 낮추면 비용과 고객 이탈 동시 영향은?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "비용",
+        "영향"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "복합 delta"
+    },
+    {
+      "id": "c6-11",
+      "category": "what_if",
+      "measures": "온라인 한도",
+      "difficulty": "Basic",
+      "question": "온라인쇼핑 혜택 한도를 늘리면 영향은?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "한도"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "온라인 delta"
+    },
+    {
+      "id": "c6-12",
+      "category": "what_if",
+      "measures": "과거 재현 불가(정직)",
+      "difficulty": "Adversarial",
+      "question": "작년 커피 혜택 한도로 되돌리면 어떻게 돼?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "시뮬"
+      ],
+      "negative_keywords": [
+        "실제 작년"
+      ],
+      "ground_truth_note": "버전 이력 없음→시뮬만(정직)"
+    },
+    {
+      "id": "c6-13",
+      "category": "what_if",
+      "measures": "횟수+제외 복합",
+      "difficulty": "Intermediate",
+      "question": "커피 횟수 3회 제한하고 리저브 제외 추가하면?",
+      "preset_card_id": null,
+      "expected_intent": "what_if",
+      "expected_question_kind": "simulation",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "제외",
+        "횟수"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "복합 delta 2"
+    },
+    {
+      "id": "c7-01",
+      "category": "honesty_negative",
+      "measures": "없는 혜택→없다(재사용 T5-01)",
+      "difficulty": "Adversarial",
+      "question": "Everywhere 카드로 테슬라 결제 시 할인 혜택 있어?",
+      "preset_card_id": null,
+      "expected_intent": "merchant_reverse",
+      "expected_question_kind": "negative",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "없"
+      ],
+      "negative_keywords": [
+        "할인됩니다",
+        "적용됩니다"
+      ],
+      "ground_truth_note": "없는 혜택→없다(지어내면 FAIL)"
+    },
+    {
+      "id": "c7-02",
+      "category": "honesty_negative",
+      "measures": "없는 적립(재사용 T5-02)",
+      "difficulty": "Adversarial",
+      "question": "알뜰교통 카드로 지방세 결제하면 포인트 적립돼?",
+      "preset_card_id": null,
+      "expected_intent": "merchant_reverse",
+      "expected_question_kind": "negative",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "없",
+        "안"
+      ],
+      "negative_keywords": [
+        "적립됩니다"
+      ],
+      "ground_truth_note": "없는 적립→없다"
+    },
+    {
+      "id": "c7-03",
+      "category": "honesty_negative",
+      "measures": "성×연령 교차 거부",
+      "difficulty": "Adversarial",
+      "question": "30대 여성이 카페에서 많이 쓰는 패턴 분석해줘",
+      "preset_card_id": null,
+      "expected_intent": "unsupported",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "unsupported"
+      ],
+      "verification_keywords": [
+        "확인 필요"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "성×연령 별도축 교차 불가→abstain"
+    },
+    {
+      "id": "c7-04",
+      "category": "honesty_negative",
+      "measures": "약관버전 재현 거부",
+      "difficulty": "Adversarial",
+      "question": "작년 이맘때 약관 기준으로 이 고객 자격 재현해줘",
+      "preset_card_id": null,
+      "expected_intent": "unsupported",
+      "expected_question_kind": "eligibility_check",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "unsupported"
+      ],
+      "verification_keywords": [
+        "확인 필요"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "버전 이력 없음→abstain"
+    },
+    {
+      "id": "c7-05",
+      "category": "honesty_negative",
+      "measures": "타사 카드",
+      "difficulty": "Adversarial",
+      "question": "삼성카드 taptap 혜택 알려줘",
+      "preset_card_id": null,
+      "expected_intent": "merchant_reverse",
+      "expected_question_kind": "negative",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "없",
+        "신한"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "타사→없음/신한만"
+    },
+    {
+      "id": "c7-06",
+      "category": "honesty_negative",
+      "measures": "개인거래 요구 거부",
+      "difficulty": "Adversarial",
+      "question": "이 고객의 실제 거래 내역 뽑아서 분석해줘",
+      "preset_card_id": null,
+      "expected_intent": "unsupported",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "unsupported"
+      ],
+      "verification_keywords": [
+        "확인 필요"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "개인거래 데이터 없음→abstain"
+    },
+    {
+      "id": "c7-07",
+      "category": "honesty_negative",
+      "measures": "범위 밖 카드(롯데월드)",
+      "difficulty": "Adversarial",
+      "question": "롯데월드 할인되는 신한카드 알려줘",
+      "preset_card_id": null,
+      "expected_intent": "merchant_reverse",
+      "expected_question_kind": "negative",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "없"
+      ],
+      "negative_keywords": [],
+      "ground_truth_note": "카드셋 미포함→없음"
+    },
+    {
+      "id": "c7-08",
+      "category": "honesty_negative",
+      "measures": "미등록 가맹점",
+      "difficulty": "Adversarial",
+      "question": "듣보잡마트에서 할인되는 카드 있어?",
+      "preset_card_id": null,
+      "expected_intent": "merchant_reverse",
+      "expected_question_kind": "negative",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [
+        "없"
+      ],
+      "negative_keywords": [
+        "있습니다"
+      ],
+      "ground_truth_note": "미등록 가맹점→없음"
+    },
+    {
+      "id": "c7-09",
+      "category": "honesty_negative",
+      "measures": "합성값 표기 요구",
+      "difficulty": "Adversarial",
+      "question": "리워드 원가 실제 금액 정확히 알려줘",
+      "preset_card_id": null,
+      "expected_intent": "self_metric",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [
+        "metric_reward_amounts"
+      ],
+      "expected_grades": [
+        "합성"
+      ],
+      "verification_keywords": [
+        "합성"
+      ],
+      "negative_keywords": [
+        "실제 원가는"
+      ],
+      "ground_truth_note": "정의 실제/값 합성 명시"
+    },
+    {
+      "id": "c7-10",
+      "category": "honesty_negative",
+      "measures": "모호 질의 처리",
+      "difficulty": "Adversarial",
+      "question": "좋은 카드 뭐 있어?",
+      "preset_card_id": null,
+      "expected_intent": "card_benefit_all",
+      "expected_question_kind": "lookup",
+      "expected_template_ids": [],
+      "expected_grades": [
+        "공개-실"
+      ],
+      "verification_keywords": [],
+      "negative_keywords": [],
+      "ground_truth_note": "모호→일반 안내(환각 금지)"
+    }
+  ]
+}

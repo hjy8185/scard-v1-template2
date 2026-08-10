@@ -1,0 +1,1205 @@
+{
+  "version": "11299178ebb2",
+  "merchants": {
+    "gs25": {
+      "surface": "gs25",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "gs칼텍스": {
+      "surface": "gs칼텍스",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "cu": {
+      "surface": "cu",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "세븐일레븐": {
+      "surface": "세븐일레븐",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "이마트": {
+      "surface": "이마트",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "홈플러스": {
+      "surface": "홈플러스",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "롯데마트": {
+      "surface": "롯데마트",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "롯데월드": {
+      "surface": "롯데월드",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "서울랜드": {
+      "surface": "서울랜드",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "socar": {
+      "surface": "socar",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "쏘카": {
+      "surface": "쏘카",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "스타벅스": {
+      "surface": "스타벅스",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "이디야": {
+      "surface": "이디야",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "투썸": {
+      "surface": "투썸",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "커피빈": {
+      "surface": "커피빈",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "올리브영": {
+      "surface": "올리브영",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "쿠팡": {
+      "surface": "쿠팡",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "배달의민족": {
+      "surface": "배달의민족",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "요기요": {
+      "surface": "요기요",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "넷플릭스": {
+      "surface": "넷플릭스",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "유니클로": {
+      "surface": "유니클로",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "자라": {
+      "surface": "자라",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "h&m": {
+      "surface": "h&m",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "이케아": {
+      "surface": "이케아",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "신라호텔": {
+      "surface": "신라호텔",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "gs주유": {
+      "surface": "gs주유",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "sk주유": {
+      "surface": "sk주유",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "s-oil": {
+      "surface": "s-oil",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "현대오일뱅크": {
+      "surface": "현대오일뱅크",
+      "id": null,
+      "source": "known",
+      "freq": 999
+    },
+    "taking10": {
+      "surface": "Taking 10",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "mypick": {
+      "surface": "My Pick",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "무료보험": {
+      "surface": "무료보험",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "gs칼텍스주유시": {
+      "surface": "GS칼텍스 주유시",
+      "id": null,
+      "source": "extracted",
+      "freq": 8
+    },
+    "영화": {
+      "surface": "영화",
+      "id": null,
+      "source": "extracted",
+      "freq": 52
+    },
+    "놀이영역": {
+      "surface": "놀이 영역",
+      "id": null,
+      "source": "extracted",
+      "freq": 56
+    },
+    "onepick맛집": {
+      "surface": "One Pick 맛집",
+      "id": null,
+      "source": "extracted",
+      "freq": 101
+    },
+    "4대편의점이용시": {
+      "surface": "4대 편의점 이용 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 111
+    },
+    "커피업종이용시": {
+      "surface": "커피 업종 이용 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 111
+    },
+    "해외이용금액": {
+      "surface": "해외 이용금액",
+      "id": null,
+      "source": "extracted",
+      "freq": 64
+    },
+    "통합": {
+      "surface": "통합",
+      "id": null,
+      "source": "extracted",
+      "freq": 80
+    },
+    "spa브랜드": {
+      "surface": "SPA 브랜드",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "포잉": {
+      "surface": "포잉",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "요식": {
+      "surface": "요식",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "ediyacoffee에서결제시": {
+      "surface": "EDIYA COFFEE에서 결제 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "테마파크/영화": {
+      "surface": "테마파크/영화",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "현금": {
+      "surface": "현금",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "ott": {
+      "surface": "OTT",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "홈쇼핑": {
+      "surface": "홈쇼핑",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "해외이용": {
+      "surface": "해외이용",
+      "id": null,
+      "source": "extracted",
+      "freq": 13
+    },
+    "금융우대": {
+      "surface": "금융우대",
+      "id": null,
+      "source": "extracted",
+      "freq": 6
+    },
+    "요식업종이용금액의": {
+      "surface": "요식업종 이용금액의",
+      "id": null,
+      "source": "extracted",
+      "freq": 6
+    },
+    "travel": {
+      "surface": "Travel",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "대중교통이용금액": {
+      "surface": "대중교통 이용 금액",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "포인트": {
+      "surface": "포인트",
+      "id": null,
+      "source": "extracted",
+      "freq": 15
+    },
+    "생활편의영역이용시": {
+      "surface": "생활편의영역 이용 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 17
+    },
+    "해외이용금액에대해1.": {
+      "surface": "해외 이용금액에 대해 1.",
+      "id": null,
+      "source": "extracted",
+      "freq": 17
+    },
+    "테마파크": {
+      "surface": "테마파크",
+      "id": null,
+      "source": "extracted",
+      "freq": 42
+    },
+    "주유": {
+      "surface": "주유",
+      "id": null,
+      "source": "extracted",
+      "freq": 17
+    },
+    "생활": {
+      "surface": "생활",
+      "id": null,
+      "source": "extracted",
+      "freq": 29
+    },
+    "빽다방이용시": {
+      "surface": "빽다방 이용시",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "커피": {
+      "surface": "커피",
+      "id": null,
+      "source": "extracted",
+      "freq": 16
+    },
+    "daily결제일": {
+      "surface": "Daily 결제일",
+      "id": null,
+      "source": "extracted",
+      "freq": 11
+    },
+    "weekly": {
+      "surface": "Weekly",
+      "id": null,
+      "source": "extracted",
+      "freq": 13
+    },
+    "monthly단골": {
+      "surface": "Monthly 단골",
+      "id": null,
+      "source": "extracted",
+      "freq": 13
+    },
+    "면세점/항공": {
+      "surface": "면세점/항공",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "giftoption": {
+      "surface": "Gift Option",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "골프": {
+      "surface": "골프",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "마이신한포인트": {
+      "surface": "마이신한포인트",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "신한금융그룹": {
+      "surface": "신한 금융그룹",
+      "id": null,
+      "source": "extracted",
+      "freq": 13
+    },
+    "기본": {
+      "surface": "기본",
+      "id": null,
+      "source": "extracted",
+      "freq": 73
+    },
+    "추가": {
+      "surface": "추가",
+      "id": null,
+      "source": "extracted",
+      "freq": 7
+    },
+    "특별": {
+      "surface": "특별",
+      "id": null,
+      "source": "extracted",
+      "freq": 64
+    },
+    "모바일교통카드": {
+      "surface": "모바일 교통카드",
+      "id": null,
+      "source": "extracted",
+      "freq": 62
+    },
+    "요식/커피": {
+      "surface": "요식/커피",
+      "id": null,
+      "source": "extracted",
+      "freq": 7
+    },
+    "lg계열": {
+      "surface": "LG계열",
+      "id": null,
+      "source": "extracted",
+      "freq": 6
+    },
+    "스포츠": {
+      "surface": "스포츠",
+      "id": null,
+      "source": "extracted",
+      "freq": 18
+    },
+    "전국유명백화점및": {
+      "surface": "전국 유명 백화점 및",
+      "id": null,
+      "source": "extracted",
+      "freq": 7
+    },
+    "cube선택": {
+      "surface": "Cube 선택",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "sk내트럭주유소에서주유시": {
+      "surface": "SK내트럭 주유소에서 주유 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "에이치디현대오일뱅크주유시리터당": {
+      "surface": "에이치디현대오일뱅크 주유 시 리터당",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "개인사업자공통": {
+      "surface": "개인사업자 공통",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "온라인영화": {
+      "surface": "온라인 영화",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "레일리지": {
+      "surface": "레일리지",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "직접고른주유소에서": {
+      "surface": "직접 고른 주유소에서",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "꼭필요한정비소와주차장": {
+      "surface": "꼭 필요한 정비소와 주차장",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "전월이용금액별월간통합": {
+      "surface": "전월 이용금액별 월간 통합",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "대중교통": {
+      "surface": "대중교통",
+      "id": null,
+      "source": "extracted",
+      "freq": 8
+    },
+    "서원유통탑마트이용금액": {
+      "surface": "서원유통 탑마트 이용금액",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "서원유통탑마트수목돌풍추가": {
+      "surface": "서원유통 탑마트 수목돌풍 추가",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "교보문고/반디앤루니스": {
+      "surface": "교보문고/반디앤루니스",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "전국버스/지하철/택시이용시최고": {
+      "surface": "전국 버스/지하철/택시 이용 시 최고",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "디지털구독": {
+      "surface": "디지털 구독",
+      "id": null,
+      "source": "extracted",
+      "freq": 8
+    },
+    "onepick쇼핑몰": {
+      "surface": "One Pick 쇼핑몰",
+      "id": null,
+      "source": "extracted",
+      "freq": 10
+    },
+    "신한은행금융": {
+      "surface": "신한은행 금융",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "공연/영화": {
+      "surface": "공연/영화",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "건강/미용": {
+      "surface": "건강/미용",
+      "id": null,
+      "source": "extracted",
+      "freq": 6
+    },
+    "현대오일뱅크주유시리터당": {
+      "surface": "현대오일뱅크 주유 시 리터당",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "하이패스": {
+      "surface": "하이패스",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "신세계사이먼프리미엄아울렛": {
+      "surface": "신세계사이먼 프리미엄 아울렛",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "신세계계열사영역별": {
+      "surface": "신세계 계열사 영역별",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "cgv2천원현장": {
+      "surface": "CGV 2천원 현장",
+      "id": null,
+      "source": "extracted",
+      "freq": 53
+    },
+    "마일리지": {
+      "surface": "마일리지",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "놀이영역이용시": {
+      "surface": "놀이 영역 이용 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 45
+    },
+    "socar결제시": {
+      "surface": "SOCAR 결제 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "온라인영화예매": {
+      "surface": "온라인 영화예매",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "3대": {
+      "surface": "3대",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "베이커리": {
+      "surface": "베이커리",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "다이소": {
+      "surface": "다이소",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "레저": {
+      "surface": "레저",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "이용금액": {
+      "surface": "이용금액",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "택시/ktx이용금액": {
+      "surface": "택시/KTX 이용 금액",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "네이버외결제시0.": {
+      "surface": "네이버 외 결제 시 0.",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "hd현대오일뱅크및gs칼텍스주유": {
+      "surface": "HD현대오일뱅크 및 GS칼텍스 주유",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "해외": {
+      "surface": "해외",
+      "id": null,
+      "source": "extracted",
+      "freq": 12
+    },
+    "카카오페이결제시": {
+      "surface": "카카오페이 결제 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "이동통신요금자동이체시": {
+      "surface": "이동통신요금 자동 이체 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "식음료": {
+      "surface": "식음료",
+      "id": null,
+      "source": "extracted",
+      "freq": 7
+    },
+    "홈경기": {
+      "surface": "홈경기",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "gs칼텍스주유시리터당": {
+      "surface": "GS칼텍스 주유 시 리터당",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "할인": {
+      "surface": "할인",
+      "id": null,
+      "source": "extracted",
+      "freq": 7
+    },
+    "국내/해외이용금액0.": {
+      "surface": "국내/해외 이용금액 0.",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "캐시백": {
+      "surface": "캐시백",
+      "id": null,
+      "source": "extracted",
+      "freq": 6
+    },
+    "gs칼텍스리터당": {
+      "surface": "GS칼텍스 리터당",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "생활쇼핑최대": {
+      "surface": "생활쇼핑 최대",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "커피전문점/제과점업종": {
+      "surface": "커피전문점/제과점 업종",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "주말": {
+      "surface": "주말",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "교육": {
+      "surface": "교육",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "밀딜리버리": {
+      "surface": "밀딜리버리",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "신한금융그룹금융": {
+      "surface": "신한금융그룹 금융",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "병원/약국": {
+      "surface": "병원/약국",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "온라인몰": {
+      "surface": "온라인몰",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "7개디지털구독": {
+      "surface": "7개 디지털 구독",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "뷰티": {
+      "surface": "뷰티",
+      "id": null,
+      "source": "extracted",
+      "freq": 10
+    },
+    "쥬얼리": {
+      "surface": "쥬얼리",
+      "id": null,
+      "source": "extracted",
+      "freq": 8
+    },
+    "쇼핑": {
+      "surface": "쇼핑",
+      "id": null,
+      "source": "extracted",
+      "freq": 7
+    },
+    "통신": {
+      "surface": "통신",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "영화/스포츠": {
+      "surface": "영화/스포츠",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "생활영역이용금액의": {
+      "surface": "생활영역 이용금액의",
+      "id": null,
+      "source": "extracted",
+      "freq": 10
+    },
+    "생활친화가맹점잔돈": {
+      "surface": "생활친화가맹점 잔돈",
+      "id": null,
+      "source": "extracted",
+      "freq": 8
+    },
+    "전가맹점0.": {
+      "surface": "전 가맹점 0.",
+      "id": null,
+      "source": "extracted",
+      "freq": 6
+    },
+    "gift": {
+      "surface": "Gift",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "면세점": {
+      "surface": "면세점",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "알뜰주유소최대": {
+      "surface": "알뜰주유소 최대",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "ikea점내이용금액특별": {
+      "surface": "IKEA 점내 이용금액 특별",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "제휴": {
+      "surface": "제휴",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "신세계백화점": {
+      "surface": "신세계백화점",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "신세계백화점입점영화관주말3천원": {
+      "surface": "신세계백화점 입점영화관 주말 3천원",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "전국동물병원": {
+      "surface": "전국 동물병원",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "5개펫온라인전용몰": {
+      "surface": "5개 펫 온라인 전용몰",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "일반온라인쇼핑몰": {
+      "surface": "일반 온라인 쇼핑몰",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "일상생활비": {
+      "surface": "일상 생활비",
+      "id": null,
+      "source": "extracted",
+      "freq": 9
+    },
+    "투썸플레이스": {
+      "surface": "투썸플레이스",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "커피/편의점": {
+      "surface": "커피/편의점",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "간편결제로결제시": {
+      "surface": "간편결제로 결제 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 8
+    },
+    "편의점": {
+      "surface": "편의점",
+      "id": null,
+      "source": "extracted",
+      "freq": 4
+    },
+    "디지털구독영역이용시": {
+      "surface": "디지털 구독 영역 이용 시",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "차량이용": {
+      "surface": "차량 이용",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "주유/충전": {
+      "surface": "주유/충전",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "금리우대": {
+      "surface": "금리우대",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "lg트윈스정규시즌홈경기": {
+      "surface": "LG트윈스 정규 시즌 홈경기",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "daily": {
+      "surface": "Daily",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "국내": {
+      "surface": "국내",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "땡겨요앱이용금액마이신한포인트": {
+      "surface": "땡겨요 앱 이용금액 마이신한포인트",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "편의점이용금액마이신한포인트": {
+      "surface": "편의점 이용금액 마이신한포인트",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "국내전가맹점이용금액의0.": {
+      "surface": "국내 전가맹점 이용금액의 0.",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "대중교통이용금액의": {
+      "surface": "대중교통 이용금액의",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "배달앱": {
+      "surface": "배달 앱",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "항공마일리지": {
+      "surface": "항공 마일리지",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "공항라운지": {
+      "surface": "공항 라운지",
+      "id": null,
+      "source": "extracted",
+      "freq": 5
+    },
+    "jeju": {
+      "surface": "JEJU",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "전월실적/": {
+      "surface": "전월 실적/",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "홈플러스점내이용": {
+      "surface": "홈플러스 점내 이용",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "요일별지정영역에서": {
+      "surface": "요일별 지정 영역에서",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "화물운송사업자전용": {
+      "surface": "화물운송사업자 전용",
+      "id": null,
+      "source": "extracted",
+      "freq": 8
+    },
+    "monthlyplan": {
+      "surface": "Monthly Plan",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "annualplan": {
+      "surface": "Annual Plan",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "timeplan": {
+      "surface": "Time Plan",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "dailyplan": {
+      "surface": "Daily Plan",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "planday": {
+      "surface": "Plan Day",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "국내/외신판이용가맹점0.": {
+      "surface": "국내/외 신판이용 가맹점 0.",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "영화/뷰티/스포츠": {
+      "surface": "영화/뷰티/스포츠",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "후불교통카드선택시대중교통": {
+      "surface": "후불교통카드 선택 시 대중교통",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "쓸수록solsol": {
+      "surface": "쓸수록 SOLSOL",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "담을수록solsol": {
+      "surface": "담을수록 SOLSOL",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "모을수록solsol": {
+      "surface": "모을수록 SOLSOL",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "전월이용금액별월": {
+      "surface": "전월 이용금액별 월",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "신세계백화점제휴": {
+      "surface": "신세계백화점 제휴",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "신세계신한카드bestfit": {
+      "surface": "신세계 신한카드 Best Fit",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "국내가맹점이용금액0.": {
+      "surface": "국내 가맹점 이용금액 0.",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "해외가맹점이용금액": {
+      "surface": "해외 가맹점 이용금액",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "lge.com플러스": {
+      "surface": "LGE.COM 플러스",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "기타": {
+      "surface": "기타",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "3대백화점및롯데마트": {
+      "surface": "3대 백화점 및 롯데마트",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "전가맹점": {
+      "surface": "전 가맹점",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "맥스무비영화": {
+      "surface": "맥스무비 영화",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "cgv영화": {
+      "surface": "CGV 영화",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "아모레퍼시픽이용시뷰티포인트": {
+      "surface": "아모레퍼시픽 이용 시 뷰티포인트",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "알찬주유": {
+      "surface": "알찬 주유",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    },
+    "아웃백": {
+      "surface": "아웃백",
+      "id": null,
+      "source": "extracted",
+      "freq": 3
+    },
+    "항공": {
+      "surface": "항공",
+      "id": null,
+      "source": "extracted",
+      "freq": 2
+    }
+  }
+}

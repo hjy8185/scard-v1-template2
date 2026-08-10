@@ -1,0 +1,2649 @@
+{
+ "_doc": "U94 S1 — 결과셋 GOLD. 답변 텍스트가 아니라 실행 결과를 대조한다.",
+ "_why": [
+  "TRD2 r1이 '답변이 어렵습니다'라며 48을 포함해 PASS로 통과했다.",
+  "텍스트 substring으로는 '데이터로 보여줬나'를 판정할 수 없다 (ETM false-positive 23.0%)."
+ ],
+ "_provenance_rule": [
+  "★ 생성자와 검산자를 분리한다 — 시스템 출력을 그대로 GOLD로 쓰면 자기참조다.",
+  "2601.08778: BIRD Mini-Dev 52.8% 오류. 우리도 CHN-D가 낡은 GOLD로 채점된 전례가 있다.",
+  "필수 필드: label · source_query · engine · normalization_version · reviewed_by · reviewed_at",
+  "generated_by 와 reviewed_by 가 같으면 게이트가 거부한다."
+ ],
+ "_how_to_add": [
+  "1. source_query 를 라이브에서 실행한다 (사람이 쿼리를 검토한 뒤).",
+  "2. 결과를 bff_v2.domain.canonical.canonical_rows(rows, columns) 로 정규화한다.",
+  "3. expected 에 그 행렬을, expected_sha256 에 result_digest 를 넣는다.",
+  "4. data_snapshot 에 그 시점 /health 의 data_snapshot.digest 를 적는다.",
+  "5. reviewed_by 에 검산한 사람을 적는다 — 생성자와 달라야 한다.",
+  "★ 결과셋을 못 정하는 문항(정의·방법론)은 넣지 않는다. 패널로 넘어간다."
+ ],
+ "_tolerance_rule": [
+  "숫자만 tolerance를 쓴다. 문자열·null 은 exact.",
+  "기본 0.001(0.1%) — 부동소수·집계 순서 흔들림만 흡수한다.",
+  "★ 넓게 주면 '틀린 답'이 통과한다. u19-04가 3.6배 과소인데 패널 PASS였던 유형."
+ ],
+ "_status": "20건 채움 (2026-08-06). source_query 재실행으로 재현 가능. data_snapshot f0738e15351b53b5",
+ "items": {
+  "CHN-D": {
+   "label": "커버 최하위 = 주류/유흥 2장",
+   "source_query": "SELECT benefit_category,COUNT(DISTINCT card_id) n FROM r1_card_category GROUP BY 1 ORDER BY 2 ASC",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "간편결제",
+      32
+     ],
+     [
+      "교육/학원",
+      15
+     ],
+     [
+      "대중교통",
+      91
+     ],
+     [
+      "배달",
+      21
+     ],
+     [
+      "보험/금융",
+      14
+     ],
+     [
+      "뷰티",
+      48
+     ],
+     [
+      "생활",
+      57
+     ],
+     [
+      "쇼핑",
+      85
+     ],
+     [
+      "슈퍼마켓/마트",
+      110
+     ],
+     [
+      "약국",
+      6
+     ],
+     [
+      "여가",
+      252
+     ],
+     [
+      "온라인쇼핑",
+      70
+     ],
+     [
+      "음식점",
+      188
+     ],
+     [
+      "의료/건강",
+      8
+     ],
+     [
+      "의류/패션",
+      13
+     ],
+     [
+      "자동납부",
+      14
+     ],
+     [
+      "제과/베이커리",
+      7
+     ],
+     [
+      "주류/유흥",
+      2
+     ],
+     [
+      "주유/충전",
+      131
+     ],
+     [
+      "커피/음료",
+      239
+     ],
+     [
+      "통신",
+      78
+     ],
+     [
+      "패스트푸드",
+      62
+     ],
+     [
+      "편의점",
+      161
+     ],
+     [
+      "포인트/적립일반",
+      321
+     ],
+     [
+      "항공/면세",
+      45
+     ],
+     [
+      "해외이용",
+      83
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "benefit_category",
+    "n"
+   ],
+   "expected_sha256": [
+    "37634978aeeb71a816830bad9ea8659f81d24d6bbab3cd2b17c467a1458a321c"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 26,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:32Z",
+   "review_note": "label 수치 3/5 일치 (예 [2.0, 2.0, 7.0])",
+   "resultset_policy": "required",
+   "resultset_policy_reason": "★ 진단 초안이 \"질문은 상권 기회, GOLD는 카드 커버 — 축이 다르다\"며 제외를 권고했으나 **철회한다**(리뷰 #5). 평가셋 `gold_facts`가 명시적으로 \"커버가 가장 얇은 후보는 주류/유흥\"과 커버리지 수치를 요구한다(`data/v2_eval_set.json` CHN-D). 즉 카드 커버가 **의도된 정답**이고, GOLD가 어긋난 게 아니라 답변이 질문 의도를 벗어난 것이다. 상권 분석을 새 정답으로 삼으려면 시나리오 계약부터 사람 검토로 바꿔야 한다"
+  },
+  "MKT-2": {
+   "label": "음식점·외식 혜택 카드 목록 (음식점 188장 / 패스트푸드 62장)",
+   "source_query": "SELECT benefit_category,COUNT(DISTINCT card_id) FROM r1_card_category WHERE benefit_category IN ('음식점','패스트푸드') GROUP BY 1",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "음식점",
+      188
+     ],
+     [
+      "패스트푸드",
+      62
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "benefit_category",
+    "_col1"
+   ],
+   "expected_sha256": [
+    "c7916bbda472144f1ec3508760d0550163bccf0eb612dbb1f4f0ba7b8c1f27b6"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 2,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:33Z",
+   "review_note": "label 수치 2/4 일치 (예 [188.0, 62.0])",
+   "resultset_policy": "excluded",
+   "resultset_policy_reason": "질문이 목록을 물었고(\"카드는 다 뭐가 있어?\") 답변도 카드 목록이다. 그런데 GOLD는 카테고리 집계(음식점 188/패스트푸드 62)를 요구한다 — 형태가 다르다. `v2_numeric_gold`도 must_values=[]로 같은 판단을 적었다. ★ 목록형 expected를 지원하면 되살릴 수 있다(별 유닛)"
+  },
+  "MKT-3": {
+   "label": "연령대별 실질 혜택률 — 50대 0.83% 최고, 20대 0.48% 최저",
+   "source_query": "SELECT segment_value,AVG(effective_reward_rate) FROM metrics_segment_month WHERE segment_type='age_band' GROUP BY 1",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "60_이상",
+      0.00593
+     ],
+     [
+      10,
+      0.007062
+     ],
+     [
+      20,
+      0.004775
+     ],
+     [
+      30,
+      0.006803
+     ],
+     [
+      40,
+      0.005901
+     ],
+     [
+      50,
+      0.008253
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "segment_value",
+    "_col1"
+   ],
+   "expected_sha256": [
+    "4e49291e7bb8a7f077b2c393cfd6154cdc8c622e2cc5d5e611bc2b06591273cf"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 6,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:34Z",
+   "review_note": "label 수치 8/8 일치 (예 [50.0, 20.0, 10.0])",
+   "resultset_policy": "optional"
+  },
+  "POP1": {
+   "label": "점심 생활인구 1위 = 여의동 157,933명/시",
+   "source_query": "SELECT adstrd_name,SUM(avg_population_per_hour)/3 lunch_pop FROM v_living_population_hourly_avg WHERE year_month='202606' AND hour_slot IN (11,12,13) GROUP BY 1 ORDER BY 2 DESC",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "가락1동",
+      26203
+     ],
+     [
+      "가락2동",
+      20950
+     ],
+     [
+      "가락본동",
+      44117
+     ],
+     [
+      "가산동",
+      88674
+     ],
+     [
+      "가양1동",
+      48097
+     ],
+     [
+      "강일동",
+      42998
+     ],
+     [
+      "개봉1동",
+      22950
+     ],
+     [
+      "개포1동",
+      21318
+     ],
+     [
+      "개포2동",
+      28076
+     ],
+     [
+      "고덕1동",
+      21565
+     ],
+     [
+      "고덕2동",
+      24252
+     ],
+     [
+      "고척1동",
+      24366
+     ],
+     [
+      "공덕동",
+      29196
+     ],
+     [
+      "공릉1동",
+      33265
+     ],
+     [
+      "공릉2동",
+      49183
+     ],
+     [
+      "공항동",
+      34798
+     ],
+     [
+      "광장동",
+      34647
+     ],
+     [
+      "광희동",
+      34830
+     ],
+     [
+      "구로2동",
+      34415
+     ],
+     [
+      "구로3동",
+      56886
+     ],
+     [
+      "구로5동",
+      33184
+     ],
+     [
+      "구산동",
+      22236
+     ],
+     [
+      "구의3동",
+      27097
+     ],
+     [
+      "군자동",
+      26206
+     ],
+     [
+      "길동",
+      55377
+     ],
+     [
+      "길음1동",
+      27951
+     ],
+     [
+      "낙성대동",
+      23742
+     ],
+     [
+      "남가좌2동",
+      19711
+     ],
+     [
+      "남영동",
+      25124
+     ],
+     [
+      "남현동",
+      19907
+     ],
+     [
+      "내곡동",
+      25134
+     ],
+     [
+      "노량진1동",
+      33109
+     ],
+     [
+      "녹번동",
+      25535
+     ],
+     [
+      "논현1동",
+      48758
+     ],
+     [
+      "논현2동",
+      63026
+     ],
+     [
+      "답십리1동",
+      20858
+     ],
+     [
+      "당산1동",
+      27247
+     ],
+     [
+      "당산2동",
+      40636
+     ],
+     [
+      "대림3동",
+      21239
+     ],
+     [
+      "대방동",
+      44522
+     ],
+     [
+      "대조동",
+      48795
+     ],
+     [
+      "대치1동",
+      28452
+     ],
+     [
+      "대치2동",
+      62166
+     ],
+     [
+      "대치4동",
+      49579
+     ],
+     [
+      "대학동",
+      44201
+     ],
+     [
+      "대흥동",
+      29166
+     ],
+     [
+      "도곡1동",
+      49976
+     ],
+     [
+      "도곡2동",
+      28911
+     ],
+     [
+      "독산1동",
+      35954
+     ],
+     [
+      "동선동",
+      25554
+     ],
+     [
+      "둔촌2동",
+      25122
+     ],
+     [
+      "등촌3동",
+      35390
+     ],
+     [
+      "망우본동",
+      38717
+     ],
+     [
+      "면목본동",
+      22435
+     ],
+     [
+      "명동",
+      72209
+     ],
+     [
+      "명일1동",
+      22066
+     ],
+     [
+      "목1동",
+      42597
+     ],
+     [
+      "묵1동",
+      20759
+     ],
+     [
+      "문래동",
+      40928
+     ],
+     [
+      "문정1동",
+      21201
+     ],
+     [
+      "문정2동",
+      54248
+     ],
+     [
+      "미아동",
+      21456
+     ],
+     [
+      "반포1동",
+      37343
+     ],
+     [
+      "반포4동",
+      55670
+     ],
+     [
+      "발산1동",
+      32094
+     ],
+     [
+      "방배1동",
+      23457
+     ],
+     [
+      "방배2동",
+      20878
+     ],
+     [
+      "방배3동",
+      22199
+     ],
+     [
+      "방배4동",
+      27228
+     ],
+     [
+      "방이2동",
+      36830
+     ],
+     [
+      "방학1동",
+      23784
+     ],
+     [
+      "방화1동",
+      29413
+     ],
+     [
+      "방화2동",
+      22988
+     ],
+     [
+      "북가좌2동",
+      23149
+     ],
+     [
+      "북아현동",
+      76061
+     ],
+     [
+      "불광1동",
+      20054
+     ],
+     [
+      "사근동",
+      31203
+     ],
+     [
+      "사당2동",
+      28559
+     ],
+     [
+      "사직동",
+      40224
+     ],
+     [
+      "삼선동",
+      25978
+     ],
+     [
+      "삼성1동",
+      71920
+     ],
+     [
+      "삼성2동",
+      45099
+     ],
+     [
+      "삼전동",
+      23974
+     ],
+     [
+      "상계1동",
+      27052
+     ],
+     [
+      "상계2동",
+      26220
+     ],
+     [
+      "상계6·7동",
+      45088
+     ],
+     [
+      "상도1동",
+      37432
+     ],
+     [
+      "상봉2동",
+      21169
+     ],
+     [
+      "상암동",
+      59377
+     ],
+     [
+      "상일동",
+      37476
+     ],
+     [
+      "서강동",
+      26505
+     ],
+     [
+      "서교동",
+      84655
+     ],
+     [
+      "서초1동",
+      35793
+     ],
+     [
+      "서초2동",
+      61114
+     ],
+     [
+      "서초3동",
+      94510
+     ],
+     [
+      "석관동",
+      24069
+     ],
+     [
+      "석촌동",
+      24796
+     ],
+     [
+      "성내1동",
+      21945
+     ],
+     [
+      "성내2동",
+      21262
+     ],
+     [
+      "성내3동",
+      26706
+     ],
+     [
+      "성북동",
+      19716
+     ],
+     [
+      "성산2동",
+      29495
+     ],
+     [
+      "성수1가1동",
+      21212
+     ],
+     [
+      "성수1가2동",
+      28648
+     ],
+     [
+      "성수2가1동",
+      20730
+     ],
+     [
+      "성수2가3동",
+      60793
+     ],
+     [
+      "세곡동",
+      40256
+     ],
+     [
+      "소공동",
+      52079
+     ],
+     [
+      "송중동",
+      28705
+     ],
+     [
+      "송천동",
+      23206
+     ],
+     [
+      "송파1동",
+      23021
+     ],
+     [
+      "수서동",
+      28881
+     ],
+     [
+      "시흥1동",
+      24027
+     ],
+     [
+      "신내1동",
+      28611
+     ],
+     [
+      "신당동",
+      22622
+     ],
+     [
+      "신대방2동",
+      23231
+     ],
+     [
+      "신도림동",
+      30093
+     ],
+     [
+      "신림동",
+      25169
+     ],
+     [
+      "신사동",
+      59924
+     ],
+     [
+      "신정3동",
+      33698
+     ],
+     [
+      "신정4동",
+      28804
+     ],
+     [
+      "신촌동",
+      75653
+     ],
+     [
+      "아현동",
+      29151
+     ],
+     [
+      "안암동",
+      33836
+     ],
+     [
+      "암사1동",
+      24310
+     ],
+     [
+      "압구정동",
+      55290
+     ],
+     [
+      "양재1동",
+      72170
+     ],
+     [
+      "양재2동",
+      49448
+     ],
+     [
+      "양평1동",
+      21208
+     ],
+     [
+      "양평2동",
+      29759
+     ],
+     [
+      "여의동",
+      157933
+     ],
+     [
+      "역삼1동",
+      141943
+     ],
+     [
+      "역삼2동",
+      61582
+     ],
+     [
+      "역촌동",
+      34000
+     ],
+     [
+      "연희동",
+      36003
+     ],
+     [
+      "염창동",
+      26207
+     ],
+     [
+      "영등포동",
+      68507
+     ],
+     [
+      "오금동",
+      34394
+     ],
+     [
+      "오류2동",
+      43297
+     ],
+     [
+      "옥수동",
+      25400
+     ],
+     [
+      "왕십리도선동",
+      19992
+     ],
+     [
+      "용강동",
+      23001
+     ],
+     [
+      "용신동",
+      42507
+     ],
+     [
+      "우장산동",
+      30738
+     ],
+     [
+      "월곡1동",
+      25452
+     ],
+     [
+      "월곡2동",
+      22705
+     ],
+     [
+      "은천동",
+      22032
+     ],
+     [
+      "을지로동",
+      27832
+     ],
+     [
+      "이문1동",
+      35396
+     ],
+     [
+      "이촌1동",
+      23987
+     ],
+     [
+      "이화동",
+      49293
+     ],
+     [
+      "인수동",
+      23016
+     ],
+     [
+      "자양1동",
+      21663
+     ],
+     [
+      "자양2동",
+      23063
+     ],
+     [
+      "자양3동",
+      24063
+     ],
+     [
+      "자양4동",
+      26681
+     ],
+     [
+      "잠실4동",
+      21772
+     ],
+     [
+      "잠실6동",
+      56267
+     ],
+     [
+      "잠실본동",
+      32284
+     ],
+     [
+      "잠원동",
+      37880
+     ],
+     [
+      "장안1동",
+      32684
+     ],
+     [
+      "장안2동",
+      26757
+     ],
+     [
+      "장지동",
+      27550
+     ],
+     [
+      "전농1동",
+      36849
+     ],
+     [
+      "제기동",
+      33201
+     ],
+     [
+      "조원동",
+      49437
+     ],
+     [
+      "종로1·2·3·4가동",
+      103085
+     ],
+     [
+      "종로5·6가동",
+      22168
+     ],
+     [
+      "종암동",
+      33783
+     ],
+     [
+      "중계2·3동",
+      28358
+     ],
+     [
+      "중곡4동",
+      21997
+     ],
+     [
+      "중화2동",
+      20919
+     ],
+     [
+      "진관동",
+      53439
+     ],
+     [
+      "창2동",
+      23085
+     ],
+     [
+      "창4동",
+      27798
+     ],
+     [
+      "천호1동",
+      26105
+     ],
+     [
+      "천호2동",
+      41627
+     ],
+     [
+      "천호3동",
+      24102
+     ],
+     [
+      "청담동",
+      53480
+     ],
+     [
+      "청량리동",
+      21819
+     ],
+     [
+      "청룡동",
+      36283
+     ],
+     [
+      "청운효자동",
+      21854
+     ],
+     [
+      "청파동",
+      24957
+     ],
+     [
+      "충현동",
+      46502
+     ],
+     [
+      "필동",
+      21544
+     ],
+     [
+      "하계1동",
+      23255
+     ],
+     [
+      "한강로동",
+      69404
+     ],
+     [
+      "한남동",
+      33571
+     ],
+     [
+      "합정동",
+      21430
+     ],
+     [
+      "행당1동",
+      45676
+     ],
+     [
+      "행운동",
+      19810
+     ],
+     [
+      "혜화동",
+      34685
+     ],
+     [
+      "홍은2동",
+      19390
+     ],
+     [
+      "화곡1동",
+      50774
+     ],
+     [
+      "화곡8동",
+      68099
+     ],
+     [
+      "화곡본동",
+      20602
+     ],
+     [
+      "화양동",
+      40009
+     ],
+     [
+      "회기동",
+      23756
+     ],
+     [
+      "회현동",
+      55779
+     ],
+     [
+      "흑석동",
+      35478
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "adstrd_name",
+    "lunch_pop"
+   ],
+   "expected_sha256": [
+    "edf3c83958f4ecdf94bc3e21294577914967a0f7e008573b070a6070c9606f01"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 200,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:38Z",
+   "review_note": "label 수치 7/7 일치 (예 [157933.0, 157933.0, 141943.0])",
+   "resultset_policy": "excluded",
+   "resultset_policy_reason": "POP3와 같은 기간축 문제(리뷰 #7이 지적). GOLD는 202606의 157,933명, 기준선 답변은 전 기간 평균 여의동 153,441명이다"
+  },
+  "POP2": {
+   "label": "인구 대비 소비 1위 = 노량진1동 325,079원/인(연환산)",
+   "source_query": "WITH pop AS (SELECT adstrd_cd,adstrd_name,SUM(avg_population_per_hour)/3 lp FROM v_living_population_hourly_avg WHERE year_month='202606' AND hour_slot IN (11,12,13) GROUP BY 1,2), sal AS (SELECT t.adstrd_cd,SUM(s.sales_amount) krw FROM seoul_area_sales s JOIN seoul_trade_area t ON s.trdar_cd=t.trdar_cd WHERE s.year_quarter LIKE '2025%' GROUP BY 1) SELECT p.adstrd_name, sa.krw/(p.lp*365) kpp FROM pop p JOIN sal sa ON p.adstrd_cd=sa.adstrd_cd WHERE p.lp>1000 ORDER BY kpp DESC LIMIT 5",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "가락1동",
+      182331
+     ],
+     [
+      "노량진1동",
+      325079
+     ],
+     [
+      "방이2동",
+      144246
+     ],
+     [
+      "이태원1동",
+      171136
+     ],
+     [
+      "제기동",
+      305899
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "adstrd_name",
+    "kpp"
+   ],
+   "expected_sha256": [
+    "bf9c922c316688cb97f13c3e64e508c1e04323f333b9ba03e30cdc7381bc50cb"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 5,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:43Z",
+   "review_note": "label 수치 4/4 일치 (예 [325079.0, 325079.0, 305899.0])",
+   "resultset_policy": "optional"
+  },
+  "POP3": {
+   "label": "30대 생활인구 1위 = 역삼1동 27,384명/시(24시간 평균)",
+   "source_query": "SELECT adstrd_name,SUM(avg_population_per_hour)/24 pop30 FROM v_living_population_hourly_avg WHERE year_month='202606' AND age_band='30' GROUP BY 1 ORDER BY 2 DESC",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "가락1동",
+      4939
+     ],
+     [
+      "가락본동",
+      8115
+     ],
+     [
+      "가산동",
+      16523
+     ],
+     [
+      "가양1동",
+      9146
+     ],
+     [
+      "강일동",
+      6606
+     ],
+     [
+      "개봉1동",
+      4475
+     ],
+     [
+      "개봉2동",
+      3767
+     ],
+     [
+      "개포2동",
+      3906
+     ],
+     [
+      "고덕2동",
+      3233
+     ],
+     [
+      "고척1동",
+      3942
+     ],
+     [
+      "공덕동",
+      6039
+     ],
+     [
+      "공릉1동",
+      4956
+     ],
+     [
+      "공릉2동",
+      5662
+     ],
+     [
+      "공항동",
+      5195
+     ],
+     [
+      "광장동",
+      3598
+     ],
+     [
+      "광희동",
+      4742
+     ],
+     [
+      "구로2동",
+      5398
+     ],
+     [
+      "구로3동",
+      10118
+     ],
+     [
+      "구로5동",
+      6395
+     ],
+     [
+      "구산동",
+      3231
+     ],
+     [
+      "구의1동",
+      4029
+     ],
+     [
+      "구의3동",
+      4304
+     ],
+     [
+      "군자동",
+      4177
+     ],
+     [
+      "길동",
+      9651
+     ],
+     [
+      "길음1동",
+      3649
+     ],
+     [
+      "낙성대동",
+      5150
+     ],
+     [
+      "남영동",
+      3871
+     ],
+     [
+      "남현동",
+      4054
+     ],
+     [
+      "노량진1동",
+      6594
+     ],
+     [
+      "녹번동",
+      4675
+     ],
+     [
+      "논현1동",
+      10693
+     ],
+     [
+      "논현2동",
+      11368
+     ],
+     [
+      "답십리1동",
+      4147
+     ],
+     [
+      "답십리2동",
+      3588
+     ],
+     [
+      "당산1동",
+      5686
+     ],
+     [
+      "당산2동",
+      10341
+     ],
+     [
+      "대림3동",
+      4007
+     ],
+     [
+      "대방동",
+      7334
+     ],
+     [
+      "대조동",
+      9461
+     ],
+     [
+      "대치2동",
+      7369
+     ],
+     [
+      "대치4동",
+      6155
+     ],
+     [
+      "대학동",
+      6210
+     ],
+     [
+      "대흥동",
+      3735
+     ],
+     [
+      "도곡1동",
+      6977
+     ],
+     [
+      "독산1동",
+      8198
+     ],
+     [
+      "동선동",
+      3350
+     ],
+     [
+      "둔촌2동",
+      3720
+     ],
+     [
+      "등촌1동",
+      5179
+     ],
+     [
+      "등촌3동",
+      6157
+     ],
+     [
+      "망우본동",
+      6274
+     ],
+     [
+      "망원1동",
+      4300
+     ],
+     [
+      "면목본동",
+      4756
+     ],
+     [
+      "명동",
+      9304
+     ],
+     [
+      "목1동",
+      4413
+     ],
+     [
+      "목2동",
+      3643
+     ],
+     [
+      "묵1동",
+      3323
+     ],
+     [
+      "문래동",
+      6756
+     ],
+     [
+      "문정1동",
+      3969
+     ],
+     [
+      "문정2동",
+      10243
+     ],
+     [
+      "반포1동",
+      6074
+     ],
+     [
+      "반포4동",
+      6020
+     ],
+     [
+      "발산1동",
+      3796
+     ],
+     [
+      "방배1동",
+      3379
+     ],
+     [
+      "방배3동",
+      3838
+     ],
+     [
+      "방배4동",
+      4045
+     ],
+     [
+      "방이2동",
+      9126
+     ],
+     [
+      "방화1동",
+      4871
+     ],
+     [
+      "방화2동",
+      4117
+     ],
+     [
+      "보라매동",
+      3744
+     ],
+     [
+      "북가좌2동",
+      3972
+     ],
+     [
+      "북아현동",
+      12109
+     ],
+     [
+      "불광1동",
+      3609
+     ],
+     [
+      "사당1동",
+      4441
+     ],
+     [
+      "사당2동",
+      4506
+     ],
+     [
+      "사직동",
+      5175
+     ],
+     [
+      "삼선동",
+      3682
+     ],
+     [
+      "삼성1동",
+      10306
+     ],
+     [
+      "삼성2동",
+      7621
+     ],
+     [
+      "삼전동",
+      5861
+     ],
+     [
+      "상계1동",
+      3731
+     ],
+     [
+      "상계2동",
+      3604
+     ],
+     [
+      "상계6·7동",
+      6535
+     ],
+     [
+      "상도1동",
+      5423
+     ],
+     [
+      "상봉2동",
+      5078
+     ],
+     [
+      "상암동",
+      9397
+     ],
+     [
+      "상일동",
+      5106
+     ],
+     [
+      "서강동",
+      4353
+     ],
+     [
+      "서교동",
+      14960
+     ],
+     [
+      "서림동",
+      3329
+     ],
+     [
+      "서원동",
+      4387
+     ],
+     [
+      "서초1동",
+      5305
+     ],
+     [
+      "서초2동",
+      10690
+     ],
+     [
+      "서초3동",
+      13234
+     ],
+     [
+      "석관동",
+      3846
+     ],
+     [
+      "석촌동",
+      5958
+     ],
+     [
+      "성내1동",
+      3375
+     ],
+     [
+      "성내2동",
+      4503
+     ],
+     [
+      "성내3동",
+      4506
+     ],
+     [
+      "성산1동",
+      3914
+     ],
+     [
+      "성산2동",
+      6120
+     ],
+     [
+      "성수1가1동",
+      3898
+     ],
+     [
+      "성수1가2동",
+      5480
+     ],
+     [
+      "성수2가1동",
+      3772
+     ],
+     [
+      "성수2가3동",
+      9971
+     ],
+     [
+      "세곡동",
+      6417
+     ],
+     [
+      "소공동",
+      6193
+     ],
+     [
+      "송중동",
+      3948
+     ],
+     [
+      "송파1동",
+      5774
+     ],
+     [
+      "수서동",
+      3884
+     ],
+     [
+      "시흥1동",
+      4181
+     ],
+     [
+      "신길1동",
+      3334
+     ],
+     [
+      "신길6동",
+      3369
+     ],
+     [
+      "신내1동",
+      4645
+     ],
+     [
+      "신당동",
+      4097
+     ],
+     [
+      "신대방1동",
+      3278
+     ],
+     [
+      "신대방2동",
+      3852
+     ],
+     [
+      "신도림동",
+      5285
+     ],
+     [
+      "신림동",
+      7290
+     ],
+     [
+      "신사동",
+      10294
+     ],
+     [
+      "신정3동",
+      4736
+     ],
+     [
+      "신정4동",
+      4863
+     ],
+     [
+      "신촌동",
+      9112
+     ],
+     [
+      "아현동",
+      5096
+     ],
+     [
+      "안암동",
+      3431
+     ],
+     [
+      "암사1동",
+      4270
+     ],
+     [
+      "압구정동",
+      7590
+     ],
+     [
+      "양재1동",
+      11053
+     ],
+     [
+      "양재2동",
+      8038
+     ],
+     [
+      "양평1동",
+      4784
+     ],
+     [
+      "양평2동",
+      6405
+     ],
+     [
+      "여의동",
+      24072
+     ],
+     [
+      "역삼1동",
+      27384
+     ],
+     [
+      "역삼2동",
+      9292
+     ],
+     [
+      "역촌동",
+      5751
+     ],
+     [
+      "연남동",
+      3696
+     ],
+     [
+      "연희동",
+      5769
+     ],
+     [
+      "염창동",
+      5719
+     ],
+     [
+      "영등포동",
+      13478
+     ],
+     [
+      "영등포본동",
+      3266
+     ],
+     [
+      "오금동",
+      4533
+     ],
+     [
+      "오류1동",
+      3555
+     ],
+     [
+      "오류2동",
+      6882
+     ],
+     [
+      "옥수동",
+      4701
+     ],
+     [
+      "왕십리도선동",
+      3845
+     ],
+     [
+      "용강동",
+      4172
+     ],
+     [
+      "용답동",
+      3375
+     ],
+     [
+      "용신동",
+      7067
+     ],
+     [
+      "우장산동",
+      4846
+     ],
+     [
+      "원효로1동",
+      4422
+     ],
+     [
+      "월곡1동",
+      3348
+     ],
+     [
+      "월곡2동",
+      3259
+     ],
+     [
+      "은천동",
+      4734
+     ],
+     [
+      "을지로동",
+      3523
+     ],
+     [
+      "응암1동",
+      3613
+     ],
+     [
+      "이문1동",
+      5320
+     ],
+     [
+      "이화동",
+      7047
+     ],
+     [
+      "인헌동",
+      4298
+     ],
+     [
+      "자양1동",
+      4108
+     ],
+     [
+      "자양2동",
+      4449
+     ],
+     [
+      "자양3동",
+      3865
+     ],
+     [
+      "자양4동",
+      5134
+     ],
+     [
+      "잠실4동",
+      3765
+     ],
+     [
+      "잠실6동",
+      8004
+     ],
+     [
+      "잠실본동",
+      6932
+     ],
+     [
+      "잠원동",
+      5816
+     ],
+     [
+      "장안1동",
+      5853
+     ],
+     [
+      "장안2동",
+      4133
+     ],
+     [
+      "장지동",
+      5241
+     ],
+     [
+      "전농1동",
+      5239
+     ],
+     [
+      "제기동",
+      3706
+     ],
+     [
+      "조원동",
+      11132
+     ],
+     [
+      "종로1·2·3·4가동",
+      13058
+     ],
+     [
+      "종암동",
+      4795
+     ],
+     [
+      "중계2·3동",
+      3719
+     ],
+     [
+      "중곡2동",
+      3295
+     ],
+     [
+      "중곡4동",
+      3577
+     ],
+     [
+      "중화2동",
+      4013
+     ],
+     [
+      "진관동",
+      6321
+     ],
+     [
+      "창2동",
+      4163
+     ],
+     [
+      "창4동",
+      3847
+     ],
+     [
+      "천호1동",
+      4061
+     ],
+     [
+      "천호2동",
+      7904
+     ],
+     [
+      "천호3동",
+      5401
+     ],
+     [
+      "청담동",
+      8071
+     ],
+     [
+      "청룡동",
+      8502
+     ],
+     [
+      "청파동",
+      4355
+     ],
+     [
+      "충현동",
+      7076
+     ],
+     [
+      "한강로동",
+      12316
+     ],
+     [
+      "한남동",
+      6049
+     ],
+     [
+      "합정동",
+      4528
+     ],
+     [
+      "행당1동",
+      7371
+     ],
+     [
+      "행운동",
+      4819
+     ],
+     [
+      "혜화동",
+      3896
+     ],
+     [
+      "화곡1동",
+      10397
+     ],
+     [
+      "화곡6동",
+      4251
+     ],
+     [
+      "화곡8동",
+      12877
+     ],
+     [
+      "화곡본동",
+      4785
+     ],
+     [
+      "화양동",
+      6310
+     ],
+     [
+      "회현동",
+      6108
+     ],
+     [
+      "흑석동",
+      3746
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "adstrd_name",
+    "pop30"
+   ],
+   "expected_sha256": [
+    "c643d9e727cbc8aa51a466bd2d11b1ecf85fea2931be78eae0d4fb63b2280502"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 200,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:48Z",
+   "review_note": "label 수치 5/6 일치 (예 [27384.0, 24.0, 27384.0])",
+   "resultset_policy": "excluded",
+   "resultset_policy_reason": "기간축이 갈렸다. GOLD는 `year_month='202606'` 고정 + SUM/24이고 답변은 기간 필터 없이 hour_slot별 AVG다 — 15행 중 8행이 tolerance 2% 초과(가양1동 20.8% · 북아현동 11.7%). 1위 동네는 양쪽 같아 결론은 맞다. ★ U96 market.md가 경고한 기간축 함정. GOLD를 답변에 맞추면 대조 의미가 사라지므로 제외한다 — 질문·GOLD의 기간축 확정이 선행이다"
+  },
+  "TRD1": {
+   "label": "온라인 YoY 1위 통신기기 +42.5%, 화장품 +36.6% (미매핑 5종)",
+   "source_query": "SELECT kosis_group,mapped_category,yoy_pct FROM market_trend_group ORDER BY yoy_pct DESC",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "가구",
+      "생활",
+      6.2
+     ],
+     [
+      "가방",
+      "의류/패션",
+      4.1
+     ],
+     [
+      "가전·전자",
+      "온라인쇼핑",
+      7.6
+     ],
+     [
+      "가전·전자·통신기기",
+      "온라인쇼핑",
+      15.9
+     ],
+     [
+      "기타",
+      null,
+      1.5
+     ],
+     [
+      "기타서비스",
+      null,
+      22.9
+     ],
+     [
+      "농축수산물",
+      "슈퍼마켓/마트",
+      8.5
+     ],
+     [
+      "문화 및 레저서비스",
+      "여가",
+      9.3
+     ],
+     [
+      "사무·문구",
+      null,
+      0.4
+     ],
+     [
+      "생활용품",
+      "생활",
+      8.6
+     ],
+     [
+      "서적",
+      "교육/학원",
+      -5.1
+     ],
+     [
+      "스포츠·레저용품",
+      "여가",
+      2.9
+     ],
+     [
+      "신발",
+      "의류/패션",
+      1.0
+     ],
+     [
+      "아동·유아용품",
+      "쇼핑",
+      7.7
+     ],
+     [
+      "애완용품",
+      null,
+      6.7
+     ],
+     [
+      "여행 및 교통서비스",
+      "여가",
+      -3.4
+     ],
+     [
+      "음·식료품",
+      "슈퍼마켓/마트",
+      14.0
+     ],
+     [
+      "음식서비스",
+      "음식점",
+      10.2
+     ],
+     [
+      "의복",
+      "의류/패션",
+      2.7
+     ],
+     [
+      "이쿠폰서비스",
+      "온라인쇼핑",
+      15.8
+     ],
+     [
+      "자동차 및 자동차용품",
+      null,
+      40.8
+     ],
+     [
+      "컴퓨터 및 주변기기",
+      "온라인쇼핑",
+      9.0
+     ],
+     [
+      "통신기기",
+      "온라인쇼핑",
+      42.5
+     ],
+     [
+      "패션용품 및 액세서리",
+      "의류/패션",
+      12.0
+     ],
+     [
+      "화장품",
+      "뷰티",
+      36.6
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "kosis_group",
+    "mapped_category",
+    "yoy_pct"
+   ],
+   "expected_sha256": [
+    "4bd28dacf84561c41bb41000fbbefffb9a96092ce61b6f979cdcb2c4b2206af7"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 25,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:49Z",
+   "review_note": "label 수치 5/7 일치 (예 [42.5, 36.6, 42.5])",
+   "resultset_policy": "optional"
+  },
+  "TRD2": {
+   "label": "뷰티 커버 48장 / 전체 664장, 시장 화장품 +36.6%",
+   "source_query": "SELECT COUNT(DISTINCT card_id) FROM r1_card_category WHERE benefit_category='뷰티'",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      48
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "_col0"
+   ],
+   "expected_sha256": [
+    "ab383a003701227933f998648bc3f03e7fcb72bd14a4b1f2a4600ddfe55e682f"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 1,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:51Z",
+   "review_note": "label 수치 2/6 일치 (예 [48.0, 48.0])",
+   "resultset_policy": "optional"
+  },
+  "U10-D08": {
+   "label": "20대 실질 혜택률 = 0.477%",
+   "source_query": "SELECT segment_value,AVG(effective_reward_rate) rate,SUM(eligible_spend) spend,SUM(observed_reward_amount) rew FROM metrics_segment_month WHERE segment_type='age_band' AND segment_value='20' AND statement_month<>'ALL' GROUP BY 1",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      20,
+      0.004777,
+      781855105,
+      3797985
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "segment_value",
+    "rate",
+    "spend",
+    "rew"
+   ],
+   "expected_sha256": [
+    "f15ab02e8c8b49da96cb78e90798f17414abfcb52ca3d87202b8549d6271790b"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 1,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:52Z",
+   "review_note": "label 수치 3/3 일치 (예 [20.0, 781855105.0, 3797985.0])",
+   "resultset_policy": "optional"
+  },
+  "U10-D26": {
+   "label": "성별 실질 혜택률 — 남 0.667% > 여 0.629%",
+   "source_query": "SELECT segment_value,AVG(effective_reward_rate) FROM metrics_segment_month WHERE segment_type='sex' GROUP BY 1",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "F",
+      0.006289
+     ],
+     [
+      "M",
+      0.006669
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "segment_value",
+    "_col1"
+   ],
+   "expected_sha256": [
+    "3f6be77544a3fe15cae30536b54bd1f5a8ff8afa2c102001d117e438238e9fd2"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 2,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:53Z",
+   "review_note": "대조할 수치가 label에 없다(통과)",
+   "resultset_policy": "optional"
+  },
+  "XW1": {
+   "label": "crosswalk 43건 = exact 0.9/promoted 32 + broad 0.7/reviewed 11",
+   "source_query": "SELECT match_type,confidence,review_status,COUNT(*) FROM d0_market_crosswalk GROUP BY 1,2,3",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "broad",
+      0.7,
+      "reviewed",
+      11
+     ],
+     [
+      "exact",
+      0.9,
+      "promoted",
+      32
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "match_type",
+    "confidence",
+    "review_status",
+    "_col3"
+   ],
+   "expected_sha256": [
+    "2c226142022ed42a278bbc70892527c455e7195785329112fe0043d0632ae304"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 2,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:55Z",
+   "review_note": "label 수치 5/6 일치 (예 [32.0, 11.0, 32.0])",
+   "resultset_policy": "optional"
+  },
+  "u19-04": {
+   "label": "서울 슈퍼마켓/마트 시장 규모 — 연간 19.12조(2025) / 18.82조(2024)",
+   "source_query": "SELECT SUM(s.sales_amount) FROM seoul_area_sales s JOIN d0_market_crosswalk x ON s.industry_name=x.seoul_industry WHERE s.year_quarter LIKE '2025%' AND x.shinhan_category='슈퍼마켓/마트'",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      19124940810666
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "_col0"
+   ],
+   "expected_sha256": [
+    "4da3c519cbee9b62d53f8f7d9c6eb7b6ebcbea7143c579ae4e6132a510c04af7"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 1,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:27:58Z",
+   "review_note": "label 수치 4/7 일치 (예 [19.12, 18.82, 19124940810666.0])",
+   "resultset_policy": "optional"
+  },
+  "x1-01": {
+   "label": "서울 음식점(외식) 시장 규모 — 2025년 연간 19.617조",
+   "source_query": "SELECT SUM(s.sales_amount) FROM seoul_area_sales s JOIN d0_market_crosswalk x ON s.industry_name=x.seoul_industry WHERE s.year_quarter LIKE '2025%' AND x.shinhan_category='음식점'",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      19616889404163
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "_col0"
+   ],
+   "expected_sha256": [
+    "c7adf53ce9e01387b0bdd956ed480595d4730b6e4cea3e7e3b174b5f8b4527a8"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 1,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:00Z",
+   "review_note": "label 수치 2/3 일치 (예 [19.617, 19616889404163.0])",
+   "resultset_policy": "optional"
+  },
+  "x1-02": {
+   "label": "커피-음료 최다 소비 연령대 = 30대(7.06조 > 20대 5.24조)",
+   "source_query": "SELECT SUM(age_20_amount),SUM(age_30_amount),SUM(age_40_amount),SUM(age_50_amount) FROM seoul_area_sales WHERE industry_name='커피-음료' AND year_quarter LIKE '2025%'",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      524230589101,
+      706101074606,
+      492460507831,
+      392069445295
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "_col0",
+    "_col1",
+    "_col2",
+    "_col3"
+   ],
+   "expected_sha256": [
+    "f3ef4fd4384e9cdbbca9a7b2aebcdc60303bbd2d62ef42fa2935f5b93abf3bf8"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 1,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:02Z",
+   "review_note": "label 수치 4/12 일치 (예 [524230589101.0, 706101074606.0, 492460507831.0])",
+   "resultset_policy": "optional"
+  },
+  "x1-03": {
+   "label": "혜택 카테고리별 서울 시장 1위 = 음식점(19.6조)",
+   "source_query": "SELECT x.shinhan_category,SUM(s.sales_amount) krw FROM seoul_area_sales s JOIN d0_market_crosswalk x ON s.industry_name=x.seoul_industry WHERE s.year_quarter LIKE '2025%' GROUP BY 1 ORDER BY 2 DESC",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "교육/학원",
+      4739922676056
+     ],
+     [
+      "뷰티",
+      2483903530757
+     ],
+     [
+      "슈퍼마켓/마트",
+      19124940810666
+     ],
+     [
+      "약국",
+      5631963312246
+     ],
+     [
+      "여가",
+      1776812997898
+     ],
+     [
+      "온라인쇼핑",
+      141427100916
+     ],
+     [
+      "음식점",
+      19616889404163
+     ],
+     [
+      "의료",
+      10545545532357
+     ],
+     [
+      "의류/패션",
+      8434769866413
+     ],
+     [
+      "제과/베이커리",
+      785277633836
+     ],
+     [
+      "주류/유흥",
+      3312819336321
+     ],
+     [
+      "커피/음료",
+      2758246271701
+     ],
+     [
+      "패스트푸드",
+      986613650473
+     ],
+     [
+      "편의점",
+      3251412205729
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "shinhan_category",
+    "krw"
+   ],
+   "expected_sha256": [
+    "9a34eb4b06ed7aa5c2c4038623b624221854a977e6a4082c5cfc26acf575705a"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 14,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:04Z",
+   "review_note": "label 수치 5/5 일치 (예 [19.6, 19.617, 19.125])",
+   "resultset_policy": "optional"
+  },
+  "x3-03": {
+   "label": "편의점 ⊑ 생활 (편의점 커버 161장)",
+   "source_query": "SELECT COUNT(DISTINCT card_id) FROM r1_card_category WHERE benefit_category='편의점'",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      161
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "_col0"
+   ],
+   "expected_sha256": [
+    "0f44b7cddc917ced6eb65d57cb56c61c49dfc3920cdbb150c8e8f9df64bbbee3"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 1,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:05Z",
+   "review_note": "label 수치 2/2 일치 (예 [161.0, 161.0])",
+   "resultset_policy": "optional"
+  },
+  "x3-04": {
+   "label": "서울 식음료 시장 = 24.1조원(음식점+커피/음료+패스트푸드+제과)",
+   "source_query": "SELECT SUM(s.sales_amount) FROM seoul_area_sales s JOIN d0_market_crosswalk x ON s.industry_name=x.seoul_industry WHERE s.year_quarter LIKE '2025%' AND x.shinhan_category IN ('음식점','커피/음료','제과/베이커리','패스트푸드')",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      24147026960173
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "_col0"
+   ],
+   "expected_sha256": [
+    "a1979117e96aafb1605c11acea98eabf7dd4a20dabfe3306c9c22984cc3cbd36"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 1,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:08Z",
+   "review_note": "label 수치 2/4 일치 (예 [24.1, 24147026960173.0])",
+   "resultset_policy": "optional"
+  },
+  "x3-05": {
+   "label": "의료 계열 = 의료/건강 8장 + 약국 6장 (Clean_ 26종 체계)",
+   "source_query": "SELECT benefit_category,COUNT(DISTINCT card_id) FROM r1_card_category WHERE benefit_category LIKE '%의료%' OR benefit_category LIKE '%약국%' GROUP BY 1",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "약국",
+      6
+     ],
+     [
+      "의료/건강",
+      8
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "benefit_category",
+    "_col1"
+   ],
+   "expected_sha256": [
+    "88757c74c1ab53476ce6ec4b0dc520d1b995d01ae315aa1eae0b1ad24be79dfe"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 2,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:09Z",
+   "review_note": "label 수치 2/5 일치 (예 [8.0, 6.0])",
+   "resultset_policy": "excluded",
+   "resultset_policy_reason": "질문(\"병원 혜택 있어?\")이 범위를 지정하지 않는다. 답변은 \"총 14종\"이고 14 = 의료/건강 8 + 약국 6이라 수치는 맞으나 GOLD가 분해를 요구한다. ★ U65(u65-100q-result.md:51) → U94-c → 이번으로 **세 번째** gold 결함 지적이다. 지적만 반복하지 않고 정책으로 명시한다"
+  },
+  "x6-01": {
+   "label": "내부 거래 카테고리 1위 = 교육/학원 23.2억(103,344건 중)",
+   "source_query": "SELECT benefit_category,krw,txn_count,avg_txn_krw FROM d4_txn_category_rollup ORDER BY krw DESC",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "교육/학원",
+      2321625321,
+      6460,
+      359384
+     ],
+     [
+      "뷰티",
+      300302025,
+      2993,
+      100334
+     ],
+     [
+      "슈퍼마켓/마트",
+      432210245,
+      16852,
+      25647
+     ],
+     [
+      "약국",
+      239394620,
+      7936,
+      30165
+     ],
+     [
+      "여가",
+      1236418,
+      181,
+      6831
+     ],
+     [
+      "온라인쇼핑",
+      17041785,
+      262,
+      65044
+     ],
+     [
+      "음식점",
+      1240491990,
+      26642,
+      46561
+     ],
+     [
+      "의료",
+      1205063689,
+      14156,
+      85127
+     ],
+     [
+      "의류/패션",
+      865698540,
+      11303,
+      76590
+     ],
+     [
+      "제과/베이커리",
+      11107291,
+      817,
+      13595
+     ],
+     [
+      "주류/유흥",
+      238898364,
+      4508,
+      52994
+     ],
+     [
+      "커피/음료",
+      48159333,
+      5102,
+      9439
+     ],
+     [
+      "패스트푸드",
+      28754685,
+      1270,
+      22641
+     ],
+     [
+      "편의점",
+      41799715,
+      4862,
+      8597
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "benefit_category",
+    "krw",
+    "txn_count",
+    "avg_txn_krw"
+   ],
+   "expected_sha256": [
+    "f8ad783622d04a2bfea83f9fbbf41970769f5dd8e31df1856974c6f354c18cd9"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 14,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:11Z",
+   "review_note": "label 수치 6/8 일치 (예 [23.2, 2321625321.0, 6460.0])",
+   "resultset_policy": "optional"
+  },
+  "x6-02": {
+   "label": "혜택 미적용 민원 원인 1위 = 전월실적 미달(94건)",
+   "source_query": "SELECT denial_reason_ko,COUNT(*) n FROM d7_complaint_case GROUP BY 1 ORDER BY 2 DESC",
+   "engine": "athena",
+   "expected": [
+    [
+     [
+      "월 한도 소진",
+      41
+     ],
+     [
+      "월 횟수 초과",
+      54
+     ],
+     [
+      "전월실적 미달",
+      94
+     ],
+     [
+      null,
+      314
+     ]
+    ]
+   ],
+   "expected_columns": [
+    "denial_reason_ko",
+    "n"
+   ],
+   "expected_sha256": [
+    "8eb3241620523b50b1d71d0ce24e147a6ce0a104bf301f38a944a6b696f14d68"
+   ],
+   "normalization_version": 1,
+   "tolerance": 0.02,
+   "n_rows": 4,
+   "data_snapshot": "f0738e15351b53b5",
+   "generated_by": "scripts/build_gold_resultset.py",
+   "reviewed_by": "scripts/build_gold_resultset.py + v2_numeric_gold.label 대조",
+   "reviewed_at": "2026-08-06T06:28:12Z",
+   "review_note": "label 수치 5/5 일치 (예 [94.0, 314.0, 94.0])",
+   "resultset_policy": "optional"
+  }
+ },
+ "_skipped": [],
+ "_known_limits": {
+  "_doc": "U94-c 실측 — GOLD로 대조할 수 없는 문항과 그 이유. 억지로 맞추지 않는다.",
+  "x6-02": "✅ **수리됨(U94-c)** — 종전에는 d7_complaint_case(94)와 d7_complaint_root_cause(98)가 달랐다. 원인은 ETL이 손집계(complaint_index.root_cause.denial_distribution)를 옮긴 것이었고, 개별 케이스에서 세도록 고쳤다. 이제 양쪽 94·54·41로 일치한다",
+  "MKT-3": "답변이 혜택률을 **직접 계산**한다(d4_transaction 조인) vs GOLD는 metrics_segment_month 사전집계. 0.008881 vs 0.00593 — 분모가 다르다. ★ x6-02와 **같은 유형일 수 있다**(집계 테이블이 원본과 갈림) — 별 조사 필요",
+  "U10-D08": "답변이 월별로 쪼개 준다(statement_month 컬럼 추가) vs GOLD는 전체 평균. GOLD의 'ALL' 행이 답변에 있지만 컬럼 축이 달라 대조 불가",
+  "CHN-D": "답변 생성 실패(exec_error) — 증거가 비었다. 채점기 문제가 아니다",
+  "x3-05": "빌더가 거부했다 — label '의료/건강 23장 + 약국 20장' vs 실측 8장·6장. GOLD가 낡았거나 데이터가 변했다. ★ 이것도 조사 대상이다"
+ },
+ "_resultset_policy_doc": {
+  "_doc": "★★ 리뷰 #3 — `must_values`는 **답변 텍스트의 필수 숫자 검사** 목록이고 (`v2_numeric_gold.py:896`) 결과셋 GOLD 정책 필드가 아니다. 진단 초안이 그것으로 정책을 추론해 S1(제외)과 S2(보존)가 모순됐다 — S3 게이트를 만들면 S2가 보존하라던 x1-02·x3-03이 즉시 실패한다.",
+  "policy_version": 1,
+  "values": {
+   "required": "결과셋 대조를 반드시 한다. 불일치면 FAIL이다",
+   "optional": "결과셋 대조를 시도하되 대조 불가면 다음 채점기로 넘긴다(기본)",
+   "excluded": "결과셋 대조를 하지 않는다. `resultset_policy_reason` 필수"
+  },
+  "_why_not_accepted_shapes": "리뷰가 `accepted_shapes`(card_list·category_counts)도 제안했으나 **이번에는 넣지 않는다.** 목록형 expected를 채점기에 추가하는 것은 U98 범위를 넘고, MKT-2·x3-05 두 건을 위해 새 비교 방식을 만드는 비용이 크다. `excluded` + 사유로 3값만 두면 모순은 해소된다 — 형태 확장은 별 유닛이다."
+ }
+}

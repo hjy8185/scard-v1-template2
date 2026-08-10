@@ -1,0 +1,1408 @@
+{
+ "meta": {
+  "role": "U65 S0 확장 평가셋 100문항. 기존 41건(v1·baseline~v6 비교 기반)을 그대로 두고 picker_full_eval에서 59건을 더했다. Miller 공식상 δ=0.03 검출에는 n≈969가 필요해 100도 부족하지만, 41 대비 표본 오차가 1.56배 줄어든다.",
+  "n": 100,
+  "n_original": 41,
+  "n_added": 59,
+  "source": "data/v2_eval_set.json + data/picker_full_eval.json",
+  "selection": "결정론: 기존 41 유지 → 패러프레이즈(기존의 -pN, 신규끼리 base 중복) 제외 → phase 라운드로빈 59건",
+  "paraphrase_policy": "독립 표본을 깨므로 제외한다. 넣으면 유효 n이 부풀려져 표본 오차 계산이 거짓이 된다.",
+  "holdout": [
+   "POP3",
+   "x1-02",
+   "x3-03",
+   "x6-01",
+   "CHN-C",
+   "XW2"
+  ],
+  "holdout_note": "신규 59건은 전부 hold-out 성격 — 카탈로그 보강 문구를 이 질문들에 맞춘 적이 없다. 과적합 여부의 새 증거가 된다.",
+  "built_by": "scripts/build_v2_eval_100.py"
+ },
+ "scenarios": [
+  {
+   "id": "POP1",
+   "question": "서울에서 점심에 사람이 제일 많이 모이는 동네 어디야? 거기서 소비도 제일 많이 일어나?",
+   "preset_card_id": null,
+   "category": "J-population",
+   "anatomy_type": "population",
+   "verification_keywords": [
+    "여의도",
+    "생활인구",
+    "노량진"
+   ],
+   "negative_keywords": [
+    "방문객 수",
+    "실제 인구"
+   ],
+   "gold_facts": "여의도동 점심 생활인구 1위(15.8만/일)·카드소비 13위, 노량진 인구 22위·소비 1위. AreaMapping(상권↔행정동) 연결 명시 + 통신 추계 caveat 동반하면 PASS.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "POP2",
+   "question": "사람 수 대비 소비가 제일 센 동네는 어디야?",
+   "preset_card_id": null,
+   "category": "J-population",
+   "anatomy_type": "population",
+   "verification_keywords": [
+    "노량진",
+    "1인당"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "노량진 32.3만원/인 1위(최하위 역삼 1.1만 — 30배). 노량진=수산 도매 상권 객단가 효과 각주 필수. 분모 정의(점심 11~13시 평균) 명시하면 PASS.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "POP3",
+   "question": "30대가 많이 모이는 동네 어디야?",
+   "preset_card_id": null,
+   "category": "J-population",
+   "anatomy_type": "population",
+   "verification_keywords": [
+    "30대",
+    "여의도"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "30대 점심 생활인구 최다 상권 top3(여의도·역삼 등) 제시 + 동일 age_band 축(시장 소비·우리 혜택률과 대조 가능) 언급하면 PASS.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "TRD1",
+   "question": "요즘 온라인에서 뭐가 제일 빠르게 크고 있어?",
+   "preset_card_id": null,
+   "category": "K-trend",
+   "anatomy_type": "trend",
+   "verification_keywords": [
+    "화장품",
+    "36.6"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "통신기기 +42.5%(온라인쇼핑 매핑)·화장품 +36.6%(뷰티) 등 YoY 상위 제시 + 미매핑 상품군(자동차 등 5종) 정직 고지하면 PASS. 출처(통계청 [공개-실]) 명시.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "TRD2",
+   "question": "화장품 쪽 시장이 크는 것 같은데, 우리 뷰티 혜택 커버는 어때?",
+   "preset_card_id": null,
+   "category": "K-trend",
+   "anatomy_type": "trend",
+   "verification_keywords": [
+    "뷰티"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "뷰티 카테고리 커버(카드 수) 진단 + 시장 방향 각주(온라인 화장품 +36.6%↑) 병기하면 PASS — coverage에 시계열 부착 최초.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "TRD4",
+   "question": "우리 카드 포트폴리오가 시장 전체에서 어느 정도야?",
+   "preset_card_id": null,
+   "category": "K-trend",
+   "anatomy_type": "trend",
+   "verification_keywords": [
+    "112.5"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "월 승인 112.5조(+7.7%)·ECOS 이용 95.8조·발급 1.37억장 제시 + '카드다모아 48장뿐이라 상품 전수 비교 불가, 우리는 694장 전수 보유' 정직 고지하면 PASS. [U30] '전수 비교 불가(48장) 고지'는 회피가 아니라 정답의 일부 — 충족도 판정에서도 ANSWERED. [U30 보정] '전수 비교 불가(48장) 고지'=정답의 일부, ANSWERED.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "WIF1",
+   "question": "뷰티 적립률을 2%p 올리고 상한도 5만원으로 올리면 비용이 얼마나 늘어?",
+   "preset_card_id": null,
+   "category": "K-trend",
+   "anatomy_type": "trend",
+   "verification_keywords": [
+    "비용",
+    "적립"
+   ],
+   "negative_keywords": [
+    "정확히 계산할 수 없습니다",
+    "데이터가 없습니다"
+   ],
+   "gold_facts": "혜택 룰 변경(적립률 +2%p, 월 상한 5만원) 시 비용 증분을 리워드 원장/거래 데이터로 시뮬레이션해 금액 또는 증가율로 제시해야 한다. 상한이 지배적이면 그 사실을 밝히는 것도 정답에 포함. 데이터 접근 자체를 부정하면 오답. 합성 데이터임을 밝히는 것은 감점 아님.",
+   "gold_source": "u64_authored"
+  },
+  {
+   "id": "x1-01",
+   "question": "우리 음식점 혜택이 노리는 서울 외식 시장이 얼마나 커?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [
+    "커피",
+    "30"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "커피/음료→(crosswalk)→서울 커피-음료 + 30대 최다 7,061억. 연결경로 명시해야 PASS [U30 gold 보정] 19.6조+5업종 분해+crosswalk 경로면 PASS — '시장 전체 대비 비중' 등 추가 맥락 요구 금지(v4 judge 경계 교정). [U30 보정] 19.6조+5업종+crosswalk 경로면 PASS — 추가 맥락 요구 금지.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "u19-04",
+   "question": "우리 슈퍼마켓 혜택이 노리는 서울 시장 얼마나 커?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [
+    "슈퍼마켓"
+   ],
+   "negative_keywords": [
+    "연결할 수 없",
+    "데이터가 없"
+   ],
+   "gold_facts": "crosswalk 43매핑·커버 90.2% broad 매핑 confidence 0.7 구분",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x1-02",
+   "question": "커피는 서울에서 주로 몇 대가 많이 소비해?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [
+    "편의점"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "편의점→crosswalk→서울 편의점 업종 매출. 연결 명시 [U30 gold 보정] 30대 최다(7,061억)+연령 분해면 PASS — 추가 맥락 요구 금지. [U30 보정] 30대 최다(7,061억)+연령 분해면 PASS.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x1-05",
+   "question": "스타벅스는 통계에서 무슨 업종으로 잡혀? 우리 혜택이랑은 어떻게 이어져?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [
+    "커피"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "가맹점 스타벅스→커피/음료→서울 커피-음료 3단 사슬 명시",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x3-04",
+   "question": "식음료 시장이 서울에서 얼마나 돼?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "taxonomy확장+crosswalk 2단 연쇄",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x1-03",
+   "question": "우리 혜택 카테고리 기준으로 서울 시장을 나눠보면 어디가 제일 커?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [
+    "음식점"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "by_category=crosswalk 집계 산출물(음식점 1위) + 90.2% 커버 명시",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "XW1",
+   "question": "그 crosswalk 매핑은 누가 어떤 근거로 만든 거야? 다 믿어도 돼?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [
+    "1,785",
+    "10차"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "2층 답변: ①정부 공식(국세청 업종코드↔KSIC 11차, 1,785행) — 소진공은 10차라 버전 갈림 ②우리 큐레이션(confidence 0.9·검수·90.2% 커버). '공식 연계표조차 갈라져 다리가 필요하다' 결론이면 PASS.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "XW2",
+   "question": "그 매핑들 만들고 나서 검증은 어떻게 한 거야? 그냥 만들어두고 끝이야?",
+   "preset_card_id": null,
+   "category": "A-market",
+   "anatomy_type": "market",
+   "verification_keywords": [
+    "검증"
+   ],
+   "negative_keywords": [
+    "검증하지 않았습니다",
+    "알 수 없습니다"
+   ],
+   "gold_facts": "crosswalk 매핑의 검증 이력(사람 검수/샘플 확인/신뢰도 표기 등)을 근거와 함께 설명해야 한다. '만들어두고 끝'이 아니라는 점과 검증 방식·범위를 밝히면 정답. 검증 절차를 전혀 제시하지 못하면 오답.",
+   "gold_source": "u64_authored"
+  },
+  {
+   "id": "x3-01",
+   "question": "'식음료'라는 혜택 상품은 없잖아. 근데 식음료 혜택 물으면 뭐가 나와? 왜 커피랑 음식점이 포함돼?",
+   "preset_card_id": null,
+   "category": "A-catalog",
+   "anatomy_type": "generic",
+   "verification_keywords": [
+    "커피",
+    "음식점"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "식음료⊑커피/음료·음식점 subsumption 경로 설명해야 PASS",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "MKT-2",
+   "question": "음식점이나 외식 혜택 주는 카드는 다 뭐가 있어?",
+   "preset_card_id": null,
+   "category": "A-catalog",
+   "anatomy_type": "generic",
+   "verification_keywords": [
+    "음식점"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "카드 목록",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x3-05",
+   "question": "병원 혜택 있어?",
+   "preset_card_id": null,
+   "category": "A-catalog",
+   "anatomy_type": "generic",
+   "verification_keywords": [],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "병원→의원/의료 alias 해석",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x3-03",
+   "question": "생활 혜택이랑 편의점 혜택이랑 뭐가 달라? 겹치는 거 아냐?",
+   "preset_card_id": null,
+   "category": "A-catalog",
+   "anatomy_type": "generic",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "편의점⊑생활 포함관계 명시",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x5-03",
+   "question": "이 카드로 편의점에서 결제하면 할인 받을 수 있나요?",
+   "preset_card_id": "CARD_Product:201709220001",
+   "category": "A-eligibility",
+   "anatomy_type": "eligibility",
+   "verification_keywords": [
+    "변화"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "what-if=동일 규칙엔진 재사용+[합성]cohort",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "P2-04",
+   "question": "소액으로 결제해도 할인 대상인가요?",
+   "preset_card_id": "CARD_Product:201510150001",
+   "category": "A-eligibility",
+   "anatomy_type": "eligibility",
+   "verification_keywords": [
+    "할인"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "대상 카드='신한카드 YOLO Tasty'. 특정 카테고리 혜택=['온라인쇼핑', '음식점']. 실제 benefit=['영라이프 할인', '통합할인한도', 'SPA 브랜드 10% 결제일 할인', '소셜커머스 10% 결제일 할인', 'H&B Store 10% 결제일 할인', '포잉 10% 결제일 할인', 'SG다인힐 외식업체 10% 결제일 할인', 'Mall 내 F&B 매장 10% 할인']. 혜택유형=['할인'].",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x5-01",
+   "question": "전월실적 40만원 채웠고 커피전문점에서 3만원 결제했는데 커피 혜택 대상이야? 어느 약관 조항 때문인지도",
+   "preset_card_id": "CARD_Product:202010130001",
+   "category": "A-eligibility",
+   "anatomy_type": "eligibility",
+   "verification_keywords": [
+    "커피",
+    "실적"
+   ],
+   "negative_keywords": [
+    "확인이 어렵",
+    "고객센터"
+   ],
+   "gold_facts": "요기요 카드에 커피전문점(카테고리) 일반 혜택 없음 — 카테고리 판정(커피/음료⊑식음료) 후 \"카드 내 커피 카테고리 혜택 없음 + 스타벅스 사이렌오더 지정 혜택은 있음\" 구분. 전월실적 50만 조건 실인용(40만=미충족 판정). 지어낸 커피 혜택=FAIL",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "P2-01",
+   "question": "이 카드로 편의점에서 결제하면 할인 받을 수 있나요?",
+   "preset_card_id": "CARD_Product:201709220001",
+   "category": "A-eligibility",
+   "anatomy_type": "eligibility",
+   "verification_keywords": [
+    "할인",
+    "적립",
+    "포인트"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "대상 카드='신한카드 Deep Dream 체크'. 특정 카테고리 태깅 없음(전방위 적립/할인형일 수 있음 — benefit 내용 참고). 실제 benefit=['DREAM 영역', '아껴드림', '통합적립한도', '신한금융그룹 서비스', '전월 실적/적립 한도 없이 국내/외 이용 가맹점 0.2% 기본 포인트 적립', '자주 가는 DREAM 영역은 기본의 3배(총 0.6%) 포인트 적립', 'DREAM영역 중 가장 많이 이용한 영역은 기본의  5배(총 1.0%) 포인트 자동적립']. 혜택유형=['적립', '포인트'].",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "P2-06",
+   "question": "온라인에서 이 카드로 사면 적립되나요?",
+   "preset_card_id": "CARD_Product:201512100001",
+   "category": "A-eligibility",
+   "anatomy_type": "eligibility",
+   "verification_keywords": [
+    "캐시백",
+    "할인"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "대상 카드='G마켓/옥션 신한카드 Smile365 체크'. 특정 카테고리 혜택=['온라인쇼핑', '편의점']. 실제 benefit=['G마켓/옥션 15% 캐시백', '통합할인(캐시백)한도', 'GS25 5% 캐시백', '통합할인(캐시백)한도', '카쉐어링 ‘SOCAR’ 5% 캐시백', '통합할인(캐시백)한도']. 혜택유형=['캐시백', '할인'].",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x5-02",
+   "question": "그럼 스타벅스에서 결제하면? 같은 커피인데 왜 달라?",
+   "preset_card_id": "201903201001",
+   "category": "A-eligibility",
+   "anatomy_type": "eligibility",
+   "verification_keywords": [
+    "사이렌오더",
+    "한도"
+   ],
+   "negative_keywords": [
+    "리저브",
+    "판정이 불가"
+   ],
+   "gold_facts": "요기요 카드의 스타벅스 혜택은 카테고리 전체가 아니라 지정 가맹점(사이렌오더) 한정 — 10% 할인·월 1만원 한도·전월 50만 조건을 실약관(source_text)으로 인용. 일반 매장 카드결제 vs 사이렌오더 채널 구분 설명. 리저브 언급=FAIL",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "h-08",
+   "question": "딥드림 체크로 스타벅스 결제하면 DREAM 적립 되는지 판정해줘",
+   "preset_card_id": "201903201001",
+   "category": "A-eligibility",
+   "anatomy_type": "eligibility",
+   "verification_keywords": [
+    "미매핑",
+    "기본"
+   ],
+   "negative_keywords": [
+    "DREAM 영역에 포함됩니다",
+    "적립됩니다"
+   ],
+   "gold_facts": "U21 후: DREAM 4영역(할인점/편의점·잡화/영화·커피/이동통신) 구성을 실측 안내하되, 가맹점 목록에 커피 브랜드 부재 → 스타벅스 포함 여부는 여전히 미확정(정직 유지). 기본적립 0.2%는 확정. 스타벅스 적립 단정=FAIL",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "MKT-3",
+   "question": "음식점 소비층을 겨냥하려는데, 연령대별 실질 혜택률 비교해줘",
+   "preset_card_id": null,
+   "category": "A-metric",
+   "anatomy_type": "metric",
+   "verification_keywords": [
+    "실질 혜택률"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "연령대별 비교+정의",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "U10-D09",
+   "question": "연령대별로 실질 혜택률이 어떻게 다른지 비교해줘",
+   "preset_card_id": null,
+   "category": "A-metric",
+   "anatomy_type": "metric",
+   "verification_keywords": [
+    "연령"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "연령대별 비교",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "MKT2-4",
+   "question": "그럼 우리 고객은 연령대별 실질 혜택률이 어때?",
+   "preset_card_id": null,
+   "category": "A-metric",
+   "anatomy_type": "metric",
+   "verification_keywords": [
+    "연령"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "연령대별 세그먼트",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "U10-D26",
+   "question": "여성 고객과 남성 고객의 실질 혜택률 차이가 있어?",
+   "preset_card_id": null,
+   "category": "A-metric",
+   "anatomy_type": "metric",
+   "verification_keywords": [
+    "여성"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "성별 비교",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "U10-D08",
+   "question": "20대 고객의 실질 혜택률은 어때?",
+   "preset_card_id": null,
+   "category": "A-metric",
+   "anatomy_type": "metric",
+   "verification_keywords": [
+    "20대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "20대 실질혜택률 값",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "P4-13",
+   "question": "reward_delta_amount가 정확히 뭘 의미해?",
+   "preset_card_id": null,
+   "category": "A-metric",
+   "anatomy_type": "metric",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "지표(실질혜택률/적격소비/리워드/커버리지) 값 또는 정의를 제시하면 PASS. 값 질의는 수치, 메타 질의는 정의/단위/출처. 3000행 덤프·평균 오안내면 PARTIAL/FAIL.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "MKT-4",
+   "question": "그중 20대 실질 혜택률은 어느 정도야?",
+   "preset_card_id": null,
+   "category": "A-metric",
+   "anatomy_type": "metric",
+   "verification_keywords": [
+    "20대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "20대 값",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x6-01",
+   "question": "우리 고객이 실제로 어느 혜택 카테고리에 돈 쓰는지 보여줘",
+   "preset_card_id": null,
+   "category": "A-txn",
+   "anatomy_type": "txn",
+   "verification_keywords": [
+    "카테고리"
+   ],
+   "negative_keywords": [
+    "실제 신한 고객 데이터",
+    "실 고객 거래 기준",
+    "건수를 조작"
+   ],
+   "gold_facts": "D4 103,344건×crosswalk. [합성] method demo 표기. 내부거래에도 같은 다리",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x6-04",
+   "question": "민원 CP00101 원인이 뭐야?",
+   "preset_card_id": null,
+   "category": "A-complaint",
+   "anatomy_type": "complaint",
+   "verification_keywords": [
+    "전월실적"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "3단 추적+denial 판정",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "x6-02",
+   "question": "혜택 미적용 민원들 실제 원인이 뭐야?",
+   "preset_card_id": null,
+   "category": "A-complaint",
+   "anatomy_type": "complaint",
+   "verification_keywords": [
+    "원인"
+   ],
+   "negative_keywords": [
+    "실제 신한 고객 데이터",
+    "실 고객 거래 기준",
+    "건수를 조작"
+   ],
+   "gold_facts": "원장연결 근본원인(실적미달/횟수/한도)+오류의심 11건. 4단 체인",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "CMP2",
+   "question": "우리 민원 수준이 업계랑 비교하면 어때?",
+   "preset_card_id": null,
+   "category": "A-complaint",
+   "anatomy_type": "complaint",
+   "verification_keywords": [
+    "5,974"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "금감원 카드사 민원 5,974건(+8.8%)·소비자원 연령분포(30대 33%) 등 외부 실측 제시 + 우리는 합성이라 비율·구조 비교만 가능함을 명시하면 PASS.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "CHN-D",
+   "question": "역삼은 사람이 그렇게 많은데 소비가 안 잡혀. 어디에 기회가 있어?",
+   "preset_card_id": null,
+   "category": "L-chain",
+   "anatomy_type": "chain",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "①첫 1~2문장이 직접 답('커버가 가장 얇은 후보는 주류/유흥, 1장')+핵심 수치 ②'후보'·'우선순위 점수 아님' qualifier ③근거 표(후보 비교) ④판단 한계(통신 추계·시점 상이) ⑤gap -18 등 앵커 수치가 결론 근거로 등장. hop 순서 낭독·N-hop 자기 서술·화면 위치 안내 없음.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "CHN-A",
+   "question": "요즘 화장품 시장이 뜨는데, 우리 카드로 대응 가능해? 문제는 없어?",
+   "preset_card_id": null,
+   "category": "L-chain",
+   "anatomy_type": "chain",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "①첫 문단 직접 답(+36.6% vs 공존 7장/43장 16.3%) ②'공존'·'점검 후보'·'충돌 확정 아님' 언어 ③근거 표 ④판단 한계(card 단위 합집합). 자기 서술 없음.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "CHN-B",
+   "question": "혜택 미적용 민원이 많다는데, 근본 원인이 뭐고 뭘 검토해야 해?",
+   "preset_card_id": null,
+   "category": "L-chain",
+   "anatomy_type": "chain",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "①첫 문단 직접 답(전사 1위 전월실적 98건→가설→미검출 2장 검토 출발점) ②'전사'·'가설'·'미검출≠없음'·'추천 아닌 검토' ③분모 3종(43/39/37) ④판단 한계. 자기 서술 없음.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "CHN-C",
+   "question": "우리 고객이 실제로 돈을 제일 많이 쓰는 데가 어디고, 거기 대응은 잘 돼 있어?",
+   "preset_card_id": null,
+   "category": "L-chain",
+   "anatomy_type": "chain",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "①첫 문단 직접 답(교육/학원 객단가 359,384원 최고, 커버 12장) ②'합성(방향 증명용)' qualifier + 시장 축 공개 데이터 교차검증 ③근거 표 ④판단 한계. 자기 서술 없음.",
+   "gold_source": "picker_full_eval"
+  },
+  {
+   "id": "MKT-1",
+   "question": "음식점 제휴 프로모션 하려는데, 지금 음식점 혜택 주는 우리 카드가 뭐가 있어?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "음식점"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "카드 목록, '확인 필요' FAIL",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPe1",
+   "question": "생활인구가 그 동네 방문객 수라는 거지? 정확히 몇 명이 왔다는 거야?",
+   "preset_card_id": null,
+   "category": "U27 신규(엣지)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "추계"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "정직성 게이트: 생활인구는 통신 기반 '추계'이며 방문객·구매자 수가 아님을 명시하면 PASS. 방문객 수로 단정하면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPv1",
+   "question": "붐비는 동네일수록 카드 매출도 큰 거야?",
+   "preset_card_id": null,
+   "category": "U27 신규(변형)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "여의도",
+    "노량진"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "인구 순위와 소비 순위의 괴리(여의도/노량진 역설) 제시하면 PASS.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "CHN-E",
+   "question": "횟수 초과 민원은 왜 나는 거야?",
+   "preset_card_id": null,
+   "category": "U40",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "①첫 문단 직접 답(개연성 — 관측 173장 중 139장 80.3%) ②'가설'·'원인 확정 아님'·분모=파싱 관측 ③근거 표(53건·8,597원) ④판단 한계('거래-거절 직접 연결 필요'). 자기 서술 없음.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "CMP1",
+   "question": "이 민원 데이터 진짜야? 믿어도 돼?",
+   "preset_card_id": null,
+   "category": "U29 신규",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "합성",
+    "과표집"
+   ],
+   "negative_keywords": [
+    "실제 민원 원문"
+   ],
+   "gold_facts": "①합성+혜택 과표집 선고지 ②3중 앵커(하나카드 56유형·중앙값 36턴 / 금감원 5,974건 +8.8% / 소비자원 16,802건) ③실 상담 다수는 거래성 문의(혜택 ~2%)라는 괴리 정직 제시. 절대 건수 비교 없으면 PASS.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "TRD3",
+   "question": "뷰티 적립률을 2%p 올리면 비용이 얼마나 늘어?",
+   "preset_card_id": null,
+   "category": "U28 신규",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "2,918"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "rule_simulate 델타(합성) 제시 + 실공시 앵커(신한카드 포인트부채 2,918억, DART) 병기하면 PASS. 합성/실공시 구분 명시.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT-5",
+   "question": "20대 혜택 대상 소비 규모는 얼마야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "20대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "20대 eligible_spend",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPe2",
+   "question": "잠실나루 쪽은 사람 대비 소비 어때?",
+   "preset_card_id": null,
+   "category": "U27 신규(엣지)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "인덱스는 상위 25상권만 — 잠실나루 미포함. '해당 상권은 인덱스에 없음(상위 25개만)' 정직 고지하거나 잠실(관광특구/잠실역·잠실새내)로 한정해 답하면 PASS. 잠실나루 수치를 지어내면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPv2",
+   "question": "유동인구랑 실제 매출이 따로 노는 상권이 있어?",
+   "preset_card_id": null,
+   "category": "U27 신규(변형)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "여의도"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "괴리 상권(여의도: 인구1위/소비13위 또는 역삼, 노량진 역방향) 구체 제시하면 PASS.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT-6",
+   "question": "음식점 할인 한도를 반으로 줄이면 리워드 비용이 얼마나 절감돼?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "리워드"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "한도 반감 시뮬 델타",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPe3",
+   "question": "새벽 2시에 사람 많은 동네는 어디야?",
+   "preset_card_id": null,
+   "category": "U27 신규(엣지)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "인덱스는 점심(11~13시) 기준만 사전계산 — 새벽 시간대 미보유를 정직 고지하면 PASS. 새벽 수치를 지어내면 FAIL. (점심 기준으로 대체 제안은 가점)",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPv3",
+   "question": "머릿수 대비 씀씀이가 큰 상권 뽑아줘",
+   "preset_card_id": null,
+   "category": "U27 신규(변형)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "노량진"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "침투율 순위(노량진 1위) + 도매 각주. 정의(연매출÷점심 인구) 언급 가점.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT-7",
+   "question": "커피 혜택 구조가 비슷한 카드들끼리 묶어서 보여줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "커피"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "유사 구조 그룹(저가치 유형)",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPe4",
+   "question": "그 침투율인가 하는 숫자, 어떻게 계산한 거야? 믿어도 돼?",
+   "preset_card_id": null,
+   "category": "U27 신규(엣지)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "생활인구"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "정의(연매출÷점심 평균 생활인구×365) + 두 원천(생활인구[공공]·추정매출[집계]) + 한계(추계·시점 불일치) 설명하면 PASS.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPv4",
+   "question": "20대는 주로 어느 동네에 모여 있어?",
+   "preset_card_id": null,
+   "category": "U27 신규(변형)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "20대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "20대 점심 생활인구 최다 상권 top3 제시하면 PASS(인덱스 pop_by_age['20'].top_areas).",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT-8",
+   "question": "보고 전에 그 실질 혜택률 숫자는 어떻게 계산된 거야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "기대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "정의+계산식+출처",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPe5",
+   "question": "여의도는 사람이 그렇게 많은데 왜 소비가 적어?",
+   "preset_card_id": null,
+   "category": "U27 신규(엣지)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "여의도"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "인구1위/소비13위 사실 제시 + 해석은 데이터 한계 내에서(업종 구성·직장인 통행 가설은 '가능성'으로, 단정 금지). 인덱스에 없는 인과를 단정하면 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPv5",
+   "question": "강남 쪽은 사람 많은 만큼 소비도 나와?",
+   "preset_card_id": null,
+   "category": "U27 신규(변형)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "강남"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "강남역 focus(인구·소비 순위 병기) 또는 전체 대조표에서 강남 언급하면 PASS.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT2-1",
+   "question": "서울에서 소비 규모가 큰 업종이 뭐야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "한식"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "업종 순위(한식 최대)",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPe6",
+   "question": "사람 많이 모이는 동네 위주로 신규 가맹 제휴를 하면 손해야?",
+   "preset_card_id": null,
+   "category": "U27 신규(엣지)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "침투율/괴리 데이터로 '인구만으로는 소비를 보증 못함'을 근거 제시하면 PASS. 제휴 손익(원가·수수료) 단정은 데이터 밖 — 한계 고지 필요.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "POPv6",
+   "question": "30대 타겟 프로모션 하려는데, 30대가 모이는 동네부터 알려줘",
+   "preset_card_id": null,
+   "category": "U27 신규(변형)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "30대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "30대 밀집 상권 제시 + (가점) 다음 단계로 시장 소비/자사 지표 대조 제안.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT2-2",
+   "question": "그 음식점은 주로 몇 대가 많이 소비해?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "음식점"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "음식점 연령 구성",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT2-3",
+   "question": "소비가 몰리는 시간대는 언제야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "시간대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "시간대 피크",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT2-5",
+   "question": "음식점 혜택 주는 우리 카드가 뭐가 있어?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "음식점"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "카드 목록",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT2-6",
+   "question": "음식점 할인 한도를 반으로 줄이면 리워드 비용이 얼마나 절감돼?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "리워드"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "시뮬 델타",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT2-7",
+   "question": "커피 혜택 구조가 비슷한 카드들끼리 묶어서 보여줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "커피"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "유사 그룹(저가치)",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "MKT2-8",
+   "question": "그 실질 혜택률 숫자는 어떻게 계산된 거야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "기대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "정의+계산식+출처",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P1-02",
+   "question": "이름은 다른데 실제 혜택은 비슷한 카드들 찾아줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "유사",
+    "겹치"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "혜택 카테고리 집합 자카드 유사 카드쌍(top-K) 제시하면 PASS. '공유 카테고리' 언급이 근거. 카드쌍 없이 일반론만이면 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P1-03",
+   "question": "서로 겹쳐서 정리할 만한 카드 조합 있어?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "유사",
+    "겹치"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "혜택 카테고리 집합 자카드 유사 카드쌍(top-K) 제시하면 PASS. '공유 카테고리' 언급이 근거. 카드쌍 없이 일반론만이면 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P1-06",
+   "question": "연회비 비싼데 혜택은 별로인 카드 골라줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "연회비 대비 혜택 밀도 비교 시도(연회비·혜택 수 데이터 실재) 또는 '가치 판단 기준 필요' 정직 응답. '확인 필요'만 반환하면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P1-07",
+   "question": "음식점 할인 한도를 반으로 줄이면 어떻게 돼?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "규칙 변경(한도/적립률 등) 시 리워드 비용 영향(증감)을 근거로 제시하면 PASS. base rule 없이 일반론만이면 PARTIAL, 무관하면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P1-08",
+   "question": "적립률을 좀 낮추면 비용이 얼마나 줄어?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "규칙 변경(한도/적립률 등) 시 리워드 비용 영향(증감)을 근거로 제시하면 PASS. base rule 없이 일반론만이면 PARTIAL, 무관하면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P1-09",
+   "question": "특정 매장을 혜택에서 빼면 영향이 얼마나 커?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "규칙 변경(한도/적립률 등) 시 리워드 비용 영향(증감)을 근거로 제시하면 PASS. base rule 없이 일반론만이면 PARTIAL, 무관하면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P1-11",
+   "question": "여러 분야에서 동시에 겹치는 카드들 찾아줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "유사",
+    "겹치"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "혜택 카테고리 집합 자카드 유사 카드쌍(top-K) 제시하면 PASS. '공유 카테고리' 언급이 근거. 카드쌍 없이 일반론만이면 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P2-08",
+   "question": "이번 달 할인 한도 아직 남았나요?",
+   "preset_card_id": "CARD_Product:201709220001",
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "개인 실시간 잔여 한도는 데모 데이터 밖 — 카드의 한도 '구조'(월 통합 한도 등)를 약관 근거로 설명 + 개인 잔액은 확인 불가 정직 고지하면 PASS. 구조 설명 없이 앱 안내만 하면 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P2-09",
+   "question": "이 카드 혜택 뭐뭐 있는지 다 알려주세요",
+   "preset_card_id": "CARD_Product:201510150001",
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "혜택",
+    "할인"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "대상 카드='신한카드 YOLO Tasty'. 특정 카테고리 혜택=['온라인쇼핑', '음식점']. 실제 benefit=['영라이프 할인', '통합할인한도', 'SPA 브랜드 10% 결제일 할인', '소셜커머스 10% 결제일 할인', 'H&B Store 10% 결제일 할인', '포잉 10% 결제일 할인', 'SG다인힐 외식업체 10% 결제일 할인', 'Mall 내 F&B 매장 10% 할인']. 혜택유형=['할인'].",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P2-27",
+   "question": "세금 낸 것도 실적에 포함되나요?",
+   "preset_card_id": "CARD_Product:201709220001",
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "실적",
+    "적립",
+    "포인트"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "대상 카드='신한카드 Deep Dream 체크'. 특정 카테고리 태깅 없음(전방위 적립/할인형일 수 있음 — benefit 내용 참고). 실제 benefit=['DREAM 영역', '아껴드림', '통합적립한도', '신한금융그룹 서비스', '전월 실적/적립 한도 없이 국내/외 이용 가맹점 0.2% 기본 포인트 적립', '자주 가는 DREAM 영역은 기본의 3배(총 0.6%) 포인트 적립', 'DREAM영역 중 가장 많이 이용한 영역은 기본의  5배(총 1.0%) 포인트 자동적립']. 혜택유형=['적립', '포인트'].",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P2-35",
+   "question": "이 카드에서 제일 큰 혜택이 뭐예요?",
+   "preset_card_id": "CARD_Product:201510150001",
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "혜택",
+    "할인"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "대상 카드='신한카드 YOLO Tasty'. 특정 카테고리 혜택=['온라인쇼핑', '음식점']. 실제 benefit=['영라이프 할인', '통합할인한도', 'SPA 브랜드 10% 결제일 할인', '소셜커머스 10% 결제일 할인', 'H&B Store 10% 결제일 할인', '포잉 10% 결제일 할인', 'SG다인힐 외식업체 10% 결제일 할인', 'Mall 내 F&B 매장 10% 할인']. 혜택유형=['할인'].",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P3-02",
+   "question": "소비는 많은데 우리 혜택이 부족한 영역 짚어줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "카테고리별 혜택 커버리지(강/약 영역) 진단 제시하면 PASS. 특정 영역이 약하다는 근거 있는 진단이면 PASS, 일반론만 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P3-06",
+   "question": "이 지역 소비 패턴에 맞는 혜택 카테고리 찾아줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "질문의 가맹점/카테고리를 그래프에서 매칭. 실제 카드 언급 PASS, 환각 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P3-10",
+   "question": "카테고리별로 혜택 커버리지 어떻게 되는지 봐줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "카테고리별 혜택 커버리지(강/약 영역) 진단 제시하면 PASS. 특정 영역이 약하다는 근거 있는 진단이면 PASS, 일반론만 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P3-11",
+   "question": "이 MCC 코드가 우리 혜택 분류로 어떻게 연결돼?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "MCC"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "MCC↔혜택 공식 crosswalk 부재를 정직 고지(현재 매핑은 서울업종↔혜택 카테고리) + 대안 경로(가맹점/업종 기반) 안내하면 PASS. 가짜 MCC 매핑을 지어내면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P3-12",
+   "question": "최근 소비 늘어난 영역인데 혜택이 못 따라가는 데 있어?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "카테고리별 혜택 커버리지(강/약 영역) 진단 제시하면 PASS. 특정 영역이 약하다는 근거 있는 진단이면 PASS, 일반론만 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P3-16",
+   "question": "우리 혜택이 시장 소비를 얼마나 커버하는지 봐줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "카테고리별 혜택 커버리지(강/약 영역) 진단 제시하면 PASS. 특정 영역이 약하다는 근거 있는 진단이면 PASS, 일반론만 PARTIAL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P3-17",
+   "question": "혜택 대상 거래 건수가 얼마나 돼?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "eligible 거래 규모 — metric(eligible_spend 관련) 또는 거래 롤업(합성 12.6만 중 대상 건수) 수치 제시. '지표 없음'만 반환하면 FAIL(데이터 실재).",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P4-02",
+   "question": "실질 혜택률 정의를 바꾸면 어떤 대시보드랑 답변이 영향받아?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "지표(실질혜택률/적격소비/리워드/커버리지) 값 또는 정의를 제시하면 PASS. 값 질의는 수치, 메타 질의는 정의/단위/출처. 3000행 덤프·평균 오안내면 PARTIAL/FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P4-05",
+   "question": "eligible_spend 지표는 어느 테이블에서 나온 거야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "지표(실질혜택률/적격소비/리워드/커버리지) 값 또는 정의를 제시하면 PASS. 값 질의는 수치, 메타 질의는 정의/단위/출처. 3000행 덤프·평균 오안내면 PARTIAL/FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P4-06",
+   "question": "이 지표 정의 버전이 어떻게 돼?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "버전"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "metric registry의 정의+버전(definition_version) 제시하면 PASS. (원판 질문이 지표명 미지정이라 실질 혜택률로 명시화 — 컨텍스트 의존 제거)",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P4-07",
+   "question": "eligible_spend 정의를 바꾸면 어떤 KPI가 흔들려?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "지표(실질혜택률/적격소비/리워드/커버리지) 값 또는 정의를 제시하면 PASS. 값 질의는 수치, 메타 질의는 정의/단위/출처. 3000행 덤프·평균 오안내면 PARTIAL/FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P4-10",
+   "question": "커버리지 지표 계산에 어떤 소비 데이터가 쓰여?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "서울"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "coverage의 시장 축 = 서울 상권 추정매출(공개-집계) + 내부 축 = 혜택 카드 수. 원천 두 개를 밝히면 PASS. '출처 없음'이면 FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "P4-12",
+   "question": "이 지표 믿을 만해? 추정이 섞여 있어?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [],
+   "negative_keywords": [],
+   "gold_facts": "지표(실질혜택률/적격소비/리워드/커버리지) 값 또는 정의를 제시하면 PASS. 값 질의는 수치, 메타 질의는 정의/단위/출처. 3000행 덤프·평균 오안내면 PARTIAL/FAIL.",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "U10-D03",
+   "question": "쇼핑이라고 하면 우리 데이터에선 뭐가 포함돼?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "온라인쇼핑"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "'쇼핑' 하위(뷰티·온라인쇼핑·의류/패션) 설명 PASS, 회피 FAIL",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "U10-D12",
+   "question": "방금 그 실질 혜택률은 정확히 어떻게 계산되는 거야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "기대"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "정의+계산식+출처",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "U10-D14",
+   "question": "이 지표는 어떤 데이터에서 나온 거야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "테이블"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "원천 테이블 lineage",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "U10-D27",
+   "question": "의료 관련해서 우리가 다루는 데이터가 뭐가 있어?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "의료"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "의료/건강 계층·범위 설명 PASS",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "U10-D28",
+   "question": "의료 쪽 혜택 있는 카드 보여줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "의료"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "의료 혜택 카드 제시 또는 없음 정직 고지",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "u19-05",
+   "question": "실질혜택률 정의가 뭐야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "정의",
+    "리워드"
+   ],
+   "negative_keywords": [],
+   "gold_facts": "catalog.terms 비어있지 않음(SMUS push 후) definition_version 표기",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "x2-01a",
+   "question": "서울 시장에선 60대가 제일 많이 쓴다는데, 그게 얼마야?",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "60"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "시장 60+ 20.7조[집계]",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  },
+  {
+   "id": "x2-03",
+   "question": "점심에 밀 카드 뭐가 좋아? 시장이 진짜 점심 피크인지도 확인해줘",
+   "preset_card_id": null,
+   "category": "기존(f1 전수)",
+   "anatomy_type": "",
+   "verification_keywords": [
+    "점심"
+   ],
+   "negative_keywords": [
+    "우리 고객 데이터에 따르면",
+    "홍대입구 1위"
+   ],
+   "gold_facts": "11~14 피크",
+   "gold_source": "picker_full_eval",
+   "added_in": "U65-S0"
+  }
+ ]
+}

@@ -1,0 +1,331 @@
+@prefix co: <https://card.ai-ready/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# U27 AreaMapping — 서울 상권(추정매출 축) ↔ 행정동(생활인구 축)
+# 출처: 서울시 상권분석서비스 영역-상권 shapefile(TRDAR_CD_N, ADSTRD_CD) — 원본 무변형 참조.
+# 매핑 방식: 상권명 정규화 일치(괄호·공백 제거 substring). 검증: 25/25 (2026-07-16).
+
+<https://card.ai-ready/ontology#areamap/%EB%85%B8%EB%9F%89%EC%A7%84%EC%97%AD%28%EB%85%B8%EB%9F%89%EC%A7%84%29> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "노량진역(노량진)" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11590510" ;
+    co:targetLabel "노량진1동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EA%B0%80%EC%82%B0%EB%94%94%EC%A7%80%ED%84%B8%EB%8B%A8%EC%A7%80> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "가산디지털단지" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11545510" ;
+    co:targetLabel "가산동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%9A%A9%EC%82%B0%EC%A0%84%EC%9E%90%EC%83%81%EA%B0%80%28%EC%9A%A9%EC%82%B0%EC%97%AD%29> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "용산전자상가(용산역)" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11170625" ;
+    co:targetLabel "한강로동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EB%AA%85%EB%8F%99%20%EB%82%A8%EB%8C%80%EB%AC%B8%20%EB%B6%81%EC%B0%BD%EB%8F%99%20%EB%8B%A4%EB%8F%99%20%EB%AC%B4%EA%B5%90%EB%8F%99%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "명동 남대문 북창동 다동 무교동 관광특구" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11140520" ;
+    co:targetLabel "소공동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EA%B0%80%EB%9D%BD%EC%8B%9C%EC%9E%A5> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "가락시장" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11710631" ;
+    co:targetLabel "가락1동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EA%B0%95%EB%82%A8%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "강남역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11650520" ;
+    co:targetLabel "서초2동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%9E%A0%EC%8B%A4%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "잠실 관광특구" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11710562" ;
+    co:targetLabel "방이2동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%A2%85%EB%A1%9C3%EA%B0%80%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "종로3가역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11110615" ;
+    co:targetLabel "종로1·2·3·4가동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%9E%A0%EC%8B%A4%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "잠실역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11710710" ;
+    co:targetLabel "잠실6동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%A2%85%EB%A1%9C%C2%B7%EC%B2%AD%EA%B3%84%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "종로·청계 관광특구" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11110615" ;
+    co:targetLabel "종로1·2·3·4가동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%B2%AD%EB%9F%89%EB%A6%AC%EC%B2%AD%EA%B3%BC%EB%AC%BC%EC%8B%9C%EC%9E%A5> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "청량리청과물시장" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11230545" ;
+    co:targetLabel "제기동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%B2%AD%EB%9F%89%EB%A6%AC%EC%A2%85%ED%95%A9%EC%8B%9C%EC%9E%A5> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "청량리종합시장" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11230545" ;
+    co:targetLabel "제기동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%97%AC%EC%9D%98%EB%8F%84%EC%97%AD%28%EC%97%AC%EC%9D%98%EB%8F%84%29> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "여의도역(여의도)" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11560540" ;
+    co:targetLabel "여의동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EB%8F%85%EC%82%B0%EB%8F%99%20%EC%9A%B0%EC%8B%9C%EC%9E%A5> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "독산동 우시장" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11545610" ;
+    co:targetLabel "독산1동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%9E%A0%EC%8B%A4%EC%83%88%EB%82%B4%EC%97%AD%28%EC%8B%A0%EC%B2%9C%29> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "잠실새내역(신천)" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11710650" ;
+    co:targetLabel "잠실본동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%95%95%EA%B5%AC%EC%A0%95%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "압구정역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11680510" ;
+    co:targetLabel "신사동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%ED%99%8D%EB%8C%80%EC%9E%85%EA%B5%AC%EC%97%AD%28%ED%99%8D%EB%8C%80%29> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "홍대입구역(홍대)" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11440660" ;
+    co:targetLabel "서교동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%98%81%EB%93%B1%ED%8F%AC%EC%97%AD%28%EC%98%81%EB%93%B1%ED%8F%AC%29> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "영등포역(영등포)" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11560535" ;
+    co:targetLabel "영등포동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EB%8F%99%EC%84%9C%EC%8B%9C%EC%9E%A5> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "동서시장" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11230545" ;
+    co:targetLabel "제기동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%97%AD%EC%82%BC%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "역삼역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11680640" ;
+    co:targetLabel "역삼1동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%8B%A0%EC%82%AC%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "신사역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11650540" ;
+    co:targetLabel "잠원동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EA%B5%AC%EB%A1%9C%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "구로역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11530530" ;
+    co:targetLabel "구로2동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EB%8F%99%EB%8C%80%EB%AC%B8%ED%8C%A8%EC%85%98%ED%83%80%EC%9A%B4%20%EA%B4%80%EA%B4%91%ED%8A%B9%EA%B5%AC> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "동대문패션타운 관광특구" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11140590" ;
+    co:targetLabel "광희동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EB%85%B8%EC%9B%90%EC%97%AD> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "노원역" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11350640" ;
+    co:targetLabel "상계2동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .
+
+<https://card.ai-ready/ontology#areamap/%EC%95%95%EA%B5%AC%EC%A0%95%EB%A1%9C%EB%8D%B0%EC%98%A4%EC%97%AD%28%EC%95%95%EA%B5%AC%EC%A0%95%EB%A1%9C%EB%8D%B0%EC%98%A4%29> a co:AreaMapping ;
+    co:sourceScheme "seoul_trade_area" ;
+    co:sourceCode "압구정로데오역(압구정로데오)" ;
+    co:targetScheme "admin_dong" ;
+    co:targetCode "11680545" ;
+    co:targetLabel "압구정동" ;
+    co:mappingType "name_match" ;
+    co:confidence "1.0"^^xsd:decimal ;
+    co:evidence "서울시 상권영역 shapefile TRDAR_CD_N↔ADSTRD_CD" ;
+    co:reviewStatus "verified" ;
+    co:createdBy "build_14+shapefile" ;
+    co:version "1.0" .

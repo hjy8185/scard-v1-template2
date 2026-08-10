@@ -1,0 +1,261 @@
+[
+ {
+  "a": "d0_market_crosswalk",
+  "b": "seoul_area_sales",
+  "key": "industry_name=seoul_industry",
+  "n": 15,
+  "source": "measured",
+  "verified_rows": 381001
+ },
+ {
+  "a": "r0_card_product",
+  "b": "r1_card_category",
+  "key": "card_id=card_product_id",
+  "n": 15,
+  "source": "measured",
+  "verified_rows": 1058
+ },
+ {
+  "a": "seoul_area_sales",
+  "b": "seoul_trade_area",
+  "key": "trdar_cd",
+  "n": 12,
+  "source": "measured",
+  "verified_rows": 439141
+ },
+ {
+  "a": "d1_customer",
+  "b": "metrics_customer_month",
+  "key": "customer_id",
+  "n": 9,
+  "source": "measured",
+  "verified_rows": 3000
+ },
+ {
+  "a": "d4_txn_category_rollup",
+  "b": "r1_card_category",
+  "key": "benefit_category",
+  "n": 7,
+  "source": "measured",
+  "verified_rows": 1035
+ },
+ {
+  "a": "r1_benefit",
+  "b": "r2_benefit_condition",
+  "key": "benefit_id",
+  "n": 4,
+  "source": "measured",
+  "verified_rows": 11533
+ },
+ {
+  "a": "seoul_living_population",
+  "b": "seoul_trade_area",
+  "key": "adstrd_cd",
+  "n": 4,
+  "source": "measured",
+  "verified_rows": 592943316
+ },
+ {
+  "a": "market_trend_group",
+  "b": "r1_card_category",
+  "key": "benefit_category=mapped_category",
+  "n": 4,
+  "source": "measured",
+  "verified_rows": 1648
+ },
+ {
+  "a": "d4_transaction",
+  "b": "d7_complaint_case",
+  "key": "related_txn_id=txn_id",
+  "n": 4,
+  "source": "measured",
+  "verified_rows": 6
+ },
+ {
+  "a": "d4_txn_category_rollup",
+  "b": "v_market_size_category_year",
+  "key": "benefit_category",
+  "n": 4,
+  "source": "measured",
+  "verified_rows": 70
+ },
+ {
+  "a": "d4_transaction",
+  "b": "d6_reward_ledger",
+  "key": "txn_id",
+  "n": 3,
+  "source": "measured",
+  "verified_rows": 99278
+ },
+ {
+  "a": "seoul_trade_area",
+  "b": "v_living_population_hourly_avg",
+  "key": "adstrd_cd",
+  "n": 3,
+  "source": "measured",
+  "verified_rows": 9809856
+ },
+ {
+  "a": "d0_market_crosswalk",
+  "b": "d4_transaction",
+  "key": "industry_name=seoul_industry",
+  "n": 3,
+  "source": "measured",
+  "verified_rows": 116049
+ },
+ {
+  "a": "d4_txn_category_rollup",
+  "b": "market_trend_group",
+  "key": "mapped_category=benefit_category",
+  "n": 3,
+  "source": "measured",
+  "verified_rows": 17
+ },
+ {
+  "a": "d0_market_crosswalk",
+  "b": "seoul_area_sales",
+  "key": "seoul_industry=industry_name",
+  "n": 3,
+  "source": "measured",
+  "verified_rows": 381001
+ },
+ {
+  "a": "d4_txn_category_rollup",
+  "b": "market_trend_group",
+  "key": "benefit_category=mapped_category",
+  "n": 2,
+  "source": "measured",
+  "verified_rows": 17
+ },
+ {
+  "a": "r0_card_product",
+  "b": "r1_benefit",
+  "key": "card_product_id",
+  "n": 2,
+  "source": "measured",
+  "verified_rows": 5647
+ },
+ {
+  "a": "seoul_area_sales",
+  "b": "seoul_trade_area",
+  "key": "area_name",
+  "n": 1,
+  "source": "measured",
+  "verified_rows": 439109
+ },
+ {
+  "a": "d6_reward_ledger",
+  "b": "r1_benefit",
+  "key": "benefit_id",
+  "n": 1,
+  "source": "measured",
+  "verified_rows": 99278
+ },
+ {
+  "a": "d1_customer",
+  "b": "d4_transaction",
+  "key": "customer_id",
+  "n": 1,
+  "source": "measured",
+  "verified_rows": 125891
+ },
+ {
+  "a": "d0_market_crosswalk",
+  "b": "d4_transaction",
+  "key": "shinhan_category=industry_name",
+  "n": 1,
+  "source": "measured",
+  "verified_rows": 4862
+ },
+ {
+  "a": "d2_account",
+  "b": "metrics_account_month",
+  "key": "card_account_id",
+  "n": 1,
+  "source": "measured",
+  "verified_rows": 5988
+ },
+ {
+  "a": "r0_card_product",
+  "b": "r1_card_category",
+  "key": "card_product_id=card_id",
+  "n": 1,
+  "source": "measured",
+  "verified_rows": 1058
+ },
+ {
+  "a": "r1_benefit",
+  "b": "r1_card_category",
+  "key": "card_product_id=card_id",
+  "n": 1,
+  "source": "measured",
+  "verified_rows": 9020
+ },
+ {
+  "a": "metrics_account_month",
+  "b": "metrics_customer_month",
+  "key": "metrics:effective_reward_rate,eligible_spend,eligible_transaction_count",
+  "n": 0,
+  "source": "sibling"
+ },
+ {
+  "a": "metrics_account_month",
+  "b": "metrics_segment_month",
+  "key": "metrics:effective_reward_rate,eligible_spend,eligible_transaction_count",
+  "n": 0,
+  "source": "sibling"
+ },
+ {
+  "a": "metrics_customer_month",
+  "b": "metrics_segment_month",
+  "key": "metrics:effective_reward_rate,eligible_spend,eligible_transaction_count",
+  "n": 0,
+  "source": "sibling"
+ },
+ {
+  "a": "metrics_account_month",
+  "b": "reward_by_account",
+  "key": "metrics:eligible_transaction_count,expected_reward_amount,observed_reward_amount",
+  "n": 0,
+  "source": "sibling"
+ },
+ {
+  "a": "metrics_customer_month",
+  "b": "reward_by_account",
+  "key": "metrics:eligible_transaction_count,expected_reward_amount,observed_reward_amount",
+  "n": 0,
+  "source": "sibling"
+ },
+ {
+  "a": "metrics_segment_month",
+  "b": "reward_by_account",
+  "key": "metrics:eligible_transaction_count,expected_reward_amount,observed_reward_amount",
+  "n": 0,
+  "source": "sibling"
+ },
+ {
+  "a": "d7_complaint",
+  "b": "d7_complaint_case",
+  "key": "metrics:issue,narrative,sub_issue",
+  "n": 0,
+  "source": "sibling"
+ },
+ {
+  "a": "d7_complaint_case",
+  "b": "d7_complaint_root_cause",
+  "key": "denial_reason_ko=denial_reason",
+  "n": 0,
+  "source": "verified",
+  "verified_rows": 189,
+  "note": "같은 이름 denial_reason끼리는 0행이다(case=영문코드, root_cause=한글). ko가 짝이다"
+ },
+ {
+  "a": "v_living_population_dong_hour",
+  "b": "v_market_penetration_dong",
+  "key": "adstrd_cd=adstrd_cd, hour_slot=hour_slot, year_month=year_month",
+  "n": 0,
+  "source": "verified",
+  "verified_rows": 844560,
+  "note": "★ 조인키가 **복합 3열**이다(행정동+시간대+년월). ⚠️ adstrd_cd 하나로 조인하면 364,849,920행 — 실측 432배 카티전이다(어느 쪽도 adstrd_cd에 유일하지 않다: liv 169,776행/393동, pen 844,560행/391동). 복합키면 844,560행 = pen 전건이므로 1:N으로 정확히 붙는다. U101 실측 추가 — 실제 SQL이 2회 조인했는데 그래프에 엣지가 없었다(미등록 1쌍). 두 뷰 모두 행정동×시간대×년월 입도다."
+ }
+]

@@ -1,0 +1,306 @@
+{
+ "meta": {
+  "source": "U37 Stage 0 chain audit(build_22) — 체인 앵커 수치의 단일 소스",
+  "ssot_rule": "시장 수치는 mci만. cmc(U19 이전 77.9%)는 참조 금지 — 분기는 아래 경고",
+  "generated_at": "",
+  "asset_hashes": {
+   "mci": "f6d2112ac060",
+   "pop": "98ec9ab77dbe",
+   "trend": "e1f81c97bbf4",
+   "rollup": "a2ebd8158a34",
+   "sig": "f95be563603c",
+   "cond": "4bba3d9f1241",
+   "exc": "af3b63476c03",
+   "comp": "a797f070462d",
+   "vocab": "c5095e4997b5",
+   "cmc_stale": "225fa02e1a81"
+  },
+  "as_of": {
+   "market": "2025",
+   "pop": "202606",
+   "trend": "202605",
+   "internal_d4": "D4 합성 4개월"
+  },
+  "stale_divergence_warning": {
+   "교육/학원": {
+    "stale_cmc": 3819627395935,
+    "ssot_mci": 4739922676056
+   },
+   "의료": {
+    "stale_cmc": 9302131985919,
+    "ssot_mci": 10545545532357
+   }
+  },
+  "n_cards_total": 694
+ },
+ "chain_d": {
+  "areas": {
+   "역삼역": {
+    "gap": -18,
+    "pop_rank": 2,
+    "sales_rank": 20,
+    "top_industries": [
+     {
+      "industry": "한식음식점",
+      "krw": 147827826377,
+      "category": "음식점",
+      "cover_cards": 21
+     },
+     {
+      "industry": "일반의원",
+      "krw": 71934026593,
+      "category": "의료",
+      "cover_cards": 0
+     },
+     {
+      "industry": "커피-음료",
+      "krw": 42385867575,
+      "category": "커피/음료",
+      "cover_cards": 282
+     },
+     {
+      "industry": "편의점",
+      "krw": 38729623167,
+      "category": "편의점",
+      "cover_cards": 178
+     },
+     {
+      "industry": "호프-간이주점",
+      "krw": 25442717454,
+      "category": "주류/유흥",
+      "cover_cards": 1
+     }
+    ]
+   },
+   "압구정로데오역(압구정로데오)": {
+    "gap": -14,
+    "pop_rank": 11,
+    "sales_rank": 25,
+    "top_industries": [
+     {
+      "industry": "일반의류",
+      "krw": 127260138711,
+      "category": "의류/패션",
+      "cover_cards": 4
+     },
+     {
+      "industry": "일반의원",
+      "krw": 116241128579,
+      "category": "의료",
+      "cover_cards": 0
+     },
+     {
+      "industry": "한식음식점",
+      "krw": 53817388018,
+      "category": "음식점",
+      "cover_cards": 21
+     },
+     {
+      "industry": "양식음식점",
+      "krw": 44818048376,
+      "category": "음식점",
+      "cover_cards": 21
+     },
+     {
+      "industry": "시계및귀금속",
+      "krw": 42779676403,
+      "category": null,
+      "cover_cards": null
+     }
+    ]
+   },
+   "여의도역(여의도)": {
+    "gap": -12,
+    "pop_rank": 1,
+    "sales_rank": 13,
+    "top_industries": [
+     {
+      "industry": "한식음식점",
+      "krw": 227964417307,
+      "category": "음식점",
+      "cover_cards": 21
+     },
+     {
+      "industry": "일식음식점",
+      "krw": 58674284592,
+      "category": "음식점",
+      "cover_cards": 21
+     },
+     {
+      "industry": "일반의원",
+      "krw": 56277227431,
+      "category": "의료",
+      "cover_cards": 0
+     },
+     {
+      "industry": "커피-음료",
+      "krw": 54796732330,
+      "category": "커피/음료",
+      "cover_cards": 282
+     },
+     {
+      "industry": "호프-간이주점",
+      "krw": 40160725906,
+      "category": "주류/유흥",
+      "cover_cards": 1
+     }
+    ]
+   },
+   "홍대입구역(홍대)": {
+    "gap": -11,
+    "pop_rank": 6,
+    "sales_rank": 17,
+    "top_industries": [
+     {
+      "industry": "한식음식점",
+      "krw": 114690865813,
+      "category": "음식점",
+      "cover_cards": 21
+     },
+     {
+      "industry": "호프-간이주점",
+      "krw": 88925093973,
+      "category": "주류/유흥",
+      "cover_cards": 1
+     },
+     {
+      "industry": "일반의류",
+      "krw": 55738052385,
+      "category": "의류/패션",
+      "cover_cards": 4
+     },
+     {
+      "industry": "일반의원",
+      "krw": 53381232606,
+      "category": "의료",
+      "cover_cards": 0
+     },
+     {
+      "industry": "커피-음료",
+      "krw": 46468762585,
+      "category": "커피/음료",
+      "cover_cards": 282
+     }
+    ]
+   }
+  },
+  "medical_market_krw": 10545545532357,
+  "medical_market_rank": 3,
+  "vocab_bridge": "서울 통계 '의료' ↔ 그래프 노드 '의료/건강' (vocab_sot market_label)",
+  "caveats": [
+   "생활인구는 2026-06 점심시간 대표월·통신 추계(방문·구매자 아님)",
+   "매출은 2025 연간 — 시점·성격 상이. 인과 아님(기회 탐색)"
+  ]
+ },
+ "chain_a": {
+  "kosis": {
+   "group": "화장품",
+   "yoy_pct": 36.6,
+   "latest_krw": 1566080000000,
+   "mapped_category": "뷰티"
+  },
+  "seoul_beauty_krw": 2483903530757,
+  "seoul_industries": [
+   "네일숍",
+   "미용실",
+   "피부관리실",
+   "화장품"
+  ],
+  "cards_total": 43,
+  "online_exclusion_coexist": 7,
+  "coexist_pct": 16.3,
+  "scope_caveat": "제외는 card 단위 합집합(benefit scope 없음) — '뷰티 혜택이 온라인을 제외'가 아니라 '카드 약관 어딘가에 온라인 제외 문구 공존'. 점검 후보 스크리닝(B2)",
+  "scope_upgrade_path": "그래프 스키마상 HAS_EXCLUSION은 CARD_Benefit→CARD_Exclusion (benefit-level 존재) — build_13이 card 단위로 합산했을 뿐. 빌드 파이프라인에서 benefit_id 보존 시 충돌 판정으로 승격 가능(백로그)"
+ },
+ "chain_b": {
+  "denial_distribution_enterprise": {
+   "전월실적 미달": 98,
+   "월 횟수 초과": 53,
+   "월 한도 소진": 41
+  },
+  "scope_note": "원인 분포는 전사(합성 민원 전체) — 카테고리별 분해는 현 데이터로 불성립(연결 가능 6/203건). 구조 가설 프레임(H2)",
+  "condition_type_count": 1602,
+  "beauty_tristate": {
+   "category": "뷰티",
+   "condition_type": "전월실적조건",
+   "total_sig": 43,
+   "observed": 39,
+   "unobserved": 4,
+   "detected": 37,
+   "not_detected": 2,
+   "not_detected_names": [
+    "신한카드 Always FAN",
+    "스타필드 신한카드"
+   ],
+   "caveat": "not_detected는 '조건 없음'이 아니라 관측된 파싱에서 미검출 (파싱 커버리지: {'parsed': 2882, 'partial': 1743, 'unsupported': 6908})"
+  }
+ },
+ "chain_c": {
+  "internal": {
+   "rank": 1,
+   "krw": 2321625321,
+   "avg_txn_krw": 359384,
+   "top_age_band": "40"
+  },
+  "seoul_market_krw": 4739922676056,
+  "hakwon_age_top": [
+   {
+    "age_band": "40",
+    "krw": 1777111380484
+   },
+   {
+    "age_band": "50",
+    "krw": 922382929185
+   }
+  ],
+  "cards_total": 12,
+  "contrast": {
+   "커피/음료": 282,
+   "편의점": 178
+  },
+  "tristate": {
+   "category": "교육/학원",
+   "condition_type": "전월실적조건",
+   "total_sig": 12,
+   "observed": 11,
+   "unobserved": 1,
+   "detected": 7,
+   "not_detected": 4,
+   "not_detected_names": [
+    "신한카드 국민행복 체크",
+    "신한카드 Hi-Point Nano Platinum#",
+    "신한카드 Edu Plan+",
+    "신한카드 국민행복"
+   ],
+   "caveat": "not_detected는 '조건 없음'이 아니라 관측된 파싱에서 미검출 (파싱 커버리지: {'parsed': 2882, 'partial': 1743, 'unsupported': 6908})"
+  }
+ },
+ "chain_e": {
+  "denial_count_enterprise": 53,
+  "condition_type_count": 654,
+  "internal_pattern": {
+   "avg_txn_krw": 8597,
+   "txn_count": 4862
+  },
+  "tristate": {
+   "category": "편의점",
+   "condition_type": "월횟수한도",
+   "total_sig": 178,
+   "observed": 173,
+   "unobserved": 5,
+   "detected": 139,
+   "not_detected": 34,
+   "not_detected_names": [
+    "신한카드 YOLO ⓘ",
+    "신한카드 Unboxing",
+    "The CLASSIC NEO",
+    "GS ALL 신한카드 체크",
+    "여댕냥 PET 신한카드 Point Plan 체크",
+    "KT 신한카드 체크"
+   ],
+   "caveat": "not_detected는 '조건 없음'이 아니라 관측된 파싱에서 미검출 (파싱 커버리지: {'parsed': 2882, 'partial': 1743, 'unsupported': 6908})"
+  },
+  "finding_kind": "hypothesis",
+  "caveat": "저단가·고빈도 패턴은 개연성 — 거래-거절 직접 연결은 현 데이터 밖(정직 고지)"
+ }
+}

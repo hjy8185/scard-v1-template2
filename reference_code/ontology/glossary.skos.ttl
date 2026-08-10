@@ -1,0 +1,247 @@
+@prefix seo: <https://card.ai-ready/scheme/seoul#> .
+@prefix shc: <https://card.ai-ready/scheme/shinhan#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+seo:N00020 a skos:Concept ;
+    skos:prefLabel "PC방"@ko .
+
+seo:N00021 a skos:Concept ;
+    skos:prefLabel "가구"@ko .
+
+seo:N00022 a skos:Concept ;
+    skos:prefLabel "가방"@ko .
+
+seo:N00023 a skos:Concept ;
+    skos:prefLabel "가전제품"@ko .
+
+seo:N00024 a skos:Concept ;
+    skos:prefLabel "가전제품수리"@ko .
+
+seo:N00025 a skos:Concept ;
+    skos:prefLabel "골프연습장"@ko .
+
+seo:N00026 a skos:Concept ;
+    skos:prefLabel "네일숍"@ko .
+
+seo:N00027 a skos:Concept ;
+    skos:prefLabel "노래방"@ko .
+
+seo:N00028 a skos:Concept ;
+    skos:prefLabel "당구장"@ko .
+
+seo:N00029 a skos:Concept ;
+    skos:prefLabel "문구"@ko .
+
+seo:N00030 a skos:Concept ;
+    skos:prefLabel "미곡판매"@ko .
+
+seo:N00031 a skos:Concept ;
+    skos:prefLabel "미용실"@ko .
+
+seo:N00032 a skos:Concept ;
+    skos:prefLabel "반찬가게"@ko .
+
+seo:N00033 a skos:Concept ;
+    skos:prefLabel "부동산중개업"@ko .
+
+seo:N00034 a skos:Concept ;
+    skos:prefLabel "분식전문점"@ko .
+
+seo:N00035 a skos:Concept ;
+    skos:prefLabel "서적"@ko .
+
+seo:N00036 a skos:Concept ;
+    skos:prefLabel "섬유제품"@ko .
+
+seo:N00037 a skos:Concept ;
+    skos:prefLabel "세탁소"@ko .
+
+seo:N00038 a skos:Concept ;
+    skos:prefLabel "수산물판매"@ko .
+
+seo:N00039 a skos:Concept ;
+    skos:prefLabel "슈퍼마켓"@ko .
+
+seo:N00040 a skos:Concept ;
+    skos:prefLabel "스포츠 강습"@ko .
+
+seo:N00041 a skos:Concept ;
+    skos:prefLabel "스포츠클럽"@ko .
+
+seo:N00042 a skos:Concept ;
+    skos:prefLabel "시계및귀금속"@ko .
+
+seo:N00043 a skos:Concept ;
+    skos:prefLabel "신발"@ko .
+
+seo:N00044 a skos:Concept ;
+    skos:prefLabel "안경"@ko .
+
+seo:N00045 a skos:Concept ;
+    skos:prefLabel "애완동물"@ko .
+
+seo:N00046 a skos:Concept ;
+    skos:prefLabel "양식음식점"@ko .
+
+seo:N00047 a skos:Concept ;
+    skos:prefLabel "여관"@ko .
+
+seo:N00048 a skos:Concept ;
+    skos:prefLabel "예술학원"@ko .
+
+seo:N00049 a skos:Concept ;
+    skos:prefLabel "완구"@ko .
+
+seo:N00050 a skos:Concept ;
+    skos:prefLabel "외국어학원"@ko .
+
+seo:N00051 a skos:Concept ;
+    skos:prefLabel "운동/경기용품"@ko .
+
+seo:N00052 a skos:Concept ;
+    skos:prefLabel "육류판매"@ko .
+
+seo:N00053 a skos:Concept ;
+    skos:prefLabel "의료기기"@ko .
+
+seo:N00054 a skos:Concept ;
+    skos:prefLabel "의약품"@ko .
+
+seo:N00055 a skos:Concept ;
+    skos:prefLabel "인테리어"@ko .
+
+seo:N00056 a skos:Concept ;
+    skos:prefLabel "일반교습학원"@ko .
+
+seo:N00057 a skos:Concept ;
+    skos:prefLabel "일반의류"@ko .
+
+seo:N00058 a skos:Concept ;
+    skos:prefLabel "일반의원"@ko .
+
+seo:N00059 a skos:Concept ;
+    skos:prefLabel "일식음식점"@ko .
+
+seo:N00060 a skos:Concept ;
+    skos:prefLabel "자동차미용"@ko .
+
+seo:N00061 a skos:Concept ;
+    skos:prefLabel "자동차수리"@ko .
+
+seo:N00062 a skos:Concept ;
+    skos:prefLabel "자전거 및 기타운송장비"@ko .
+
+seo:N00063 a skos:Concept ;
+    skos:prefLabel "전자상거래업"@ko .
+
+seo:N00064 a skos:Concept ;
+    skos:prefLabel "제과점"@ko .
+
+seo:N00065 a skos:Concept ;
+    skos:prefLabel "조명용품"@ko .
+
+seo:N00066 a skos:Concept ;
+    skos:prefLabel "중식음식점"@ko .
+
+seo:N00067 a skos:Concept ;
+    skos:prefLabel "철물점"@ko .
+
+seo:N00068 a skos:Concept ;
+    skos:prefLabel "청과상"@ko .
+
+seo:N00069 a skos:Concept ;
+    skos:prefLabel "치과의원"@ko .
+
+seo:N00070 a skos:Concept ;
+    skos:prefLabel "치킨전문점"@ko .
+
+seo:N00071 a skos:Concept ;
+    skos:prefLabel "커피-음료"@ko .
+
+seo:N00072 a skos:Concept ;
+    skos:prefLabel "컴퓨터및주변장치판매"@ko .
+
+seo:N00073 a skos:Concept ;
+    skos:prefLabel "패스트푸드점"@ko .
+
+seo:N00074 a skos:Concept ;
+    skos:prefLabel "편의점"@ko .
+
+seo:N00075 a skos:Concept ;
+    skos:prefLabel "피부관리실"@ko .
+
+seo:N00076 a skos:Concept ;
+    skos:prefLabel "한식음식점"@ko .
+
+seo:N00077 a skos:Concept ;
+    skos:prefLabel "한의원"@ko .
+
+seo:N00078 a skos:Concept ;
+    skos:prefLabel "핸드폰"@ko .
+
+seo:N00079 a skos:Concept ;
+    skos:prefLabel "호프-간이주점"@ko .
+
+seo:N00080 a skos:Concept ;
+    skos:prefLabel "화장품"@ko .
+
+seo:N00081 a skos:Concept ;
+    skos:prefLabel "화초"@ko .
+
+shc:N00001 a skos:Concept ;
+    skos:prefLabel "커피/음료"@ko .
+
+shc:N00002 a skos:Concept ;
+    skos:prefLabel "식음료"@ko .
+
+shc:N00003 a skos:Concept ;
+    skos:prefLabel "제과/베이커리"@ko .
+
+shc:N00004 a skos:Concept ;
+    skos:prefLabel "음식점"@ko .
+
+shc:N00005 a skos:Concept ;
+    skos:prefLabel "패스트푸드"@ko .
+
+shc:N00006 a skos:Concept ;
+    skos:prefLabel "편의점"@ko .
+
+shc:N00007 a skos:Concept ;
+    skos:prefLabel "생활"@ko .
+
+shc:N00008 a skos:Concept ;
+    skos:prefLabel "슈퍼마켓/마트"@ko .
+
+shc:N00009 a skos:Concept ;
+    skos:prefLabel "의료"@ko .
+
+shc:N00010 a skos:Concept ;
+    skos:prefLabel "의료/건강"@ko .
+
+shc:N00011 a skos:Concept ;
+    skos:prefLabel "약국"@ko .
+
+shc:N00012 a skos:Concept ;
+    skos:prefLabel "온라인쇼핑"@ko .
+
+shc:N00013 a skos:Concept ;
+    skos:prefLabel "쇼핑"@ko .
+
+shc:N00014 a skos:Concept ;
+    skos:prefLabel "의류/패션"@ko .
+
+shc:N00015 a skos:Concept ;
+    skos:prefLabel "뷰티"@ko .
+
+shc:N00016 a skos:Concept ;
+    skos:prefLabel "교육/학원"@ko .
+
+shc:N00017 a skos:Concept ;
+    skos:prefLabel "교육"@ko .
+
+shc:N00018 a skos:Concept ;
+    skos:prefLabel "주류/유흥"@ko .
+
+shc:N00019 a skos:Concept ;
+    skos:prefLabel "여가"@ko .
+

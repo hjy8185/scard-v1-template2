@@ -1,0 +1,195 @@
+{
+ "_note": "U21 W5 — 딥드림 DREAM 영역 구성. 원천: graph_poc_card sh_ctnts(신한 공개 페이지 크롤 실측). 지어낸 항목 없음.",
+ "card_product_id": "201709220001",
+ "card_name": "신한카드 Deep Dream 체크",
+ "structure": {
+  "모두드림": {
+   "rate": "0.2%",
+   "condition": "전월실적/한도 없음, 국내외 전 가맹점"
+  },
+  "더해드림": {
+   "rate": "0.6%",
+   "condition": "전월 20만원 이상, DREAM 영역 이용분"
+  },
+  "챙겨드림": {
+   "rate": "1.0%",
+   "condition": "전월 20만원 이상, DREAM 영역 중 당월 최다 이용 1개 영역(자동 선정)"
+  }
+ },
+ "dream_areas": [
+  {
+   "area": "할인점",
+   "merchants": [
+    "이마트",
+    "홈플러스",
+    "롯데마트",
+    "롯데VIC마켓",
+    "트레이더스홀세일클럽",
+    "하나로클럽"
+   ],
+   "ontology_category": "슈퍼마켓/마트"
+  },
+  {
+   "area": "편의점/잡화",
+   "merchants": [
+    "CU",
+    "GS25",
+    "세븐일레븐",
+    "다이소",
+    "올리브영"
+   ],
+   "ontology_category": "편의점"
+  },
+  {
+   "area": "영화/커피",
+   "merchants": [
+    "CGV오프라인",
+    "롯데시네마오프라인"
+   ],
+   "ontology_category": "여가",
+   "note": "커피 브랜드는 sh_ctnts 가맹점 목록에 명시 없음 — 영화만 실측"
+  },
+  {
+   "area": "이동통신",
+   "merchants": [
+    "SKT",
+    "KT",
+    "LGU+"
+   ],
+   "ontology_category": null,
+   "note": "통신 카테고리 온톨로지 미보유 — 미매핑 정직"
+  }
+ ],
+ "honesty": "영역 4종·가맹점은 크롤 실측. '커피'가 영화/커피 영역명에 있으나 가맹점 목록에 커피 브랜드 부재 — 스타벅스 포함 여부는 여전히 판정 불가(미매핑 유지).",
+ "family": {
+  "199902110019": {
+   "card_name": "신한카드 Deep Dream Platinum+(미니언즈)",
+   "areas_mentioned": [],
+   "note": "크롤 원문에 DREAM 영역 상세 미확인 — 판정 불가 정직 고지",
+   "fallback_to": null
+  },
+  "202012030002": {
+   "card_name": "신한카드 Deep Dream Platinum+(연세대학교 총동문회)",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  },
+  "201709220003": {
+   "card_name": "신한카드 Deep Dream 체크(미니언즈)",
+   "areas_mentioned": [],
+   "note": "크롤 원문에 DREAM 영역 상세 미확인 — 판정 불가 정직 고지",
+   "fallback_to": null
+  },
+  "201904080001": {
+   "card_name": "성남사랑 신한카드 Deep Dream 체크",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  },
+  "201802220002": {
+   "card_name": "SOL Deep Dream 신한카드 체크",
+   "areas_mentioned": [],
+   "note": "크롤 원문에 DREAM 영역 상세 미확인 — 판정 불가 정직 고지",
+   "fallback_to": null
+  },
+  "201709220002": {
+   "card_name": "신한카드 Deep Dream",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  },
+  "202110210001": {
+   "card_name": "신한카드 Deep Dream(모베러웍스)",
+   "areas_mentioned": [],
+   "note": "크롤 원문에 DREAM 영역 상세 미확인 — 판정 불가 정직 고지",
+   "fallback_to": null
+  },
+  "202408270001": {
+   "card_name": "신한카드 Deep Dream(LG라이프케어패밀리)",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  },
+  "201808230001": {
+   "card_name": "성남시 아동수당 신한카드 Deep Dream 체크",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  },
+  "201807260002": {
+   "card_name": "신한카드 Deep Dream Platinum+",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  },
+  "201806280001": {
+   "card_name": "청년동행 신한카드 Deep Dream 체크",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  },
+  "202103230001": {
+   "card_name": "성남사랑 신한카드 Deep Dream 체크(chak)",
+   "areas_mentioned": [
+    "영화",
+    "이동통신",
+    "잡화",
+    "커피",
+    "편의점",
+    "할인점"
+   ],
+   "detail": "영역 상세 요율은 대표 카드 큐레이션 참조(동일 DREAM 체계)",
+   "fallback_to": "201709220001"
+  }
+ },
+ "family_note": "U33(C7): Deep Dream 가족 13종 — 대표 카드는 정밀 큐레이션, 가족 카드는 크롤 실측의 영역 언급 + 대표 체계 참조(fallback_to). 언급 없는 카드는 판정 불가 정직 유지."
+}
