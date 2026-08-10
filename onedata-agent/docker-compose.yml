@@ -1,0 +1,162 @@
+version: "3.8"
+
+services:
+  # ===========================================================================
+  # Backend API (FastAPI)
+  # ===========================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: onedata-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - AWS_REGION=ap-northeast-2
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-test}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-test}
+      - NEPTUNE_ENDPOINT=http://neptune:8182
+      - OPENSEARCH_ENDPOINT=http://opensearch:9200
+      - OPENSEARCH_INDEX=onedata-ontology
+      - ATHENA_DATABASE=ai_ready_v2
+      - ATHENA_OUTPUT_BUCKET=s3://onedata-athena-results/
+      - ATHENA_WORKGROUP=primary
+      - BEDROCK_MODEL_ID=anthropic.claude-sonnet-4-20250514
+      - APP_PORT=8000
+      - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
+      - SQL_READ_ONLY=true
+      - ONTOLOGY_CACHE_PATH=data/ontology_cache.json
+      - TABLE_METADATA_PATH=data/table_metadata.json
+      - SYNONYMS_PATH=data/synonyms.json
+    volumes:
+      - ./backend:/app
+      - ./ontology:/app/ontology:ro
+    depends_on:
+      opensearch:
+        condition: service_healthy
+    networks:
+      - onedata-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ===========================================================================
+  # Frontend (Next.js)
+  # ===========================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: onedata-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - onedata-net
+
+  # ===========================================================================
+  # OpenSearch (Local replacement for OpenSearch Serverless)
+  # ===========================================================================
+  opensearch:
+    image: opensearchproject/opensearch:2.12.0
+    container_name: onedata-opensearch
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    networks:
+      - onedata-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ===========================================================================
+  # Neptune (simulated with Apache Jena Fuseki for local dev)
+  # ===========================================================================
+  neptune:
+    image: stain/jena-fuseki:4.10.0
+    container_name: onedata-neptune
+    ports:
+      - "8182:3030"
+    environment:
+      - ADMIN_PASSWORD=admin
+      - JVM_ARGS=-Xmx1g
+    command: /jena-fuseki/fuseki-server --mem /onedata
+    volumes:
+      - neptune-data:/fuseki/databases
+      - ./ontology:/ontology:ro
+    networks:
+      - onedata-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:3030/$$/ping || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ===========================================================================
+  # LocalStack (AWS services emulation for Athena, S3, Glue)
+  # ===========================================================================
+  localstack:
+    image: localstack/localstack:3.4
+    container_name: onedata-localstack
+    ports:
+      - "4566:4566"
+      - "4510-4559:4510-4559"
+    environment:
+      - SERVICES=s3,athena,glue
+      - DEFAULT_REGION=ap-northeast-2
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - DEBUG=0
+    volumes:
+      - localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - onedata-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:4566/_localstack/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  opensearch-data:
+    driver: local
+  neptune-data:
+    driver: local
+  localstack-data:
+    driver: local
+
+networks:
+  onedata-net:
+    driver: bridge
+    name: onedata-network

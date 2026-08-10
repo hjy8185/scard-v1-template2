@@ -1,0 +1,475 @@
+{
+  "description": "한국어 비즈니스 용어 → 실제 컬럼/테이블 매핑 사전",
+  "synonyms": {
+    "고객번호": {
+      "column_name": "그룹md번호",
+      "table_name": "igd_d_cust_mas",
+      "description": "그룹 통합 고객 식별 번호 (Universal Customer ID)"
+    },
+    "고객ID": {
+      "column_name": "그룹md번호",
+      "table_name": "igd_d_cust_mas",
+      "description": "그룹 통합 고객 식별 번호"
+    },
+    "MD번호": {
+      "column_name": "그룹md번호",
+      "table_name": "igd_d_cust_mas",
+      "description": "그룹 통합 고객 마스터 데이터 번호"
+    },
+    "결제금액": {
+      "column_name": "이용금액",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "카드 이용(결제) 금액"
+    },
+    "사용금액": {
+      "column_name": "이용금액",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "카드 이용 금액"
+    },
+    "카드사용액": {
+      "column_name": "이용금액",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "카드 이용 금액"
+    },
+    "소비금액": {
+      "column_name": "이용금액",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "카드 이용(소비) 금액"
+    },
+    "매출": {
+      "column_name": "총매출금액",
+      "table_name": "trs_m_merchant_region",
+      "description": "가맹점 매출 금액"
+    },
+    "매출액": {
+      "column_name": "총매출금액",
+      "table_name": "trs_m_merchant_region",
+      "description": "가맹점 총 매출 금액"
+    },
+    "수입": {
+      "column_name": "추정소득",
+      "table_name": "igd_m_cust_income",
+      "description": "고객 월 추정 소득"
+    },
+    "소득": {
+      "column_name": "추정소득",
+      "table_name": "igd_m_cust_income",
+      "description": "고객 월 추정 소득"
+    },
+    "월급": {
+      "column_name": "급여이체금액",
+      "table_name": "igd_m_cust_income",
+      "description": "급여 이체 금액"
+    },
+    "급여": {
+      "column_name": "급여이체금액",
+      "table_name": "igd_m_cust_income",
+      "description": "급여 이체 금액"
+    },
+    "연봉": {
+      "column_name": "추정소득",
+      "table_name": "igd_m_cust_income",
+      "description": "추정 소득 (연봉은 x12로 환산 필요)"
+    },
+    "나이": {
+      "column_name": "연령",
+      "table_name": "igd_d_cust_mas",
+      "description": "고객 나이"
+    },
+    "연령": {
+      "column_name": "연령",
+      "table_name": "igd_d_cust_mas",
+      "description": "고객 나이"
+    },
+    "연령대": {
+      "column_name": "연령대",
+      "table_name": "igd_m_cust_base",
+      "description": "연령대 구간 (20대, 30대 등)"
+    },
+    "성별": {
+      "column_name": "성별",
+      "table_name": "igd_d_cust_mas",
+      "description": "성별 코드 (M: 남성, F: 여성)"
+    },
+    "남성": {
+      "column_name": "성별",
+      "table_name": "igd_d_cust_mas",
+      "description": "성별='M' 조건"
+    },
+    "여성": {
+      "column_name": "성별",
+      "table_name": "igd_d_cust_mas",
+      "description": "성별='F' 조건"
+    },
+    "지역": {
+      "column_name": "거주지역시도",
+      "table_name": "igd_d_cust_mas",
+      "description": "고객 거주 시/도"
+    },
+    "거주지": {
+      "column_name": "거주지역시도",
+      "table_name": "igd_d_cust_mas",
+      "description": "고객 거주 지역"
+    },
+    "잔액": {
+      "column_name": "잔액",
+      "table_name": "pdt_m_acct_holding_base_bank",
+      "description": "계좌 잔액"
+    },
+    "예금": {
+      "column_name": "은행예수금",
+      "table_name": "igd_m_cust_asset",
+      "description": "은행 예수금 잔액"
+    },
+    "적금": {
+      "column_name": "잔액",
+      "table_name": "pdt_m_acct_holding_base_bank",
+      "description": "적금 계좌 잔액 (상품유형='적금' 필터 필요)"
+    },
+    "대출": {
+      "column_name": "대출잔액",
+      "table_name": "pdt_m_loan_base",
+      "description": "대출 잔액"
+    },
+    "대출금": {
+      "column_name": "대출잔액",
+      "table_name": "pdt_m_loan_base",
+      "description": "대출 잔액"
+    },
+    "빚": {
+      "column_name": "총부채",
+      "table_name": "igd_m_cust_asset",
+      "description": "총 부채 금액"
+    },
+    "부채": {
+      "column_name": "총부채",
+      "table_name": "igd_m_cust_asset",
+      "description": "총 부채 금액"
+    },
+    "자산": {
+      "column_name": "총자산",
+      "table_name": "igd_m_cust_asset",
+      "description": "그룹 총 자산"
+    },
+    "순자산": {
+      "column_name": "순자산",
+      "table_name": "igd_m_cust_asset",
+      "description": "순자산 (총자산 - 총부채)"
+    },
+    "신용점수": {
+      "column_name": "신용점수",
+      "table_name": "igd_m_cust_credit",
+      "description": "KCB/NICE 신용점수"
+    },
+    "신용등급": {
+      "column_name": "신용등급",
+      "table_name": "igd_m_cust_credit",
+      "description": "신용등급 (1~10등급)"
+    },
+    "연체": {
+      "column_name": "연체여부",
+      "table_name": "igd_m_cust_credit",
+      "description": "연체 여부 (Y/N)"
+    },
+    "카드이용": {
+      "column_name": "이용건수",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "카드 이용 건수"
+    },
+    "카드결제": {
+      "column_name": "이용금액",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "카드 결제(이용) 금액"
+    },
+    "거래건수": {
+      "column_name": "이용건수",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "거래(이용) 건수"
+    },
+    "거래금액": {
+      "column_name": "이용금액",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "거래(이용) 금액"
+    },
+    "업종": {
+      "column_name": "업종대분류",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "업종 대분류"
+    },
+    "업종분류": {
+      "column_name": "업종대분류",
+      "table_name": "com_m_merchant_franchise",
+      "description": "업종 대분류 카테고리"
+    },
+    "가맹점": {
+      "column_name": "가맹점명",
+      "table_name": "com_m_merchant_franchise",
+      "description": "가맹점 이름"
+    },
+    "상점": {
+      "column_name": "가맹점명",
+      "table_name": "com_m_merchant_franchise",
+      "description": "가맹점(상점) 이름"
+    },
+    "프랜차이즈": {
+      "column_name": "프랜차이즈명",
+      "table_name": "com_m_merchant_franchise",
+      "description": "프랜차이즈 브랜드명"
+    },
+    "배달": {
+      "column_name": "배달플랫폼",
+      "table_name": "trs_m_merchant_delivery",
+      "description": "배달 플랫폼 정보"
+    },
+    "배달앱": {
+      "column_name": "배달플랫폼",
+      "table_name": "trs_m_merchant_delivery",
+      "description": "배달 플랫폼명"
+    },
+    "주문": {
+      "column_name": "주문건수",
+      "table_name": "trs_m_merchant_delivery",
+      "description": "주문 건수"
+    },
+    "할부": {
+      "column_name": "할부건수",
+      "table_name": "trs_m_card_installment",
+      "description": "할부 거래 건수"
+    },
+    "무이자할부": {
+      "column_name": "무이자할부건수",
+      "table_name": "trs_m_card_installment",
+      "description": "무이자 할부 건수"
+    },
+    "해외결제": {
+      "column_name": "해외이용금액원화",
+      "table_name": "trs_m_overseas_txn",
+      "description": "해외 이용 금액 (원화 환산)"
+    },
+    "해외이용": {
+      "column_name": "해외이용건수",
+      "table_name": "trs_m_overseas_txn",
+      "description": "해외 이용 건수"
+    },
+    "포인트": {
+      "column_name": "잔여포인트",
+      "table_name": "igd_m_cust_reward",
+      "description": "잔여 포인트"
+    },
+    "적립포인트": {
+      "column_name": "적립포인트",
+      "table_name": "igd_m_cust_reward",
+      "description": "월 적립 포인트"
+    },
+    "캐시백": {
+      "column_name": "캐시백금액",
+      "table_name": "trs_m_card_benefit_usage",
+      "description": "캐시백 금액"
+    },
+    "혜택": {
+      "column_name": "혜택합계",
+      "table_name": "trs_m_card_benefit_usage",
+      "description": "총 혜택 금액"
+    },
+    "할인": {
+      "column_name": "할인금액",
+      "table_name": "trs_m_card_benefit_usage",
+      "description": "할인 혜택 금액"
+    },
+    "보험료": {
+      "column_name": "납입보험료",
+      "table_name": "igd_m_cust_txn_life",
+      "description": "월 납입 보험료"
+    },
+    "보험금": {
+      "column_name": "보험금지급액",
+      "table_name": "igd_m_cust_txn_life",
+      "description": "보험금 지급 금액"
+    },
+    "주식": {
+      "column_name": "매수금액",
+      "table_name": "igd_m_cust_txn_sec",
+      "description": "증권 매수 금액"
+    },
+    "투자": {
+      "column_name": "총평가금액",
+      "table_name": "cln_d_cust_mas_sec",
+      "description": "증권 총 평가 금액"
+    },
+    "수익률": {
+      "column_name": "수익률",
+      "table_name": "igd_m_cust_txn_sec",
+      "description": "투자 수익률"
+    },
+    "펀드": {
+      "column_name": "평가금액",
+      "table_name": "pdt_m_fund_holding",
+      "description": "펀드 평가 금액"
+    },
+    "구독": {
+      "column_name": "구독서비스수",
+      "table_name": "igd_m_cust_subscription",
+      "description": "이용 중인 구독 서비스 수"
+    },
+    "정기결제": {
+      "column_name": "총구독금액",
+      "table_name": "igd_m_cust_subscription",
+      "description": "월 구독 결제 총액"
+    },
+    "OTT": {
+      "column_name": "주요구독분류",
+      "table_name": "igd_m_cust_subscription",
+      "description": "구독 카테고리 (OTT 포함)"
+    },
+    "간편결제": {
+      "column_name": "간편결제건수",
+      "table_name": "trs_m_payment_method",
+      "description": "간편결제 이용 건수"
+    },
+    "삼성페이": {
+      "column_name": "주이용간편결제",
+      "table_name": "trs_m_payment_method",
+      "description": "주 이용 간편결제 수단"
+    },
+    "카카오페이": {
+      "column_name": "주이용간편결제",
+      "table_name": "trs_m_payment_method",
+      "description": "주 이용 간편결제 수단"
+    },
+    "VIP": {
+      "column_name": "VIP여부",
+      "table_name": "igd_m_cust_segment",
+      "description": "VIP 고객 여부"
+    },
+    "충성도": {
+      "column_name": "충성도점수",
+      "table_name": "rpt_m_cust_loyalty",
+      "description": "고객 충성도 스코어"
+    },
+    "이탈": {
+      "column_name": "이탈위험도",
+      "table_name": "igd_m_cust_segment",
+      "description": "이탈 위험 등급"
+    },
+    "사업자": {
+      "column_name": "사업자등록번호",
+      "table_name": "igd_m_soleprop_base",
+      "description": "개인사업자 등록번호"
+    },
+    "자영업": {
+      "column_name": "사업자등록번호",
+      "table_name": "igd_m_soleprop_base",
+      "description": "개인사업자(자영업자) 정보"
+    },
+    "소상공인": {
+      "column_name": "매출등급",
+      "table_name": "igd_m_soleprop_base",
+      "description": "개인사업자 매출 등급"
+    },
+    "종업원": {
+      "column_name": "종업원수",
+      "table_name": "igd_m_soleprop_base",
+      "description": "종업원 수"
+    },
+    "직원수": {
+      "column_name": "직원수",
+      "table_name": "igd_m_soleprop_employee",
+      "description": "총 직원 수"
+    },
+    "인건비": {
+      "column_name": "인건비",
+      "table_name": "trs_m_soleprop_expense",
+      "description": "인건비 지출"
+    },
+    "임대료": {
+      "column_name": "임대료",
+      "table_name": "trs_m_soleprop_expense",
+      "description": "임대료 지출"
+    },
+    "경비": {
+      "column_name": "총경비금액",
+      "table_name": "trs_m_soleprop_expense",
+      "description": "총 경비 지출 금액"
+    },
+    "금리": {
+      "column_name": "금리",
+      "table_name": "pdt_m_acct_holding_base_bank",
+      "description": "적용 금리"
+    },
+    "이자율": {
+      "column_name": "금리",
+      "table_name": "pdt_m_loan_base",
+      "description": "대출 적용 금리"
+    },
+    "DSR": {
+      "column_name": "DSR",
+      "table_name": "igd_m_cust_credit",
+      "description": "총부채원리금상환비율 (%)"
+    },
+    "온라인쇼핑": {
+      "column_name": "업종대분류",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "업종대분류='온라인쇼핑' 조건"
+    },
+    "오프라인": {
+      "column_name": "온오프라인구분",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "온오프라인구분='오프라인' 조건"
+    },
+    "온라인": {
+      "column_name": "온오프라인구분",
+      "table_name": "igd_m_cust_txn_card",
+      "description": "온오프라인구분='온라인' 조건"
+    },
+    "모바일": {
+      "column_name": "모바일로그인수",
+      "table_name": "igd_m_cust_channel",
+      "description": "모바일 앱 로그인 수"
+    },
+    "앱": {
+      "column_name": "앱로그인일수",
+      "table_name": "igd_m_cust_digital",
+      "description": "앱 로그인 일수"
+    },
+    "객단가": {
+      "column_name": "객단가",
+      "table_name": "trs_m_merchant_region",
+      "description": "건당 평균 결제 금액"
+    },
+    "생존율": {
+      "column_name": "생존율",
+      "table_name": "trs_m_merchant_new_close",
+      "description": "가맹점 1년 생존율"
+    },
+    "신규가맹점": {
+      "column_name": "신규가맹점수",
+      "table_name": "trs_m_merchant_new_close",
+      "description": "신규 개업 가맹점 수"
+    },
+    "폐업": {
+      "column_name": "폐업가맹점수",
+      "table_name": "trs_m_merchant_new_close",
+      "description": "폐업 가맹점 수"
+    },
+    "리뷰": {
+      "column_name": "리뷰건수",
+      "table_name": "com_m_merchant_review",
+      "description": "가맹점 리뷰 건수"
+    },
+    "별점": {
+      "column_name": "평균별점",
+      "table_name": "com_m_merchant_review",
+      "description": "가맹점 평균 별점"
+    },
+    "결혼": {
+      "column_name": "이벤트유형",
+      "table_name": "igd_m_cust_life_event",
+      "description": "라이프이벤트 유형='결혼'"
+    },
+    "출산": {
+      "column_name": "이벤트유형",
+      "table_name": "igd_m_cust_life_event",
+      "description": "라이프이벤트 유형='출산'"
+    }
+  }
+}

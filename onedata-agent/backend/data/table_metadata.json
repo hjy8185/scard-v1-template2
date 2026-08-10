@@ -1,0 +1,955 @@
+{
+  "database": "ai_ready_v2",
+  "region": "ap-northeast-2",
+  "description": "신한금융그룹 원데이터(Onedata) AI Ready 통합 데이터 플랫폼",
+  "universal_join_key": "그룹md번호",
+  "tables": [
+    {
+      "table_name": "igd_d_cust_mas",
+      "description": "그룹 통합 고객 마스터 (일별 스냅샷). 그룹 전 계열사 고객의 기본 인적사항을 통합 관리하는 마스터 테이블.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호 (Universal ID)", "is_key": true},
+        {"name": "고객명", "dtype": "string", "description": "고객 이름"},
+        {"name": "성별", "dtype": "string", "description": "성별 코드 (M/F)"},
+        {"name": "연령", "dtype": "int", "description": "고객 나이"},
+        {"name": "연령대", "dtype": "string", "description": "연령대 구간 (20대, 30대 등)"},
+        {"name": "거주지역시도", "dtype": "string", "description": "거주 시/도"},
+        {"name": "거주지역시군구", "dtype": "string", "description": "거주 시/군/구"},
+        {"name": "직업코드", "dtype": "string", "description": "직업 분류 코드"},
+        {"name": "최초가입일", "dtype": "string", "description": "그룹 최초 가입 일자 (YYYYMMDD)"},
+        {"name": "기준일자", "dtype": "string", "description": "데이터 기준 일자 (YYYYMMDD)"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_base",
+      "description": "그룹 통합 고객 기본 (월별). 고객의 월별 상태 정보와 계열사별 보유 상품 요약.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
+        {"name": "성별", "dtype": "string", "description": "성별 (M/F)"},
+        {"name": "연령대", "dtype": "string", "description": "연령대"},
+        {"name": "거주지역", "dtype": "string", "description": "거주 지역"},
+        {"name": "은행보유여부", "dtype": "string", "description": "은행 상품 보유 여부 (Y/N)"},
+        {"name": "카드보유여부", "dtype": "string", "description": "카드 상품 보유 여부 (Y/N)"},
+        {"name": "생명보험보유여부", "dtype": "string", "description": "생명보험 보유 여부 (Y/N)"},
+        {"name": "증권보유여부", "dtype": "string", "description": "증권 보유 여부 (Y/N)"},
+        {"name": "총자산", "dtype": "bigint", "description": "그룹 총 자산 (원)"},
+        {"name": "총부채", "dtype": "bigint", "description": "그룹 총 부채 (원)"}
+      ]
+    },
+    {
+      "table_name": "cln_d_cust_mas_bank",
+      "description": "은행 계열사 고객 마스터. 신한은행 고객의 상세 정보.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "은행고객번호", "dtype": "string", "description": "은행 내부 고객번호"},
+        {"name": "고객등급", "dtype": "string", "description": "은행 고객 등급"},
+        {"name": "가입일자", "dtype": "string", "description": "은행 최초 가입일"},
+        {"name": "주거래여부", "dtype": "string", "description": "주거래 고객 여부"},
+        {"name": "급여이체여부", "dtype": "string", "description": "급여 이체 등록 여부"}
+      ]
+    },
+    {
+      "table_name": "cln_d_cust_mas_card",
+      "description": "카드 계열사 고객 마스터. 신한카드 고객의 상세 정보.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "카드고객번호", "dtype": "string", "description": "카드 내부 고객번호"},
+        {"name": "회원등급", "dtype": "string", "description": "카드 회원 등급"},
+        {"name": "카드가입일", "dtype": "string", "description": "카드 최초 가입일"},
+        {"name": "보유카드수", "dtype": "int", "description": "보유 카드 매수"},
+        {"name": "신용한도", "dtype": "bigint", "description": "총 신용 한도 (원)"},
+        {"name": "연회비등급", "dtype": "string", "description": "연회비 등급"}
+      ]
+    },
+    {
+      "table_name": "cln_d_cust_mas_life",
+      "description": "생명보험 계열사 고객 마스터. 신한라이프 고객의 상세 정보.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "보험고객번호", "dtype": "string", "description": "보험 내부 고객번호"},
+        {"name": "보유계약수", "dtype": "int", "description": "보유 보험 계약 수"},
+        {"name": "총보험료", "dtype": "bigint", "description": "월 납입 보험료 합계"},
+        {"name": "최초계약일", "dtype": "string", "description": "최초 보험 계약일"}
+      ]
+    },
+    {
+      "table_name": "cln_d_cust_mas_sec",
+      "description": "증권 계열사 고객 마스터. 신한투자증권 고객의 상세 정보.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "증권고객번호", "dtype": "string", "description": "증권 내부 고객번호"},
+        {"name": "투자성향", "dtype": "string", "description": "투자 성향 (안정형/안정추구형/위험중립형/적극투자형/공격투자형)"},
+        {"name": "보유종목수", "dtype": "int", "description": "보유 종목 수"},
+        {"name": "총평가금액", "dtype": "bigint", "description": "보유 자산 총 평가 금액"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_txn_bank",
+      "description": "은행 고객 거래 월별 집계. 고객별 월간 은행 거래 요약 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
+        {"name": "입금건수", "dtype": "int", "description": "월간 입금 거래 건수"},
+        {"name": "입금금액", "dtype": "bigint", "description": "월간 입금 총액"},
+        {"name": "출금건수", "dtype": "int", "description": "월간 출금 거래 건수"},
+        {"name": "출금금액", "dtype": "bigint", "description": "월간 출금 총액"},
+        {"name": "이체건수", "dtype": "int", "description": "월간 이체 건수"},
+        {"name": "이체금액", "dtype": "bigint", "description": "월간 이체 금액"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_txn_card",
+      "description": "카드 고객 거래 월별 집계. 고객별 월간 카드 이용 요약 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
+        {"name": "이용건수", "dtype": "int", "description": "월간 카드 이용 건수"},
+        {"name": "이용금액", "dtype": "bigint", "description": "월간 카드 이용 금액"},
+        {"name": "업종대분류", "dtype": "string", "description": "업종 대분류명"},
+        {"name": "업종중분류", "dtype": "string", "description": "업종 중분류명"},
+        {"name": "온오프라인구분", "dtype": "string", "description": "온라인/오프라인 구분"},
+        {"name": "할부건수", "dtype": "int", "description": "할부 결제 건수"},
+        {"name": "해외이용건수", "dtype": "int", "description": "해외 이용 건수"},
+        {"name": "해외이용금액", "dtype": "bigint", "description": "해외 이용 금액"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_txn_life",
+      "description": "생명보험 고객 거래 월별 집계. 보험료 납입 및 보험금 지급 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
+        {"name": "납입보험료", "dtype": "bigint", "description": "월 납입 보험료"},
+        {"name": "보험금지급액", "dtype": "bigint", "description": "월 보험금 지급 금액"},
+        {"name": "계약유지건수", "dtype": "int", "description": "유지 중인 계약 건수"},
+        {"name": "신규계약건수", "dtype": "int", "description": "신규 가입 건수"},
+        {"name": "해지건수", "dtype": "int", "description": "해지 건수"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_txn_sec",
+      "description": "증권 고객 거래 월별 집계. 주식/펀드 매매 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
+        {"name": "매수건수", "dtype": "int", "description": "월간 매수 거래 건수"},
+        {"name": "매수금액", "dtype": "bigint", "description": "월간 매수 금액"},
+        {"name": "매도건수", "dtype": "int", "description": "월간 매도 거래 건수"},
+        {"name": "매도금액", "dtype": "bigint", "description": "월간 매도 금액"},
+        {"name": "수익률", "dtype": "double", "description": "월간 수익률 (%)"},
+        {"name": "거래종목수", "dtype": "int", "description": "거래한 종목 수"}
+      ]
+    },
+    {
+      "table_name": "trs_m_cust_acct_txn_bank",
+      "description": "은행 계좌별 거래 월별 상세. 계좌 단위의 상세 거래 집계.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "계좌번호", "dtype": "string", "description": "은행 계좌번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "계좌유형", "dtype": "string", "description": "계좌 유형 (예금/적금/대출 등)"},
+        {"name": "잔액", "dtype": "bigint", "description": "월말 잔액"},
+        {"name": "입금건수", "dtype": "int", "description": "입금 건수"},
+        {"name": "입금금액", "dtype": "bigint", "description": "입금 금액"},
+        {"name": "출금건수", "dtype": "int", "description": "출금 건수"},
+        {"name": "출금금액", "dtype": "bigint", "description": "출금 금액"}
+      ]
+    },
+    {
+      "table_name": "trs_m_cust_acct_txn_sec",
+      "description": "증권 계좌별 거래 월별 상세. 증권 계좌 단위 상세 거래 집계.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "계좌번호", "dtype": "string", "description": "증권 계좌번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "평가금액", "dtype": "bigint", "description": "계좌 평가 금액"},
+        {"name": "매수금액", "dtype": "bigint", "description": "매수 금액"},
+        {"name": "매도금액", "dtype": "bigint", "description": "매도 금액"},
+        {"name": "실현손익", "dtype": "bigint", "description": "실현 손익"},
+        {"name": "투자유형", "dtype": "string", "description": "투자 유형 (주식/펀드/채권 등)"}
+      ]
+    },
+    {
+      "table_name": "trs_d_cust_card_txn",
+      "description": "카드 거래 일별 상세. 개별 카드 결제 건 단위 상세 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "거래일자", "거래일련번호"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "거래일자", "dtype": "string", "description": "거래 일자 (YYYYMMDD)", "is_key": true},
+        {"name": "거래일련번호", "dtype": "string", "description": "거래 일련번호", "is_key": true},
+        {"name": "카드번호", "dtype": "string", "description": "카드 번호"},
+        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호"},
+        {"name": "가맹점명", "dtype": "string", "description": "가맹점 이름"},
+        {"name": "이용금액", "dtype": "bigint", "description": "이용 금액"},
+        {"name": "업종코드", "dtype": "string", "description": "업종 분류 코드"},
+        {"name": "업종명", "dtype": "string", "description": "업종 분류 이름"},
+        {"name": "할부개월", "dtype": "int", "description": "할부 개월 수 (0=일시불)"},
+        {"name": "온오프라인구분", "dtype": "string", "description": "온라인/오프라인"},
+        {"name": "해외여부", "dtype": "string", "description": "해외 결제 여부"}
+      ]
+    },
+    {
+      "table_name": "trs_d_cust_bank_txn",
+      "description": "은행 거래 일별 상세. 개별 은행 입출금 건 단위 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "거래일자", "거래일련번호"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "거래일자", "dtype": "string", "description": "거래 일자 (YYYYMMDD)", "is_key": true},
+        {"name": "거래일련번호", "dtype": "string", "description": "거래 일련번호", "is_key": true},
+        {"name": "계좌번호", "dtype": "string", "description": "계좌번호"},
+        {"name": "거래구분", "dtype": "string", "description": "입금/출금/이체 구분"},
+        {"name": "거래금액", "dtype": "bigint", "description": "거래 금액"},
+        {"name": "거래후잔액", "dtype": "bigint", "description": "거래 후 잔액"},
+        {"name": "적요", "dtype": "string", "description": "거래 적요/메모"},
+        {"name": "거래채널", "dtype": "string", "description": "거래 채널 (모바일/ATM/창구 등)"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_channel",
+      "description": "고객 채널 이용 월별 집계. 모바일/인터넷/ATM 등 채널별 이용 통계.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "모바일로그인수", "dtype": "int", "description": "모바일 앱 로그인 수"},
+        {"name": "인터넷로그인수", "dtype": "int", "description": "인터넷뱅킹 로그인 수"},
+        {"name": "ATM이용건수", "dtype": "int", "description": "ATM 이용 건수"},
+        {"name": "창구방문건수", "dtype": "int", "description": "영업점 창구 방문 건수"},
+        {"name": "주이용채널", "dtype": "string", "description": "주 이용 채널"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_credit",
+      "description": "고객 신용 정보 월별. 신용점수, 연체 이력 등 신용 관련 정보.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "신용점수", "dtype": "int", "description": "KCB/NICE 신용점수"},
+        {"name": "신용등급", "dtype": "string", "description": "신용등급 (1~10등급)"},
+        {"name": "연체여부", "dtype": "string", "description": "현재 연체 여부 (Y/N)"},
+        {"name": "연체금액", "dtype": "bigint", "description": "연체 금액"},
+        {"name": "총대출잔액", "dtype": "bigint", "description": "총 대출 잔액"},
+        {"name": "DSR", "dtype": "double", "description": "총부채원리금상환비율 (%)"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_segment",
+      "description": "고객 세그먼트 월별. 고객 분류 및 마케팅 세그먼트 정보.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "라이프스테이지", "dtype": "string", "description": "라이프 스테이지 (사회초년생/신혼/자녀양육/은퇴준비 등)"},
+        {"name": "소비성향", "dtype": "string", "description": "소비 성향 분류"},
+        {"name": "디지털성숙도", "dtype": "string", "description": "디지털 활용 수준"},
+        {"name": "VIP여부", "dtype": "string", "description": "VIP 고객 여부"},
+        {"name": "이탈위험도", "dtype": "string", "description": "이탈 위험 등급 (상/중/하)"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_asset",
+      "description": "고객 자산 월별 집계. 계열사별 자산/부채 통합 현황.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "은행예수금", "dtype": "bigint", "description": "은행 예수금 잔액"},
+        {"name": "은행대출금", "dtype": "bigint", "description": "은행 대출 잔액"},
+        {"name": "증권평가액", "dtype": "bigint", "description": "증권 계좌 평가 금액"},
+        {"name": "보험해약환급금", "dtype": "bigint", "description": "보험 해약 환급금"},
+        {"name": "총자산", "dtype": "bigint", "description": "그룹 총 자산"},
+        {"name": "총부채", "dtype": "bigint", "description": "그룹 총 부채"},
+        {"name": "순자산", "dtype": "bigint", "description": "순자산 (자산-부채)"}
+      ]
+    },
+    {
+      "table_name": "card_prod",
+      "description": "카드 상품 마스터. 전체 카드 상품(신용/체크)의 기본 정보.",
+      "domain": "product",
+      "key_columns": ["카드상품코드"],
+      "columns": [
+        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
+        {"name": "카드상품명", "dtype": "string", "description": "카드 상품 이름"},
+        {"name": "카드유형", "dtype": "string", "description": "신용카드/체크카드 구분"},
+        {"name": "연회비", "dtype": "int", "description": "연회비 금액"},
+        {"name": "주요혜택", "dtype": "string", "description": "주요 혜택 설명"},
+        {"name": "출시일자", "dtype": "string", "description": "상품 출시 일자"},
+        {"name": "판매상태", "dtype": "string", "description": "판매중/단종 상태"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_card_prod_base_card",
+      "description": "카드 상품 월별 기본 정보. 카드 상품의 월별 실적 및 보유 현황.",
+      "domain": "product",
+      "key_columns": ["카드상품코드", "기준년월"],
+      "columns": [
+        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "보유회원수", "dtype": "int", "description": "해당 카드 보유 회원 수"},
+        {"name": "신규발급수", "dtype": "int", "description": "월간 신규 발급 건수"},
+        {"name": "해지건수", "dtype": "int", "description": "월간 해지 건수"},
+        {"name": "이용회원수", "dtype": "int", "description": "월간 이용 회원 수"},
+        {"name": "총이용금액", "dtype": "bigint", "description": "월간 총 이용 금액"},
+        {"name": "건당평균이용금액", "dtype": "bigint", "description": "건당 평균 이용 금액"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_acct_holding_base_bank",
+      "description": "은행 계좌 보유 월별 현황. 계좌별 잔액 및 거래 현황.",
+      "domain": "product",
+      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "계좌번호", "dtype": "string", "description": "은행 계좌번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "상품유형", "dtype": "string", "description": "상품 유형 (수시입출금/정기예금/적금/대출)"},
+        {"name": "잔액", "dtype": "bigint", "description": "월말 잔액"},
+        {"name": "금리", "dtype": "double", "description": "적용 금리 (%)"},
+        {"name": "개설일자", "dtype": "string", "description": "계좌 개설일"},
+        {"name": "만기일자", "dtype": "string", "description": "만기 일자"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_acct_holding_base_sec",
+      "description": "증권 계좌 보유 월별 현황. 증권 계좌별 보유 종목 및 평가 현황.",
+      "domain": "product",
+      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "계좌번호", "dtype": "string", "description": "증권 계좌번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "보유종목수", "dtype": "int", "description": "보유 종목 수"},
+        {"name": "매입금액", "dtype": "bigint", "description": "총 매입 금액"},
+        {"name": "평가금액", "dtype": "bigint", "description": "총 평가 금액"},
+        {"name": "평가손익", "dtype": "bigint", "description": "평가 손익"},
+        {"name": "수익률", "dtype": "double", "description": "수익률 (%)"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_insurance_holding",
+      "description": "보험 계약 보유 현황. 고객별 보험 계약 상세.",
+      "domain": "product",
+      "key_columns": ["그룹md번호", "계약번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "계약번호", "dtype": "string", "description": "보험 계약 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "상품유형", "dtype": "string", "description": "보험 유형 (종신/정기/연금/건강 등)"},
+        {"name": "보험료", "dtype": "bigint", "description": "월 보험료"},
+        {"name": "보험기간", "dtype": "string", "description": "보험 기간"},
+        {"name": "계약상태", "dtype": "string", "description": "계약 상태 (유지/완납/해지)"},
+        {"name": "해약환급금", "dtype": "bigint", "description": "해약 환급금"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_fund_holding",
+      "description": "펀드 보유 현황. 고객별 펀드 보유 상세.",
+      "domain": "product",
+      "key_columns": ["그룹md번호", "펀드코드", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "펀드코드", "dtype": "string", "description": "펀드 코드", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "펀드명", "dtype": "string", "description": "펀드 이름"},
+        {"name": "펀드유형", "dtype": "string", "description": "펀드 유형 (주식형/채권형/혼합형/MMF)"},
+        {"name": "투자금액", "dtype": "bigint", "description": "투자 원금"},
+        {"name": "평가금액", "dtype": "bigint", "description": "현재 평가 금액"},
+        {"name": "수익률", "dtype": "double", "description": "수익률 (%)"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_loan_base",
+      "description": "대출 상품 보유 현황. 고객별 대출 상세 정보.",
+      "domain": "product",
+      "key_columns": ["그룹md번호", "대출번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "대출번호", "dtype": "string", "description": "대출 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "대출유형", "dtype": "string", "description": "대출 유형 (주택담보/신용/전세 등)"},
+        {"name": "대출금액", "dtype": "bigint", "description": "대출 원금"},
+        {"name": "대출잔액", "dtype": "bigint", "description": "대출 잔액"},
+        {"name": "금리", "dtype": "double", "description": "적용 금리 (%)"},
+        {"name": "상환방식", "dtype": "string", "description": "상환 방식 (원리금균등/원금균등/만기일시)"},
+        {"name": "만기일자", "dtype": "string", "description": "대출 만기일"}
+      ]
+    },
+    {
+      "table_name": "com_m_merchant_franchise",
+      "description": "가맹점 프랜차이즈 정보. 프랜차이즈 브랜드별 가맹점 마스터.",
+      "domain": "merchant",
+      "key_columns": ["가맹점번호"],
+      "columns": [
+        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
+        {"name": "가맹점명", "dtype": "string", "description": "가맹점 이름"},
+        {"name": "프랜차이즈명", "dtype": "string", "description": "프랜차이즈 브랜드명"},
+        {"name": "업종대분류", "dtype": "string", "description": "업종 대분류"},
+        {"name": "업종중분류", "dtype": "string", "description": "업종 중분류"},
+        {"name": "업종소분류", "dtype": "string", "description": "업종 소분류"},
+        {"name": "시도", "dtype": "string", "description": "소재지 시/도"},
+        {"name": "시군구", "dtype": "string", "description": "소재지 시/군/구"},
+        {"name": "동", "dtype": "string", "description": "소재지 동/읍/면"},
+        {"name": "사업자등록번호", "dtype": "string", "description": "사업자등록번호"}
+      ]
+    },
+    {
+      "table_name": "trs_m_merchant_delivery",
+      "description": "배달 가맹점 월별 거래. 배달앱 연동 가맹점의 월별 매출 정보.",
+      "domain": "merchant",
+      "key_columns": ["가맹점번호", "기준년월"],
+      "columns": [
+        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "가맹점명", "dtype": "string", "description": "가맹점 이름"},
+        {"name": "배달플랫폼", "dtype": "string", "description": "배달 플랫폼명"},
+        {"name": "주문건수", "dtype": "int", "description": "월간 주문 건수"},
+        {"name": "이용금액", "dtype": "bigint", "description": "월간 결제 금액"},
+        {"name": "평균주문금액", "dtype": "bigint", "description": "건당 평균 주문 금액"},
+        {"name": "업종분류", "dtype": "string", "description": "업종 분류"}
+      ]
+    },
+    {
+      "table_name": "rpt_d_merchant_industry_index",
+      "description": "가맹점 업종 지수 일별. 업종별 매출 지수 및 시장 동향.",
+      "domain": "merchant",
+      "key_columns": ["업종코드", "기준일자"],
+      "columns": [
+        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
+        {"name": "기준일자", "dtype": "string", "description": "기준 일자 (YYYYMMDD)", "is_key": true},
+        {"name": "업종명", "dtype": "string", "description": "업종 이름"},
+        {"name": "매출지수", "dtype": "double", "description": "매출 지수 (100 기준)"},
+        {"name": "건수지수", "dtype": "double", "description": "건수 지수 (100 기준)"},
+        {"name": "전년동기대비증감률", "dtype": "double", "description": "전년 동기 대비 증감률 (%)"},
+        {"name": "전월대비증감률", "dtype": "double", "description": "전월 대비 증감률 (%)"}
+      ]
+    },
+    {
+      "table_name": "trs_m_merchant_region",
+      "description": "지역별 가맹점 월별 매출. 시/군/구 단위 가맹점 매출 집계.",
+      "domain": "merchant",
+      "key_columns": ["시군구코드", "업종코드", "기준년월"],
+      "columns": [
+        {"name": "시군구코드", "dtype": "string", "description": "행정구역 코드", "is_key": true},
+        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "시도명", "dtype": "string", "description": "시/도"},
+        {"name": "시군구명", "dtype": "string", "description": "시/군/구"},
+        {"name": "업종명", "dtype": "string", "description": "업종 이름"},
+        {"name": "가맹점수", "dtype": "int", "description": "해당 지역 가맹점 수"},
+        {"name": "총매출금액", "dtype": "bigint", "description": "총 매출 금액"},
+        {"name": "총건수", "dtype": "int", "description": "총 거래 건수"},
+        {"name": "객단가", "dtype": "bigint", "description": "건당 평균 금액"}
+      ]
+    },
+    {
+      "table_name": "trs_m_merchant_time",
+      "description": "시간대별 가맹점 매출. 시간대 및 요일별 매출 패턴.",
+      "domain": "merchant",
+      "key_columns": ["가맹점번호", "기준년월", "시간대"],
+      "columns": [
+        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "시간대", "dtype": "string", "description": "시간대 (00~23)", "is_key": true},
+        {"name": "요일", "dtype": "string", "description": "요일 (월~일)"},
+        {"name": "매출금액", "dtype": "bigint", "description": "매출 금액"},
+        {"name": "거래건수", "dtype": "int", "description": "거래 건수"},
+        {"name": "고객수", "dtype": "int", "description": "방문 고객 수"}
+      ]
+    },
+    {
+      "table_name": "igd_m_soleprop_base",
+      "description": "개인사업자 기본 월별. 개인사업자 고객의 사업 기본 정보.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "사업자등록번호", "dtype": "string", "description": "사업자등록번호"},
+        {"name": "업종", "dtype": "string", "description": "사업 업종"},
+        {"name": "개업일자", "dtype": "string", "description": "개업 일자"},
+        {"name": "종업원수", "dtype": "int", "description": "종업원 수"},
+        {"name": "사업지역", "dtype": "string", "description": "사업장 소재 지역"},
+        {"name": "매출등급", "dtype": "string", "description": "매출 규모 등급"}
+      ]
+    },
+    {
+      "table_name": "trs_m_soleprop_merchant_sales_card",
+      "description": "개인사업자 카드 매출 월별. 개인사업자의 카드 수취 매출 정보.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "카드매출건수", "dtype": "int", "description": "카드 매출 건수"},
+        {"name": "카드매출금액", "dtype": "bigint", "description": "카드 매출 금액"},
+        {"name": "신용카드매출", "dtype": "bigint", "description": "신용카드 매출"},
+        {"name": "체크카드매출", "dtype": "bigint", "description": "체크카드 매출"},
+        {"name": "배달매출", "dtype": "bigint", "description": "배달앱 매출"},
+        {"name": "평균객단가", "dtype": "bigint", "description": "건당 평균 결제 금액"}
+      ]
+    },
+    {
+      "table_name": "trs_m_soleprop_bank_txn",
+      "description": "개인사업자 은행 거래 월별. 사업자 계좌 입출금 요약.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "입금건수", "dtype": "int", "description": "입금 건수"},
+        {"name": "입금금액", "dtype": "bigint", "description": "입금 금액"},
+        {"name": "출금건수", "dtype": "int", "description": "출금 건수"},
+        {"name": "출금금액", "dtype": "bigint", "description": "출금 금액"},
+        {"name": "대출잔액", "dtype": "bigint", "description": "사업자 대출 잔액"},
+        {"name": "예금잔액", "dtype": "bigint", "description": "사업자 예금 잔액"}
+      ]
+    },
+    {
+      "table_name": "igd_m_soleprop_credit",
+      "description": "개인사업자 신용 정보 월별. 사업자 신용 평가 관련 정보.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "사업자신용등급", "dtype": "string", "description": "사업자 신용등급"},
+        {"name": "매출안정성", "dtype": "string", "description": "매출 안정성 등급"},
+        {"name": "업력", "dtype": "int", "description": "사업 업력 (개월)"},
+        {"name": "연체이력여부", "dtype": "string", "description": "과거 연체 이력 여부"}
+      ]
+    },
+    {
+      "table_name": "trs_m_soleprop_expense",
+      "description": "개인사업자 경비 지출 월별. 사업 경비 카드 이용 내역.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "총경비금액", "dtype": "bigint", "description": "총 경비 지출 금액"},
+        {"name": "인건비", "dtype": "bigint", "description": "인건비 지출"},
+        {"name": "임대료", "dtype": "bigint", "description": "임대료 지출"},
+        {"name": "재료비", "dtype": "bigint", "description": "재료/원자재비"},
+        {"name": "광고비", "dtype": "bigint", "description": "광고/마케팅비"},
+        {"name": "기타경비", "dtype": "bigint", "description": "기타 경비"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_event",
+      "description": "고객 이벤트 월별. 마케팅 이벤트 참여 및 혜택 수혜 이력.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월", "이벤트코드"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "이벤트코드", "dtype": "string", "description": "이벤트 코드", "is_key": true},
+        {"name": "이벤트명", "dtype": "string", "description": "이벤트 이름"},
+        {"name": "참여여부", "dtype": "string", "description": "참여 여부"},
+        {"name": "혜택금액", "dtype": "bigint", "description": "수혜 금액"},
+        {"name": "채널", "dtype": "string", "description": "참여 채널"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_complaint",
+      "description": "고객 민원/VOC 월별. 고객 불만 및 상담 이력.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "민원건수", "dtype": "int", "description": "민원 건수"},
+        {"name": "민원유형", "dtype": "string", "description": "민원 유형"},
+        {"name": "처리상태", "dtype": "string", "description": "처리 상태"},
+        {"name": "만족도", "dtype": "int", "description": "응대 만족도 점수"},
+        {"name": "상담채널", "dtype": "string", "description": "상담 채널 (전화/앱/챗봇)"}
+      ]
+    },
+    {
+      "table_name": "trs_m_card_benefit_usage",
+      "description": "카드 혜택 이용 월별. 카드 할인/적립 혜택 사용 내역.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "카드상품코드", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "할인금액", "dtype": "bigint", "description": "받은 할인 금액"},
+        {"name": "적립포인트", "dtype": "bigint", "description": "적립 포인트"},
+        {"name": "캐시백금액", "dtype": "bigint", "description": "캐시백 금액"},
+        {"name": "혜택합계", "dtype": "bigint", "description": "총 혜택 금액"},
+        {"name": "이용대비혜택률", "dtype": "double", "description": "이용 금액 대비 혜택률 (%)"}
+      ]
+    },
+    {
+      "table_name": "trs_m_card_installment",
+      "description": "카드 할부 거래 월별. 할부 결제 상세 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "할부건수", "dtype": "int", "description": "할부 거래 건수"},
+        {"name": "할부금액", "dtype": "bigint", "description": "할부 결제 금액"},
+        {"name": "평균할부개월", "dtype": "double", "description": "평균 할부 개월"},
+        {"name": "무이자할부건수", "dtype": "int", "description": "무이자 할부 건수"},
+        {"name": "할부잔여금액", "dtype": "bigint", "description": "미결제 할부 잔액"}
+      ]
+    },
+    {
+      "table_name": "trs_m_overseas_txn",
+      "description": "해외 거래 월별. 해외 카드 결제 및 환전 정보.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "해외이용건수", "dtype": "int", "description": "해외 이용 건수"},
+        {"name": "해외이용금액원화", "dtype": "bigint", "description": "해외 이용 금액 (원화 환산)"},
+        {"name": "주이용국가", "dtype": "string", "description": "주 이용 국가"},
+        {"name": "주이용통화", "dtype": "string", "description": "주 이용 통화 (USD/JPY/EUR 등)"},
+        {"name": "온라인해외결제", "dtype": "bigint", "description": "온라인 해외 결제 금액"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_digital",
+      "description": "고객 디지털 행동 월별. 앱/웹 이용 행동 데이터.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "앱로그인일수", "dtype": "int", "description": "앱 로그인 일수"},
+        {"name": "화면조회수", "dtype": "int", "description": "화면 조회 수"},
+        {"name": "이체실행건수", "dtype": "int", "description": "앱 통한 이체 건수"},
+        {"name": "알림수신건수", "dtype": "int", "description": "푸시 알림 수신 건수"},
+        {"name": "알림클릭수", "dtype": "int", "description": "알림 클릭 수"},
+        {"name": "주이용기능", "dtype": "string", "description": "주 이용 기능"}
+      ]
+    },
+    {
+      "table_name": "rpt_m_cust_consumption_pattern",
+      "description": "고객 소비 패턴 월별. 업종별/시간대별 소비 성향 분석.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "주소비업종", "dtype": "string", "description": "주 소비 업종"},
+        {"name": "주소비시간대", "dtype": "string", "description": "주 소비 시간대"},
+        {"name": "주소비요일", "dtype": "string", "description": "주 소비 요일"},
+        {"name": "온라인비율", "dtype": "double", "description": "온라인 소비 비율 (%)"},
+        {"name": "평균건당금액", "dtype": "bigint", "description": "건당 평균 결제 금액"},
+        {"name": "소비다양성지수", "dtype": "double", "description": "소비 업종 다양성 지수"}
+      ]
+    },
+    {
+      "table_name": "rpt_m_cust_loyalty",
+      "description": "고객 충성도 지표 월별. 계열사 이용 빈도 및 충성도 스코어.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "이용계열사수", "dtype": "int", "description": "이용 계열사 수"},
+        {"name": "총거래건수", "dtype": "int", "description": "그룹 전체 거래 건수"},
+        {"name": "충성도점수", "dtype": "double", "description": "충성도 스코어 (0-100)"},
+        {"name": "주거래계열사", "dtype": "string", "description": "주거래 계열사"},
+        {"name": "크로스셀여부", "dtype": "string", "description": "크로스셀 대상 여부"}
+      ]
+    },
+    {
+      "table_name": "trs_m_merchant_category_sales",
+      "description": "업종별 가맹점 매출 월별 집계. 업종 카테고리별 매출 통계.",
+      "domain": "merchant",
+      "key_columns": ["업종코드", "기준년월"],
+      "columns": [
+        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "업종대분류", "dtype": "string", "description": "업종 대분류"},
+        {"name": "업종중분류", "dtype": "string", "description": "업종 중분류"},
+        {"name": "총매출금액", "dtype": "bigint", "description": "총 매출 금액"},
+        {"name": "총거래건수", "dtype": "int", "description": "총 거래 건수"},
+        {"name": "이용고객수", "dtype": "int", "description": "이용 고객 수"},
+        {"name": "가맹점수", "dtype": "int", "description": "가맹점 수"},
+        {"name": "전월대비증감률", "dtype": "double", "description": "전월 대비 증감률"}
+      ]
+    },
+    {
+      "table_name": "trs_m_merchant_new_close",
+      "description": "가맹점 신규/폐업 월별. 가맹점 개폐업 동향.",
+      "domain": "merchant",
+      "key_columns": ["시군구코드", "업종코드", "기준년월"],
+      "columns": [
+        {"name": "시군구코드", "dtype": "string", "description": "행정구역 코드", "is_key": true},
+        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "신규가맹점수", "dtype": "int", "description": "신규 개업 가맹점 수"},
+        {"name": "폐업가맹점수", "dtype": "int", "description": "폐업 가맹점 수"},
+        {"name": "순증감", "dtype": "int", "description": "순 증감 (신규-폐업)"},
+        {"name": "생존율", "dtype": "double", "description": "1년 생존율 (%)"}
+      ]
+    },
+    {
+      "table_name": "igd_m_soleprop_revenue",
+      "description": "개인사업자 매출 월별 집계. 사업자의 총 매출 현황.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "총매출", "dtype": "bigint", "description": "월 총 매출"},
+        {"name": "카드매출", "dtype": "bigint", "description": "카드 결제 매출"},
+        {"name": "현금매출", "dtype": "bigint", "description": "현금 매출"},
+        {"name": "온라인매출", "dtype": "bigint", "description": "온라인 매출"},
+        {"name": "전월대비증감률", "dtype": "double", "description": "전월 대비 매출 증감률"},
+        {"name": "동업종평균대비", "dtype": "double", "description": "동 업종 평균 대비 비율"}
+      ]
+    },
+    {
+      "table_name": "igd_m_soleprop_employee",
+      "description": "개인사업자 직원 정보 월별. 직원 수 및 인건비 현황.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "직원수", "dtype": "int", "description": "총 직원 수"},
+        {"name": "정규직수", "dtype": "int", "description": "정규직 수"},
+        {"name": "비정규직수", "dtype": "int", "description": "비정규직 수"},
+        {"name": "총인건비", "dtype": "bigint", "description": "총 인건비"},
+        {"name": "4대보험납부액", "dtype": "bigint", "description": "4대보험 납부 금액"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_card_benefit_spec",
+      "description": "카드 혜택 사양 마스터. 카드 상품별 혜택 상세 스펙.",
+      "domain": "product",
+      "key_columns": ["카드상품코드", "혜택코드"],
+      "columns": [
+        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
+        {"name": "혜택코드", "dtype": "string", "description": "혜택 코드", "is_key": true},
+        {"name": "혜택유형", "dtype": "string", "description": "혜택 유형 (할인/적립/캐시백)"},
+        {"name": "혜택업종", "dtype": "string", "description": "적용 업종"},
+        {"name": "할인율", "dtype": "double", "description": "할인/적립률 (%)"},
+        {"name": "월한도", "dtype": "bigint", "description": "월 혜택 한도"},
+        {"name": "최소이용금액", "dtype": "bigint", "description": "최소 결제 금액 조건"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_deposit_product",
+      "description": "예적금 상품 마스터. 은행 예금/적금 상품 정보.",
+      "domain": "product",
+      "key_columns": ["상품코드"],
+      "columns": [
+        {"name": "상품코드", "dtype": "string", "description": "상품 코드", "is_key": true},
+        {"name": "상품명", "dtype": "string", "description": "상품 이름"},
+        {"name": "상품유형", "dtype": "string", "description": "예금/적금/파킹통장 구분"},
+        {"name": "기본금리", "dtype": "double", "description": "기본 금리 (%)"},
+        {"name": "최고금리", "dtype": "double", "description": "최고 우대 금리 (%)"},
+        {"name": "가입기간", "dtype": "string", "description": "가입 기간 조건"},
+        {"name": "최소가입금액", "dtype": "bigint", "description": "최소 가입 금액"},
+        {"name": "판매상태", "dtype": "string", "description": "판매 상태"}
+      ]
+    },
+    {
+      "table_name": "pdt_m_loan_product",
+      "description": "대출 상품 마스터. 은행 대출 상품 정보.",
+      "domain": "product",
+      "key_columns": ["상품코드"],
+      "columns": [
+        {"name": "상품코드", "dtype": "string", "description": "상품 코드", "is_key": true},
+        {"name": "상품명", "dtype": "string", "description": "상품 이름"},
+        {"name": "대출유형", "dtype": "string", "description": "대출 유형 (주택담보/신용/전세 등)"},
+        {"name": "기본금리", "dtype": "double", "description": "기본 금리 (%)"},
+        {"name": "최저금리", "dtype": "double", "description": "최저 금리 (%)"},
+        {"name": "최대한도", "dtype": "bigint", "description": "최대 대출 한도"},
+        {"name": "상환방식", "dtype": "string", "description": "상환 방식"},
+        {"name": "판매상태", "dtype": "string", "description": "판매 상태"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_income",
+      "description": "고객 소득 추정 월별. 급여이체/매출 기반 소득 추정 정보.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "추정소득", "dtype": "bigint", "description": "월 추정 소득"},
+        {"name": "소득구간", "dtype": "string", "description": "소득 구간"},
+        {"name": "급여이체금액", "dtype": "bigint", "description": "급여 이체 금액"},
+        {"name": "소득대비소비율", "dtype": "double", "description": "소득 대비 소비 비율 (%)"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_life_event",
+      "description": "고객 라이프 이벤트 월별. 결혼/출산/이사 등 주요 생애 이벤트 감지.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "이벤트유형", "dtype": "string", "description": "이벤트 유형 (결혼/출산/이사/취직/퇴직)"},
+        {"name": "감지일자", "dtype": "string", "description": "이벤트 감지 일자"},
+        {"name": "신뢰도", "dtype": "double", "description": "감지 신뢰도"},
+        {"name": "관련상품추천", "dtype": "string", "description": "추천 상품 코드"}
+      ]
+    },
+    {
+      "table_name": "rpt_m_age_gender_stats",
+      "description": "연령/성별 통계 월별. 연령대 및 성별 기준 각종 통계.",
+      "domain": "customer",
+      "key_columns": ["연령대", "성별", "기준년월"],
+      "columns": [
+        {"name": "연령대", "dtype": "string", "description": "연령대 (20대~70대 이상)", "is_key": true},
+        {"name": "성별", "dtype": "string", "description": "성별 (M/F)", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "고객수", "dtype": "int", "description": "해당 그룹 고객 수"},
+        {"name": "평균이용금액", "dtype": "bigint", "description": "평균 카드 이용 금액"},
+        {"name": "평균거래건수", "dtype": "double", "description": "평균 거래 건수"},
+        {"name": "온라인비율", "dtype": "double", "description": "온라인 결제 비율 (%)"},
+        {"name": "평균보유상품수", "dtype": "double", "description": "평균 보유 상품 수"}
+      ]
+    },
+    {
+      "table_name": "rpt_m_region_stats",
+      "description": "지역별 통계 월별. 행정구역 기준 소비/가맹점 통계.",
+      "domain": "merchant",
+      "key_columns": ["시군구코드", "기준년월"],
+      "columns": [
+        {"name": "시군구코드", "dtype": "string", "description": "행정구역 코드", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "시도명", "dtype": "string", "description": "시/도"},
+        {"name": "시군구명", "dtype": "string", "description": "시/군/구"},
+        {"name": "인구수", "dtype": "int", "description": "추정 인구 수"},
+        {"name": "가맹점수", "dtype": "int", "description": "활성 가맹점 수"},
+        {"name": "총소비금액", "dtype": "bigint", "description": "지역 내 총 소비 금액"},
+        {"name": "1인당소비", "dtype": "bigint", "description": "1인당 평균 소비"},
+        {"name": "주요업종", "dtype": "string", "description": "최다 소비 업종"}
+      ]
+    },
+    {
+      "table_name": "trs_m_payment_method",
+      "description": "결제수단 이용 월별. 결제 방법별 이용 현황 (간편결제 등).",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "간편결제건수", "dtype": "int", "description": "간편결제 이용 건수"},
+        {"name": "간편결제금액", "dtype": "bigint", "description": "간편결제 이용 금액"},
+        {"name": "주이용간편결제", "dtype": "string", "description": "주 이용 간편결제 (삼성페이/카카오페이 등)"},
+        {"name": "실물카드건수", "dtype": "int", "description": "실물 카드 결제 건수"},
+        {"name": "실물카드금액", "dtype": "bigint", "description": "실물 카드 결제 금액"},
+        {"name": "자동이체건수", "dtype": "int", "description": "자동이체 건수"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_subscription",
+      "description": "고객 구독 서비스 월별. 정기결제/구독 서비스 이용 현황.",
+      "domain": "transaction",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "구독서비스수", "dtype": "int", "description": "이용 중인 구독 서비스 수"},
+        {"name": "총구독금액", "dtype": "bigint", "description": "월 구독 결제 총액"},
+        {"name": "주요구독분류", "dtype": "string", "description": "주 구독 카테고리 (OTT/음악/쇼핑 등)"},
+        {"name": "최대구독금액", "dtype": "bigint", "description": "단건 최대 구독 금액"},
+        {"name": "구독시작월", "dtype": "string", "description": "가장 오래된 구독 시작 연월"}
+      ]
+    },
+    {
+      "table_name": "trs_m_soleprop_loan",
+      "description": "개인사업자 대출 월별. 사업자 대출 현황 및 상환 정보.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "대출건수", "dtype": "int", "description": "보유 대출 건수"},
+        {"name": "총대출잔액", "dtype": "bigint", "description": "총 대출 잔액"},
+        {"name": "월상환금액", "dtype": "bigint", "description": "월 상환 금액"},
+        {"name": "대출유형", "dtype": "string", "description": "주 대출 유형"},
+        {"name": "연체여부", "dtype": "string", "description": "연체 여부"},
+        {"name": "금리", "dtype": "double", "description": "가중평균 금리 (%)"}
+      ]
+    },
+    {
+      "table_name": "rpt_m_soleprop_benchmark",
+      "description": "개인사업자 벤치마크 월별. 동업종/동지역 대비 사업 성과 비교.",
+      "domain": "soleprop",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "매출백분위", "dtype": "int", "description": "동업종 매출 백분위 (%)"},
+        {"name": "고객수백분위", "dtype": "int", "description": "동업종 고객수 백분위"},
+        {"name": "객단가백분위", "dtype": "int", "description": "동업종 객단가 백분위"},
+        {"name": "동업종평균매출", "dtype": "bigint", "description": "동업종 평균 매출"},
+        {"name": "동지역평균매출", "dtype": "bigint", "description": "동지역 평균 매출"}
+      ]
+    },
+    {
+      "table_name": "com_m_merchant_review",
+      "description": "가맹점 리뷰 월별 집계. 가맹점에 대한 고객 리뷰 통계.",
+      "domain": "merchant",
+      "key_columns": ["가맹점번호", "기준년월"],
+      "columns": [
+        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "리뷰건수", "dtype": "int", "description": "리뷰 건수"},
+        {"name": "평균별점", "dtype": "double", "description": "평균 별점 (1-5)"},
+        {"name": "긍정비율", "dtype": "double", "description": "긍정 리뷰 비율 (%)"},
+        {"name": "주요키워드", "dtype": "string", "description": "주요 리뷰 키워드"}
+      ]
+    },
+    {
+      "table_name": "igd_m_cust_reward",
+      "description": "고객 리워드/포인트 월별. 포인트 적립 및 사용 현황.",
+      "domain": "customer",
+      "key_columns": ["그룹md번호", "기준년월"],
+      "columns": [
+        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
+        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
+        {"name": "적립포인트", "dtype": "bigint", "description": "월 적립 포인트"},
+        {"name": "사용포인트", "dtype": "bigint", "description": "월 사용 포인트"},
+        {"name": "잔여포인트", "dtype": "bigint", "description": "잔여 포인트"},
+        {"name": "소멸예정포인트", "dtype": "bigint", "description": "3개월 내 소멸 예정 포인트"},
+        {"name": "포인트사용처", "dtype": "string", "description": "주 사용처"}
+      ]
+    }
+  ]
+}

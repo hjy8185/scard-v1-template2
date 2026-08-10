@@ -1,0 +1,313 @@
+# =============================================================================
+# Onedata Shinhan Financial Group - Korean Business Glossary
+# =============================================================================
+# Maps Korean business terms to English definitions and context.
+# Used by the AI agent for NL-to-SQL translation and domain understanding.
+# =============================================================================
+
+terms:
+  # --- Universal Identifiers ---
+  그룹md번호:
+    english: "Group Master Data ID"
+    description: "Unified customer identifier across all Shinhan Financial Group subsidiaries"
+    usage: "Universal join key linking bank, card, life, and securities data"
+    data_type: "string"
+    example: "SHG0000012345"
+
+  개인사업자번호:
+    english: "Sole Proprietor Business Number"
+    description: "Business registration number for individual business owners"
+    data_type: "string"
+
+  # --- Temporal Fields ---
+  기준년월:
+    english: "Reference Year-Month"
+    description: "Reporting period in YYYYMM format"
+    data_type: "string(6)"
+    format: "YYYYMM"
+    example: "202401"
+
+  기준일자:
+    english: "Reference Date"
+    description: "Reporting date for daily snapshot data"
+    data_type: "string(8) or date"
+    format: "YYYYMMDD"
+
+  거래일자:
+    english: "Transaction Date"
+    description: "Date when the financial transaction occurred"
+    data_type: "date"
+
+  # --- Boolean/Flag Fields ---
+  tf:
+    english: "True/False Flag"
+    description: "Binary indicator field (1=True/Yes, 0=False/No)"
+    data_type: "integer(1)"
+    values:
+      1: "True / Yes / Active"
+      0: "False / No / Inactive"
+
+  여부:
+    english: "Whether or not (Y/N flag)"
+    description: "Suffix indicating a boolean field in Korean column names"
+    data_type: "string(1) or integer(1)"
+    values:
+      Y: "Yes"
+      N: "No"
+      1: "Yes"
+      0: "No"
+
+  # --- Loyalty Programs ---
+  탑스클럽:
+    english: "TOPS Club"
+    description: "Shinhan Financial Group's integrated loyalty program with tiered benefits"
+    tiers:
+      - "VIP"
+      - "PLATINUM"
+      - "GOLD"
+      - "SILVER"
+      - "CLASSIC"
+    context: "Based on cross-subsidiary asset size and transaction volume"
+
+  팬클럽:
+    english: "Fan Club"
+    description: "Shinhan Card's customer loyalty community program"
+    context: "Table: jaz_sh_fanclub_membership_chghist"
+
+  # --- Analytics/Segmentation ---
+  RFM:
+    english: "Recency/Frequency/Monetary"
+    description: "Customer value segmentation model based on transaction behavior"
+    components:
+      R: "Recency - days since last transaction"
+      F: "Frequency - number of transactions in period"
+      M: "Monetary - total transaction amount in period"
+    context: "Table: igd_m_shg_rfm_base_ledger"
+
+  고객등급:
+    english: "Customer Grade"
+    description: "Customer tier classification within a subsidiary"
+    context: "Varies by subsidiary; different grading criteria for bank vs card vs securities"
+
+  # --- Subsidiary Names ---
+  은행:
+    english: "Bank"
+    description: "Shinhan Bank (신한은행)"
+    table_suffix: "_bank"
+
+  카드:
+    english: "Card"
+    description: "Shinhan Card (신한카드)"
+    table_suffix: "_card"
+
+  라이프:
+    english: "Life Insurance"
+    description: "Shinhan Life (신한라이프)"
+    table_suffix: "_life"
+
+  증권:
+    english: "Securities"
+    description: "Shinhan Investment Corp / Shinhan Securities (신한투자증권)"
+    table_suffix: "_sec"
+
+  # --- Table Prefix Meanings ---
+  cln:
+    english: "Cleansed"
+    description: "Cleansed/standardized customer master data"
+    context: "Tables prefixed with cln_ contain cleaned customer information"
+
+  igd:
+    english: "Integrated"
+    description: "Integrated/unified data across subsidiaries"
+    context: "Tables prefixed with igd_ contain cross-subsidiary integrated data"
+
+  trs:
+    english: "Transaction"
+    description: "Transaction-level detail data"
+    context: "Tables prefixed with trs_ contain transaction records"
+
+  pdt:
+    english: "Product"
+    description: "Product/account holding data"
+    context: "Tables prefixed with pdt_ contain product and holding information"
+
+  rpt:
+    english: "Report"
+    description: "Reporting/analytical data"
+    context: "Tables prefixed with rpt_ contain pre-aggregated reporting data"
+
+  com:
+    english: "Common"
+    description: "Common reference/master data"
+    context: "Tables prefixed with com_ contain shared reference data"
+
+  gba:
+    english: "Global Banking Account"
+    description: "Bank account daily balance data"
+    context: "Table: gba_acct_daily"
+
+  vam:
+    english: "Value Added Marketing"
+    description: "Marketing and product recommendation data"
+    context: "Tables prefixed with vam_ contain marketing-related customer data"
+
+  jaz:
+    english: "Jazz (Shinhan internal system)"
+    description: "Data from Shinhan's Jazz platform system"
+    context: "Tables prefixed with jaz_ are from the Jazz CRM system"
+
+  shg:
+    english: "Shinhan Group"
+    description: "Shinhan Financial Group level data"
+    context: "Used for group-wide aggregated metrics"
+
+  # --- Table Type Suffixes ---
+  _d_:
+    english: "Daily"
+    description: "Daily snapshot data (일별)"
+    context: "Partitioned by 기준일자"
+
+  _m_:
+    english: "Monthly"
+    description: "Monthly aggregated/snapshot data (월별)"
+    context: "Partitioned by 기준년월"
+
+  mas:
+    english: "Master"
+    description: "Master data table containing core entity attributes"
+    context: "Contains static/slowly-changing customer or entity attributes"
+
+  base:
+    english: "Base"
+    description: "Base analytical table with derived metrics"
+    context: "Contains pre-computed metrics and indicators"
+
+  # --- Financial Terms ---
+  수신:
+    english: "Deposits/Savings"
+    description: "Bank deposit products (checking, savings, time deposits)"
+    context: "수신잔액 = deposit balance"
+
+  여신:
+    english: "Loans/Credit"
+    description: "Bank lending products (mortgages, personal loans)"
+    context: "여신잔액 = loan balance"
+
+  자산:
+    english: "Assets"
+    description: "Total financial assets held by a customer"
+    context: "May include deposits, securities, insurance cash value"
+
+  AUM:
+    english: "Assets Under Management"
+    description: "Total assets managed for securities customers"
+    context: "Used in rpt_d_assetsize_sec tables"
+
+  보유:
+    english: "Holding"
+    description: "Current holding/position of a financial product"
+    context: "Suffix in table names indicating current position data"
+
+  # --- Merchant/Commerce Terms ---
+  가맹점:
+    english: "Merchant/Franchise"
+    description: "A business that accepts Shinhan Card payments"
+    context: "Identified by 가맹점번호 (merchant ID)"
+
+  업종:
+    english: "Industry/Business Category"
+    description: "Merchant industry classification code"
+    context: "Hierarchical classification (대분류/중분류/소분류)"
+
+  매출:
+    english: "Sales/Revenue"
+    description: "Merchant sales volume from card transactions"
+    context: "Used in trs_m_soleprop_merchant_sales_card"
+
+  배달:
+    english: "Delivery"
+    description: "Delivery-related transactions (food delivery, etc.)"
+    context: "Table: trs_m_merchant_delivery"
+
+  프랜차이즈:
+    english: "Franchise"
+    description: "Franchise chain classification for merchants"
+    context: "Table: com_m_merchant_franchise"
+
+  # --- Product Terms ---
+  상품:
+    english: "Product"
+    description: "Financial product offered to customers"
+
+  오토론:
+    english: "Auto Loan"
+    description: "Shinhan Card auto loan product"
+    context: "Table: pdt_m_autoloan_prod_base_card"
+
+  연회비:
+    english: "Annual Fee"
+    description: "Yearly fee charged for credit card membership"
+
+  계약:
+    english: "Contract"
+    description: "Insurance policy contract"
+    context: "Used in pdt_m_contract_holding_base_life"
+
+  # --- Column Name Patterns ---
+  _cnt:
+    english: "Count"
+    description: "Numeric count of items/occurrences"
+
+  _amt:
+    english: "Amount"
+    description: "Monetary amount (in KRW)"
+
+  _rt:
+    english: "Rate"
+    description: "Ratio or percentage value"
+
+  _cd:
+    english: "Code"
+    description: "Classification or identifier code"
+
+  _nm:
+    english: "Name"
+    description: "Descriptive name field"
+
+  _dt:
+    english: "Date"
+    description: "Date field (usually YYYYMMDD format)"
+
+  _yn:
+    english: "Yes/No"
+    description: "Boolean flag field (Y/N)"
+
+  _tf:
+    english: "True/False"
+    description: "Boolean flag field (1/0)"
+
+  # --- Common Abbreviations ---
+  cust:
+    english: "Customer"
+    description: "Customer entity abbreviation in table/column names"
+
+  acct:
+    english: "Account"
+    description: "Account entity abbreviation in table/column names"
+
+  txn:
+    english: "Transaction"
+    description: "Transaction entity abbreviation in table/column names"
+
+  prod:
+    english: "Product"
+    description: "Product entity abbreviation in table/column names"
+
+  dim:
+    english: "Dimension"
+    description: "Dimension table for lookup/reference data"
+    context: "Tables: m_card_dim, m_cust_dim"
+
+  soleprop:
+    english: "Sole Proprietor"
+    description: "Individual business owner abbreviation"

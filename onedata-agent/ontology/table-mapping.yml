@@ -1,0 +1,1019 @@
+# =============================================================================
+# Onedata Table-to-Ontology Mapping
+# =============================================================================
+# Maps 53 AWS Glue tables (database: ai_ready_v2) to ontology classes.
+# Each table includes: ontology class, subsidiary, description, key columns,
+# and join patterns.
+# =============================================================================
+
+database: ai_ready_v2
+universal_join_key: 그룹md번호
+partition_key_monthly: 기준년월
+partition_key_daily: 기준일자
+
+tables:
+  # ===========================================================================
+  # Card Product Reference
+  # ===========================================================================
+  card_prod:
+    ontology_class: CardProduct
+    subsidiary: card
+    description: "Card product master - defines all Shinhan Card products"
+    description_ko: "카드상품 마스터 - 신한카드 전체 상품 정의"
+    grain: "One row per card product"
+    columns:
+      상품코드: "Card product code (PK)"
+      상품명: "Card product name"
+      상품유형: "Product type (credit/check/prepaid)"
+      연회비: "Annual fee amount"
+      브랜드: "Card network brand (VISA/Master/Local)"
+      출시일자: "Product launch date"
+      판매상태: "Sales status (active/discontinued)"
+      혜택유형: "Benefit category"
+
+  # ===========================================================================
+  # Cleansed Customer Master (Daily) - By Subsidiary
+  # ===========================================================================
+  cln_d_cust_mas_bank:
+    ontology_class: Customer
+    subsidiary: bank
+    description: "Daily cleansed customer master - Shinhan Bank"
+    description_ko: "일별 정제 고객마스터 - 신한은행"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID (universal customer key)"
+      기준일자: "Reference date (partition key, YYYYMMDD)"
+      고객명: "Customer name"
+      생년월일: "Date of birth"
+      성별: "Gender (M/F)"
+      연령: "Age"
+      고객등급: "Bank customer grade"
+      최초거래일: "First transaction date"
+      주소코드: "Address postal code"
+
+  cln_d_cust_mas_card:
+    ontology_class: Customer
+    subsidiary: card
+    description: "Daily cleansed customer master - Shinhan Card"
+    description_ko: "일별 정제 고객마스터 - 신한카드"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID (universal customer key)"
+      기준일자: "Reference date (partition key, YYYYMMDD)"
+      고객명: "Customer name"
+      생년월일: "Date of birth"
+      성별: "Gender (M/F)"
+      연령: "Age"
+      카드고객등급: "Card customer grade"
+      보유카드수: "Number of cards held"
+      회원상태: "Member status"
+
+  cln_d_cust_mas_life:
+    ontology_class: Customer
+    subsidiary: life
+    description: "Daily cleansed customer master - Shinhan Life"
+    description_ko: "일별 정제 고객마스터 - 신한라이프"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID (universal customer key)"
+      기준일자: "Reference date (partition key, YYYYMMDD)"
+      고객명: "Customer name"
+      생년월일: "Date of birth"
+      성별: "Gender (M/F)"
+      보험고객등급: "Insurance customer grade"
+      계약건수: "Number of contracts"
+      최초계약일: "First contract date"
+
+  cln_d_cust_mas_sec:
+    ontology_class: Customer
+    subsidiary: sec
+    description: "Daily cleansed customer master - Shinhan Securities"
+    description_ko: "일별 정제 고객마스터 - 신한투자증권"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID (universal customer key)"
+      기준일자: "Reference date (partition key, YYYYMMDD)"
+      고객명: "Customer name"
+      생년월일: "Date of birth"
+      성별: "Gender (M/F)"
+      증권고객등급: "Securities customer grade"
+      계좌수: "Number of accounts"
+      최초개설일: "First account open date"
+
+  # ===========================================================================
+  # Cleansed Sole Proprietor Master (Daily)
+  # ===========================================================================
+  cln_d_soleprop_mas_bank:
+    ontology_class: SoleProprietor
+    subsidiary: bank
+    description: "Daily cleansed sole proprietor master - Shinhan Bank"
+    description_ko: "일별 정제 개인사업자마스터 - 신한은행"
+    grain: "One row per sole proprietor per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Sole proprietor business registration number"
+      기준일자: "Reference date (partition key)"
+      사업자명: "Business name"
+      업종코드: "Industry classification code"
+      사업개시일: "Business start date"
+      대출잔액: "Outstanding loan balance"
+      예금잔액: "Deposit balance"
+
+  cln_d_soleprop_mas_card:
+    ontology_class: SoleProprietor
+    subsidiary: card
+    description: "Daily cleansed sole proprietor master - Shinhan Card"
+    description_ko: "일별 정제 개인사업자마스터 - 신한카드"
+    grain: "One row per sole proprietor per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Sole proprietor business registration number"
+      기준일자: "Reference date (partition key)"
+      사업자명: "Business name"
+      가맹점번호: "Merchant ID"
+      업종코드: "Industry classification code"
+      월매출: "Monthly sales amount"
+
+  # ===========================================================================
+  # Cleansed Customer Base (Monthly) - By Subsidiary
+  # ===========================================================================
+  cln_m_cust_base_bank:
+    ontology_class: Customer
+    subsidiary: bank
+    description: "Monthly customer base metrics - Shinhan Bank"
+    description_ko: "월별 고객베이스 - 신한은행"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month (YYYYMM)"
+      수신잔액: "Total deposit balance"
+      여신잔액: "Total loan balance"
+      수신건수: "Number of deposit accounts"
+      여신건수: "Number of loan accounts"
+      거래건수_월: "Monthly transaction count"
+      거래금액_월: "Monthly transaction amount"
+      디지털채널이용tf: "Digital channel usage flag (1/0)"
+
+  cln_m_cust_base_card:
+    ontology_class: Customer
+    subsidiary: card
+    description: "Monthly customer base metrics - Shinhan Card"
+    description_ko: "월별 고객베이스 - 신한카드"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month (YYYYMM)"
+      이용금액: "Monthly card spending amount"
+      이용건수: "Monthly card usage count"
+      보유카드수: "Number of active cards"
+      신용카드이용금액: "Credit card spending"
+      체크카드이용금액: "Debit card spending"
+      해외이용금액: "Overseas spending amount"
+      할부이용금액: "Installment purchase amount"
+
+  cln_m_cust_base_life:
+    ontology_class: Customer
+    subsidiary: life
+    description: "Monthly customer base metrics - Shinhan Life"
+    description_ko: "월별 고객베이스 - 신한라이프"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month (YYYYMM)"
+      유지계약건수: "Active contract count"
+      월납보험료: "Monthly insurance premium"
+      총보험료누계: "Cumulative total premium"
+      보장성보험tf: "Protection insurance flag"
+      저축성보험tf: "Savings insurance flag"
+
+  cln_m_cust_base_sec:
+    ontology_class: Customer
+    subsidiary: sec
+    description: "Monthly customer base metrics - Shinhan Securities"
+    description_ko: "월별 고객베이스 - 신한투자증권"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month (YYYYMM)"
+      예탁자산: "Custodial assets"
+      주식잔고: "Stock balance"
+      펀드잔고: "Fund balance"
+      채권잔고: "Bond balance"
+      거래건수_월: "Monthly trade count"
+      거래금액_월: "Monthly trade amount"
+      수익률: "Return rate"
+
+  # ===========================================================================
+  # Cleansed Sole Proprietor Base (Monthly)
+  # ===========================================================================
+  cln_m_soleprop_base_bank:
+    ontology_class: SoleProprietor
+    subsidiary: bank
+    description: "Monthly sole proprietor base metrics - Shinhan Bank"
+    description_ko: "월별 개인사업자베이스 - 신한은행"
+    grain: "One row per sole proprietor per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      기준년월: "Reference year-month"
+      수신잔액: "Deposit balance"
+      여신잔액: "Loan balance"
+      월입금액: "Monthly deposit amount"
+      월출금액: "Monthly withdrawal amount"
+      업종코드: "Industry code"
+
+  cln_m_soleprop_base_card:
+    ontology_class: SoleProprietor
+    subsidiary: card
+    description: "Monthly sole proprietor base metrics - Shinhan Card"
+    description_ko: "월별 개인사업자베이스 - 신한카드"
+    grain: "One row per sole proprietor per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      기준년월: "Reference year-month"
+      월매출금액: "Monthly sales amount"
+      월매출건수: "Monthly sales count"
+      배달매출금액: "Delivery sales amount"
+      업종코드: "Industry code"
+      가맹점번호: "Merchant franchise ID"
+
+  # ===========================================================================
+  # Common Reference Tables
+  # ===========================================================================
+  com_m_merchant_franchise:
+    ontology_class: Merchant
+    subsidiary: card
+    description: "Merchant franchise master - chain/brand classification"
+    description_ko: "가맹점 프랜차이즈 마스터 - 체인/브랜드 분류"
+    grain: "One row per franchise"
+    columns:
+      프랜차이즈코드: "Franchise chain code (PK)"
+      프랜차이즈명: "Franchise chain name"
+      업종대분류: "Industry major category"
+      업종중분류: "Industry medium category"
+      업종소분류: "Industry minor category"
+      가맹점수: "Number of affiliated merchants"
+      브랜드유형: "Brand type"
+
+  com_manual_base:
+    ontology_class: null
+    subsidiary: common
+    description: "Manual/reference data base - manually curated business rules"
+    description_ko: "수동 기준정보 - 수동 관리 업무규칙"
+    grain: "Various reference data"
+    columns:
+      항목코드: "Item code"
+      항목명: "Item name"
+      항목값: "Item value"
+      설명: "Description"
+      적용시작일: "Effective start date"
+      적용종료일: "Effective end date"
+
+  com_postal_base:
+    ontology_class: PostalArea
+    subsidiary: common
+    description: "Postal code reference - geographic area mapping"
+    description_ko: "우편번호 기준정보 - 지역 매핑"
+    grain: "One row per postal code"
+    columns:
+      우편번호: "Postal code (PK)"
+      시도: "Province/City"
+      시군구: "District"
+      읍면동: "Town/Village"
+      도로명: "Road name"
+      지역코드: "Region code"
+
+  # ===========================================================================
+  # Bank Account Daily
+  # ===========================================================================
+  gba_acct_daily:
+    ontology_class: Account
+    subsidiary: bank
+    description: "Bank account daily balance snapshot"
+    description_ko: "은행 계좌 일별 잔액 스냅샷"
+    grain: "One row per account per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID (account owner)"
+      계좌번호: "Account number"
+      기준일자: "Reference date (partition key)"
+      잔액: "Account balance"
+      입금액: "Deposit amount (inflow)"
+      출금액: "Withdrawal amount (outflow)"
+      계좌유형: "Account type code"
+      상품코드: "Product code"
+      개설일: "Account open date"
+
+  # ===========================================================================
+  # Integrated (igd) Tables - Cross-Subsidiary
+  # ===========================================================================
+  igd_d_cust_mas:
+    ontology_class: Customer
+    subsidiary: integrated
+    description: "Daily integrated customer master - group-wide unified view"
+    description_ko: "일별 통합고객마스터 - 그룹 통합 뷰"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID (PK)"
+      기준일자: "Reference date"
+      고객명: "Customer name"
+      생년월일: "Date of birth"
+      성별: "Gender"
+      연령: "Age"
+      은행고객tf: "Bank customer flag"
+      카드고객tf: "Card customer flag"
+      보험고객tf: "Life insurance customer flag"
+      증권고객tf: "Securities customer flag"
+      탑스클럽등급: "TOPS Club tier"
+      총자산규모: "Total asset size"
+
+  igd_d_soleprop_mas:
+    ontology_class: SoleProprietor
+    subsidiary: integrated
+    description: "Daily integrated sole proprietor master"
+    description_ko: "일별 통합 개인사업자마스터"
+    grain: "One row per sole proprietor per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      기준일자: "Reference date"
+      사업자명: "Business name"
+      업종코드: "Industry code"
+      은행거래tf: "Bank transaction flag"
+      카드가맹tf: "Card merchant flag"
+
+  igd_m_cust_base:
+    ontology_class: Customer
+    subsidiary: integrated
+    description: "Monthly integrated customer base - group-wide metrics"
+    description_ko: "월별 통합고객베이스 - 그룹 통합 지표"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      총자산: "Total assets across all subsidiaries"
+      은행자산: "Bank assets"
+      증권자산: "Securities assets"
+      보험자산: "Insurance assets value"
+      카드이용금액: "Card spending amount"
+      거래계열사수: "Number of transacting subsidiaries"
+      탑스클럽등급: "TOPS Club tier"
+      디지털활동tf: "Digital activity flag"
+
+  igd_m_cust_holding_base:
+    ontology_class: Asset
+    subsidiary: integrated
+    description: "Monthly customer product holding base - what each customer holds"
+    description_ko: "월별 고객 상품보유 베이스"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      은행수신보유tf: "Bank deposit holding flag"
+      은행여신보유tf: "Bank loan holding flag"
+      카드보유tf: "Card holding flag"
+      보험보유tf: "Insurance holding flag"
+      증권보유tf: "Securities holding flag"
+      펀드보유tf: "Fund holding flag"
+      보유상품수: "Total products held count"
+
+  igd_m_cust_txn:
+    ontology_class: Transaction
+    subsidiary: integrated
+    description: "Monthly integrated customer transaction summary"
+    description_ko: "월별 통합고객 거래요약"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      총거래건수: "Total transaction count (all subsidiaries)"
+      총거래금액: "Total transaction amount"
+      은행거래건수: "Bank transaction count"
+      카드거래건수: "Card transaction count"
+      보험거래건수: "Insurance transaction count"
+      증권거래건수: "Securities transaction count"
+
+  igd_m_cust_txn_bank:
+    ontology_class: Transaction
+    subsidiary: bank
+    description: "Monthly customer transaction summary - Bank component"
+    description_ko: "월별 고객거래요약 - 은행"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      입금건수: "Deposit transaction count"
+      입금금액: "Deposit amount"
+      출금건수: "Withdrawal transaction count"
+      출금금액: "Withdrawal amount"
+      이체건수: "Transfer count"
+      이체금액: "Transfer amount"
+
+  igd_m_cust_txn_card:
+    ontology_class: Transaction
+    subsidiary: card
+    description: "Monthly customer transaction summary - Card component"
+    description_ko: "월별 고객거래요약 - 카드"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      신용이용건수: "Credit usage count"
+      신용이용금액: "Credit usage amount"
+      체크이용건수: "Debit usage count"
+      체크이용금액: "Debit usage amount"
+      해외이용건수: "Overseas usage count"
+      해외이용금액: "Overseas usage amount"
+      할부이용건수: "Installment count"
+
+  igd_m_cust_txn_life:
+    ontology_class: Transaction
+    subsidiary: life
+    description: "Monthly customer transaction summary - Life Insurance component"
+    description_ko: "월별 고객거래요약 - 보험"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      납입보험료: "Paid premium amount"
+      보험금지급건수: "Insurance claim count"
+      보험금지급액: "Insurance claim amount"
+      신규계약건수: "New contract count"
+      해지건수: "Cancellation count"
+
+  igd_m_cust_txn_sec:
+    ontology_class: Transaction
+    subsidiary: sec
+    description: "Monthly customer transaction summary - Securities component"
+    description_ko: "월별 고객거래요약 - 증권"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      매수건수: "Buy order count"
+      매수금액: "Buy order amount"
+      매도건수: "Sell order count"
+      매도금액: "Sell order amount"
+      수익률: "Return rate"
+      거래종목수: "Number of traded securities"
+
+  igd_m_shg_rfm_base_ledger:
+    ontology_class: RFMSegment
+    subsidiary: integrated
+    description: "Monthly group-wide RFM segmentation base"
+    description_ko: "월별 그룹 RFM 세그먼트 베이스"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      rfm_r_score: "Recency score"
+      rfm_f_score: "Frequency score"
+      rfm_m_score: "Monetary score"
+      rfm_total_score: "Total RFM score"
+      rfm_segment: "RFM segment label"
+      최근거래일: "Last transaction date"
+      거래빈도: "Transaction frequency"
+      거래규모: "Transaction monetary value"
+
+  igd_m_soleprop_asset:
+    ontology_class: Asset
+    subsidiary: integrated
+    description: "Monthly sole proprietor asset summary"
+    description_ko: "월별 개인사업자 자산요약"
+    grain: "One row per sole proprietor per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      기준년월: "Reference year-month"
+      총자산: "Total business assets"
+      은행자산: "Bank-held assets"
+      카드매출누계: "Cumulative card sales"
+      대출잔액: "Outstanding loan balance"
+
+  igd_m_soleprop_base:
+    ontology_class: SoleProprietor
+    subsidiary: integrated
+    description: "Monthly sole proprietor base metrics"
+    description_ko: "월별 개인사업자 베이스"
+    grain: "One row per sole proprietor per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      기준년월: "Reference year-month"
+      업종코드: "Industry code"
+      매출금액_월: "Monthly sales"
+      매출건수_월: "Monthly sales count"
+      은행거래tf: "Bank activity flag"
+      카드가맹tf: "Card merchant flag"
+      종업원수: "Number of employees"
+
+  # ===========================================================================
+  # Fan Club / Membership
+  # ===========================================================================
+  jaz_sh_fanclub_membership_chghist:
+    ontology_class: Membership
+    subsidiary: card
+    description: "Shinhan Fan Club membership change history"
+    description_ko: "신한 팬클럽 멤버십 변경이력"
+    grain: "One row per membership change event"
+    columns:
+      그룹md번호: "Group MD ID"
+      멤버십등급: "Membership tier"
+      변경일자: "Change date"
+      변경전등급: "Previous tier"
+      변경후등급: "New tier"
+      변경사유: "Change reason"
+      가입일자: "Enrollment date"
+
+  # ===========================================================================
+  # Dimension Tables
+  # ===========================================================================
+  m_card_dim:
+    ontology_class: Card
+    subsidiary: card
+    description: "Card dimension - lookup table for card attributes"
+    description_ko: "카드 디멘전 - 카드속성 조회테이블"
+    grain: "One row per card"
+    columns:
+      카드번호: "Card number (masked/hashed)"
+      그룹md번호: "Card owner Group MD ID"
+      상품코드: "Card product code"
+      상품명: "Card product name"
+      카드유형: "Card type (credit/debit)"
+      발급일: "Issue date"
+      유효기간: "Expiry date"
+      카드상태: "Card status"
+
+  m_cust_dim:
+    ontology_class: Customer
+    subsidiary: integrated
+    description: "Customer dimension - unified lookup for customer attributes"
+    description_ko: "고객 디멘전 - 통합 고객속성 조회테이블"
+    grain: "One row per customer (latest snapshot)"
+    columns:
+      그룹md번호: "Group MD ID (PK)"
+      고객명: "Customer name"
+      생년월일: "Date of birth"
+      성별: "Gender"
+      연령대: "Age group"
+      거주지역: "Residential area"
+      탑스클럽등급: "TOPS Club tier"
+      주거래계열사: "Primary subsidiary"
+      고객세그먼트: "Customer segment"
+
+  # ===========================================================================
+  # Product Holdings (Monthly)
+  # ===========================================================================
+  pdt_m_acct_holding_base_bank:
+    ontology_class: Account
+    subsidiary: bank
+    description: "Monthly bank account holding base"
+    description_ko: "월별 은행 계좌보유 베이스"
+    grain: "One row per account per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      계좌번호: "Account number"
+      기준년월: "Reference year-month"
+      상품코드: "Product code"
+      상품명: "Product name"
+      계좌유형: "Account type (deposit/savings/CMA)"
+      잔액: "Balance"
+      개설일: "Open date"
+      만기일: "Maturity date"
+
+  pdt_m_autoloan_prod_base_card:
+    ontology_class: Loan
+    subsidiary: card
+    description: "Monthly auto loan product base - Shinhan Card auto loans"
+    description_ko: "월별 오토론 상품베이스 - 신한카드"
+    grain: "One row per auto loan per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      대출번호: "Loan number"
+      기준년월: "Reference year-month"
+      상품코드: "Product code"
+      대출금액: "Loan principal amount"
+      대출잔액: "Outstanding balance"
+      금리: "Interest rate"
+      대출기간: "Loan term (months)"
+      실행일: "Disbursement date"
+      상환방식: "Repayment method"
+
+  pdt_m_card_prod_base_card:
+    ontology_class: Card
+    subsidiary: card
+    description: "Monthly card product holding base - active card holdings"
+    description_ko: "월별 카드상품 보유베이스"
+    grain: "One row per card per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      카드번호: "Card number"
+      기준년월: "Reference year-month"
+      상품코드: "Product code"
+      상품명: "Product name"
+      카드유형: "Card type"
+      발급일: "Issue date"
+      이용금액_월: "Monthly spending"
+      이용건수_월: "Monthly usage count"
+      한도: "Credit limit"
+
+  pdt_m_contract_holding_base_life:
+    ontology_class: InsuranceContract
+    subsidiary: life
+    description: "Monthly insurance contract holding base"
+    description_ko: "월별 보험계약 보유베이스"
+    grain: "One row per contract per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      계약번호: "Contract/policy number"
+      기준년월: "Reference year-month"
+      상품코드: "Product code"
+      상품명: "Product name"
+      보험유형: "Insurance type (protection/savings)"
+      월보험료: "Monthly premium"
+      계약상태: "Contract status"
+      계약일: "Contract start date"
+      만기일: "Maturity date"
+      보장금액: "Coverage amount"
+
+  pdt_m_loan_prod_base_card:
+    ontology_class: Loan
+    subsidiary: card
+    description: "Monthly loan product base - Shinhan Card loan products"
+    description_ko: "월별 대출상품 베이스 - 신한카드"
+    grain: "One row per loan per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      대출번호: "Loan number"
+      기준년월: "Reference year-month"
+      상품코드: "Product code"
+      상품유형: "Product type (cash advance/installment/revolving)"
+      대출금액: "Loan principal"
+      대출잔액: "Outstanding balance"
+      금리: "Interest rate"
+      실행일: "Disbursement date"
+      만기일: "Maturity date"
+
+  # ===========================================================================
+  # Reporting / Analytical Tables
+  # ===========================================================================
+  rpt_d_assetsize_sec:
+    ontology_class: Securities
+    subsidiary: sec
+    description: "Daily securities asset size report"
+    description_ko: "일별 증권 자산규모 리포트"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID"
+      기준일자: "Reference date"
+      총예탁자산: "Total custodial assets"
+      주식평가금액: "Stock valuation"
+      채권평가금액: "Bond valuation"
+      펀드평가금액: "Fund valuation"
+      예수금: "Cash deposit"
+      외화자산: "Foreign currency assets"
+
+  rpt_d_assetsize_sec_excl:
+    ontology_class: Securities
+    subsidiary: sec
+    description: "Daily securities asset size (excluding specific items)"
+    description_ko: "일별 증권 자산규모 (특정항목 제외)"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID"
+      기준일자: "Reference date"
+      순예탁자산: "Net custodial assets (excl. specified items)"
+      제외항목코드: "Excluded item code"
+      조정자산: "Adjusted asset value"
+
+  rpt_d_cust_mas:
+    ontology_class: Customer
+    subsidiary: integrated
+    description: "Daily customer master for reporting - pre-aggregated"
+    description_ko: "일별 리포트용 고객마스터 (사전집계)"
+    grain: "One row per customer per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID"
+      기준일자: "Reference date"
+      고객명: "Customer name"
+      연령대: "Age group"
+      성별: "Gender"
+      탑스클럽등급: "TOPS Club tier"
+      총자산규모: "Total asset band"
+      주거래계열사: "Primary subsidiary"
+      활동고객tf: "Active customer flag"
+      VIP고객tf: "VIP customer flag"
+
+  rpt_d_merchant_industry_index:
+    ontology_class: IndustryCategory
+    subsidiary: card
+    description: "Daily merchant industry index - spending trends by category"
+    description_ko: "일별 가맹점 업종지수 - 업종별 소비 트렌드"
+    grain: "One row per industry category per day"
+    partition: 기준일자
+    columns:
+      기준일자: "Reference date"
+      업종코드: "Industry code"
+      업종명: "Industry name"
+      매출지수: "Sales index"
+      건수지수: "Transaction count index"
+      전년동기대비: "Year-over-year comparison (%)"
+      전월대비: "Month-over-month comparison (%)"
+
+  rpt_d_unit_deposit_acct:
+    ontology_class: DepositAccount
+    subsidiary: bank
+    description: "Daily unit deposit account details"
+    description_ko: "일별 단위수신계좌 상세"
+    grain: "One row per deposit account per day"
+    partition: 기준일자
+    columns:
+      그룹md번호: "Group MD ID"
+      계좌번호: "Account number"
+      기준일자: "Reference date"
+      잔액: "Balance"
+      상품코드: "Product code"
+      계좌유형: "Account type"
+      금리: "Interest rate"
+      개설일: "Open date"
+      만기일: "Maturity date"
+
+  # ===========================================================================
+  # Membership
+  # ===========================================================================
+  shg_membership_cust_hist:
+    ontology_class: Membership
+    subsidiary: integrated
+    description: "Shinhan Group membership customer history (TOPS Club)"
+    description_ko: "신한그룹 멤버십 고객이력 (탑스클럽)"
+    grain: "One row per membership tier change"
+    columns:
+      그룹md번호: "Group MD ID"
+      등급변경일: "Tier change date"
+      변경전등급: "Previous tier"
+      변경후등급: "New tier"
+      산정기준자산: "Asset criteria for tier calculation"
+      산정기준거래: "Transaction criteria for tier calculation"
+      멤버십유형: "Membership type (TOPS Club)"
+
+  # ===========================================================================
+  # Transaction Detail Tables (Monthly)
+  # ===========================================================================
+  trs_m_cust_acct_txn_bank:
+    ontology_class: Transaction
+    subsidiary: bank
+    description: "Monthly customer account transactions - Bank"
+    description_ko: "월별 고객 계좌거래 - 은행"
+    grain: "One row per account per month (aggregated)"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      계좌번호: "Account number"
+      기준년월: "Reference year-month"
+      입금건수: "Deposit count"
+      입금금액: "Deposit amount"
+      출금건수: "Withdrawal count"
+      출금금액: "Withdrawal amount"
+      자동이체건수: "Auto-transfer count"
+      급여입금tf: "Salary deposit flag"
+
+  trs_m_cust_acct_txn_sec:
+    ontology_class: Transaction
+    subsidiary: sec
+    description: "Monthly customer account transactions - Securities"
+    description_ko: "월별 고객 계좌거래 - 증권"
+    grain: "One row per account per month (aggregated)"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      계좌번호: "Account number"
+      기준년월: "Reference year-month"
+      매수건수: "Buy count"
+      매수금액: "Buy amount"
+      매도건수: "Sell count"
+      매도금액: "Sell amount"
+      입금건수: "Cash-in count"
+      출금건수: "Cash-out count"
+
+  trs_m_cust_card_txn_card:
+    ontology_class: Transaction
+    subsidiary: card
+    description: "Monthly customer card transactions - Card"
+    description_ko: "월별 고객 카드거래 - 카드"
+    grain: "One row per card per month (aggregated)"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      카드번호: "Card number"
+      기준년월: "Reference year-month"
+      이용건수: "Usage count"
+      이용금액: "Usage amount"
+      국내이용금액: "Domestic spending"
+      해외이용금액: "Overseas spending"
+      온라인이용금액: "Online spending"
+      오프라인이용금액: "Offline spending"
+      할부이용금액: "Installment spending"
+      업종별이용: "Spending by industry category (JSON)"
+
+  trs_m_cust_contract_txn_life:
+    ontology_class: Transaction
+    subsidiary: life
+    description: "Monthly customer contract transactions - Life Insurance"
+    description_ko: "월별 고객 계약거래 - 보험"
+    grain: "One row per contract per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      계약번호: "Contract number"
+      기준년월: "Reference year-month"
+      납입보험료: "Paid premium"
+      보험금청구건수: "Claim count"
+      보험금지급액: "Claim payout"
+      중도인출금액: "Mid-term withdrawal"
+      계약상태변경: "Contract status change"
+
+  trs_m_merchant_delivery:
+    ontology_class: Merchant
+    subsidiary: card
+    description: "Monthly merchant delivery transaction data"
+    description_ko: "월별 가맹점 배달거래 데이터"
+    grain: "One row per merchant per month"
+    partition: 기준년월
+    columns:
+      가맹점번호: "Merchant ID"
+      기준년월: "Reference year-month"
+      배달매출건수: "Delivery sales count"
+      배달매출금액: "Delivery sales amount"
+      배달플랫폼: "Delivery platform"
+      일반매출건수: "Regular sales count"
+      일반매출금액: "Regular sales amount"
+      배달비중: "Delivery sales ratio"
+
+  trs_m_soleprop_asset_bank:
+    ontology_class: Asset
+    subsidiary: bank
+    description: "Monthly sole proprietor bank asset detail"
+    description_ko: "월별 개인사업자 은행자산 상세"
+    grain: "One row per sole proprietor per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      기준년월: "Reference year-month"
+      수신잔액: "Deposit balance"
+      여신잔액: "Loan balance"
+      매출입금액: "Sales deposit amount"
+      운영자금대출: "Operating fund loan"
+      시설자금대출: "Facility fund loan"
+
+  trs_m_soleprop_asset_card:
+    ontology_class: Asset
+    subsidiary: card
+    description: "Monthly sole proprietor card asset/sales detail"
+    description_ko: "월별 개인사업자 카드자산/매출 상세"
+    grain: "One row per sole proprietor per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      기준년월: "Reference year-month"
+      월매출금액: "Monthly sales amount"
+      월매출건수: "Monthly sales count"
+      카드대출잔액: "Card loan balance"
+      가맹점매출: "Merchant sales revenue"
+
+  trs_m_soleprop_merchant_sales_card:
+    ontology_class: Merchant
+    subsidiary: card
+    description: "Monthly sole proprietor merchant sales via card"
+    description_ko: "월별 개인사업자 가맹점 카드매출"
+    grain: "One row per merchant per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      개인사업자번호: "Business registration number"
+      가맹점번호: "Merchant ID"
+      기준년월: "Reference year-month"
+      매출금액: "Sales amount"
+      매출건수: "Sales count"
+      평균단가: "Average transaction value"
+      업종코드: "Industry code"
+      신규고객매출: "New customer sales"
+      재방문고객매출: "Returning customer sales"
+
+  # ===========================================================================
+  # Value Added Marketing (VAM)
+  # ===========================================================================
+  vam_cus_mkt_mas_m:
+    ontology_class: Customer
+    subsidiary: integrated
+    description: "Monthly customer marketing master - propensity/segment data"
+    description_ko: "월별 고객 마케팅마스터 - 성향/세그먼트"
+    grain: "One row per customer per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      마케팅동의tf: "Marketing consent flag"
+      선호채널: "Preferred channel"
+      관심상품유형: "Interest product type"
+      이탈위험등급: "Churn risk grade"
+      교차판매대상tf: "Cross-sell target flag"
+      고객세그먼트: "Customer marketing segment"
+      LTV등급: "Lifetime value grade"
+
+  vam_cus_prdt_mas_m:
+    ontology_class: Product
+    subsidiary: integrated
+    description: "Monthly customer-product affinity/recommendation master"
+    description_ko: "월별 고객-상품 친화도/추천 마스터"
+    grain: "One row per customer-product pair per month"
+    partition: 기준년월
+    columns:
+      그룹md번호: "Group MD ID"
+      기준년월: "Reference year-month"
+      상품코드: "Product code"
+      상품유형: "Product type"
+      추천점수: "Recommendation score"
+      보유여부: "Holding flag (Y/N)"
+      관심도점수: "Interest score"
+      최근조회일: "Last inquiry date"
+
+# =============================================================================
+# Join Patterns
+# =============================================================================
+join_patterns:
+  customer_cross_subsidiary:
+    description: "Join customer data across all 4 subsidiaries"
+    join_key: 그룹md번호
+    example: |
+      SELECT b.수신잔액, c.이용금액, l.유지계약건수, s.예탁자산
+      FROM cln_m_cust_base_bank b
+      JOIN cln_m_cust_base_card c ON b.그룹md번호 = c.그룹md번호 AND b.기준년월 = c.기준년월
+      JOIN cln_m_cust_base_life l ON b.그룹md번호 = l.그룹md번호 AND b.기준년월 = l.기준년월
+      JOIN cln_m_cust_base_sec s ON b.그룹md번호 = s.그룹md번호 AND b.기준년월 = s.기준년월
+      WHERE b.기준년월 = '202401'
+
+  customer_to_transactions:
+    description: "Join customer master to transaction details"
+    join_key: 그룹md번호
+    partition_align: 기준년월
+    example: |
+      SELECT d.고객명, d.탑스클럽등급, t.이용건수, t.이용금액
+      FROM m_cust_dim d
+      JOIN trs_m_cust_card_txn_card t ON d.그룹md번호 = t.그룹md번호
+      WHERE t.기준년월 = '202401'
+
+  sole_proprietor_full:
+    description: "Join sole proprietor data with merchant sales"
+    join_keys: [그룹md번호, 개인사업자번호]
+    example: |
+      SELECT sp.사업자명, sp.업종코드, ms.매출금액, ms.매출건수
+      FROM igd_m_soleprop_base sp
+      JOIN trs_m_soleprop_merchant_sales_card ms
+        ON sp.그룹md번호 = ms.그룹md번호
+        AND sp.개인사업자번호 = ms.개인사업자번호
+        AND sp.기준년월 = ms.기준년월
+      WHERE sp.기준년월 = '202401'
+
+  merchant_analysis:
+    description: "Join merchant with delivery and industry data"
+    join_key: 가맹점번호
+    example: |
+      SELECT f.프랜차이즈명, d.배달매출금액, d.일반매출금액, d.배달비중
+      FROM com_m_merchant_franchise f
+      JOIN trs_m_merchant_delivery d ON f.프랜차이즈코드 = d.가맹점번호
+      WHERE d.기준년월 = '202401'

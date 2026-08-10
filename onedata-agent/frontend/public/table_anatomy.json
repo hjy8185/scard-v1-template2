@@ -1,0 +1,102 @@
+{
+  "tables": [
+    {
+      "name": "CARD_MASTER",
+      "schema": "onedata",
+      "description": "카드 마스터 테이블 - 카드 상품 기본 정보",
+      "columns": [
+        { "name": "card_id", "type": "VARCHAR(20)", "description": "카드 고유 식별자", "isPrimaryKey": true },
+        { "name": "card_name", "type": "VARCHAR(100)", "description": "카드 상품명" },
+        { "name": "card_type", "type": "VARCHAR(10)", "description": "카드 유형 (신용/체크)" },
+        { "name": "annual_fee", "type": "INTEGER", "description": "연회비(원)" },
+        { "name": "issue_date", "type": "DATE", "description": "발급일" },
+        { "name": "status", "type": "VARCHAR(10)", "description": "상태 (활성/해지)" }
+      ],
+      "relationships": [
+        { "from": "CARD_MASTER", "to": "TRANSACTION", "type": "one-to-many", "joinColumn": "card_id" },
+        { "from": "CARD_MASTER", "to": "BENEFIT", "type": "one-to-many", "joinColumn": "card_id" },
+        { "from": "CARD_MASTER", "to": "CUSTOMER", "type": "many-to-one", "joinColumn": "cust_id" }
+      ]
+    },
+    {
+      "name": "TRANSACTION",
+      "schema": "onedata",
+      "description": "거래 내역 테이블 - 카드 결제 트랜잭션",
+      "columns": [
+        { "name": "txn_id", "type": "VARCHAR(30)", "description": "거래 고유 식별자", "isPrimaryKey": true },
+        { "name": "card_id", "type": "VARCHAR(20)", "description": "카드 식별자", "isForeignKey": true },
+        { "name": "cust_id", "type": "VARCHAR(20)", "description": "고객 식별자", "isForeignKey": true },
+        { "name": "mcht_id", "type": "VARCHAR(20)", "description": "가맹점 식별자", "isForeignKey": true },
+        { "name": "txn_amt", "type": "DECIMAL(15,2)", "description": "결제 금액" },
+        { "name": "txn_date", "type": "DATE", "description": "결제일" },
+        { "name": "txn_type", "type": "VARCHAR(10)", "description": "결제 유형 (일시불/할부)" },
+        { "name": "installment_months", "type": "INTEGER", "description": "할부 개월 수", "nullable": true },
+        { "name": "is_overseas", "type": "BOOLEAN", "description": "해외 결제 여부" }
+      ],
+      "relationships": [
+        { "from": "TRANSACTION", "to": "CARD_MASTER", "type": "many-to-one", "joinColumn": "card_id" },
+        { "from": "TRANSACTION", "to": "CUSTOMER", "type": "many-to-one", "joinColumn": "cust_id" },
+        { "from": "TRANSACTION", "to": "MERCHANT", "type": "many-to-one", "joinColumn": "mcht_id" }
+      ]
+    },
+    {
+      "name": "CUSTOMER",
+      "schema": "onedata",
+      "description": "고객 정보 테이블",
+      "columns": [
+        { "name": "cust_id", "type": "VARCHAR(20)", "description": "고객 고유 식별자", "isPrimaryKey": true },
+        { "name": "cust_name", "type": "VARCHAR(50)", "description": "고객명" },
+        { "name": "age", "type": "INTEGER", "description": "나이" },
+        { "name": "gender", "type": "VARCHAR(1)", "description": "성별 (M/F)" },
+        { "name": "join_date", "type": "DATE", "description": "가입일" },
+        { "name": "credit_grade", "type": "VARCHAR(5)", "description": "신용등급" },
+        { "name": "region", "type": "VARCHAR(20)", "description": "거주 지역" }
+      ],
+      "relationships": [
+        { "from": "CUSTOMER", "to": "CARD_MASTER", "type": "one-to-many", "joinColumn": "cust_id" },
+        { "from": "CUSTOMER", "to": "TRANSACTION", "type": "one-to-many", "joinColumn": "cust_id" }
+      ]
+    },
+    {
+      "name": "MERCHANT",
+      "schema": "onedata",
+      "description": "가맹점 정보 테이블",
+      "columns": [
+        { "name": "mcht_id", "type": "VARCHAR(20)", "description": "가맹점 식별자", "isPrimaryKey": true },
+        { "name": "mcht_name", "type": "VARCHAR(100)", "description": "가맹점명" },
+        { "name": "category", "type": "VARCHAR(30)", "description": "업종 분류" },
+        { "name": "region", "type": "VARCHAR(20)", "description": "소재지" },
+        { "name": "is_franchise", "type": "BOOLEAN", "description": "프랜차이즈 여부" }
+      ],
+      "relationships": [
+        { "from": "MERCHANT", "to": "TRANSACTION", "type": "one-to-many", "joinColumn": "mcht_id" }
+      ]
+    },
+    {
+      "name": "BENEFIT",
+      "schema": "onedata",
+      "description": "카드 혜택 테이블",
+      "columns": [
+        { "name": "benefit_id", "type": "VARCHAR(20)", "description": "혜택 식별자", "isPrimaryKey": true },
+        { "name": "card_id", "type": "VARCHAR(20)", "description": "카드 식별자", "isForeignKey": true },
+        { "name": "benefit_type", "type": "VARCHAR(20)", "description": "혜택 유형 (할인/적립/마일리지)" },
+        { "name": "benefit_rate", "type": "DECIMAL(5,2)", "description": "혜택률(%)" },
+        { "name": "category", "type": "VARCHAR(30)", "description": "적용 업종" },
+        { "name": "monthly_limit", "type": "INTEGER", "description": "월 한도(원)" }
+      ],
+      "relationships": [
+        { "from": "BENEFIT", "to": "CARD_MASTER", "type": "many-to-one", "joinColumn": "card_id" }
+      ]
+    }
+  ],
+  "ontology": {
+    "description": "신한금융그룹 Onedata 카드 도메인 온톨로지",
+    "entities": ["카드", "고객", "거래", "가맹점", "혜택", "결제"],
+    "relationships": [
+      { "from": "고객", "to": "카드", "type": "보유" },
+      { "from": "카드", "to": "거래", "type": "결제" },
+      { "from": "거래", "to": "가맹점", "type": "이용" },
+      { "from": "카드", "to": "혜택", "type": "제공" }
+    ]
+  }
+}

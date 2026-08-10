@@ -1,0 +1,329 @@
+{
+  "description": "Onedata 온톨로지 캐시 - Neptune 그래프에서 추출한 테이블 관계 정보",
+  "version": "1.0.0",
+  "generated_at": "2026-08-01T00:00:00Z",
+  "relationships": [
+    {
+      "source": "igd_d_cust_mas",
+      "target": "igd_m_cust_base",
+      "type": "aggregates_to",
+      "properties": {"join_key": "그룹md번호", "description": "일별 마스터 → 월별 기본"}
+    },
+    {
+      "source": "igd_d_cust_mas",
+      "target": "cln_d_cust_mas_bank",
+      "type": "has_subsidiary",
+      "properties": {"join_key": "그룹md번호", "description": "통합 마스터 → 은행 계열사"}
+    },
+    {
+      "source": "igd_d_cust_mas",
+      "target": "cln_d_cust_mas_card",
+      "type": "has_subsidiary",
+      "properties": {"join_key": "그룹md번호", "description": "통합 마스터 → 카드 계열사"}
+    },
+    {
+      "source": "igd_d_cust_mas",
+      "target": "cln_d_cust_mas_life",
+      "type": "has_subsidiary",
+      "properties": {"join_key": "그룹md번호", "description": "통합 마스터 → 생명보험 계열사"}
+    },
+    {
+      "source": "igd_d_cust_mas",
+      "target": "cln_d_cust_mas_sec",
+      "type": "has_subsidiary",
+      "properties": {"join_key": "그룹md번호", "description": "통합 마스터 → 증권 계열사"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_txn_bank",
+      "type": "has_transaction",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 은행 거래"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_txn_card",
+      "type": "has_transaction",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 카드 거래"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_txn_life",
+      "type": "has_transaction",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 보험 거래"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_txn_sec",
+      "type": "has_transaction",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 증권 거래"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_channel",
+      "type": "has_behavior",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 채널 이용"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_credit",
+      "type": "has_credit",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 신용 정보"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_segment",
+      "type": "has_segment",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 세그먼트"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_asset",
+      "type": "has_asset",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 자산 현황"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_income",
+      "type": "has_income",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 소득 정보"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_digital",
+      "type": "has_behavior",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 디지털 행동"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "rpt_m_cust_consumption_pattern",
+      "type": "has_pattern",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 소비 패턴"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "rpt_m_cust_loyalty",
+      "type": "has_metric",
+      "properties": {"join_key": "그룹md번호", "description": "고객 기본 → 충성도"}
+    },
+    {
+      "source": "igd_m_cust_txn_card",
+      "target": "trs_d_cust_card_txn",
+      "type": "detail_of",
+      "properties": {"join_key": "그룹md번호", "description": "카드 월별 집계 ← 일별 상세"}
+    },
+    {
+      "source": "igd_m_cust_txn_bank",
+      "target": "trs_d_cust_bank_txn",
+      "type": "detail_of",
+      "properties": {"join_key": "그룹md번호", "description": "은행 월별 집계 ← 일별 상세"}
+    },
+    {
+      "source": "igd_m_cust_txn_bank",
+      "target": "trs_m_cust_acct_txn_bank",
+      "type": "detail_of",
+      "properties": {"join_key": "그룹md번호", "description": "은행 고객 집계 ← 계좌별 상세"}
+    },
+    {
+      "source": "igd_m_cust_txn_sec",
+      "target": "trs_m_cust_acct_txn_sec",
+      "type": "detail_of",
+      "properties": {"join_key": "그룹md번호", "description": "증권 고객 집계 ← 계좌별 상세"}
+    },
+    {
+      "source": "igd_m_cust_txn_card",
+      "target": "trs_m_card_benefit_usage",
+      "type": "has_benefit",
+      "properties": {"join_key": "그룹md번호", "description": "카드 거래 → 혜택 이용"}
+    },
+    {
+      "source": "igd_m_cust_txn_card",
+      "target": "trs_m_card_installment",
+      "type": "has_installment",
+      "properties": {"join_key": "그룹md번호", "description": "카드 거래 → 할부 정보"}
+    },
+    {
+      "source": "igd_m_cust_txn_card",
+      "target": "trs_m_overseas_txn",
+      "type": "has_overseas",
+      "properties": {"join_key": "그룹md번호", "description": "카드 거래 → 해외 거래"}
+    },
+    {
+      "source": "card_prod",
+      "target": "pdt_m_card_prod_base_card",
+      "type": "has_monthly_stats",
+      "properties": {"join_key": "카드상품코드", "description": "카드 상품 → 월별 실적"}
+    },
+    {
+      "source": "card_prod",
+      "target": "pdt_m_card_benefit_spec",
+      "type": "has_benefit_spec",
+      "properties": {"join_key": "카드상품코드", "description": "카드 상품 → 혜택 스펙"}
+    },
+    {
+      "source": "com_m_merchant_franchise",
+      "target": "trs_m_merchant_delivery",
+      "type": "has_delivery",
+      "properties": {"join_key": "가맹점번호", "description": "가맹점 마스터 → 배달 매출"}
+    },
+    {
+      "source": "com_m_merchant_franchise",
+      "target": "trs_m_merchant_time",
+      "type": "has_time_pattern",
+      "properties": {"join_key": "가맹점번호", "description": "가맹점 → 시간대별 매출"}
+    },
+    {
+      "source": "com_m_merchant_franchise",
+      "target": "com_m_merchant_review",
+      "type": "has_review",
+      "properties": {"join_key": "가맹점번호", "description": "가맹점 → 리뷰 정보"}
+    },
+    {
+      "source": "com_m_merchant_franchise",
+      "target": "trs_m_merchant_region",
+      "type": "belongs_to_region",
+      "properties": {"join_key": "시군구코드", "description": "가맹점 → 지역별 집계"}
+    },
+    {
+      "source": "trs_m_merchant_category_sales",
+      "target": "rpt_d_merchant_industry_index",
+      "type": "has_index",
+      "properties": {"join_key": "업종코드", "description": "업종 매출 → 업종 지수"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "trs_m_soleprop_merchant_sales_card",
+      "type": "has_sales",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 카드 매출"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "trs_m_soleprop_bank_txn",
+      "type": "has_transaction",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 은행 거래"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "igd_m_soleprop_credit",
+      "type": "has_credit",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 신용 정보"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "trs_m_soleprop_expense",
+      "type": "has_expense",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 경비 지출"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "igd_m_soleprop_revenue",
+      "type": "has_revenue",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 매출 현황"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "igd_m_soleprop_employee",
+      "type": "has_employee",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 직원 정보"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "trs_m_soleprop_loan",
+      "type": "has_loan",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 대출 현황"}
+    },
+    {
+      "source": "igd_m_soleprop_base",
+      "target": "rpt_m_soleprop_benchmark",
+      "type": "has_benchmark",
+      "properties": {"join_key": "그룹md번호", "description": "사업자 기본 → 벤치마크"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "pdt_m_acct_holding_base_bank",
+      "type": "has_account",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 은행 계좌"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "pdt_m_acct_holding_base_sec",
+      "type": "has_account",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 증권 계좌"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "pdt_m_insurance_holding",
+      "type": "has_insurance",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 보험 계약"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "pdt_m_fund_holding",
+      "type": "has_fund",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 펀드 보유"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "pdt_m_loan_base",
+      "type": "has_loan",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 대출"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "trs_m_payment_method",
+      "type": "has_payment",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 결제수단"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_subscription",
+      "type": "has_subscription",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 구독 서비스"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_reward",
+      "type": "has_reward",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 포인트/리워드"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_event",
+      "type": "has_event",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 이벤트 참여"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_complaint",
+      "type": "has_complaint",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 민원/VOC"}
+    },
+    {
+      "source": "igd_m_cust_base",
+      "target": "igd_m_cust_life_event",
+      "type": "has_life_event",
+      "properties": {"join_key": "그룹md번호", "description": "고객 → 라이프 이벤트"}
+    }
+  ],
+  "domains": {
+    "customer": {
+      "description": "고객 정보 도메인 - 인적사항, 자산, 신용, 행동 패턴",
+      "core_tables": ["igd_d_cust_mas", "igd_m_cust_base"]
+    },
+    "transaction": {
+      "description": "거래 도메인 - 계열사별 거래 내역 및 결제 정보",
+      "core_tables": ["igd_m_cust_txn_card", "igd_m_cust_txn_bank"]
+    },
+    "product": {
+      "description": "상품 도메인 - 카드/예금/대출/보험/펀드 상품 정보",
+      "core_tables": ["card_prod", "pdt_m_deposit_product", "pdt_m_loan_product"]
+    },
+    "merchant": {
+      "description": "가맹점 도메인 - 가맹점 정보, 매출, 업종 동향",
+      "core_tables": ["com_m_merchant_franchise", "trs_m_merchant_category_sales"]
+    },
+    "soleprop": {
+      "description": "개인사업자 도메인 - 사업자 기본, 매출, 경비, 신용",
+      "core_tables": ["igd_m_soleprop_base", "igd_m_soleprop_revenue"]
+    }
+  }
+}

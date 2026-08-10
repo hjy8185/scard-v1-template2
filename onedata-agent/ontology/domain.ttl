@@ -1,0 +1,656 @@
+@prefix : <https://onedata.shinhan.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# =============================================================================
+# Onedata Shinhan Financial Group - Domain Ontology
+# =============================================================================
+# This ontology models the unified data domain for Shinhan Financial Group,
+# spanning 4 subsidiaries: Bank, Card, Life Insurance, and Securities.
+# The universal join key is 그룹md번호 (Group Master Data ID).
+# =============================================================================
+
+<https://onedata.shinhan.com/ontology> a owl:Ontology ;
+    dc:title "Onedata Shinhan Financial Group Domain Ontology"@en ;
+    dc:title "원데이터 신한금융그룹 도메인 온톨로지"@ko ;
+    dc:description "Unified data model for Shinhan Financial Group across Bank, Card, Life Insurance, and Securities subsidiaries."@en ;
+    dc:creator "Shinhan Financial Group AI Platform Team" ;
+    owl:versionInfo "1.0.0" .
+
+# =============================================================================
+# Classes
+# =============================================================================
+
+# --- Core Entity Classes ---
+
+:Customer a owl:Class ;
+    rdfs:label "Customer"@en ;
+    rdfs:label "고객"@ko ;
+    rdfs:comment "A retail customer of Shinhan Financial Group identified by 그룹md번호."@en ;
+    skos:definition "신한금융그룹의 개인 고객. 그룹md번호로 식별됨."@ko .
+
+:SoleProprietor a owl:Class ;
+    rdfs:label "Sole Proprietor"@en ;
+    rdfs:label "개인사업자"@ko ;
+    rdfs:comment "A sole proprietor (individual business owner) customer."@en ;
+    skos:definition "개인사업자 고객. 사업자등록번호로 식별됨."@ko .
+
+:Account a owl:Class ;
+    rdfs:label "Account"@en ;
+    rdfs:label "계좌"@ko ;
+    rdfs:comment "A financial account (deposit, savings, investment, etc.)."@en ;
+    skos:definition "금융 계좌 (예금, 적금, 투자 등)."@ko .
+
+:Card a owl:Class ;
+    rdfs:label "Card"@en ;
+    rdfs:label "카드"@ko ;
+    rdfs:comment "A credit or debit card product issued to a customer."@en ;
+    skos:definition "고객에게 발급된 신용카드 또는 체크카드."@ko .
+
+:Loan a owl:Class ;
+    rdfs:label "Loan"@en ;
+    rdfs:label "대출"@ko ;
+    rdfs:comment "A loan product (auto loan, mortgage, personal loan, etc.)."@en ;
+    skos:definition "대출 상품 (자동차론, 주택담보, 신용대출 등)."@ko .
+
+:Insurance a owl:Class ;
+    rdfs:label "Insurance"@en ;
+    rdfs:label "보험"@ko ;
+    rdfs:comment "An insurance contract/policy from Shinhan Life."@en ;
+    skos:definition "신한라이프의 보험 계약."@ko .
+
+:Securities a owl:Class ;
+    rdfs:label "Securities"@en ;
+    rdfs:label "증권"@ko ;
+    rdfs:comment "A securities/investment account from Shinhan Securities."@en ;
+    skos:definition "신한투자증권의 증권/투자 계좌."@ko .
+
+:Transaction a owl:Class ;
+    rdfs:label "Transaction"@en ;
+    rdfs:label "거래"@ko ;
+    rdfs:comment "A financial transaction across any subsidiary."@en ;
+    skos:definition "금융 거래 (은행, 카드, 보험, 증권)."@ko .
+
+:Merchant a owl:Class ;
+    rdfs:label "Merchant"@en ;
+    rdfs:label "가맹점"@ko ;
+    rdfs:comment "A merchant/franchise that accepts Shinhan card payments."@en ;
+    skos:definition "신한카드 결제를 수용하는 가맹점."@ko .
+
+:Product a owl:Class ;
+    rdfs:label "Product"@en ;
+    rdfs:label "상품"@ko ;
+    rdfs:comment "A financial product offered by any subsidiary."@en ;
+    skos:definition "금융 상품 (은행, 카드, 보험, 증권)."@ko .
+
+:Membership a owl:Class ;
+    rdfs:label "Membership"@en ;
+    rdfs:label "멤버십"@ko ;
+    rdfs:comment "A loyalty/membership program enrollment (e.g., TOPS Club, Fan Club)."@en ;
+    skos:definition "로열티/멤버십 프로그램 가입 (탑스클럽, 팬클럽 등)."@ko .
+
+# --- Supporting Classes ---
+
+:Subsidiary a owl:Class ;
+    rdfs:label "Subsidiary"@en ;
+    rdfs:label "계열사"@ko ;
+    rdfs:comment "A Shinhan Financial Group subsidiary (Bank, Card, Life, Securities)."@en .
+
+:PostalArea a owl:Class ;
+    rdfs:label "Postal Area"@en ;
+    rdfs:label "우편지역"@ko ;
+    rdfs:comment "A postal/geographic area used for customer address classification."@en .
+
+:IndustryCategory a owl:Class ;
+    rdfs:label "Industry Category"@en ;
+    rdfs:label "업종분류"@ko ;
+    rdfs:comment "A merchant industry category classification."@en .
+
+:RFMSegment a owl:Class ;
+    rdfs:label "RFM Segment"@en ;
+    rdfs:label "RFM 세그먼트"@ko ;
+    rdfs:comment "Recency/Frequency/Monetary segmentation for customer value."@en .
+
+:Asset a owl:Class ;
+    rdfs:label "Asset"@en ;
+    rdfs:label "자산"@ko ;
+    rdfs:comment "A customer's financial asset holding."@en .
+
+:CardProduct a owl:Class ;
+    rdfs:subClassOf :Product ;
+    rdfs:label "Card Product"@en ;
+    rdfs:label "카드상품"@ko ;
+    rdfs:comment "A specific card product definition (benefits, tier, fees)."@en .
+
+:LoanProduct a owl:Class ;
+    rdfs:subClassOf :Product ;
+    rdfs:label "Loan Product"@en ;
+    rdfs:label "대출상품"@ko ;
+    rdfs:comment "A specific loan product definition."@en .
+
+:InsuranceContract a owl:Class ;
+    rdfs:subClassOf :Insurance ;
+    rdfs:label "Insurance Contract"@en ;
+    rdfs:label "보험계약"@ko ;
+    rdfs:comment "A specific insurance contract/policy holding."@en .
+
+:DepositAccount a owl:Class ;
+    rdfs:subClassOf :Account ;
+    rdfs:label "Deposit Account"@en ;
+    rdfs:label "수신계좌"@ko ;
+    rdfs:comment "A deposit/savings bank account."@en .
+
+:SecuritiesHolding a owl:Class ;
+    rdfs:subClassOf :Securities ;
+    rdfs:label "Securities Holding"@en ;
+    rdfs:label "증권보유"@ko ;
+    rdfs:comment "A customer's securities/stock holding position."@en .
+
+# =============================================================================
+# Subsidiary Instances
+# =============================================================================
+
+:ShinhanBank a :Subsidiary ;
+    rdfs:label "Shinhan Bank"@en ;
+    rdfs:label "신한은행"@ko ;
+    :subsidiaryCode "bank" .
+
+:ShinhanCard a :Subsidiary ;
+    rdfs:label "Shinhan Card"@en ;
+    rdfs:label "신한카드"@ko ;
+    :subsidiaryCode "card" .
+
+:ShinhanLife a :Subsidiary ;
+    rdfs:label "Shinhan Life"@en ;
+    rdfs:label "신한라이프"@ko ;
+    :subsidiaryCode "life" .
+
+:ShinhanSecurities a :Subsidiary ;
+    rdfs:label "Shinhan Securities"@en ;
+    rdfs:label "신한투자증권"@ko ;
+    :subsidiaryCode "sec" .
+
+# =============================================================================
+# Object Properties (Relationships)
+# =============================================================================
+
+# --- Customer Relationships ---
+
+:hasAccount a owl:ObjectProperty ;
+    rdfs:label "has account"@en ;
+    rdfs:label "계좌보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Account ;
+    rdfs:comment "Links a customer to their financial account."@en .
+
+:hasCard a owl:ObjectProperty ;
+    rdfs:label "has card"@en ;
+    rdfs:label "카드보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Card ;
+    rdfs:comment "Links a customer to their card."@en .
+
+:hasLoan a owl:ObjectProperty ;
+    rdfs:label "has loan"@en ;
+    rdfs:label "대출보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Loan ;
+    rdfs:comment "Links a customer to their loan."@en .
+
+:hasInsurance a owl:ObjectProperty ;
+    rdfs:label "has insurance"@en ;
+    rdfs:label "보험보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Insurance ;
+    rdfs:comment "Links a customer to their insurance contract."@en .
+
+:hasSecurities a owl:ObjectProperty ;
+    rdfs:label "has securities"@en ;
+    rdfs:label "증권보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Securities ;
+    rdfs:comment "Links a customer to their securities account."@en .
+
+:hasMembership a owl:ObjectProperty ;
+    rdfs:label "has membership"@en ;
+    rdfs:label "멤버십보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Membership ;
+    rdfs:comment "Links a customer to their membership enrollment."@en .
+
+:hasTransaction a owl:ObjectProperty ;
+    rdfs:label "has transaction"@en ;
+    rdfs:label "거래보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Transaction ;
+    rdfs:comment "Links a customer to their transaction."@en .
+
+:hasAsset a owl:ObjectProperty ;
+    rdfs:label "has asset"@en ;
+    rdfs:label "자산보유"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Asset ;
+    rdfs:comment "Links a customer to their asset holding."@en .
+
+:belongsToSubsidiary a owl:ObjectProperty ;
+    rdfs:label "belongs to subsidiary"@en ;
+    rdfs:label "계열사소속"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :Subsidiary ;
+    rdfs:comment "Links a customer to their primary subsidiary."@en .
+
+:hasRFMSegment a owl:ObjectProperty ;
+    rdfs:label "has RFM segment"@en ;
+    rdfs:label "RFM세그먼트"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range :RFMSegment ;
+    rdfs:comment "Links a customer to their RFM segmentation."@en .
+
+# --- Sole Proprietor Relationships ---
+
+:soleProprietorHasAccount a owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasAccount ;
+    rdfs:label "sole proprietor has account"@en ;
+    rdfs:domain :SoleProprietor ;
+    rdfs:range :Account .
+
+:soleProprietorHasAsset a owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasAsset ;
+    rdfs:label "sole proprietor has asset"@en ;
+    rdfs:domain :SoleProprietor ;
+    rdfs:range :Asset .
+
+:operatesMerchant a owl:ObjectProperty ;
+    rdfs:label "operates merchant"@en ;
+    rdfs:label "가맹점운영"@ko ;
+    rdfs:domain :SoleProprietor ;
+    rdfs:range :Merchant ;
+    rdfs:comment "Links a sole proprietor to their merchant business."@en .
+
+# --- Transaction Relationships ---
+
+:transactionOnAccount a owl:ObjectProperty ;
+    rdfs:label "transaction on account"@en ;
+    rdfs:label "계좌거래"@ko ;
+    rdfs:domain :Transaction ;
+    rdfs:range :Account ;
+    rdfs:comment "Links a transaction to the account it occurred on."@en .
+
+:transactionAtMerchant a owl:ObjectProperty ;
+    rdfs:label "transaction at merchant"@en ;
+    rdfs:label "가맹점거래"@ko ;
+    rdfs:domain :Transaction ;
+    rdfs:range :Merchant ;
+    rdfs:comment "Links a card transaction to the merchant."@en .
+
+:transactionForProduct a owl:ObjectProperty ;
+    rdfs:label "transaction for product"@en ;
+    rdfs:label "상품거래"@ko ;
+    rdfs:domain :Transaction ;
+    rdfs:range :Product ;
+    rdfs:comment "Links a transaction to the product involved."@en .
+
+# --- Product Relationships ---
+
+:productOfferedBy a owl:ObjectProperty ;
+    rdfs:label "product offered by"@en ;
+    rdfs:label "상품제공계열사"@ko ;
+    rdfs:domain :Product ;
+    rdfs:range :Subsidiary ;
+    rdfs:comment "Links a product to the subsidiary that offers it."@en .
+
+:cardHasProduct a owl:ObjectProperty ;
+    rdfs:label "card has product"@en ;
+    rdfs:label "카드상품연결"@ko ;
+    rdfs:domain :Card ;
+    rdfs:range :CardProduct ;
+    rdfs:comment "Links a card to its product definition."@en .
+
+# --- Merchant Relationships ---
+
+:merchantInIndustry a owl:ObjectProperty ;
+    rdfs:label "merchant in industry"@en ;
+    rdfs:label "업종분류"@ko ;
+    rdfs:domain :Merchant ;
+    rdfs:range :IndustryCategory ;
+    rdfs:comment "Links a merchant to its industry category."@en .
+
+:merchantInPostalArea a owl:ObjectProperty ;
+    rdfs:label "merchant in postal area"@en ;
+    rdfs:label "지역소속"@ko ;
+    rdfs:domain :Merchant ;
+    rdfs:range :PostalArea ;
+    rdfs:comment "Links a merchant to its geographic area."@en .
+
+# --- Membership Relationships ---
+
+:membershipForProgram a owl:ObjectProperty ;
+    rdfs:label "membership for program"@en ;
+    rdfs:label "프로그램멤버십"@ko ;
+    rdfs:domain :Membership ;
+    rdfs:range owl:Thing ;
+    rdfs:comment "Links a membership to the program it belongs to."@en .
+
+# =============================================================================
+# Datatype Properties
+# =============================================================================
+
+# --- Universal Identifiers ---
+
+:groupMdId a owl:DatatypeProperty ;
+    rdfs:label "Group MD ID"@en ;
+    rdfs:label "그룹md번호"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Universal customer identifier across all subsidiaries (그룹md번호)."@en .
+
+:soleProprietorId a owl:DatatypeProperty ;
+    rdfs:label "Sole Proprietor ID"@en ;
+    rdfs:label "개인사업자번호"@ko ;
+    rdfs:domain :SoleProprietor ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Sole proprietor business registration number."@en .
+
+:subsidiaryCode a owl:DatatypeProperty ;
+    rdfs:label "Subsidiary Code"@en ;
+    rdfs:label "계열사코드"@ko ;
+    rdfs:range xsd:string .
+
+# --- Temporal Properties ---
+
+:referenceYearMonth a owl:DatatypeProperty ;
+    rdfs:label "Reference Year-Month"@en ;
+    rdfs:label "기준년월"@ko ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Reference period in YYYYMM format (기준년월)."@en .
+
+:referenceDate a owl:DatatypeProperty ;
+    rdfs:label "Reference Date"@en ;
+    rdfs:label "기준일자"@ko ;
+    rdfs:range xsd:date ;
+    rdfs:comment "Reference date for daily snapshots."@en .
+
+:transactionDate a owl:DatatypeProperty ;
+    rdfs:label "Transaction Date"@en ;
+    rdfs:label "거래일자"@ko ;
+    rdfs:domain :Transaction ;
+    rdfs:range xsd:date .
+
+:registrationDate a owl:DatatypeProperty ;
+    rdfs:label "Registration Date"@en ;
+    rdfs:label "등록일자"@ko ;
+    rdfs:range xsd:date .
+
+# --- Customer Properties ---
+
+:customerName a owl:DatatypeProperty ;
+    rdfs:label "Customer Name"@en ;
+    rdfs:label "고객명"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:birthDate a owl:DatatypeProperty ;
+    rdfs:label "Birth Date"@en ;
+    rdfs:label "생년월일"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:date .
+
+:gender a owl:DatatypeProperty ;
+    rdfs:label "Gender"@en ;
+    rdfs:label "성별"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:age a owl:DatatypeProperty ;
+    rdfs:label "Age"@en ;
+    rdfs:label "연령"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:integer .
+
+:ageGroup a owl:DatatypeProperty ;
+    rdfs:label "Age Group"@en ;
+    rdfs:label "연령대"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:customerGrade a owl:DatatypeProperty ;
+    rdfs:label "Customer Grade"@en ;
+    rdfs:label "고객등급"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string .
+
+:topsClubGrade a owl:DatatypeProperty ;
+    rdfs:label "TOPS Club Grade"@en ;
+    rdfs:label "탑스클럽등급"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:string ;
+    rdfs:comment "TOPS Club loyalty tier level."@en .
+
+:isActive a owl:DatatypeProperty ;
+    rdfs:label "Is Active"@en ;
+    rdfs:label "활동여부"@ko ;
+    rdfs:range xsd:boolean ;
+    rdfs:comment "True/False flag indicating active status (tf field)."@en .
+
+# --- Financial Amount Properties ---
+
+:totalAssets a owl:DatatypeProperty ;
+    rdfs:label "Total Assets"@en ;
+    rdfs:label "총자산"@ko ;
+    rdfs:domain :Customer ;
+    rdfs:range xsd:decimal .
+
+:depositBalance a owl:DatatypeProperty ;
+    rdfs:label "Deposit Balance"@en ;
+    rdfs:label "예금잔액"@ko ;
+    rdfs:domain :Account ;
+    rdfs:range xsd:decimal .
+
+:loanBalance a owl:DatatypeProperty ;
+    rdfs:label "Loan Balance"@en ;
+    rdfs:label "대출잔액"@ko ;
+    rdfs:domain :Loan ;
+    rdfs:range xsd:decimal .
+
+:transactionAmount a owl:DatatypeProperty ;
+    rdfs:label "Transaction Amount"@en ;
+    rdfs:label "거래금액"@ko ;
+    rdfs:domain :Transaction ;
+    rdfs:range xsd:decimal .
+
+:monthlySpending a owl:DatatypeProperty ;
+    rdfs:label "Monthly Spending"@en ;
+    rdfs:label "월이용금액"@ko ;
+    rdfs:domain :Card ;
+    rdfs:range xsd:decimal .
+
+:insurancePremium a owl:DatatypeProperty ;
+    rdfs:label "Insurance Premium"@en ;
+    rdfs:label "보험료"@ko ;
+    rdfs:domain :Insurance ;
+    rdfs:range xsd:decimal .
+
+:securitiesBalance a owl:DatatypeProperty ;
+    rdfs:label "Securities Balance"@en ;
+    rdfs:label "증권잔고"@ko ;
+    rdfs:domain :Securities ;
+    rdfs:range xsd:decimal .
+
+:salesAmount a owl:DatatypeProperty ;
+    rdfs:label "Sales Amount"@en ;
+    rdfs:label "매출금액"@ko ;
+    rdfs:domain :Merchant ;
+    rdfs:range xsd:decimal .
+
+# --- RFM Properties ---
+
+:rfmRecency a owl:DatatypeProperty ;
+    rdfs:label "RFM Recency"@en ;
+    rdfs:label "최근성"@ko ;
+    rdfs:domain :RFMSegment ;
+    rdfs:range xsd:integer .
+
+:rfmFrequency a owl:DatatypeProperty ;
+    rdfs:label "RFM Frequency"@en ;
+    rdfs:label "빈도"@ko ;
+    rdfs:domain :RFMSegment ;
+    rdfs:range xsd:integer .
+
+:rfmMonetary a owl:DatatypeProperty ;
+    rdfs:label "RFM Monetary"@en ;
+    rdfs:label "거래규모"@ko ;
+    rdfs:domain :RFMSegment ;
+    rdfs:range xsd:decimal .
+
+:rfmScore a owl:DatatypeProperty ;
+    rdfs:label "RFM Score"@en ;
+    rdfs:label "RFM점수"@ko ;
+    rdfs:domain :RFMSegment ;
+    rdfs:range xsd:decimal .
+
+# --- Merchant Properties ---
+
+:merchantName a owl:DatatypeProperty ;
+    rdfs:label "Merchant Name"@en ;
+    rdfs:label "가맹점명"@ko ;
+    rdfs:domain :Merchant ;
+    rdfs:range xsd:string .
+
+:franchiseCode a owl:DatatypeProperty ;
+    rdfs:label "Franchise Code"@en ;
+    rdfs:label "프랜차이즈코드"@ko ;
+    rdfs:domain :Merchant ;
+    rdfs:range xsd:string .
+
+:industryCode a owl:DatatypeProperty ;
+    rdfs:label "Industry Code"@en ;
+    rdfs:label "업종코드"@ko ;
+    rdfs:domain :Merchant ;
+    rdfs:range xsd:string .
+
+:deliveryFlag a owl:DatatypeProperty ;
+    rdfs:label "Delivery Flag"@en ;
+    rdfs:label "배달여부"@ko ;
+    rdfs:domain :Merchant ;
+    rdfs:range xsd:boolean .
+
+# --- Product Properties ---
+
+:productName a owl:DatatypeProperty ;
+    rdfs:label "Product Name"@en ;
+    rdfs:label "상품명"@ko ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:productCode a owl:DatatypeProperty ;
+    rdfs:label "Product Code"@en ;
+    rdfs:label "상품코드"@ko ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:string .
+
+:annualFee a owl:DatatypeProperty ;
+    rdfs:label "Annual Fee"@en ;
+    rdfs:label "연회비"@ko ;
+    rdfs:domain :CardProduct ;
+    rdfs:range xsd:decimal .
+
+:interestRate a owl:DatatypeProperty ;
+    rdfs:label "Interest Rate"@en ;
+    rdfs:label "금리"@ko ;
+    rdfs:domain :Product ;
+    rdfs:range xsd:decimal .
+
+# --- Membership Properties ---
+
+:membershipTier a owl:DatatypeProperty ;
+    rdfs:label "Membership Tier"@en ;
+    rdfs:label "멤버십등급"@ko ;
+    rdfs:domain :Membership ;
+    rdfs:range xsd:string .
+
+:membershipStartDate a owl:DatatypeProperty ;
+    rdfs:label "Membership Start Date"@en ;
+    rdfs:label "멤버십시작일"@ko ;
+    rdfs:domain :Membership ;
+    rdfs:range xsd:date .
+
+:membershipEndDate a owl:DatatypeProperty ;
+    rdfs:label "Membership End Date"@en ;
+    rdfs:label "멤버십종료일"@ko ;
+    rdfs:domain :Membership ;
+    rdfs:range xsd:date .
+
+# --- Account Properties ---
+
+:accountNumber a owl:DatatypeProperty ;
+    rdfs:label "Account Number"@en ;
+    rdfs:label "계좌번호"@ko ;
+    rdfs:domain :Account ;
+    rdfs:range xsd:string .
+
+:accountType a owl:DatatypeProperty ;
+    rdfs:label "Account Type"@en ;
+    rdfs:label "계좌유형"@ko ;
+    rdfs:domain :Account ;
+    rdfs:range xsd:string .
+
+:openDate a owl:DatatypeProperty ;
+    rdfs:label "Open Date"@en ;
+    rdfs:label "개설일"@ko ;
+    rdfs:domain :Account ;
+    rdfs:range xsd:date .
+
+:closeDate a owl:DatatypeProperty ;
+    rdfs:label "Close Date"@en ;
+    rdfs:label "해지일"@ko ;
+    rdfs:domain :Account ;
+    rdfs:range xsd:date .
+
+# --- Transaction Properties ---
+
+:transactionType a owl:DatatypeProperty ;
+    rdfs:label "Transaction Type"@en ;
+    rdfs:label "거래유형"@ko ;
+    rdfs:domain :Transaction ;
+    rdfs:range xsd:string .
+
+:transactionChannel a owl:DatatypeProperty ;
+    rdfs:label "Transaction Channel"@en ;
+    rdfs:label "거래채널"@ko ;
+    rdfs:domain :Transaction ;
+    rdfs:range xsd:string .
+
+# --- Address/Location Properties ---
+
+:postalCode a owl:DatatypeProperty ;
+    rdfs:label "Postal Code"@en ;
+    rdfs:label "우편번호"@ko ;
+    rdfs:range xsd:string .
+
+:region a owl:DatatypeProperty ;
+    rdfs:label "Region"@en ;
+    rdfs:label "지역"@ko ;
+    rdfs:range xsd:string .
+
+# =============================================================================
+# Property Constraints
+# =============================================================================
+
+:groupMdId a owl:FunctionalProperty .
+:soleProprietorId a owl:FunctionalProperty .
+:accountNumber a owl:FunctionalProperty .
+
+# =============================================================================
+# Class Hierarchy Assertions
+# =============================================================================
+
+:SoleProprietor rdfs:subClassOf :Customer .
+:CardProduct rdfs:subClassOf :Product .
+:LoanProduct rdfs:subClassOf :Product .
+:InsuranceContract rdfs:subClassOf :Insurance .
+:DepositAccount rdfs:subClassOf :Account .
+:SecuritiesHolding rdfs:subClassOf :Securities .
