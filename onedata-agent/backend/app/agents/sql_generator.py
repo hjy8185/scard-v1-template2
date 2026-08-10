@@ -25,11 +25,11 @@ _FEW_SHOT_EXAMPLES = [
         "question": "최근 3개월간 카드 이용 건수가 가장 많은 고객 상위 10명을 알려줘",
         "answer": {
             "sql": (
-                "SELECT 그룹md번호, COUNT(*) as 이용건수 "
+                'SELECT "그룹md번호", COUNT(*) as "이용건수" '
                 "FROM ai_ready_v2.igd_m_cust_txn_card "
-                "WHERE 기준년월 >= date_format(date_add('month', -3, current_date), '%Y%m') "
-                "GROUP BY 그룹md번호 "
-                "ORDER BY 이용건수 DESC "
+                'WHERE "기준년월" >= date_format(date_add(\'month\', -3, current_date), \'%Y%m\') '
+                'GROUP BY "그룹md번호" '
+                'ORDER BY "이용건수" DESC '
                 "LIMIT 10"
             ),
             "explanation": "카드 거래 테이블에서 최근 3개월 기준으로 고객별 이용 건수를 집계하여 상위 10명을 조회합니다.",
@@ -42,11 +42,11 @@ _FEW_SHOT_EXAMPLES = [
         "question": "30대 여성 고객의 온라인 쇼핑 평균 결제금액은?",
         "answer": {
             "sql": (
-                "SELECT AVG(t.이용금액) as 평균결제금액 "
+                'SELECT AVG(t."이용금액") as "평균결제금액" '
                 "FROM ai_ready_v2.igd_m_cust_txn_card t "
-                "JOIN ai_ready_v2.igd_m_cust_base c ON t.그룹md번호 = c.그룹md번호 "
-                "WHERE c.연령대 = '30대' AND c.성별 = 'F' "
-                "AND t.업종대분류 = '온라인쇼핑' "
+                'JOIN ai_ready_v2.igd_m_cust_base c ON t."그룹md번호" = c."그룹md번호" '
+                'WHERE c."연령대" = \'30대\' AND c."성별" = \'F\' '
+                'AND t."업종대분류" = \'온라인쇼핑\' '
                 "LIMIT 1000"
             ),
             "explanation": "고객 기본 테이블과 카드 거래 테이블을 조인하여 30대 여성의 온라인쇼핑 평균 결제금액을 계산합니다.",
@@ -59,11 +59,11 @@ _FEW_SHOT_EXAMPLES = [
         "question": "가맹점별 월간 매출 추이를 보여줘",
         "answer": {
             "sql": (
-                "SELECT 가맹점명, 기준년월, SUM(이용금액) as 월매출 "
+                'SELECT "가맹점명", "기준년월", SUM("이용금액") as "월매출" '
                 "FROM ai_ready_v2.trs_m_merchant_delivery "
-                "WHERE 기준년월 >= date_format(date_add('month', -6, current_date), '%Y%m') "
-                "GROUP BY 가맹점명, 기준년월 "
-                "ORDER BY 가맹점명, 기준년월 "
+                'WHERE "기준년월" >= date_format(date_add(\'month\', -6, current_date), \'%Y%m\') '
+                'GROUP BY "가맹점명", "기준년월" '
+                'ORDER BY "가맹점명", "기준년월" '
                 "LIMIT 1000"
             ),
             "explanation": "배달 가맹점 테이블에서 최근 6개월간 가맹점별 월간 매출을 집계합니다.",

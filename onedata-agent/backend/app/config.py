@@ -10,7 +10,9 @@ class Settings:
 
     def __init__(self) -> None:
         # AWS
-        self.AWS_REGION: str = os.environ.get("AWS_REGION", "ap-northeast-2")
+        self.AWS_REGION: str = os.environ.get("AWS_REGION", "ap-northeast-1")
+        self.ATHENA_REGION: str = os.environ.get("ATHENA_REGION", "ap-northeast-2")
+        self.BEDROCK_REGION: str = os.environ.get("BEDROCK_REGION", "ap-northeast-1")
 
         # Neptune Graph DB
         self.NEPTUNE_ENDPOINT: str = os.environ.get(
@@ -28,7 +30,7 @@ class Settings:
         # Athena
         self.ATHENA_DATABASE: str = os.environ.get("ATHENA_DATABASE", "ai_ready_v2")
         self.ATHENA_OUTPUT_BUCKET: str = os.environ.get(
-            "ATHENA_OUTPUT_BUCKET", "s3://onedata-athena-results/"
+            "ATHENA_OUTPUT_BUCKET", "s3://scard-aiready-poc-124962528632/athena-results/"
         )
         self.ATHENA_WORKGROUP: str = os.environ.get("ATHENA_WORKGROUP", "primary")
         self.ATHENA_TIMEOUT_SECONDS: int = int(
@@ -38,7 +40,7 @@ class Settings:
 
         # Bedrock
         self.BEDROCK_MODEL_ID: str = os.environ.get(
-            "BEDROCK_MODEL_ID", "anthropic.claude-sonnet-4-20250514"
+            "BEDROCK_MODEL_ID", "jp.anthropic.claude-haiku-4-5-20251001-v1:0"
         )
         self.BEDROCK_MAX_TOKENS: int = int(
             os.environ.get("BEDROCK_MAX_TOKENS", "4096")

@@ -1,955 +1,5856 @@
 {
-  "database": "ai_ready_v2",
-  "region": "ap-northeast-2",
-  "description": "신한금융그룹 원데이터(Onedata) AI Ready 통합 데이터 플랫폼",
-  "universal_join_key": "그룹md번호",
   "tables": [
     {
-      "table_name": "igd_d_cust_mas",
-      "description": "그룹 통합 고객 마스터 (일별 스냅샷). 그룹 전 계열사 고객의 기본 인적사항을 통합 관리하는 마스터 테이블.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호 (Universal ID)", "is_key": true},
-        {"name": "고객명", "dtype": "string", "description": "고객 이름"},
-        {"name": "성별", "dtype": "string", "description": "성별 코드 (M/F)"},
-        {"name": "연령", "dtype": "int", "description": "고객 나이"},
-        {"name": "연령대", "dtype": "string", "description": "연령대 구간 (20대, 30대 등)"},
-        {"name": "거주지역시도", "dtype": "string", "description": "거주 시/도"},
-        {"name": "거주지역시군구", "dtype": "string", "description": "거주 시/군/구"},
-        {"name": "직업코드", "dtype": "string", "description": "직업 분류 코드"},
-        {"name": "최초가입일", "dtype": "string", "description": "그룹 최초 가입 일자 (YYYYMMDD)"},
-        {"name": "기준일자", "dtype": "string", "description": "데이터 기준 일자 (YYYYMMDD)"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_base",
-      "description": "그룹 통합 고객 기본 (월별). 고객의 월별 상태 정보와 계열사별 보유 상품 요약.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
-        {"name": "성별", "dtype": "string", "description": "성별 (M/F)"},
-        {"name": "연령대", "dtype": "string", "description": "연령대"},
-        {"name": "거주지역", "dtype": "string", "description": "거주 지역"},
-        {"name": "은행보유여부", "dtype": "string", "description": "은행 상품 보유 여부 (Y/N)"},
-        {"name": "카드보유여부", "dtype": "string", "description": "카드 상품 보유 여부 (Y/N)"},
-        {"name": "생명보험보유여부", "dtype": "string", "description": "생명보험 보유 여부 (Y/N)"},
-        {"name": "증권보유여부", "dtype": "string", "description": "증권 보유 여부 (Y/N)"},
-        {"name": "총자산", "dtype": "bigint", "description": "그룹 총 자산 (원)"},
-        {"name": "총부채", "dtype": "bigint", "description": "그룹 총 부채 (원)"}
-      ]
-    },
-    {
       "table_name": "cln_d_cust_mas_bank",
-      "description": "은행 계열사 고객 마스터. 신한은행 고객의 상세 정보.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호"],
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "은행고객번호", "dtype": "string", "description": "은행 내부 고객번호"},
-        {"name": "고객등급", "dtype": "string", "description": "은행 고객 등급"},
-        {"name": "가입일자", "dtype": "string", "description": "은행 최초 가입일"},
-        {"name": "주거래여부", "dtype": "string", "description": "주거래 고객 여부"},
-        {"name": "급여이체여부", "dtype": "string", "description": "급여 이체 등록 여부"}
-      ]
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "직장우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "직장행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "직장법정gds동코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
       "table_name": "cln_d_cust_mas_card",
-      "description": "카드 계열사 고객 마스터. 신한카드 고객의 상세 정보.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호"],
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "카드고객번호", "dtype": "string", "description": "카드 내부 고객번호"},
-        {"name": "회원등급", "dtype": "string", "description": "카드 회원 등급"},
-        {"name": "카드가입일", "dtype": "string", "description": "카드 최초 가입일"},
-        {"name": "보유카드수", "dtype": "int", "description": "보유 카드 매수"},
-        {"name": "신용한도", "dtype": "bigint", "description": "총 신용 한도 (원)"},
-        {"name": "연회비등급", "dtype": "string", "description": "연회비 등급"}
-      ]
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택광역도시코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택시군구코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택구군코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
       "table_name": "cln_d_cust_mas_life",
-      "description": "생명보험 계열사 고객 마스터. 신한라이프 고객의 상세 정보.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호"],
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "보험고객번호", "dtype": "string", "description": "보험 내부 고객번호"},
-        {"name": "보유계약수", "dtype": "int", "description": "보유 보험 계약 수"},
-        {"name": "총보험료", "dtype": "bigint", "description": "월 납입 보험료 합계"},
-        {"name": "최초계약일", "dtype": "string", "description": "최초 보험 계약일"}
-      ]
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정동명",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
       "table_name": "cln_d_cust_mas_sec",
-      "description": "증권 계열사 고객 마스터. 신한투자증권 고객의 상세 정보.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호"],
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "증권고객번호", "dtype": "string", "description": "증권 내부 고객번호"},
-        {"name": "투자성향", "dtype": "string", "description": "투자 성향 (안정형/안정추구형/위험중립형/적극투자형/공격투자형)"},
-        {"name": "보유종목수", "dtype": "int", "description": "보유 종목 수"},
-        {"name": "총평가금액", "dtype": "bigint", "description": "보유 자산 총 평가 금액"}
-      ]
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계좌개설일자",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "igd_m_cust_txn_bank",
-      "description": "은행 고객 거래 월별 집계. 고객별 월간 은행 거래 요약 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
+      "table_name": "cln_d_soleprop_mas_bank",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
-        {"name": "입금건수", "dtype": "int", "description": "월간 입금 거래 건수"},
-        {"name": "입금금액", "dtype": "bigint", "description": "월간 입금 총액"},
-        {"name": "출금건수", "dtype": "int", "description": "월간 출금 거래 건수"},
-        {"name": "출금금액", "dtype": "bigint", "description": "월간 출금 총액"},
-        {"name": "이체건수", "dtype": "int", "description": "월간 이체 건수"},
-        {"name": "이체금액", "dtype": "bigint", "description": "월간 이체 금액"}
-      ]
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "사업장명",
+          "dtype": "string"
+        },
+        {
+          "name": "표준산업분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "사업장행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "노란우산공제회가입tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드가맹점tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자수",
+          "dtype": "smallint"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "igd_m_cust_txn_card",
-      "description": "카드 고객 거래 월별 집계. 고객별 월간 카드 이용 요약 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
+      "table_name": "cln_d_soleprop_mas_card",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
-        {"name": "이용건수", "dtype": "int", "description": "월간 카드 이용 건수"},
-        {"name": "이용금액", "dtype": "bigint", "description": "월간 카드 이용 금액"},
-        {"name": "업종대분류", "dtype": "string", "description": "업종 대분류명"},
-        {"name": "업종중분류", "dtype": "string", "description": "업종 중분류명"},
-        {"name": "온오프라인구분", "dtype": "string", "description": "온라인/오프라인 구분"},
-        {"name": "할부건수", "dtype": "int", "description": "할부 결제 건수"},
-        {"name": "해외이용건수", "dtype": "int", "description": "해외 이용 건수"},
-        {"name": "해외이용금액", "dtype": "bigint", "description": "해외 이용 금액"}
-      ]
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "실질가맹점건수",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "igd_m_cust_txn_life",
-      "description": "생명보험 고객 거래 월별 집계. 보험료 납입 및 보험금 지급 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
+      "table_name": "cln_m_cust_base_bank",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
-        {"name": "납입보험료", "dtype": "bigint", "description": "월 납입 보험료"},
-        {"name": "보험금지급액", "dtype": "bigint", "description": "월 보험금 지급 금액"},
-        {"name": "계약유지건수", "dtype": "int", "description": "유지 중인 계약 건수"},
-        {"name": "신규계약건수", "dtype": "int", "description": "신규 가입 건수"},
-        {"name": "해지건수", "dtype": "int", "description": "해지 건수"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "직장우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "직장행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "직장법정gds동코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "igd_m_cust_txn_sec",
-      "description": "증권 고객 거래 월별 집계. 주식/펀드 매매 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
+      "table_name": "cln_m_cust_base_card",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월 (YYYYMM)", "is_key": true},
-        {"name": "매수건수", "dtype": "int", "description": "월간 매수 거래 건수"},
-        {"name": "매수금액", "dtype": "bigint", "description": "월간 매수 금액"},
-        {"name": "매도건수", "dtype": "int", "description": "월간 매도 거래 건수"},
-        {"name": "매도금액", "dtype": "bigint", "description": "월간 매도 금액"},
-        {"name": "수익률", "dtype": "double", "description": "월간 수익률 (%)"},
-        {"name": "거래종목수", "dtype": "int", "description": "거래한 종목 수"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택광역도시코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택시군구코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택구군코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_m_cust_acct_txn_bank",
-      "description": "은행 계좌별 거래 월별 상세. 계좌 단위의 상세 거래 집계.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
+      "table_name": "cln_m_cust_base_life",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "계좌번호", "dtype": "string", "description": "은행 계좌번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "계좌유형", "dtype": "string", "description": "계좌 유형 (예금/적금/대출 등)"},
-        {"name": "잔액", "dtype": "bigint", "description": "월말 잔액"},
-        {"name": "입금건수", "dtype": "int", "description": "입금 건수"},
-        {"name": "입금금액", "dtype": "bigint", "description": "입금 금액"},
-        {"name": "출금건수", "dtype": "int", "description": "출금 건수"},
-        {"name": "출금금액", "dtype": "bigint", "description": "출금 금액"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정동명",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_m_cust_acct_txn_sec",
-      "description": "증권 계좌별 거래 월별 상세. 증권 계좌 단위 상세 거래 집계.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
+      "table_name": "cln_m_cust_base_sec",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "계좌번호", "dtype": "string", "description": "증권 계좌번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "평가금액", "dtype": "bigint", "description": "계좌 평가 금액"},
-        {"name": "매수금액", "dtype": "bigint", "description": "매수 금액"},
-        {"name": "매도금액", "dtype": "bigint", "description": "매도 금액"},
-        {"name": "실현손익", "dtype": "bigint", "description": "실현 손익"},
-        {"name": "투자유형", "dtype": "string", "description": "투자 유형 (주식/펀드/채권 등)"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계좌개설일자",
+          "dtype": "string"
+        },
+        {
+          "name": "활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_d_cust_card_txn",
-      "description": "카드 거래 일별 상세. 개별 카드 결제 건 단위 상세 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "거래일자", "거래일련번호"],
+      "table_name": "cln_m_soleprop_base_bank",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "거래일자", "dtype": "string", "description": "거래 일자 (YYYYMMDD)", "is_key": true},
-        {"name": "거래일련번호", "dtype": "string", "description": "거래 일련번호", "is_key": true},
-        {"name": "카드번호", "dtype": "string", "description": "카드 번호"},
-        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호"},
-        {"name": "가맹점명", "dtype": "string", "description": "가맹점 이름"},
-        {"name": "이용금액", "dtype": "bigint", "description": "이용 금액"},
-        {"name": "업종코드", "dtype": "string", "description": "업종 분류 코드"},
-        {"name": "업종명", "dtype": "string", "description": "업종 분류 이름"},
-        {"name": "할부개월", "dtype": "int", "description": "할부 개월 수 (0=일시불)"},
-        {"name": "온오프라인구분", "dtype": "string", "description": "온라인/오프라인"},
-        {"name": "해외여부", "dtype": "string", "description": "해외 결제 여부"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "사업장명",
+          "dtype": "string"
+        },
+        {
+          "name": "표준산업분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "사업장행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "노란우산공제회가입tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드가맹점tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자수",
+          "dtype": "smallint"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_d_cust_bank_txn",
-      "description": "은행 거래 일별 상세. 개별 은행 입출금 건 단위 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "거래일자", "거래일련번호"],
+      "table_name": "cln_m_soleprop_base_card",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "거래일자", "dtype": "string", "description": "거래 일자 (YYYYMMDD)", "is_key": true},
-        {"name": "거래일련번호", "dtype": "string", "description": "거래 일련번호", "is_key": true},
-        {"name": "계좌번호", "dtype": "string", "description": "계좌번호"},
-        {"name": "거래구분", "dtype": "string", "description": "입금/출금/이체 구분"},
-        {"name": "거래금액", "dtype": "bigint", "description": "거래 금액"},
-        {"name": "거래후잔액", "dtype": "bigint", "description": "거래 후 잔액"},
-        {"name": "적요", "dtype": "string", "description": "거래 적요/메모"},
-        {"name": "거래채널", "dtype": "string", "description": "거래 채널 (모바일/ATM/창구 등)"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_channel",
-      "description": "고객 채널 이용 월별 집계. 모바일/인터넷/ATM 등 채널별 이용 통계.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "모바일로그인수", "dtype": "int", "description": "모바일 앱 로그인 수"},
-        {"name": "인터넷로그인수", "dtype": "int", "description": "인터넷뱅킹 로그인 수"},
-        {"name": "ATM이용건수", "dtype": "int", "description": "ATM 이용 건수"},
-        {"name": "창구방문건수", "dtype": "int", "description": "영업점 창구 방문 건수"},
-        {"name": "주이용채널", "dtype": "string", "description": "주 이용 채널"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_credit",
-      "description": "고객 신용 정보 월별. 신용점수, 연체 이력 등 신용 관련 정보.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "신용점수", "dtype": "int", "description": "KCB/NICE 신용점수"},
-        {"name": "신용등급", "dtype": "string", "description": "신용등급 (1~10등급)"},
-        {"name": "연체여부", "dtype": "string", "description": "현재 연체 여부 (Y/N)"},
-        {"name": "연체금액", "dtype": "bigint", "description": "연체 금액"},
-        {"name": "총대출잔액", "dtype": "bigint", "description": "총 대출 잔액"},
-        {"name": "DSR", "dtype": "double", "description": "총부채원리금상환비율 (%)"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_segment",
-      "description": "고객 세그먼트 월별. 고객 분류 및 마케팅 세그먼트 정보.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "라이프스테이지", "dtype": "string", "description": "라이프 스테이지 (사회초년생/신혼/자녀양육/은퇴준비 등)"},
-        {"name": "소비성향", "dtype": "string", "description": "소비 성향 분류"},
-        {"name": "디지털성숙도", "dtype": "string", "description": "디지털 활용 수준"},
-        {"name": "VIP여부", "dtype": "string", "description": "VIP 고객 여부"},
-        {"name": "이탈위험도", "dtype": "string", "description": "이탈 위험 등급 (상/중/하)"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_asset",
-      "description": "고객 자산 월별 집계. 계열사별 자산/부채 통합 현황.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "은행예수금", "dtype": "bigint", "description": "은행 예수금 잔액"},
-        {"name": "은행대출금", "dtype": "bigint", "description": "은행 대출 잔액"},
-        {"name": "증권평가액", "dtype": "bigint", "description": "증권 계좌 평가 금액"},
-        {"name": "보험해약환급금", "dtype": "bigint", "description": "보험 해약 환급금"},
-        {"name": "총자산", "dtype": "bigint", "description": "그룹 총 자산"},
-        {"name": "총부채", "dtype": "bigint", "description": "그룹 총 부채"},
-        {"name": "순자산", "dtype": "bigint", "description": "순자산 (자산-부채)"}
-      ]
-    },
-    {
-      "table_name": "card_prod",
-      "description": "카드 상품 마스터. 전체 카드 상품(신용/체크)의 기본 정보.",
-      "domain": "product",
-      "key_columns": ["카드상품코드"],
-      "columns": [
-        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
-        {"name": "카드상품명", "dtype": "string", "description": "카드 상품 이름"},
-        {"name": "카드유형", "dtype": "string", "description": "신용카드/체크카드 구분"},
-        {"name": "연회비", "dtype": "int", "description": "연회비 금액"},
-        {"name": "주요혜택", "dtype": "string", "description": "주요 혜택 설명"},
-        {"name": "출시일자", "dtype": "string", "description": "상품 출시 일자"},
-        {"name": "판매상태", "dtype": "string", "description": "판매중/단종 상태"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_card_prod_base_card",
-      "description": "카드 상품 월별 기본 정보. 카드 상품의 월별 실적 및 보유 현황.",
-      "domain": "product",
-      "key_columns": ["카드상품코드", "기준년월"],
-      "columns": [
-        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "보유회원수", "dtype": "int", "description": "해당 카드 보유 회원 수"},
-        {"name": "신규발급수", "dtype": "int", "description": "월간 신규 발급 건수"},
-        {"name": "해지건수", "dtype": "int", "description": "월간 해지 건수"},
-        {"name": "이용회원수", "dtype": "int", "description": "월간 이용 회원 수"},
-        {"name": "총이용금액", "dtype": "bigint", "description": "월간 총 이용 금액"},
-        {"name": "건당평균이용금액", "dtype": "bigint", "description": "건당 평균 이용 금액"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_acct_holding_base_bank",
-      "description": "은행 계좌 보유 월별 현황. 계좌별 잔액 및 거래 현황.",
-      "domain": "product",
-      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "계좌번호", "dtype": "string", "description": "은행 계좌번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "상품유형", "dtype": "string", "description": "상품 유형 (수시입출금/정기예금/적금/대출)"},
-        {"name": "잔액", "dtype": "bigint", "description": "월말 잔액"},
-        {"name": "금리", "dtype": "double", "description": "적용 금리 (%)"},
-        {"name": "개설일자", "dtype": "string", "description": "계좌 개설일"},
-        {"name": "만기일자", "dtype": "string", "description": "만기 일자"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_acct_holding_base_sec",
-      "description": "증권 계좌 보유 월별 현황. 증권 계좌별 보유 종목 및 평가 현황.",
-      "domain": "product",
-      "key_columns": ["그룹md번호", "계좌번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "계좌번호", "dtype": "string", "description": "증권 계좌번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "보유종목수", "dtype": "int", "description": "보유 종목 수"},
-        {"name": "매입금액", "dtype": "bigint", "description": "총 매입 금액"},
-        {"name": "평가금액", "dtype": "bigint", "description": "총 평가 금액"},
-        {"name": "평가손익", "dtype": "bigint", "description": "평가 손익"},
-        {"name": "수익률", "dtype": "double", "description": "수익률 (%)"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_insurance_holding",
-      "description": "보험 계약 보유 현황. 고객별 보험 계약 상세.",
-      "domain": "product",
-      "key_columns": ["그룹md번호", "계약번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "계약번호", "dtype": "string", "description": "보험 계약 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "상품유형", "dtype": "string", "description": "보험 유형 (종신/정기/연금/건강 등)"},
-        {"name": "보험료", "dtype": "bigint", "description": "월 보험료"},
-        {"name": "보험기간", "dtype": "string", "description": "보험 기간"},
-        {"name": "계약상태", "dtype": "string", "description": "계약 상태 (유지/완납/해지)"},
-        {"name": "해약환급금", "dtype": "bigint", "description": "해약 환급금"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_fund_holding",
-      "description": "펀드 보유 현황. 고객별 펀드 보유 상세.",
-      "domain": "product",
-      "key_columns": ["그룹md번호", "펀드코드", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "펀드코드", "dtype": "string", "description": "펀드 코드", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "펀드명", "dtype": "string", "description": "펀드 이름"},
-        {"name": "펀드유형", "dtype": "string", "description": "펀드 유형 (주식형/채권형/혼합형/MMF)"},
-        {"name": "투자금액", "dtype": "bigint", "description": "투자 원금"},
-        {"name": "평가금액", "dtype": "bigint", "description": "현재 평가 금액"},
-        {"name": "수익률", "dtype": "double", "description": "수익률 (%)"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_loan_base",
-      "description": "대출 상품 보유 현황. 고객별 대출 상세 정보.",
-      "domain": "product",
-      "key_columns": ["그룹md번호", "대출번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "대출번호", "dtype": "string", "description": "대출 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "대출유형", "dtype": "string", "description": "대출 유형 (주택담보/신용/전세 등)"},
-        {"name": "대출금액", "dtype": "bigint", "description": "대출 원금"},
-        {"name": "대출잔액", "dtype": "bigint", "description": "대출 잔액"},
-        {"name": "금리", "dtype": "double", "description": "적용 금리 (%)"},
-        {"name": "상환방식", "dtype": "string", "description": "상환 방식 (원리금균등/원금균등/만기일시)"},
-        {"name": "만기일자", "dtype": "string", "description": "대출 만기일"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "실질가맹점건수",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
     },
     {
       "table_name": "com_m_merchant_franchise",
-      "description": "가맹점 프랜차이즈 정보. 프랜차이즈 브랜드별 가맹점 마스터.",
-      "domain": "merchant",
-      "key_columns": ["가맹점번호"],
       "columns": [
-        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
-        {"name": "가맹점명", "dtype": "string", "description": "가맹점 이름"},
-        {"name": "프랜차이즈명", "dtype": "string", "description": "프랜차이즈 브랜드명"},
-        {"name": "업종대분류", "dtype": "string", "description": "업종 대분류"},
-        {"name": "업종중분류", "dtype": "string", "description": "업종 중분류"},
-        {"name": "업종소분류", "dtype": "string", "description": "업종 소분류"},
-        {"name": "시도", "dtype": "string", "description": "소재지 시/도"},
-        {"name": "시군구", "dtype": "string", "description": "소재지 시/군/구"},
-        {"name": "동", "dtype": "string", "description": "소재지 동/읍/면"},
-        {"name": "사업자등록번호", "dtype": "string", "description": "사업자등록번호"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점번호",
+          "dtype": "string"
+        },
+        {
+          "name": "초개인화가맹점브랜드코드",
+          "dtype": "string"
+        },
+        {
+          "name": "초개인화가맹점브랜드코드명",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_m_merchant_delivery",
-      "description": "배달 가맹점 월별 거래. 배달앱 연동 가맹점의 월별 매출 정보.",
-      "domain": "merchant",
-      "key_columns": ["가맹점번호", "기준년월"],
+      "table_name": "com_manual_base",
       "columns": [
-        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "가맹점명", "dtype": "string", "description": "가맹점 이름"},
-        {"name": "배달플랫폼", "dtype": "string", "description": "배달 플랫폼명"},
-        {"name": "주문건수", "dtype": "int", "description": "월간 주문 건수"},
-        {"name": "이용금액", "dtype": "bigint", "description": "월간 결제 금액"},
-        {"name": "평균주문금액", "dtype": "bigint", "description": "건당 평균 주문 금액"},
-        {"name": "업종분류", "dtype": "string", "description": "업종 분류"}
-      ]
+        {
+          "name": "기준항목key값",
+          "dtype": "string"
+        },
+        {
+          "name": "매핑항목값",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "컬럼영문명",
+          "dtype": "string"
+        },
+        {
+          "name": "컬럼한글명",
+          "dtype": "string"
+        },
+        {
+          "name": "상세코드특성값1",
+          "dtype": "string"
+        },
+        {
+          "name": "상세코드특성값2",
+          "dtype": "string"
+        },
+        {
+          "name": "상세코드특성값3",
+          "dtype": "string"
+        },
+        {
+          "name": "상세코드특성값4",
+          "dtype": "string"
+        },
+        {
+          "name": "상세코드특성값5",
+          "dtype": "string"
+        },
+        {
+          "name": "항목내용문자값1",
+          "dtype": "string"
+        },
+        {
+          "name": "항목내용문자값2",
+          "dtype": "string"
+        },
+        {
+          "name": "항목내용문자값3",
+          "dtype": "string"
+        },
+        {
+          "name": "항목내용문자값4",
+          "dtype": "string"
+        },
+        {
+          "name": "항목내용문자값5",
+          "dtype": "string"
+        },
+        {
+          "name": "항목미사용tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "비고내용",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "rpt_d_merchant_industry_index",
-      "description": "가맹점 업종 지수 일별. 업종별 매출 지수 및 시장 동향.",
-      "domain": "merchant",
-      "key_columns": ["업종코드", "기준일자"],
+      "table_name": "com_postal_base",
       "columns": [
-        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
-        {"name": "기준일자", "dtype": "string", "description": "기준 일자 (YYYYMMDD)", "is_key": true},
-        {"name": "업종명", "dtype": "string", "description": "업종 이름"},
-        {"name": "매출지수", "dtype": "double", "description": "매출 지수 (100 기준)"},
-        {"name": "건수지수", "dtype": "double", "description": "건수 지수 (100 기준)"},
-        {"name": "전년동기대비증감률", "dtype": "double", "description": "전년 동기 대비 증감률 (%)"},
-        {"name": "전월대비증감률", "dtype": "double", "description": "전월 대비 증감률 (%)"}
-      ]
+        {
+          "name": "우편앞번호",
+          "dtype": "string"
+        },
+        {
+          "name": "우편뒷번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "시군구명",
+          "dtype": "string"
+        },
+        {
+          "name": "구군명",
+          "dtype": "string"
+        },
+        {
+          "name": "읍면동명",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_m_merchant_region",
-      "description": "지역별 가맹점 월별 매출. 시/군/구 단위 가맹점 매출 집계.",
-      "domain": "merchant",
-      "key_columns": ["시군구코드", "업종코드", "기준년월"],
+      "table_name": "gba_acct_daily",
       "columns": [
-        {"name": "시군구코드", "dtype": "string", "description": "행정구역 코드", "is_key": true},
-        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "시도명", "dtype": "string", "description": "시/도"},
-        {"name": "시군구명", "dtype": "string", "description": "시/군/구"},
-        {"name": "업종명", "dtype": "string", "description": "업종 이름"},
-        {"name": "가맹점수", "dtype": "int", "description": "해당 지역 가맹점 수"},
-        {"name": "총매출금액", "dtype": "bigint", "description": "총 매출 금액"},
-        {"name": "총건수", "dtype": "int", "description": "총 거래 건수"},
-        {"name": "객단가", "dtype": "bigint", "description": "건당 평균 금액"}
-      ]
+        {
+          "name": "처리일자",
+          "dtype": "string"
+        },
+        {
+          "name": "계좌번호",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "계좌수수료구분코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_m_merchant_time",
-      "description": "시간대별 가맹점 매출. 시간대 및 요일별 매출 패턴.",
-      "domain": "merchant",
-      "key_columns": ["가맹점번호", "기준년월", "시간대"],
+      "table_name": "igd_d_cust_mas",
       "columns": [
-        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "시간대", "dtype": "string", "description": "시간대 (00~23)", "is_key": true},
-        {"name": "요일", "dtype": "string", "description": "요일 (월~일)"},
-        {"name": "매출금액", "dtype": "bigint", "description": "매출 금액"},
-        {"name": "거래건수", "dtype": "int", "description": "거래 건수"},
-        {"name": "고객수", "dtype": "int", "description": "방문 고객 수"}
-      ]
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계좌개설일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계약일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "거래신한그룹사수",
+          "dtype": "int"
+        },
+        {
+          "name": "신한은행탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "개인사업자tf",
+          "dtype": "smallint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_d_soleprop_mas",
+      "columns": [
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "총사업장수",
+          "dtype": "int"
+        },
+        {
+          "name": "가맹점건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "노란우산공제회가입tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "사업자카드보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드가맹점tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프고객tf",
+          "dtype": "smallint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_cust_base",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계좌개설일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계약일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "거래신한그룹사수",
+          "dtype": "int"
+        },
+        {
+          "name": "신한은행탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "개인사업자tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프활동tf",
+          "dtype": "smallint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_cust_holding_base",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "입출금상품보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "예적금상품보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "대출상품보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "투자상품보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "지분증권보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "채무증권보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "수익증권보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "투자계약증권보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "파생결합증권보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "증권예탁증권보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "금전자산보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "연금상품보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "보험상품보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드상품보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행유동성상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행예금상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행적금상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행펀드상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행퇴직연금상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행주택담보대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행전세자금대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행신용대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행금융상품담보대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행기업대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행기타대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행개인사업자대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행기타부동산대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행자동차대출상품수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "보유보험수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "보유카드수",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_cust_txn",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "총자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "현금자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "투자자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "보험자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총부채금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신용대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "부동산대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "금융상품담보대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "오토금융대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총소득금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총지출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신용신판이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "체크카드이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "납입보험료금액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_cust_txn_bank",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "총소득금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "급여이체금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금이체금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "유동성잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "예금잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "적금잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "펀드잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "퇴직연금잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금신탁잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신용대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "주택담보대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "전세자금대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타부동산대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "금융상품담보대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "자동차대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기업대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "개인사업자대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "유동성신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "예금신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "적금신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "펀드신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "퇴직연금신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금신탁신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신용대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "주택담보대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "전세자금대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타부동산담보대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "금융상품담보대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "자동차대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기업대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "개인사업자대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "유동성해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "예금해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "적금해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "펀드해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "퇴직연금해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금신탁해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신용대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "주택담보대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "전세자금대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타부동산담보대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "금융상품담보대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "자동차대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기업대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "개인사업자대출해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타대출해지건수",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_cust_txn_card",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "카드론대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "대환론대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "오토금융대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부금융신차대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "할부금융중고차대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "오토리스대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "장기렌터카대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신용신판이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "체크카드이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "일시불이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "공과금이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "통신비이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "보험료이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "교통이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "외식이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "자동차주유이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "편의점이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "미용건강이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "백화점이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "제과이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "병원약국이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "카드론이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "대환론이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신용신판이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "체크카드이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "일시불이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "리볼빙신판이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "리볼빙현금서비스이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "현금서비스이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부금융신차대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "할부금융신차최종입금금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부금융중고차대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "할부금융중고차최종입금금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "오토리스대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "오토리스최종입금금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "장기렌터카대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "장기렌터카최종입금금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부금융신차대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부금융중고차대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "오토리스대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "장기렌터카대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "카드론대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "대환론대출신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신용카드신규발급이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "체크카드신규발급이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신규일시불이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신규할부이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신규현금서비스이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부금융신차대출취소건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부금융중고차대출취소건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "오토리스대출취소건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "장기렌터카대출취소건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "카드론대출취소건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "대환론대출취소건수",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_cust_txn_life",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "보험자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금보험잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "건강보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "건강보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "건강보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "건강보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "건강보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "건강보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "건강보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "건강보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "건강보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "건강보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "건강보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "상해보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "상해보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "상해보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "상해보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "상해보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "상해보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "상해보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "상해보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "상해보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "상해보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "상해보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "양로보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "양로보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "양로보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "양로보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "양로보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "양로보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "양로보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "양로보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "양로보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "양로보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "양로보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "어린이보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "어린이보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "어린이보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "어린이보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "어린이보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "어린이보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "어린이보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "어린이보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "어린이보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "어린이보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "어린이보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금저축교육보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금저축교육보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금저축교육보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금저축교육보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금저축교육보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금저축교육보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금저축교육보험연금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금저축교육보험연금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금저축교육보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금저축교육보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금저축교육보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "연금저축교육보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금저축교육보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종신보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종신보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종신보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종신보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종신보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종신보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종신보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종신보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종신보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종신보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종신보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종합보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종합보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종합보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종합보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종합보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종합보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종합보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종합보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종합보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "종합보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "종합보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "변액보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "변액보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "변액보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "변액보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "변액보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "변액보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "변액보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "변액보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "변액보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "변액보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "변액보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "제휴보험유지계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "제휴보험유지계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "제휴보험실효계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "제휴보험실효계약cmip금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "제휴보험보험금청구건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "제휴보험보험금청구금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "제휴보험기타제지급건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "제휴보험기타제지급금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "제휴보험계약대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "제휴보험계약대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "제휴보험계약대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신용대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신용대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신용대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "부동산담보대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "부동산담보대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "부동산담보대출잔액",
+          "dtype": "decimal(22,0)"
+        },
+        {
+          "name": "기타담보대출건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "기타담보대출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타담보대출잔액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_cust_txn_sec",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "총자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "지분증권자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "채무증권자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "수익증권자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "투자계약증권자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "파생결합증권자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "증권예탁증권자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "입출금거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "입출고거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "입금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "입고건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "출금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "출고건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "입출금거래금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "입출고거래금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "입금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "입고금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "출금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "출고금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "증권거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "3개월증권거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "6개월증권거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "12개월증권거래건수",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_shg_rfm_base_ledger",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "신한그룹rfm대상tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행기준rfm대상tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드기준rfm대상tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권기준rfm대상tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프기준rfm대상tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프활동tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행rfm최근등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행rfm빈도등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행rfm금전등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드rfm최근등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드rfm빈도등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드rfm금전등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권rfm최근등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권rfm빈도등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권rfm금전등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프rfm최근등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프rfm빈도등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프rfm금전등급값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행최근거래년월",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행수신평균잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행6개월수신평균잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행여신평균잔액",
+          "dtype": "decimal(22,0)"
+        },
+        {
+          "name": "신한은행6개월여신평균잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행6개월한도평균금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행6개월총거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드6개월미만거래tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드6개월평균승인금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드6개월평균승인건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드6개월rfm이용패턴값",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드6개월연속rfm이용패턴코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드rfm6개월평균거래건수구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드rfm사용금액구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권12개월평균월말자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한투자증권12개월거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한투자증권12개월순수익금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한투자증권최종거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권최종거래경과일수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한라이프보험계약건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한라이프월합계보험금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한라이프계약개월수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한라이프계약건수구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프합계보험료구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프계약개월수구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "총자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "현금자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행유동성잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행예금잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행적금잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "투자자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행펀드잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한투자증권총자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "보험자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "연금자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행퇴직연금잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행연금신탁잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한라이프연금보험잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총부채금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신용대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행신용대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드카드론대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한카드대환론대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한라이프신용대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "부동산대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행주택담보대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행전세자금대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행기타부동산대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한라이프부동산담보대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "금융상품담보대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행금융상품담보대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한라이프금융상품담보대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "오토금융대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드할부금융신차대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한카드할부금융중고차대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한카드오토리스대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한카드장기렌터카대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행자동차대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "기타대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행기업대출잔액",
+          "dtype": "decimal(22,0)"
+        },
+        {
+          "name": "신한은행개인사업자대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행기타대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한라이프기타담보대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총소득금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한은행급여이체금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한은행연금이체금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총지출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신한카드신용신판이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드체크카드이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드공과금이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드통신비용이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드보험료이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드교통이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드외식이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드자동차주유이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드편의점이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드미용건강이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드백화점이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드제과이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드병원약국이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "납입보험료금액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "igd_m_soleprop_asset",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "개인사업자대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "사업자카드신판이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드신용신판이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드체크카드이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드일시불이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드할부이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드리볼빙신판이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드리볼빙현금서비스이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드현금서비스이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드신판이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드신용신판이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드체크카드이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드일시불이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드할부이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드리볼빙신판이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드리볼빙현금서비스이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "사업자카드현금서비스이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "타카드사매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "유동성입금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "유동성출금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총부채금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총지출금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "총소득금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "보유카드수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신용카드이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "체크카드이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "투자자산금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "보유보험수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "납입보험료금액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
     },
     {
       "table_name": "igd_m_soleprop_base",
-      "description": "개인사업자 기본 월별. 개인사업자 고객의 사업 기본 정보.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "사업자등록번호", "dtype": "string", "description": "사업자등록번호"},
-        {"name": "업종", "dtype": "string", "description": "사업 업종"},
-        {"name": "개업일자", "dtype": "string", "description": "개업 일자"},
-        {"name": "종업원수", "dtype": "int", "description": "종업원 수"},
-        {"name": "사업지역", "dtype": "string", "description": "사업장 소재 지역"},
-        {"name": "매출등급", "dtype": "string", "description": "매출 규모 등급"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "총사업장수",
+          "dtype": "int"
+        },
+        {
+          "name": "가맹점건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "노란우산공제회가입tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "사업자카드보유tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드가맹점tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "공동사업자수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프고객tf",
+          "dtype": "smallint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "jaz_sh_fanclub_membership_chghist",
+      "columns": [
+        {
+          "name": "처리일자",
+          "dtype": "string"
+        },
+        {
+          "name": "처리순번",
+          "dtype": "bigint"
+        },
+        {
+          "name": "fan클럽거래유형코드",
+          "dtype": "string"
+        },
+        {
+          "name": "고객번호",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹통합플랫폼회원구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹통합플랫폼가입채널코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한플러스new앱여부",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹통합플랫폼추천인신한그룹사코드",
+          "dtype": "string"
+        },
+        {
+          "name": "new앱사용여부",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "m_card_dim",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "카드대체번호",
+          "dtype": "string"
+        },
+        {
+          "name": "최종적재일시",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "고객구별그룹md번호",
+          "dtype": "string"
+        },
+        {
+          "name": "소지자그룹md번호",
+          "dtype": "string"
+        },
+        {
+          "name": "회원구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드유형코드",
+          "dtype": "string"
+        },
+        {
+          "name": "본인가족구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드상태유형코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드발급사구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "카드상품번호",
+          "dtype": "string"
+        },
+        {
+          "name": "본인카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "가족카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신용카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "체크카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "bc카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "교통카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "이관tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "삭제카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "만기카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "무효카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "실질카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신규카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "탈회카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "해지카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "도난분실카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "거래정지카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "재발급카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드확정취소tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드모집방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "대표지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "모집지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "관리지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드브랜드코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드상태구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드신청일자",
+          "dtype": "string"
+        },
+        {
+          "name": "카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "카드bl등재tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드bl최종등재일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초할부이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초일시불이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초현금서비스이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근할부이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근일시불이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근현금서비스이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "카드계정대체번호",
+          "dtype": "string"
+        },
+        {
+          "name": "변경전카드대체번호",
+          "dtype": "string"
+        },
+        {
+          "name": "최종카드대체번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "대표발급사유코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최종발급사유코드",
+          "dtype": "string"
+        },
+        {
+          "name": "발급구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "모집인코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "m_cust_dim",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "최종적재일시",
+          "dtype": "string"
+        },
+        {
+          "name": "고객식별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "법인고객구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "사업장사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹관계사코드",
+          "dtype": "string"
+        },
+        {
+          "name": "법인그룹분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "법인소속그룹코드",
+          "dtype": "string"
+        },
+        {
+          "name": "rm_vm본부구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "rm_vm본부확정사유코드",
+          "dtype": "string"
+        },
+        {
+          "name": "rm_vm본부확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "rms직군코드",
+          "dtype": "string"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신용고객대상tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "가족카드소지tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "가족카드only회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "소호tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "bc카드소지tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "복지카드소지tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "비지니스카드회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "비지니스카드only회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신용카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "체크카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "선불카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "론패스회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "론회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "리볼빙고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "당월신규리볼빙고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "멤버쉽회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "오토금융개인회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "오토금융법인회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "가맹점주고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "온라인고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "외국인고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한그룹직원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행신규고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신용카드만기고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신용카드무효고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신용카드일시정지고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신용카드실질고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "체크카드만기고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "체크카드무효고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "체크카드일시정지고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "체크카드실질고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "삭제고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "만기고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "무효고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "일시정지고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "실질고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신규고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "심사직군코드",
+          "dtype": "string"
+        },
+        {
+          "name": "심사직위코드",
+          "dtype": "string"
+        },
+        {
+          "name": "만기회원구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신용카드최초확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "체크카드최초확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "기업규모코드",
+          "dtype": "string"
+        },
+        {
+          "name": "회원세분화상세코드",
+          "dtype": "string"
+        },
+        {
+          "name": "제휴사동의철회tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "워크아웃지원중단tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "법정관리tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "당사탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "당사탑스클럽회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한그룹탑스클럽tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "12개월당사탑스클럽회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "12개월신한그룹탑스회원tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "최초카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초확정일자기준발급경과개월수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "재유입확정기준발급경과개월수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "유효연장기준발급경과개월수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "최종발급일자기준발급경과개월수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드모집방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "고객요청다원화tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "관리지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "모집지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연체유예구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연체유예기간일수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "대표bl상태코드",
+          "dtype": "string"
+        },
+        {
+          "name": "결제방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "결제은행코드",
+          "dtype": "string"
+        },
+        {
+          "name": "입금방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신용카드결제일코드",
+          "dtype": "string"
+        },
+        {
+          "name": "체크카드결제일코드",
+          "dtype": "string"
+        },
+        {
+          "name": "대표결제순번",
+          "dtype": "string"
+        },
+        {
+          "name": "청구지연락처구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "주소연락처순번",
+          "dtype": "int"
+        },
+        {
+          "name": "전화번호연락처순번",
+          "dtype": "int"
+        },
+        {
+          "name": "전자주소연락처순번",
+          "dtype": "int"
+        },
+        {
+          "name": "청구지우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "직장우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "최초이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "일시불한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "현금서비스한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "카드론대출한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "무이자할부잔여한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "통합한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "총한도금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "최초일시불이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초할부이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초현금서비스이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초카드론이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근일시불이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근할부이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근현금서비스이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최근카드론이용일자",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "pdt_m_acct_holding_base_bank",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "거래식별번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "데이터댐상품분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행수신계좌상태코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행여신계좌상태코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신규일자",
+          "dtype": "string"
+        },
+        {
+          "name": "만기일자",
+          "dtype": "string"
+        },
+        {
+          "name": "해지일자",
+          "dtype": "string"
+        },
+        {
+          "name": "디지털계좌tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한은행채널코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "pdt_m_autoloan_prod_base_card",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "대출번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "영업상품코드",
+          "dtype": "string"
+        },
+        {
+          "name": "오토금융취급상품코드",
+          "dtype": "string"
+        },
+        {
+          "name": "대출상품분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "제품그룹코드",
+          "dtype": "string"
+        },
+        {
+          "name": "무이자구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "대출기간개월수",
+          "dtype": "int"
+        },
+        {
+          "name": "부분무이자개월수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "대표상환방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "변동금리여부",
+          "dtype": "string"
+        },
+        {
+          "name": "실효이자금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "완납tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "대출일자",
+          "dtype": "string"
+        },
+        {
+          "name": "확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "만기일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초결제일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최종청구일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최종청구회차",
+          "dtype": "smallint"
+        },
+        {
+          "name": "최종수납일자",
+          "dtype": "string"
+        },
+        {
+          "name": "취소여부",
+          "dtype": "string"
+        },
+        {
+          "name": "취소일자",
+          "dtype": "string"
+        },
+        {
+          "name": "대출상태변경코드",
+          "dtype": "string"
+        },
+        {
+          "name": "승계여부",
+          "dtype": "string"
+        },
+        {
+          "name": "접수지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "대출지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "대출잔액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "대출금액",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "pdt_m_card_prod_base_card",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "카드대체번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "회원구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드유형코드",
+          "dtype": "string"
+        },
+        {
+          "name": "본인가족구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드상품번호",
+          "dtype": "string"
+        },
+        {
+          "name": "본인카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "가족카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신용카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "체크카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "교통카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "삭제카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "만기카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "무효카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "실질카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신규카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "탈회카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "해지카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "도난분실카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "거래정지카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "재발급카드tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드확정취소tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드브랜드코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드bl등재tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "카드상태유형코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드상태구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "카드확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "카드신청일자",
+          "dtype": "string"
+        },
+        {
+          "name": "카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "카드모집방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "대표지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "모집지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "관리지점코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신용신판취급금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "체크카드취급금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "일시불취급금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "할부취급금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "리볼빙신판취급금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "리볼빙현금서비스취급금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "현금서비스취급금액",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "pdt_m_contract_holding_base_life",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "거래식별번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "데이터댐상품분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "정상tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프계약상태코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초가입일자",
+          "dtype": "string"
+        },
+        {
+          "name": "주계약만기일자",
+          "dtype": "string"
+        },
+        {
+          "name": "소멸일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프판매채널구분코드",
+          "dtype": "string"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "pdt_m_loan_prod_base_card",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "매출거래번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "영업상품코드",
+          "dtype": "string"
+        },
+        {
+          "name": "론지급방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "론상환방법코드",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출개월수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "론대출거치개월수",
+          "dtype": "smallint"
+        },
+        {
+          "name": "론대출처리상태코드",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출처리상태결과코드",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출일자",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출확정일자",
+          "dtype": "string"
+        },
+        {
+          "name": "지급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출만기일자",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출완납일자",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출취소일자",
+          "dtype": "string"
+        },
+        {
+          "name": "론접수경로코드",
+          "dtype": "string"
+        },
+        {
+          "name": "론신청구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "론대출확정금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "론대출잔액",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "rpt_d_assetsize_sec",
+      "columns": [
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "총자산전일대비증가율",
+          "dtype": "decimal(38,18)"
+        },
+        {
+          "name": "주식평가금액전일대비증가율",
+          "dtype": "decimal(38,18)"
+        },
+        {
+          "name": "증권평가금액전일대비증가율",
+          "dtype": "decimal(38,18)"
+        },
+        {
+          "name": "채권평가금액전일대비증가율",
+          "dtype": "decimal(38,18)"
+        },
+        {
+          "name": "펀드평가금액전일대비증가율",
+          "dtype": "decimal(38,18)"
+        },
+        {
+          "name": "금전평가금액전일대비증가율",
+          "dtype": "decimal(38,18)"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "rpt_d_assetsize_sec_excl",
+      "columns": [
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행유동성계좌개설고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한은행거치계좌개설고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한은행적립식계좌개설고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한은행신용대출신청고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한은행주택대출신청고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한은행일반대출신청고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한은행신용대출신청금액",
+          "dtype": "decimal(38,0)"
+        },
+        {
+          "name": "신한은행주택대출신청금액",
+          "dtype": "decimal(38,0)"
+        },
+        {
+          "name": "신한은행대출신청금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신한카드론대출신청고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한카드론대출신청금액",
+          "dtype": "decimal(38,0)"
+        },
+        {
+          "name": "신한라이프보험계약대출신청고객수",
+          "dtype": "decimal(21,6)"
+        },
+        {
+          "name": "신한라이프보험계약대출신청금액",
+          "dtype": "decimal(38,3)"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "rpt_d_cust_mas",
+      "columns": [
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "고객연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "고객만기연령",
+          "dtype": "smallint"
+        },
+        {
+          "name": "연령구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "연령5년구간코드",
+          "dtype": "string"
+        },
+        {
+          "name": "성별구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "내국인tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "자택우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "자택행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "자택법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "최초거래일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초카드발급일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계좌개설일자",
+          "dtype": "string"
+        },
+        {
+          "name": "최초계약일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신한은행고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한카드고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한투자증권고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한라이프고객tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "거래신한그룹사수",
+          "dtype": "int"
+        },
+        {
+          "name": "신한은행탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한카드탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한투자증권탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한라이프탑스클럽등급코드",
+          "dtype": "string"
+        },
+        {
+          "name": "개인사업자tf",
+          "dtype": "smallint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "rpt_d_merchant_industry_index",
+      "columns": [
+        {
+          "name": "기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점업종코드",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "일평균승인금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "기준년도평균승인금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "opi지수",
+          "dtype": "decimal(13,2)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "rpt_d_unit_deposit_acct",
+      "columns": [
+        {
+          "name": "dw기준일자",
+          "dtype": "string"
+        },
+        {
+          "name": "계좌번호",
+          "dtype": "string"
+        },
+        {
+          "name": "통화코드",
+          "dtype": "string"
+        },
+        {
+          "name": "순번",
+          "dtype": "bigint"
+        },
+        {
+          "name": "계정코드",
+          "dtype": "string"
+        },
+        {
+          "name": "세목코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "부분세목코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "고객번호",
+          "dtype": "string"
+        },
+        {
+          "name": "상품코드",
+          "dtype": "string"
+        },
+        {
+          "name": "과목코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "현재수신계좌상태코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "해지일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신규일자",
+          "dtype": "string"
+        },
+        {
+          "name": "만기일자",
+          "dtype": "string"
+        },
+        {
+          "name": "지불가능잔액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "질권설정총금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "투자목적코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "수신대출계좌여부",
+          "dtype": "string"
+        },
+        {
+          "name": "계약구분코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "만기기본계약금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "수신계약기간구분코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "계좌계약상태여부",
+          "dtype": "string"
+        },
+        {
+          "name": "1회적립금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "금리계약방법코드",
+          "dtype": "smallint"
+        },
+        {
+          "name": "금리회전주기값",
+          "dtype": "smallint"
+        },
+        {
+          "name": "무기명신규여부",
+          "dtype": "string"
+        },
+        {
+          "name": "액면금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "기본율",
+          "dtype": "decimal(10,5)"
+        },
+        {
+          "name": "가산율",
+          "dtype": "decimal(10,5)"
+        },
+        {
+          "name": "보너스율",
+          "dtype": "decimal(10,5)"
+        },
+        {
+          "name": "급여입금최종일자",
+          "dtype": "string"
+        },
+        {
+          "name": "비자카드결제계좌여부",
+          "dtype": "string"
+        },
+        {
+          "name": "할부금융증권계좌여부",
+          "dtype": "string"
+        },
+        {
+          "name": "증권결제계좌여부",
+          "dtype": "string"
+        },
+        {
+          "name": "원화환산잔액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "전일계좌잔액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "미화환산잔액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "마감전잔액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "원화환산마감전잔액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "월누적금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "dw원천영역상품분류여부",
+          "dtype": "string"
+        },
+        {
+          "name": "계좌이체여부",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "shg_membership_cust_hist",
+      "columns": [
+        {
+          "name": "신한그룹통합리워드앱고객정보변경일자",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹통합리워드앱고객정보변경순번",
+          "dtype": "smallint"
+        },
+        {
+          "name": "신한그룹통합리워드앱고객상태코드",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹통합플랫폼회원구분코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹통합플랫폼가입채널코드",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹멤버쉽신어플리케이션여부",
+          "dtype": "string"
+        },
+        {
+          "name": "신한그룹통합플랫폼추천인신한그룹사코드",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "trs_m_cust_acct_txn_bank",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "거래식별번호",
+          "dtype": "string"
+        },
+        {
+          "name": "데이터댐상품분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "총거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "입금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "출금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "총거래금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신규금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "해지금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "출금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "입금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "잔액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "trs_m_cust_acct_txn_sec",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "거래식별번호",
+          "dtype": "string"
+        },
+        {
+          "name": "데이터댐상품분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "순수익금액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "trs_m_cust_card_txn_card",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "거래식별번호",
+          "dtype": "string"
+        },
+        {
+          "name": "데이터댐상품분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "총이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신규이용tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "취소tf",
+          "dtype": "smallint"
+        },
+        {
+          "name": "총이용금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "입금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "대출잔액",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "trs_m_cust_contract_txn_life",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "거래식별번호",
+          "dtype": "string"
+        },
+        {
+          "name": "데이터댐상품분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "총거래건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신규건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "해지건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "입금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "출금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "총거래금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "신규금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "해지금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "출금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "입금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "실행금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "잔액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "trs_m_merchant_delivery",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점번호",
+          "dtype": "string"
+        },
+        {
+          "name": "매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "trs_m_soleprop_asset_bank",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "개인사업자대출잔액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "타카드사매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "유동성입금금액",
+          "dtype": "decimal(21,3)"
+        },
+        {
+          "name": "유동성출금금액",
+          "dtype": "decimal(21,3)"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "table_name": "trs_m_soleprop_asset_card",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "신한카드취급금액",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
     },
     {
       "table_name": "trs_m_soleprop_merchant_sales_card",
-      "description": "개인사업자 카드 매출 월별. 개인사업자의 카드 수취 매출 정보.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "카드매출건수", "dtype": "int", "description": "카드 매출 건수"},
-        {"name": "카드매출금액", "dtype": "bigint", "description": "카드 매출 금액"},
-        {"name": "신용카드매출", "dtype": "bigint", "description": "신용카드 매출"},
-        {"name": "체크카드매출", "dtype": "bigint", "description": "체크카드 매출"},
-        {"name": "배달매출", "dtype": "bigint", "description": "배달앱 매출"},
-        {"name": "평균객단가", "dtype": "bigint", "description": "건당 평균 결제 금액"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "string"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "is_key": true
+        },
+        {
+          "name": "사업자등록번호",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점번호",
+          "dtype": "string"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        },
+        {
+          "name": "가맹점업종코드",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점종류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점중분류코드",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점우편번호",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점행정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점법정gds동코드",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점계약일자",
+          "dtype": "string"
+        },
+        {
+          "name": "가맹점해지일자",
+          "dtype": "string"
+        },
+        {
+          "name": "매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "이용카드수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "이용회원수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "월요일이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "화요일이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "수요일이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "목요일이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "금요일이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "토요일이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "일요일이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "오전이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "중식이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "오후이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "야간이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "5시11시구간이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "12시13시구간이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "14시17시구간이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "18시22시구간이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "23시4시구간이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "10대매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "20대매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "30대매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "40대매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "50대매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "60대이상매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "10대이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "20대이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "30대이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "40대이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "50대이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "60대이상이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "남성매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "여성매출금액",
+          "dtype": "bigint"
+        },
+        {
+          "name": "남성이용건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "여성이용건수",
+          "dtype": "bigint"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "trs_m_soleprop_bank_txn",
-      "description": "개인사업자 은행 거래 월별. 사업자 계좌 입출금 요약.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
+      "table_name": "vam_cus_mkt_mas_m",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "입금건수", "dtype": "int", "description": "입금 건수"},
-        {"name": "입금금액", "dtype": "bigint", "description": "입금 금액"},
-        {"name": "출금건수", "dtype": "int", "description": "출금 건수"},
-        {"name": "출금금액", "dtype": "bigint", "description": "출금 금액"},
-        {"name": "대출잔액", "dtype": "bigint", "description": "사업자 대출 잔액"},
-        {"name": "예금잔액", "dtype": "bigint", "description": "사업자 예금 잔액"}
-      ]
+        {
+          "name": "기준년월일",
+          "dtype": "double"
+        },
+        {
+          "name": "고객번호",
+          "dtype": "string"
+        },
+        {
+          "name": "고객구분(pabc_활_비활)",
+          "dtype": "double"
+        },
+        {
+          "name": "tops변동구분",
+          "dtype": "double"
+        },
+        {
+          "name": "tops변동상세구분",
+          "dtype": "string"
+        },
+        {
+          "name": "활동성여부",
+          "dtype": "double"
+        },
+        {
+          "name": "1년활동성여부값",
+          "dtype": "string"
+        },
+        {
+          "name": "활동성변동구분",
+          "dtype": "double"
+        },
+        {
+          "name": "활동성변동상세구분",
+          "dtype": "string"
+        },
+        {
+          "name": "거래자인격코드",
+          "dtype": "double"
+        },
+        {
+          "name": "국적-국가코드",
+          "dtype": "string"
+        },
+        {
+          "name": "거래기간(월)(cif신규기준)",
+          "dtype": "double"
+        },
+        {
+          "name": "거래기간(월)(계좌거래기준)",
+          "dtype": "double"
+        },
+        {
+          "name": "성별",
+          "dtype": "double"
+        },
+        {
+          "name": "나이",
+          "dtype": "double"
+        },
+        {
+          "name": "연령구분",
+          "dtype": "double"
+        },
+        {
+          "name": "만나이",
+          "dtype": "double"
+        },
+        {
+          "name": "만연령구분",
+          "dtype": "double"
+        },
+        {
+          "name": "주소구분(시도기준_자택)",
+          "dtype": "string"
+        },
+        {
+          "name": "tops관리점",
+          "dtype": "smallint"
+        },
+        {
+          "name": "전담고객여부",
+          "dtype": "double"
+        },
+        {
+          "name": "총수신평잔(방카거치식평잔)",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "총수신평잔(총방카평잔)",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "총수신평잔(총방카평잔_거치적립구분(wm))",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "수신_금투소개실적",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "총수신(금투소개실적반영)_susin6+susin_gt",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "고자산변동상세구분",
+          "dtype": "string"
+        },
+        {
+          "name": "유동성_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "여신_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "수신평잔(활동성원장)",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "여신평잔(활동성원장)",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "교차합계_신기준",
+          "dtype": "double"
+        },
+        {
+          "name": "급여이체여부(kpi기준)",
+          "dtype": "double"
+        },
+        {
+          "name": "급여이체금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "연금이체여부",
+          "dtype": "double"
+        },
+        {
+          "name": "연금이체금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "직장인관리고객여부",
+          "dtype": "double"
+        },
+        {
+          "name": "신용카드보유여부",
+          "dtype": "double"
+        },
+        {
+          "name": "신용카드이용금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "체크카드보유여부",
+          "dtype": "double"
+        },
+        {
+          "name": "체크카드이용금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "신용카드결제계좌보유여부",
+          "dtype": "double"
+        },
+        {
+          "name": "신용카드결제금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "가맹점결제계좌보유",
+          "dtype": "double"
+        },
+        {
+          "name": "가맹점결제실적금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "내점일수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "tm건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "sms발송건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "인터넷쪽지발송건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "스마트레터_거래건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "이메일발송건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "dm발송건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "창구거래건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "폰뱅킹거래건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "atm거래건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "인터넷뱅킹이용건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "s뱅킹이용건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "전체거래건수_1개월",
+          "dtype": "bigint"
+        },
+        {
+          "name": "방문기준관리점번호(내점거래최다점)",
+          "dtype": "smallint"
+        },
+        {
+          "name": "atm입지급기준관리점번호(atm거래최다점)",
+          "dtype": "smallint"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
     },
     {
-      "table_name": "igd_m_soleprop_credit",
-      "description": "개인사업자 신용 정보 월별. 사업자 신용 평가 관련 정보.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
+      "table_name": "vam_cus_prdt_mas_m",
       "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "사업자신용등급", "dtype": "string", "description": "사업자 신용등급"},
-        {"name": "매출안정성", "dtype": "string", "description": "매출 안정성 등급"},
-        {"name": "업력", "dtype": "int", "description": "사업 업력 (개월)"},
-        {"name": "연체이력여부", "dtype": "string", "description": "과거 연체 이력 여부"}
-      ]
-    },
-    {
-      "table_name": "trs_m_soleprop_expense",
-      "description": "개인사업자 경비 지출 월별. 사업 경비 카드 이용 내역.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "총경비금액", "dtype": "bigint", "description": "총 경비 지출 금액"},
-        {"name": "인건비", "dtype": "bigint", "description": "인건비 지출"},
-        {"name": "임대료", "dtype": "bigint", "description": "임대료 지출"},
-        {"name": "재료비", "dtype": "bigint", "description": "재료/원자재비"},
-        {"name": "광고비", "dtype": "bigint", "description": "광고/마케팅비"},
-        {"name": "기타경비", "dtype": "bigint", "description": "기타 경비"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_event",
-      "description": "고객 이벤트 월별. 마케팅 이벤트 참여 및 혜택 수혜 이력.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월", "이벤트코드"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "이벤트코드", "dtype": "string", "description": "이벤트 코드", "is_key": true},
-        {"name": "이벤트명", "dtype": "string", "description": "이벤트 이름"},
-        {"name": "참여여부", "dtype": "string", "description": "참여 여부"},
-        {"name": "혜택금액", "dtype": "bigint", "description": "수혜 금액"},
-        {"name": "채널", "dtype": "string", "description": "참여 채널"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_complaint",
-      "description": "고객 민원/VOC 월별. 고객 불만 및 상담 이력.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "민원건수", "dtype": "int", "description": "민원 건수"},
-        {"name": "민원유형", "dtype": "string", "description": "민원 유형"},
-        {"name": "처리상태", "dtype": "string", "description": "처리 상태"},
-        {"name": "만족도", "dtype": "int", "description": "응대 만족도 점수"},
-        {"name": "상담채널", "dtype": "string", "description": "상담 채널 (전화/앱/챗봇)"}
-      ]
-    },
-    {
-      "table_name": "trs_m_card_benefit_usage",
-      "description": "카드 혜택 이용 월별. 카드 할인/적립 혜택 사용 내역.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "카드상품코드", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "할인금액", "dtype": "bigint", "description": "받은 할인 금액"},
-        {"name": "적립포인트", "dtype": "bigint", "description": "적립 포인트"},
-        {"name": "캐시백금액", "dtype": "bigint", "description": "캐시백 금액"},
-        {"name": "혜택합계", "dtype": "bigint", "description": "총 혜택 금액"},
-        {"name": "이용대비혜택률", "dtype": "double", "description": "이용 금액 대비 혜택률 (%)"}
-      ]
-    },
-    {
-      "table_name": "trs_m_card_installment",
-      "description": "카드 할부 거래 월별. 할부 결제 상세 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "할부건수", "dtype": "int", "description": "할부 거래 건수"},
-        {"name": "할부금액", "dtype": "bigint", "description": "할부 결제 금액"},
-        {"name": "평균할부개월", "dtype": "double", "description": "평균 할부 개월"},
-        {"name": "무이자할부건수", "dtype": "int", "description": "무이자 할부 건수"},
-        {"name": "할부잔여금액", "dtype": "bigint", "description": "미결제 할부 잔액"}
-      ]
-    },
-    {
-      "table_name": "trs_m_overseas_txn",
-      "description": "해외 거래 월별. 해외 카드 결제 및 환전 정보.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "해외이용건수", "dtype": "int", "description": "해외 이용 건수"},
-        {"name": "해외이용금액원화", "dtype": "bigint", "description": "해외 이용 금액 (원화 환산)"},
-        {"name": "주이용국가", "dtype": "string", "description": "주 이용 국가"},
-        {"name": "주이용통화", "dtype": "string", "description": "주 이용 통화 (USD/JPY/EUR 등)"},
-        {"name": "온라인해외결제", "dtype": "bigint", "description": "온라인 해외 결제 금액"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_digital",
-      "description": "고객 디지털 행동 월별. 앱/웹 이용 행동 데이터.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "앱로그인일수", "dtype": "int", "description": "앱 로그인 일수"},
-        {"name": "화면조회수", "dtype": "int", "description": "화면 조회 수"},
-        {"name": "이체실행건수", "dtype": "int", "description": "앱 통한 이체 건수"},
-        {"name": "알림수신건수", "dtype": "int", "description": "푸시 알림 수신 건수"},
-        {"name": "알림클릭수", "dtype": "int", "description": "알림 클릭 수"},
-        {"name": "주이용기능", "dtype": "string", "description": "주 이용 기능"}
-      ]
-    },
-    {
-      "table_name": "rpt_m_cust_consumption_pattern",
-      "description": "고객 소비 패턴 월별. 업종별/시간대별 소비 성향 분석.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "주소비업종", "dtype": "string", "description": "주 소비 업종"},
-        {"name": "주소비시간대", "dtype": "string", "description": "주 소비 시간대"},
-        {"name": "주소비요일", "dtype": "string", "description": "주 소비 요일"},
-        {"name": "온라인비율", "dtype": "double", "description": "온라인 소비 비율 (%)"},
-        {"name": "평균건당금액", "dtype": "bigint", "description": "건당 평균 결제 금액"},
-        {"name": "소비다양성지수", "dtype": "double", "description": "소비 업종 다양성 지수"}
-      ]
-    },
-    {
-      "table_name": "rpt_m_cust_loyalty",
-      "description": "고객 충성도 지표 월별. 계열사 이용 빈도 및 충성도 스코어.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "이용계열사수", "dtype": "int", "description": "이용 계열사 수"},
-        {"name": "총거래건수", "dtype": "int", "description": "그룹 전체 거래 건수"},
-        {"name": "충성도점수", "dtype": "double", "description": "충성도 스코어 (0-100)"},
-        {"name": "주거래계열사", "dtype": "string", "description": "주거래 계열사"},
-        {"name": "크로스셀여부", "dtype": "string", "description": "크로스셀 대상 여부"}
-      ]
-    },
-    {
-      "table_name": "trs_m_merchant_category_sales",
-      "description": "업종별 가맹점 매출 월별 집계. 업종 카테고리별 매출 통계.",
-      "domain": "merchant",
-      "key_columns": ["업종코드", "기준년월"],
-      "columns": [
-        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "업종대분류", "dtype": "string", "description": "업종 대분류"},
-        {"name": "업종중분류", "dtype": "string", "description": "업종 중분류"},
-        {"name": "총매출금액", "dtype": "bigint", "description": "총 매출 금액"},
-        {"name": "총거래건수", "dtype": "int", "description": "총 거래 건수"},
-        {"name": "이용고객수", "dtype": "int", "description": "이용 고객 수"},
-        {"name": "가맹점수", "dtype": "int", "description": "가맹점 수"},
-        {"name": "전월대비증감률", "dtype": "double", "description": "전월 대비 증감률"}
-      ]
-    },
-    {
-      "table_name": "trs_m_merchant_new_close",
-      "description": "가맹점 신규/폐업 월별. 가맹점 개폐업 동향.",
-      "domain": "merchant",
-      "key_columns": ["시군구코드", "업종코드", "기준년월"],
-      "columns": [
-        {"name": "시군구코드", "dtype": "string", "description": "행정구역 코드", "is_key": true},
-        {"name": "업종코드", "dtype": "string", "description": "업종 코드", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "신규가맹점수", "dtype": "int", "description": "신규 개업 가맹점 수"},
-        {"name": "폐업가맹점수", "dtype": "int", "description": "폐업 가맹점 수"},
-        {"name": "순증감", "dtype": "int", "description": "순 증감 (신규-폐업)"},
-        {"name": "생존율", "dtype": "double", "description": "1년 생존율 (%)"}
-      ]
-    },
-    {
-      "table_name": "igd_m_soleprop_revenue",
-      "description": "개인사업자 매출 월별 집계. 사업자의 총 매출 현황.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "총매출", "dtype": "bigint", "description": "월 총 매출"},
-        {"name": "카드매출", "dtype": "bigint", "description": "카드 결제 매출"},
-        {"name": "현금매출", "dtype": "bigint", "description": "현금 매출"},
-        {"name": "온라인매출", "dtype": "bigint", "description": "온라인 매출"},
-        {"name": "전월대비증감률", "dtype": "double", "description": "전월 대비 매출 증감률"},
-        {"name": "동업종평균대비", "dtype": "double", "description": "동 업종 평균 대비 비율"}
-      ]
-    },
-    {
-      "table_name": "igd_m_soleprop_employee",
-      "description": "개인사업자 직원 정보 월별. 직원 수 및 인건비 현황.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "직원수", "dtype": "int", "description": "총 직원 수"},
-        {"name": "정규직수", "dtype": "int", "description": "정규직 수"},
-        {"name": "비정규직수", "dtype": "int", "description": "비정규직 수"},
-        {"name": "총인건비", "dtype": "bigint", "description": "총 인건비"},
-        {"name": "4대보험납부액", "dtype": "bigint", "description": "4대보험 납부 금액"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_card_benefit_spec",
-      "description": "카드 혜택 사양 마스터. 카드 상품별 혜택 상세 스펙.",
-      "domain": "product",
-      "key_columns": ["카드상품코드", "혜택코드"],
-      "columns": [
-        {"name": "카드상품코드", "dtype": "string", "description": "카드 상품 코드", "is_key": true},
-        {"name": "혜택코드", "dtype": "string", "description": "혜택 코드", "is_key": true},
-        {"name": "혜택유형", "dtype": "string", "description": "혜택 유형 (할인/적립/캐시백)"},
-        {"name": "혜택업종", "dtype": "string", "description": "적용 업종"},
-        {"name": "할인율", "dtype": "double", "description": "할인/적립률 (%)"},
-        {"name": "월한도", "dtype": "bigint", "description": "월 혜택 한도"},
-        {"name": "최소이용금액", "dtype": "bigint", "description": "최소 결제 금액 조건"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_deposit_product",
-      "description": "예적금 상품 마스터. 은행 예금/적금 상품 정보.",
-      "domain": "product",
-      "key_columns": ["상품코드"],
-      "columns": [
-        {"name": "상품코드", "dtype": "string", "description": "상품 코드", "is_key": true},
-        {"name": "상품명", "dtype": "string", "description": "상품 이름"},
-        {"name": "상품유형", "dtype": "string", "description": "예금/적금/파킹통장 구분"},
-        {"name": "기본금리", "dtype": "double", "description": "기본 금리 (%)"},
-        {"name": "최고금리", "dtype": "double", "description": "최고 우대 금리 (%)"},
-        {"name": "가입기간", "dtype": "string", "description": "가입 기간 조건"},
-        {"name": "최소가입금액", "dtype": "bigint", "description": "최소 가입 금액"},
-        {"name": "판매상태", "dtype": "string", "description": "판매 상태"}
-      ]
-    },
-    {
-      "table_name": "pdt_m_loan_product",
-      "description": "대출 상품 마스터. 은행 대출 상품 정보.",
-      "domain": "product",
-      "key_columns": ["상품코드"],
-      "columns": [
-        {"name": "상품코드", "dtype": "string", "description": "상품 코드", "is_key": true},
-        {"name": "상품명", "dtype": "string", "description": "상품 이름"},
-        {"name": "대출유형", "dtype": "string", "description": "대출 유형 (주택담보/신용/전세 등)"},
-        {"name": "기본금리", "dtype": "double", "description": "기본 금리 (%)"},
-        {"name": "최저금리", "dtype": "double", "description": "최저 금리 (%)"},
-        {"name": "최대한도", "dtype": "bigint", "description": "최대 대출 한도"},
-        {"name": "상환방식", "dtype": "string", "description": "상환 방식"},
-        {"name": "판매상태", "dtype": "string", "description": "판매 상태"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_income",
-      "description": "고객 소득 추정 월별. 급여이체/매출 기반 소득 추정 정보.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "추정소득", "dtype": "bigint", "description": "월 추정 소득"},
-        {"name": "소득구간", "dtype": "string", "description": "소득 구간"},
-        {"name": "급여이체금액", "dtype": "bigint", "description": "급여 이체 금액"},
-        {"name": "소득대비소비율", "dtype": "double", "description": "소득 대비 소비 비율 (%)"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_life_event",
-      "description": "고객 라이프 이벤트 월별. 결혼/출산/이사 등 주요 생애 이벤트 감지.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "이벤트유형", "dtype": "string", "description": "이벤트 유형 (결혼/출산/이사/취직/퇴직)"},
-        {"name": "감지일자", "dtype": "string", "description": "이벤트 감지 일자"},
-        {"name": "신뢰도", "dtype": "double", "description": "감지 신뢰도"},
-        {"name": "관련상품추천", "dtype": "string", "description": "추천 상품 코드"}
-      ]
-    },
-    {
-      "table_name": "rpt_m_age_gender_stats",
-      "description": "연령/성별 통계 월별. 연령대 및 성별 기준 각종 통계.",
-      "domain": "customer",
-      "key_columns": ["연령대", "성별", "기준년월"],
-      "columns": [
-        {"name": "연령대", "dtype": "string", "description": "연령대 (20대~70대 이상)", "is_key": true},
-        {"name": "성별", "dtype": "string", "description": "성별 (M/F)", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "고객수", "dtype": "int", "description": "해당 그룹 고객 수"},
-        {"name": "평균이용금액", "dtype": "bigint", "description": "평균 카드 이용 금액"},
-        {"name": "평균거래건수", "dtype": "double", "description": "평균 거래 건수"},
-        {"name": "온라인비율", "dtype": "double", "description": "온라인 결제 비율 (%)"},
-        {"name": "평균보유상품수", "dtype": "double", "description": "평균 보유 상품 수"}
-      ]
-    },
-    {
-      "table_name": "rpt_m_region_stats",
-      "description": "지역별 통계 월별. 행정구역 기준 소비/가맹점 통계.",
-      "domain": "merchant",
-      "key_columns": ["시군구코드", "기준년월"],
-      "columns": [
-        {"name": "시군구코드", "dtype": "string", "description": "행정구역 코드", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "시도명", "dtype": "string", "description": "시/도"},
-        {"name": "시군구명", "dtype": "string", "description": "시/군/구"},
-        {"name": "인구수", "dtype": "int", "description": "추정 인구 수"},
-        {"name": "가맹점수", "dtype": "int", "description": "활성 가맹점 수"},
-        {"name": "총소비금액", "dtype": "bigint", "description": "지역 내 총 소비 금액"},
-        {"name": "1인당소비", "dtype": "bigint", "description": "1인당 평균 소비"},
-        {"name": "주요업종", "dtype": "string", "description": "최다 소비 업종"}
-      ]
-    },
-    {
-      "table_name": "trs_m_payment_method",
-      "description": "결제수단 이용 월별. 결제 방법별 이용 현황 (간편결제 등).",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "간편결제건수", "dtype": "int", "description": "간편결제 이용 건수"},
-        {"name": "간편결제금액", "dtype": "bigint", "description": "간편결제 이용 금액"},
-        {"name": "주이용간편결제", "dtype": "string", "description": "주 이용 간편결제 (삼성페이/카카오페이 등)"},
-        {"name": "실물카드건수", "dtype": "int", "description": "실물 카드 결제 건수"},
-        {"name": "실물카드금액", "dtype": "bigint", "description": "실물 카드 결제 금액"},
-        {"name": "자동이체건수", "dtype": "int", "description": "자동이체 건수"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_subscription",
-      "description": "고객 구독 서비스 월별. 정기결제/구독 서비스 이용 현황.",
-      "domain": "transaction",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "구독서비스수", "dtype": "int", "description": "이용 중인 구독 서비스 수"},
-        {"name": "총구독금액", "dtype": "bigint", "description": "월 구독 결제 총액"},
-        {"name": "주요구독분류", "dtype": "string", "description": "주 구독 카테고리 (OTT/음악/쇼핑 등)"},
-        {"name": "최대구독금액", "dtype": "bigint", "description": "단건 최대 구독 금액"},
-        {"name": "구독시작월", "dtype": "string", "description": "가장 오래된 구독 시작 연월"}
-      ]
-    },
-    {
-      "table_name": "trs_m_soleprop_loan",
-      "description": "개인사업자 대출 월별. 사업자 대출 현황 및 상환 정보.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "대출건수", "dtype": "int", "description": "보유 대출 건수"},
-        {"name": "총대출잔액", "dtype": "bigint", "description": "총 대출 잔액"},
-        {"name": "월상환금액", "dtype": "bigint", "description": "월 상환 금액"},
-        {"name": "대출유형", "dtype": "string", "description": "주 대출 유형"},
-        {"name": "연체여부", "dtype": "string", "description": "연체 여부"},
-        {"name": "금리", "dtype": "double", "description": "가중평균 금리 (%)"}
-      ]
-    },
-    {
-      "table_name": "rpt_m_soleprop_benchmark",
-      "description": "개인사업자 벤치마크 월별. 동업종/동지역 대비 사업 성과 비교.",
-      "domain": "soleprop",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "매출백분위", "dtype": "int", "description": "동업종 매출 백분위 (%)"},
-        {"name": "고객수백분위", "dtype": "int", "description": "동업종 고객수 백분위"},
-        {"name": "객단가백분위", "dtype": "int", "description": "동업종 객단가 백분위"},
-        {"name": "동업종평균매출", "dtype": "bigint", "description": "동업종 평균 매출"},
-        {"name": "동지역평균매출", "dtype": "bigint", "description": "동지역 평균 매출"}
-      ]
-    },
-    {
-      "table_name": "com_m_merchant_review",
-      "description": "가맹점 리뷰 월별 집계. 가맹점에 대한 고객 리뷰 통계.",
-      "domain": "merchant",
-      "key_columns": ["가맹점번호", "기준년월"],
-      "columns": [
-        {"name": "가맹점번호", "dtype": "string", "description": "가맹점 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "리뷰건수", "dtype": "int", "description": "리뷰 건수"},
-        {"name": "평균별점", "dtype": "double", "description": "평균 별점 (1-5)"},
-        {"name": "긍정비율", "dtype": "double", "description": "긍정 리뷰 비율 (%)"},
-        {"name": "주요키워드", "dtype": "string", "description": "주요 리뷰 키워드"}
-      ]
-    },
-    {
-      "table_name": "igd_m_cust_reward",
-      "description": "고객 리워드/포인트 월별. 포인트 적립 및 사용 현황.",
-      "domain": "customer",
-      "key_columns": ["그룹md번호", "기준년월"],
-      "columns": [
-        {"name": "그룹md번호", "dtype": "string", "description": "그룹 통합 고객 식별 번호", "is_key": true},
-        {"name": "기준년월", "dtype": "string", "description": "기준 연월", "is_key": true},
-        {"name": "적립포인트", "dtype": "bigint", "description": "월 적립 포인트"},
-        {"name": "사용포인트", "dtype": "bigint", "description": "월 사용 포인트"},
-        {"name": "잔여포인트", "dtype": "bigint", "description": "잔여 포인트"},
-        {"name": "소멸예정포인트", "dtype": "bigint", "description": "3개월 내 소멸 예정 포인트"},
-        {"name": "포인트사용처", "dtype": "string", "description": "주 사용처"}
-      ]
+        {
+          "name": "기준년월",
+          "dtype": "double"
+        },
+        {
+          "name": "고객번호",
+          "dtype": "string"
+        },
+        {
+          "name": "유동성_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "유동성_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "mmf_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "mmf_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "거치식_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "거치식_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "적립식_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "적립식_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "외화예금_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "외화예금_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "펀드_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "펀드_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "방카_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "방카_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "퇴직연금_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "퇴직연금_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "일반대출_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "일반대출_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "신용대출_평잔",
+          "dtype": "bigint"
+        },
+        {
+          "name": "신용대출_평잔_소수",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "주택대출_계좌수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "주택대출_평잔",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "수신만기상품보유여부",
+          "dtype": "double"
+        },
+        {
+          "name": "여신만기상품보유여부",
+          "dtype": "double"
+        },
+        {
+          "name": "환전건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "환전금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "송금건수",
+          "dtype": "bigint"
+        },
+        {
+          "name": "송금금액",
+          "dtype": "decimal(18,2)"
+        },
+        {
+          "name": "aws적재일시",
+          "dtype": "timestamp"
+        }
+      ],
+      "description": ""
     }
   ]
 }

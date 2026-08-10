@@ -326,6 +326,8 @@ class Orchestrator:
                 "intent": intent_result.intent,
                 "confidence": sql_result.confidence,
                 "row_count": exec_result.get("row_count", 0),
+                "columns": exec_result.get("columns", []),
+                "rows": exec_result.get("rows", [])[:50],
                 "total_ms": total_ms,
             },
         )

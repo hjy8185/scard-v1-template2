@@ -42,7 +42,7 @@ class BedrockClient:
         max_tokens: int | None = None,
     ) -> None:
         self._model_id = model_id or settings.BEDROCK_MODEL_ID
-        self._region = region or settings.AWS_REGION
+        self._region = region or settings.BEDROCK_REGION
         self._max_tokens = max_tokens or settings.BEDROCK_MAX_TOKENS
         self._client = boto3.client(
             "bedrock-runtime",
@@ -223,11 +223,13 @@ CRITICAL RULES:
 1. Generate ONLY SELECT queries - never INSERT/UPDATE/DELETE/DROP
 2. Always include LIMIT clause (max 1000 rows)
 3. Use the exact table and column names from the provided context (Korean names)
-4. The Glue database is "ai_ready_v2" - use fully qualified names: ai_ready_v2.<table_name>
-5. The universal join key across all tables is "그룹md번호" (group MD number = customer ID)
-6. For date columns, use appropriate date functions (date_parse, date_format)
-7. NULL handling: use COALESCE where appropriate
-8. Aggregations: always include GROUP BY for non-aggregated columns
+4. IMPORTANT: All Korean column names MUST be wrapped in double quotes. Example: "그룹md번호", "고객연령", "성별구분코드"
+5. The Glue database is "ai_ready_v2" - use fully qualified names: ai_ready_v2.<table_name>
+6. The universal join key across all tables is "그룹md번호" (group MD number = customer ID)
+7. For date columns, use appropriate date functions (date_parse, date_format)
+8. NULL handling: use COALESCE where appropriate
+9. Aggregations: always include GROUP BY for non-aggregated columns
+10. Column aliases also must be in double quotes if they contain Korean: e.g. COUNT(*) as "이용건수"
 
 ONTOLOGY CONTEXT:
 {context}

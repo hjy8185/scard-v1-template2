@@ -20,7 +20,7 @@ from app.config import settings
 logger = logging.getLogger(__name__)
 
 _BOTO_CONFIG = Config(
-    region_name=settings.AWS_REGION,
+    region_name=settings.ATHENA_REGION,
     retries={"max_attempts": 2},
 )
 
