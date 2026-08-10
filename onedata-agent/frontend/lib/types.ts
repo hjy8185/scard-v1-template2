@@ -3,7 +3,7 @@
 // ============================================================
 
 // SSE Event from Backend
-export type SSEEventType = 'intent' | 'context' | 'sql' | 'execution' | 'answer' | 'error';
+export type SSEEventType = 'intent' | 'context' | 'sql' | 'sql_generate' | 'execute' | 'execution' | 'answer' | 'done' | 'error';
 export type SSEStatus = 'active' | 'done' | 'error';
 
 export interface SSEEvent {

@@ -10,8 +10,9 @@ function createReasoningSteps(): ReasoningStep[] {
   return [
     { id: 'intent', label: 'Intent Analysis', labelKo: '의도 분석', status: 'pending' },
     { id: 'context', label: 'Context Retrieval', labelKo: '컨텍스트 검색', status: 'pending' },
-    { id: 'sql', label: 'SQL Generation', labelKo: 'SQL 생성', status: 'pending' },
-    { id: 'execution', label: 'Execution & Answer', labelKo: '실행 & 응답', status: 'pending' },
+    { id: 'sql_generate', label: 'SQL Generation', labelKo: 'SQL 생성', status: 'pending' },
+    { id: 'execute', label: 'Query Execution', labelKo: '쿼리 실행', status: 'pending' },
+    { id: 'answer', label: 'Answer Composition', labelKo: '답변 생성', status: 'pending' },
   ];
 }
 
@@ -99,25 +100,36 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           msg.reasoning = reasoning;
         }
 
-        if (event.event_type === 'sql' && event.status === 'done' && event.data) {
-          msg.sql = event.data.sql as string || event.data.query as string;
+        if (event.event_type === 'sql_generate' && event.status === 'done' && event.data) {
+          msg.sql = event.data.sql as string;
         }
 
-        if (event.event_type === 'execution' && event.status === 'done' && event.data) {
-          const results = event.data.results as Record<string, unknown>[] | undefined;
-          const columns = event.data.columns as string[] | undefined;
-          if (results && columns) {
-            msg.queryResults = {
-              columns,
-              rows: results,
-              rowCount: results.length,
-              executionMs: event.ms,
-            };
-          }
+        if (event.event_type === 'execute' && event.status === 'done' && event.data) {
+          // execution result comes partially here, full data in 'done' event
         }
 
         if (event.event_type === 'answer' && event.status === 'done' && event.data) {
-          msg.content = event.data.answer as string || event.data.text as string || '';
+          msg.content = event.data.content as string || event.data.answer as string || '';
+        }
+
+        if (event.event_type === 'done' && event.status === 'done' && event.data) {
+          // Final event with full results
+          const columns = event.data.columns as string[] | undefined;
+          const rows = event.data.rows as Record<string, unknown>[] | undefined;
+          if (columns && rows) {
+            msg.queryResults = {
+              columns,
+              rows,
+              rowCount: rows.length,
+              executionMs: event.data.total_ms as number || 0,
+            };
+          }
+          if (event.data.sql) {
+            msg.sql = event.data.sql as string;
+          }
+          if (!msg.content && event.data.answer) {
+            msg.content = event.data.answer as string;
+          }
         }
 
         if (event.event_type === 'error') {

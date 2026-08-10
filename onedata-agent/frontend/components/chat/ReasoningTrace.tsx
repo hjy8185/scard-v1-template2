@@ -167,6 +167,7 @@ function StepDataPreview({ step }: { step: ReasoningStep }) {
       );
     case 'context':
       const tables = step.data.tables as string[] | undefined;
+      const domainHint = step.data.domain_hint as string | undefined;
       if (tables && tables.length > 0) {
         return (
           <div className="flex flex-wrap gap-1 mt-1">
@@ -181,20 +182,37 @@ function StepDataPreview({ step }: { step: ReasoningStep }) {
           </div>
         );
       }
+      if (domainHint) {
+        return <p className="text-[11px] text-mist mt-0.5">도메인: {domainHint}</p>;
+      }
       return null;
-    case 'sql':
+    case 'sql_generate':
+      const sqlTables = step.data.tables_used as string[] | undefined;
       return (
-        <p className="text-[11px] text-jade mt-0.5">
-          SQL 쿼리 생성 완료
-        </p>
+        <div className="mt-0.5">
+          <p className="text-[11px] text-jade">SQL 쿼리 생성 완료</p>
+          {sqlTables && sqlTables.length > 0 && (
+            <div className="flex flex-wrap gap-1 mt-1">
+              {sqlTables.map((t, i) => (
+                <span key={i} className="px-1.5 py-0.5 rounded bg-ink-700 text-[10px] text-aqua border border-ink-600">
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
       );
-    case 'execution':
+    case 'execute':
       const rowCount = step.data.row_count as number | undefined;
       return rowCount !== undefined ? (
         <p className="text-[11px] text-jade mt-0.5">
           {rowCount}건 조회됨
         </p>
       ) : null;
+    case 'answer':
+      return (
+        <p className="text-[11px] text-jade mt-0.5">답변 생성 완료</p>
+      );
     default:
       return null;
   }
@@ -297,7 +315,7 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
             <span className="text-pearl font-medium">분석된 의도:</span>{' '}
             {(step.data.intent as string) || (step.data.description as string) || JSON.stringify(step.data)}
           </p>
-          {step.data.entities && (
+          {step.data.entities && (step.data.entities as string[]).length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1">
               {(step.data.entities as string[]).map((e, i) => (
                 <span key={i} className="px-2 py-0.5 rounded-full bg-aqua/10 text-aqua text-[11px] border border-aqua/20">
@@ -306,13 +324,23 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
               ))}
             </div>
           )}
+          {step.data.confidence && (
+            <p className="text-[11px] text-slate mt-1">
+              신뢰도: {Math.round((step.data.confidence as number) * 100)}%
+            </p>
+          )}
         </div>
       );
     case 'context':
       return (
         <div className="mt-2 p-3 rounded-lg bg-ink-700/50 border border-ink-600">
+          {step.data.domain_hint && (
+            <p className="text-xs text-mist">
+              <span className="text-pearl font-medium">도메인:</span> {step.data.domain_hint as string}
+            </p>
+          )}
           {step.data.tables && (
-            <div>
+            <div className="mt-2">
               <p className="text-[11px] text-slate mb-1.5">관련 테이블</p>
               <div className="flex flex-wrap gap-1.5">
                 {(step.data.tables as string[]).map((t, i) => (
@@ -323,41 +351,52 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
               </div>
             </div>
           )}
-          {step.data.columns && (
-            <div className="mt-2">
-              <p className="text-[11px] text-slate mb-1.5">관련 컬럼</p>
-              <div className="flex flex-wrap gap-1">
-                {(step.data.columns as string[]).slice(0, 10).map((c, i) => (
-                  <span key={i} className="px-1.5 py-0.5 rounded bg-ink-800 text-[10px] text-mist">
-                    {c}
+        </div>
+      );
+    case 'sql_generate':
+      return (
+        <div className="mt-2 p-3 rounded-lg bg-ink-700/50 border border-ink-600">
+          {step.data.explanation && (
+            <p className="text-xs text-mist mb-2">{step.data.explanation as string}</p>
+          )}
+          {step.data.tables_used && (
+            <div>
+              <p className="text-[11px] text-slate mb-1">사용 테이블</p>
+              <div className="flex flex-wrap gap-1.5">
+                {(step.data.tables_used as string[]).map((t, i) => (
+                  <span key={i} className="px-2 py-1 rounded-lg bg-ink-800 text-xs text-aqua border border-ink-600">
+                    {t}
                   </span>
                 ))}
               </div>
             </div>
           )}
+          {step.data.confidence && (
+            <p className="text-[11px] text-slate mt-1.5">
+              SQL 생성 신뢰도: {Math.round((step.data.confidence as number) * 100)}%
+            </p>
+          )}
+          <p className="text-xs text-jade mt-2">SQL 탭에서 전체 쿼리를 확인하세요.</p>
         </div>
       );
-    case 'sql':
+    case 'execute':
+      const rowCount = step.data.row_count as number | undefined;
+      return (
+        <div className="mt-2 p-3 rounded-lg bg-ink-700/50 border border-ink-600">
+          <div className="flex items-center gap-3">
+            {rowCount !== undefined && (
+              <span className="text-xs text-jade">{rowCount}건 조회됨</span>
+            )}
+            {step.data.truncated && (
+              <span className="text-[11px] text-amber">결과 일부 표시</span>
+            )}
+          </div>
+        </div>
+      );
+    case 'answer':
       return (
         <div className="mt-2">
-          <p className="text-xs text-jade">SQL 쿼리가 생성되었습니다. 우측 패널에서 확인하세요.</p>
-        </div>
-      );
-    case 'execution':
-      const rowCount = step.data.row_count as number | undefined;
-      const execMs = step.data.execution_ms as number | undefined;
-      return (
-        <div className="mt-2 flex items-center gap-3">
-          {rowCount !== undefined && (
-            <span className="text-xs text-jade">
-              {rowCount}건 조회
-            </span>
-          )}
-          {execMs !== undefined && (
-            <span className="text-xs text-mist">
-              실행 시간: {formatDuration(execMs)}
-            </span>
-          )}
+          <p className="text-xs text-jade">답변이 생성되었습니다.</p>
         </div>
       );
     default:

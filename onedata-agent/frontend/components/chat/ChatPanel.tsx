@@ -6,10 +6,10 @@ import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';
 
 const EXAMPLE_QUERIES = [
-  '지난 달 신용카드 매출 상위 10개 가맹점을 알려줘',
-  '20대 고객의 평균 결제 금액은?',
-  '해외 결제 비율이 가장 높은 카드 상품은?',
-  '분기별 연체율 추이를 보여줘',
+  '30대 남성 고객 수는 몇 명이야?',
+  '카드 거래 금액 상위 10명의 고객을 보여줘',
+  '신한은행과 신한카드 동시 가입 고객 수는?',
+  '연령대별 고객 분포를 알려줘',
 ];
 
 export function ChatPanel() {

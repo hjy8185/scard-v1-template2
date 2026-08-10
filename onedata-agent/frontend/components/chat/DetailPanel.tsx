@@ -55,7 +55,7 @@ export function DetailPanel() {
           <line x1="15" y1="3" x2="15" y2="21" />
         </svg>
       ),
-      enabled: !!selectedMessage?.queryResults,
+      enabled: !!(selectedMessage?.queryResults && selectedMessage.queryResults.rows.length > 0),
     },
     {
       id: 'ontology',
