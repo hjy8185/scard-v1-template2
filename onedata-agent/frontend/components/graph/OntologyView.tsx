@@ -11,18 +11,19 @@ interface OntologyViewProps {
 interface VisNode {
   id: string;
   label: string;
-  type: 'master' | 'table' | 'join_key';
+  type: 'master' | 'table' | 'join_key' | 'group';
   x: number;
   y: number;
   color: string;
   domain?: string;
+  depth?: number;
 }
 
 interface VisEdge {
   from: string;
   to: string;
   label: string;
-  type: 'join' | 'subsidiary';
+  type: 'join' | 'subsidiary' | 'hierarchy';
 }
 
 const DOMAIN_COLORS: Record<string, string> = {
@@ -41,37 +42,9 @@ const DOMAIN_COLORS: Record<string, string> = {
   digital_channel: '#22d3ee',
 };
 
-const ONEDATA_ONTOLOGY = {
-  master: { id: 'igd_d_cust_mas', label: '그룹 통합 고객 마스터', domain: 'customer' },
-  digital: [
-    { id: 'sol_m_supersol_visit', label: '슈퍼솔 월간MAU', domain: 'digital_channel' },
-    { id: 'sol_d_supersol_session', label: '슈퍼솔 일세션', domain: 'digital_channel' },
-    { id: 'jaz_sh_fanclub_membership_chghist', label: '팬클럽 멤버십', domain: 'digital_channel' },
-    { id: 'shg_membership_cust_hist', label: '리워드앱 이력', domain: 'digital_channel' },
-  ],
-  subsidiaries: [
-    { id: 'cln_d_cust_mas_bank', label: '은행 고객', domain: 'bank' },
-    { id: 'cln_d_cust_mas_card', label: '카드 고객', domain: 'card' },
-    { id: 'cln_d_cust_mas_life', label: '라이프 고객', domain: 'life' },
-    { id: 'cln_d_cust_mas_sec', label: '증권 고객', domain: 'securities' },
-  ],
-  transactions: [
-    { id: 'igd_m_cust_txn', label: '통합 거래', domain: 'transaction' },
-    { id: 'igd_m_cust_txn_bank', label: '은행 거래', domain: 'bank' },
-    { id: 'igd_m_cust_txn_card', label: '카드 거래', domain: 'card' },
-    { id: 'igd_m_cust_txn_life', label: '라이프 거래', domain: 'life' },
-    { id: 'igd_m_cust_txn_sec', label: '증권 거래', domain: 'securities' },
-  ],
-  analytics: [
-    { id: 'igd_m_cust_base', label: '고객 기본정보', domain: 'customer' },
-    { id: 'igd_m_shg_rfm_base_ledger', label: 'RFM 분석', domain: 'marketing' },
-    { id: 'm_cust_dim', label: '고객 디멘션', domain: 'customer' },
-  ],
-};
-
 export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
   const graphData = useMemo(() => {
-    return buildDefaultOntology();
+    return buildHierarchicalOntology();
   }, []);
 
   return (
@@ -81,7 +54,7 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
         <div className="flex items-center gap-2">
           {tablesUsed && tablesUsed.length > 0 && (
             <span className="text-xs text-aqua bg-aqua/10 px-2.5 py-1 rounded-full border border-aqua/20">
-              쿼리 관련
+              쿼리 관련 {tablesUsed.length}개
             </span>
           )}
           <span className="text-xs text-mist bg-ink-700 px-2.5 py-1 rounded-full border border-ink-600">
@@ -92,13 +65,13 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
 
       <div className="rounded-xl bg-ink-900 border border-ink-600 overflow-hidden">
         <svg
-          viewBox="0 0 800 550"
-          className="w-full h-[450px]"
-          style={{ background: 'radial-gradient(circle at 50% 50%, #0d1f2d, #06121a)' }}
+          viewBox="0 0 900 680"
+          className="w-full h-[550px]"
+          style={{ background: 'radial-gradient(circle at 50% 40%, #0d1f2d, #06121a)' }}
         >
           <defs>
             <pattern id="ontology-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e3a4f" strokeWidth="0.5" opacity="0.2" />
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e3a4f" strokeWidth="0.5" opacity="0.15" />
             </pattern>
             <filter id="glow">
               <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
@@ -107,8 +80,21 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
+            <filter id="glow-strong">
+              <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
-          <rect width="800" height="550" fill="url(#ontology-grid)" />
+          <rect width="900" height="680" fill="url(#ontology-grid)" />
+
+          {/* Depth level indicators */}
+          <text x="20" y="60" fill="#2a4a5a" fontSize="10" fontFamily="monospace">Depth 0: 마스터</text>
+          <text x="20" y="200" fill="#2a4a5a" fontSize="10" fontFamily="monospace">Depth 1: 계열사/도메인</text>
+          <text x="20" y="420" fill="#2a4a5a" fontSize="10" fontFamily="monospace">Depth 2: 거래/상세</text>
+          <text x="20" y="600" fill="#2a4a5a" fontSize="10" fontFamily="monospace">Depth 3: 분석/집계</text>
 
           {/* Edges */}
           {graphData.edges.map((edge, i) => {
@@ -116,88 +102,83 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
             const to = graphData.nodes.find((n) => n.id === edge.to);
             if (!from || !to) return null;
 
-            const midX = (from.x + to.x) / 2;
-            const midY = (from.y + to.y) / 2;
+            const isHighlighted = tablesUsed?.includes(from.id) && tablesUsed?.includes(to.id);
+            const dx = to.x - from.x;
+            const dy = to.y - from.y;
+            const midX = from.x + dx * 0.5;
+            const midY = from.y + dy * 0.5;
+            const ctrlY = midY - Math.abs(dx) * 0.05;
 
             return (
               <g key={`edge-${i}`}>
-                <line
-                  x1={from.x}
-                  y1={from.y}
-                  x2={to.x}
-                  y2={to.y}
-                  stroke={edge.type === 'join' ? '#38c7e0' : '#1e3a4f'}
-                  strokeWidth={edge.type === 'join' ? 2 : 1}
-                  strokeDasharray={edge.type === 'subsidiary' ? '4,4' : 'none'}
-                  opacity={0.6}
+                <path
+                  d={`M ${from.x} ${from.y} Q ${midX} ${ctrlY} ${to.x} ${to.y}`}
+                  fill="none"
+                  stroke={isHighlighted ? '#38c7e0' : edge.type === 'join' ? '#38c7e0' : edge.type === 'hierarchy' ? '#2a4a5a' : '#1e3a4f'}
+                  strokeWidth={isHighlighted ? 2.5 : edge.type === 'join' ? 1.5 : 1}
+                  strokeDasharray={edge.type === 'subsidiary' ? '4,4' : edge.type === 'hierarchy' ? '2,3' : 'none'}
+                  opacity={isHighlighted ? 0.9 : 0.5}
                 />
-                <text
-                  x={midX}
-                  y={midY - 6}
-                  textAnchor="middle"
-                  fill="#5a7a8a"
-                  fontSize="9"
-                  fontFamily="monospace"
-                >
-                  {edge.label}
-                </text>
+                {edge.label && (
+                  <text
+                    x={midX}
+                    y={ctrlY - 5}
+                    textAnchor="middle"
+                    fill="#4a6a7a"
+                    fontSize="8"
+                    fontFamily="monospace"
+                  >
+                    {edge.label}
+                  </text>
+                )}
               </g>
             );
           })}
 
           {/* Nodes */}
           {graphData.nodes.map((node) => {
-            const size = node.type === 'master' ? 32 : node.type === 'join_key' ? 16 : 24;
+            const size = node.type === 'master' ? 30 : node.type === 'group' ? 22 : 18;
             const highlighted = tablesUsed?.includes(node.id);
 
             return (
-              <g key={node.id} filter={highlighted ? 'url(#glow)' : undefined}>
-                {/* Outer glow */}
+              <g key={node.id} filter={highlighted ? 'url(#glow-strong)' : undefined}>
                 {highlighted && (
                   <circle
                     cx={node.x}
                     cy={node.y}
-                    r={size + 8}
+                    r={size + 10}
                     fill={node.color}
-                    opacity="0.1"
+                    opacity="0.12"
                   />
                 )}
-                {/* Node */}
                 <circle
                   cx={node.x}
                   cy={node.y}
                   r={size}
-                  fill="#0d1f2d"
+                  fill={highlighted ? `${node.color}15` : '#0a1520'}
                   stroke={node.color}
-                  strokeWidth={highlighted ? 2.5 : 1.5}
-                  opacity={highlighted ? 1 : 0.7}
+                  strokeWidth={highlighted ? 2.5 : node.type === 'master' ? 2 : 1.2}
+                  opacity={highlighted ? 1 : 0.75}
                 />
-                {/* Icon text */}
                 {node.type === 'master' && (
-                  <text x={node.x} y={node.y + 5} textAnchor="middle" fill={node.color} fontSize="14" fontWeight="bold">
-                    M
-                  </text>
+                  <text x={node.x} y={node.y + 5} textAnchor="middle" fill={node.color} fontSize="13" fontWeight="bold">M</text>
+                )}
+                {node.type === 'group' && (
+                  <text x={node.x} y={node.y + 4} textAnchor="middle" fill={node.color} fontSize="10" fontWeight="bold">G</text>
                 )}
                 {node.type === 'table' && (
-                  <text x={node.x} y={node.y + 4} textAnchor="middle" fill={node.color} fontSize="11">
-                    T
-                  </text>
+                  <text x={node.x} y={node.y + 4} textAnchor="middle" fill={node.color} fontSize="9">T</text>
                 )}
-                {node.type === 'join_key' && (
-                  <text x={node.x} y={node.y + 4} textAnchor="middle" fill={node.color} fontSize="8">
-                    K
-                  </text>
-                )}
-                {/* Label */}
                 <text
                   x={node.x}
-                  y={node.y + size + 14}
+                  y={node.y + size + 12}
                   textAnchor="middle"
-                  fill={highlighted ? '#f0f6f4' : '#8ba4b0'}
-                  fontSize={node.type === 'master' ? 11 : 10}
+                  fill={highlighted ? '#f0f6f4' : '#7a9aaa'}
+                  fontSize={node.type === 'master' ? 11 : node.type === 'group' ? 10 : 9}
                   fontFamily="system-ui"
+                  fontWeight={node.type === 'master' ? 'bold' : 'normal'}
                 >
-                  {node.label.length > 18 ? node.label.slice(0, 18) + '...' : node.label}
+                  {node.label.length > 14 ? node.label.slice(0, 14) + '…' : node.label}
                 </text>
               </g>
             );
@@ -206,134 +187,130 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
       </div>
 
       {/* Legend */}
-      <div className="mt-4 flex flex-wrap items-center gap-4">
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: '#22d3ee' }} />
-          <span className="text-xs text-mist">디지털채널(슈퍼솔)</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-2 border-aqua bg-ink-800" />
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.customer }} />
           <span className="text-xs text-mist">고객</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-2 border-jade bg-ink-800" />
-          <span className="text-xs text-mist">거래</span>
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.digital_channel }} />
+          <span className="text-xs text-mist">디지털</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: '#60a5fa' }} />
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.bank }} />
           <span className="text-xs text-mist">은행</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: '#f97316' }} />
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.card }} />
           <span className="text-xs text-mist">카드</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="h-[2px] w-6 bg-aqua/60" />
-          <span className="text-xs text-mist">그룹md 조인</span>
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.life }} />
+          <span className="text-xs text-mist">라이프</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.securities }} />
+          <span className="text-xs text-mist">증권</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.product }} />
+          <span className="text-xs text-mist">상품</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: DOMAIN_COLORS.merchant }} />
+          <span className="text-xs text-mist">가맹점</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-[2px] w-5" style={{ background: '#38c7e0' }} />
+          <span className="text-xs text-mist">조인</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="h-[2px] w-5 border-t border-dashed" style={{ borderColor: '#2a4a5a' }} />
+          <span className="text-xs text-mist">계층</span>
         </div>
       </div>
     </div>
   );
 }
 
-function buildQueryOntology(tablesUsed: string[]): { nodes: VisNode[]; edges: VisEdge[] } {
+function buildHierarchicalOntology(): { nodes: VisNode[]; edges: VisEdge[] } {
   const nodes: VisNode[] = [];
   const edges: VisEdge[] = [];
-  const centerX = 400;
-  const centerY = 275;
 
-  // Always show the master table in center
-  const hasMaster = tablesUsed.includes('igd_d_cust_mas');
+  // --- Depth 0: Master (center-top) ---
+  const masterX = 450;
+  const masterY = 55;
   nodes.push({
-    id: 'igd_d_cust_mas',
-    label: '그룹 통합 고객 마스터',
-    type: 'master',
-    x: centerX,
-    y: centerY,
-    color: DOMAIN_COLORS.customer,
-    domain: 'customer',
+    id: 'igd_d_cust_mas', label: '통합 고객 마스터', type: 'master',
+    x: masterX, y: masterY, color: DOMAIN_COLORS.customer, depth: 0,
   });
 
-  // Add join key
-  nodes.push({
-    id: 'join_key',
-    label: '그룹md번호',
-    type: 'join_key',
-    x: centerX,
-    y: centerY - 60,
-    color: '#f5a623',
-  });
-  edges.push({ from: 'igd_d_cust_mas', to: 'join_key', label: 'PK', type: 'join' });
+  // --- Depth 1: Domain groups ---
+  const depth1Y = 180;
+  const depth1Items = [
+    { id: 'cln_d_cust_mas_bank', label: '은행 고객', domain: 'bank', x: 100 },
+    { id: 'cln_d_cust_mas_card', label: '카드 고객', domain: 'card', x: 250 },
+    { id: 'cln_d_cust_mas_life', label: '라이프 고객', domain: 'life', x: 400 },
+    { id: 'cln_d_cust_mas_sec', label: '증권 고객', domain: 'securities', x: 550 },
+    { id: 'jaz_sh_fanclub_membership_chghist', label: '팬클럽(가입이력)', domain: 'digital_channel', x: 700 },
+    { id: 'igd_m_cust_base', label: '고객 기본', domain: 'customer', x: 850 },
+  ];
 
-  // Place used tables around the center
-  const usedNonMaster = tablesUsed.filter(t => t !== 'igd_d_cust_mas');
-  const radius = 180;
-
-  usedNonMaster.forEach((tableId, i) => {
-    const angle = (2 * Math.PI * i) / Math.max(usedNonMaster.length, 1) - Math.PI / 2;
-    const domain = getDomain(tableId);
-
+  depth1Items.forEach(item => {
     nodes.push({
-      id: tableId,
-      label: getTableLabel(tableId),
-      type: 'table',
-      x: centerX + radius * Math.cos(angle),
-      y: centerY + radius * Math.sin(angle),
-      color: DOMAIN_COLORS[domain] || DOMAIN_COLORS.common,
-      domain,
+      id: item.id, label: item.label, type: 'group',
+      x: item.x, y: depth1Y, color: DOMAIN_COLORS[item.domain], depth: 1,
     });
+    edges.push({ from: 'igd_d_cust_mas', to: item.id, label: '그룹md', type: 'join' });
+  });
 
-    edges.push({
-      from: 'join_key',
-      to: tableId,
-      label: 'FK',
-      type: 'join',
+  // --- Depth 2: Transactions & detail tables ---
+  const depth2Y = 370;
+  const depth2Items = [
+    // Bank children
+    { id: 'igd_m_cust_txn_bank', label: '은행 거래', domain: 'bank', x: 60, parent: 'cln_d_cust_mas_bank' },
+    { id: 'trs_m_cust_acct_txn_bank', label: '은행 계좌 거래', domain: 'bank', x: 150, parent: 'cln_d_cust_mas_bank' },
+    // Card children
+    { id: 'igd_m_cust_txn_card', label: '카드 거래', domain: 'card', x: 250, parent: 'cln_d_cust_mas_card' },
+    { id: 'trs_m_cust_card_txn_card', label: '카드 결제 상세', domain: 'card', x: 340, parent: 'cln_d_cust_mas_card' },
+    // Life children
+    { id: 'igd_m_cust_txn_life', label: '보험 거래', domain: 'life', x: 430, parent: 'cln_d_cust_mas_life' },
+    // Securities children
+    { id: 'igd_m_cust_txn_sec', label: '증권 거래', domain: 'securities', x: 540, parent: 'cln_d_cust_mas_sec' },
+    { id: 'trs_m_cust_acct_txn_sec', label: '증권 계좌', domain: 'securities', x: 620, parent: 'cln_d_cust_mas_sec' },
+    // Digital children
+    { id: 'sol_m_supersol_visit', label: '슈퍼솔 월MAU', domain: 'digital_channel', x: 720, parent: 'jaz_sh_fanclub_membership_chghist' },
+    { id: 'shg_membership_cust_hist', label: '리워드앱', domain: 'digital_channel', x: 810, parent: 'jaz_sh_fanclub_membership_chghist' },
+  ];
+
+  depth2Items.forEach(item => {
+    nodes.push({
+      id: item.id, label: item.label, type: 'table',
+      x: item.x, y: depth2Y, color: DOMAIN_COLORS[item.domain], depth: 2,
     });
+    edges.push({ from: item.parent, to: item.id, label: '', type: 'hierarchy' });
   });
 
-  return { nodes, edges };
-}
+  // --- Depth 3: Leaf analytics / detail ---
+  const depth3Y = 540;
+  const depth3Items = [
+    { id: 'cln_m_cust_base_bank', label: '은행 고객 월간', domain: 'bank', x: 60, parent: 'igd_m_cust_txn_bank' },
+    { id: 'pdt_m_acct_holding_base_bank', label: '예금 계좌', domain: 'product', x: 150, parent: 'trs_m_cust_acct_txn_bank' },
+    { id: 'cln_m_cust_base_card', label: '카드 고객 월간', domain: 'card', x: 260, parent: 'igd_m_cust_txn_card' },
+    { id: 'com_m_merchant_franchise', label: '가맹점', domain: 'merchant', x: 360, parent: 'trs_m_cust_card_txn_card' },
+    { id: 'trs_m_merchant_delivery', label: '배달 거래', domain: 'merchant', x: 450, parent: 'trs_m_cust_card_txn_card' },
+    { id: 'pdt_m_contract_holding_base_life', label: '보험 계약', domain: 'product', x: 540, parent: 'igd_m_cust_txn_life' },
+    { id: 'rpt_d_assetsize_sec', label: '증권 자산', domain: 'securities', x: 630, parent: 'trs_m_cust_acct_txn_sec' },
+    { id: 'sol_d_supersol_session', label: '슈퍼솔 일세션', domain: 'digital_channel', x: 730, parent: 'sol_m_supersol_visit' },
+    { id: 'igd_m_shg_rfm_base_ledger', label: 'RFM 분석', domain: 'marketing', x: 840, parent: 'shg_membership_cust_hist' },
+  ];
 
-function buildDefaultOntology(): { nodes: VisNode[]; edges: VisEdge[] } {
-  const nodes: VisNode[] = [];
-  const edges: VisEdge[] = [];
-  const centerX = 400;
-  const centerY = 280;
-
-  // Master node
-  nodes.push({
-    id: ONEDATA_ONTOLOGY.master.id,
-    label: ONEDATA_ONTOLOGY.master.label,
-    type: 'master',
-    x: centerX,
-    y: centerY,
-    color: DOMAIN_COLORS.customer,
-  });
-
-  // Digital channel (top-center, most prominent)
-  ONEDATA_ONTOLOGY.digital.forEach((d, i) => {
-    const x = 300 + (i * 200);
-    nodes.push({ id: d.id, label: d.label, type: 'table', x, y: 80, color: DOMAIN_COLORS.digital_channel || '#22d3ee' });
-    edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: d.id, label: '그룹md', type: 'join' });
-  });
-
-  // Subsidiaries (left side)
-  ONEDATA_ONTOLOGY.subsidiaries.forEach((s, i) => {
-    nodes.push({ id: s.id, label: s.label, type: 'table', x: 80, y: 120 + (i * 100), color: DOMAIN_COLORS[s.domain] });
-    edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: s.id, label: '1:1', type: 'subsidiary' });
-  });
-
-  // Transactions (bottom)
-  ONEDATA_ONTOLOGY.transactions.slice(0, 4).forEach((t, i) => {
-    const x = 150 + (i * 170);
-    nodes.push({ id: t.id, label: t.label, type: 'table', x, y: 490, color: DOMAIN_COLORS[t.domain] });
-    edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: t.id, label: '1:N', type: 'join' });
-  });
-
-  // Analytics (right side)
-  ONEDATA_ONTOLOGY.analytics.forEach((a, i) => {
-    nodes.push({ id: a.id, label: a.label, type: 'table', x: 700, y: 160 + (i * 120), color: DOMAIN_COLORS[a.domain] || DOMAIN_COLORS.common });
-    edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: a.id, label: '1:1', type: 'join' });
+  depth3Items.forEach(item => {
+    nodes.push({
+      id: item.id, label: item.label, type: 'table',
+      x: item.x, y: depth3Y, color: DOMAIN_COLORS[item.domain], depth: 3,
+    });
+    edges.push({ from: item.parent, to: item.id, label: '', type: 'hierarchy' });
   });
 
   return { nodes, edges };
@@ -356,7 +333,7 @@ function getDomain(tableId: string): string {
 
 function getTableLabel(tableId: string): string {
   const labels: Record<string, string> = {
-    'igd_d_cust_mas': '그룹 통합 고객 마스터',
+    'igd_d_cust_mas': '통합 고객 마스터',
     'igd_m_cust_base': '고객 기본정보',
     'igd_m_cust_txn': '통합 거래',
     'igd_m_cust_txn_bank': '은행 거래',
@@ -371,16 +348,21 @@ function getTableLabel(tableId: string): string {
     'cln_m_cust_base_bank': '은행 고객 월간',
     'cln_m_cust_base_card': '카드 고객 월간',
     'trs_m_cust_card_txn_card': '카드 결제',
+    'trs_m_cust_acct_txn_bank': '은행 계좌 거래',
+    'trs_m_cust_acct_txn_sec': '증권 계좌 거래',
     'trs_m_merchant_delivery': '배달 거래',
     'com_m_merchant_franchise': '가맹점 프랜차이즈',
     'm_cust_dim': '고객 디멘션',
     'm_card_dim': '카드 디멘션',
     'igd_m_shg_rfm_base_ledger': 'RFM 분석',
     'vam_cus_mkt_mas_m': '마케팅 고객',
-    'jaz_sh_fanclub_membership_chghist': '팬클럽 멤버십',
-    'sol_m_supersol_visit': '슈퍼솔 월간MAU',
+    'jaz_sh_fanclub_membership_chghist': '팬클럽(가입이력)',
+    'sol_m_supersol_visit': '슈퍼솔 월MAU',
     'sol_d_supersol_session': '슈퍼솔 일세션',
     'shg_membership_cust_hist': '리워드앱 이력',
+    'pdt_m_acct_holding_base_bank': '예금 계좌',
+    'pdt_m_contract_holding_base_life': '보험 계약',
+    'rpt_d_assetsize_sec': '증권 자산',
   };
-  return labels[tableId] || tableId.replace(/^(igd_|cln_|trs_|pdt_|com_|rpt_|jaz_|shg_)/, '');
+  return labels[tableId] || tableId.replace(/^(igd_|cln_|trs_|pdt_|com_|rpt_|jaz_|shg_|sol_)/, '');
 }
