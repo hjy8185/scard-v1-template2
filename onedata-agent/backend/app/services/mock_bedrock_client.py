@@ -286,6 +286,25 @@ class MockBedrockClient:
     def __init__(self, **kwargs: Any) -> None:
         logger.info("MockBedrockClient initialized (LOCAL_DEV mode)")
 
+    async def tool_call(
+        self,
+        system: str,
+        user: str,
+        tool: dict,
+        max_tokens: int | None = None,
+    ) -> dict[str, Any]:
+        """Mock tool_call - routes to appropriate mock handler."""
+        tool_name = tool.get("toolSpec", {}).get("name", "")
+        if tool_name == "classify_intent":
+            return json.loads(self._mock_intent(user))
+        elif tool_name == "emit_sql":
+            return self._generate_fallback_sql(user, "")
+        return {"result": "mock"}
+
+    async def text(self, system: str, user: str, max_tokens: int | None = None) -> str:
+        """Mock text call."""
+        return self._mock_answer(user)
+
     async def invoke(
         self,
         messages: list[dict[str, Any]],
@@ -416,7 +435,7 @@ class MockBedrockClient:
         return None
 
     def _generate_fallback_sql(self, query: str, context: str) -> dict[str, Any]:
-        if any(k in query for k in ["거래", "결제", "이용금액", "매출"]):
+        if any(k in query for k in ["거래", "결제", "이용금액", "이용", "매출", "카드"]):
             table = "igd_m_cust_txn_card"
             return {
                 "sql": f'SELECT "기준년월", COUNT(*) as "건수", SUM("이용금액") as "총이용금액" FROM ai_ready_v2.{table} GROUP BY "기준년월" ORDER BY "기준년월" DESC LIMIT 12',

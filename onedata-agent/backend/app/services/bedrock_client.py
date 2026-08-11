@@ -1,9 +1,7 @@
 """Bedrock Claude client for LLM operations.
 
-Uses Claude Sonnet via Amazon Bedrock for:
-- Intent classification
-- SQL generation from natural language + ontology context
-- Answer composition from query results
+Uses Bedrock Converse API with toolChoice for structured output.
+Reference: scard-v2-llm's BedrockLLM pattern.
 """
 
 from __future__ import annotations
@@ -20,20 +18,88 @@ from app.config import settings
 
 logger = logging.getLogger(__name__)
 
-_BOTO_CONFIG = Config(
-    region_name=settings.AWS_REGION,
-    retries={"max_attempts": 2},
-    read_timeout=120,
-)
-
 
 class BedrockError(Exception):
     """Raised when Bedrock invocation fails."""
     pass
 
 
+# Tool schema for SQL generation (forced via toolChoice)
+TOOL_SQL_GENERATE = {
+    "toolSpec": {
+        "name": "emit_sql",
+        "description": "생성된 SQL 쿼리와 메타데이터를 제출합니다.",
+        "inputSchema": {"json": {
+            "type": "object",
+            "required": ["sql", "explanation", "tables_used"],
+            "properties": {
+                "sql": {
+                    "type": "string",
+                    "description": "Athena-compatible SELECT SQL query",
+                },
+                "explanation": {
+                    "type": "string",
+                    "description": "쿼리가 하는 일에 대한 간단한 설명 (한국어)",
+                },
+                "tables_used": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "쿼리에 사용된 테이블 이름 목록",
+                },
+                "confidence": {
+                    "type": "number",
+                    "description": "생성 확신도 (0.0-1.0)",
+                },
+                "assumptions": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "쿼리 생성 시 가정한 사항",
+                },
+            },
+        }},
+    }
+}
+
+# Tool schema for intent classification
+TOOL_INTENT_CLASSIFY = {
+    "toolSpec": {
+        "name": "classify_intent",
+        "description": "사용자 질문의 의도를 분류합니다.",
+        "inputSchema": {"json": {
+            "type": "object",
+            "required": ["intent", "confidence", "requires_sql"],
+            "properties": {
+                "intent": {
+                    "type": "string",
+                    "enum": ["data_query", "aggregation", "comparison", "definition", "greeting", "unsupported"],
+                    "description": "분류된 의도",
+                },
+                "confidence": {
+                    "type": "number",
+                    "description": "분류 확신도 (0.0-1.0)",
+                },
+                "entities": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "추출된 엔티티",
+                },
+                "requires_sql": {
+                    "type": "boolean",
+                    "description": "SQL 실행이 필요한지 여부",
+                },
+                "domain_hint": {
+                    "type": "string",
+                    "enum": ["customer", "transaction", "product", "merchant", "soleprop"],
+                    "description": "데이터 도메인 힌트",
+                },
+            },
+        }},
+    }
+}
+
+
 class BedrockClient:
-    """Client for Amazon Bedrock Claude model invocations."""
+    """Client for Amazon Bedrock using the Converse API."""
 
     def __init__(
         self,
@@ -48,10 +114,72 @@ class BedrockClient:
             "bedrock-runtime",
             config=Config(
                 region_name=self._region,
-                retries={"max_attempts": 2},
-                read_timeout=120,
+                retries={"max_attempts": 3},
+                read_timeout=60,
             ),
         )
+
+    def _converse(self, **kw) -> dict:
+        """Single Converse API call."""
+        return self._client.converse(**kw)
+
+    async def tool_call(
+        self,
+        system: str,
+        user: str,
+        tool: dict,
+        max_tokens: int | None = None,
+    ) -> dict[str, Any]:
+        """Force structured output via toolChoice.
+
+        The model MUST call the specified tool, giving us guaranteed
+        JSON structure without fragile text parsing.
+        """
+        name = tool["toolSpec"]["name"]
+
+        def _invoke():
+            resp = self._converse(
+                modelId=self._model_id,
+                system=[{"text": system}],
+                messages=[{"role": "user", "content": [{"text": user}]}],
+                toolConfig={
+                    "tools": [tool],
+                    "toolChoice": {"tool": {"name": name}},
+                },
+                inferenceConfig={"maxTokens": max_tokens or self._max_tokens},
+            )
+            blocks = (resp.get("output") or {}).get("message", {}).get("content") or []
+            for b in blocks:
+                tu = b.get("toolUse")
+                if tu and tu.get("name") == name:
+                    return dict(tu.get("input") or {})
+            raise BedrockError(f"toolUse block missing for '{name}' (schema enforcement failed)")
+
+        try:
+            return await asyncio.to_thread(_invoke)
+        except BedrockError:
+            raise
+        except Exception as e:
+            logger.error("Bedrock tool_call failed: %s: %s", type(e).__name__, e)
+            raise BedrockError(f"Bedrock tool_call failed: {e}") from e
+
+    async def text(self, system: str, user: str, max_tokens: int | None = None) -> str:
+        """Plain text response via Converse API."""
+        def _invoke():
+            resp = self._converse(
+                modelId=self._model_id,
+                system=[{"text": system}],
+                messages=[{"role": "user", "content": [{"text": user}]}],
+                inferenceConfig={"maxTokens": max_tokens or self._max_tokens},
+            )
+            blocks = (resp.get("output") or {}).get("message", {}).get("content") or []
+            return "".join(b.get("text", "") for b in blocks if isinstance(b, dict)).strip()
+
+        try:
+            return await asyncio.to_thread(_invoke)
+        except Exception as e:
+            logger.error("Bedrock text call failed: %s: %s", type(e).__name__, e)
+            raise BedrockError(f"Bedrock text call failed: {e}") from e
 
     async def invoke(
         self,
@@ -61,49 +189,40 @@ class BedrockClient:
         max_tokens: int | None = None,
         stop_sequences: list[str] | None = None,
     ) -> str:
-        """Invoke Claude model and return the text response.
+        """Legacy invoke method (Messages API format) for backward compatibility.
 
-        Args:
-            messages: List of message dicts with 'role' and 'content'.
-            system: System prompt.
-            temperature: Sampling temperature (0.0 for deterministic).
-            max_tokens: Override max tokens.
-            stop_sequences: Optional stop sequences.
-
-        Returns:
-            The assistant's text response.
-
-        Raises:
-            BedrockError: If invocation fails.
+        Translates to Converse API internally.
         """
-        body = {
-            "anthropic_version": "bedrock-2023-05-31",
-            "messages": messages,
-            "max_tokens": max_tokens or self._max_tokens,
-            "temperature": temperature,
-        }
-        if system:
-            body["system"] = system
-        if stop_sequences:
-            body["stop_sequences"] = stop_sequences
+        converse_messages = []
+        for msg in messages:
+            role = msg.get("role", "user")
+            content = msg.get("content", "")
+            if isinstance(content, str):
+                converse_messages.append({
+                    "role": role,
+                    "content": [{"text": content}],
+                })
+            elif isinstance(content, list):
+                converse_messages.append({
+                    "role": role,
+                    "content": content,
+                })
+
+        def _invoke():
+            kw: dict[str, Any] = {
+                "modelId": self._model_id,
+                "messages": converse_messages,
+                "inferenceConfig": {"maxTokens": max_tokens or self._max_tokens},
+            }
+            if system:
+                kw["system"] = [{"text": system}]
+
+            resp = self._converse(**kw)
+            blocks = (resp.get("output") or {}).get("message", {}).get("content") or []
+            return "".join(b.get("text", "") for b in blocks if isinstance(b, dict)).strip()
 
         try:
-            response = await asyncio.to_thread(
-                self._client.invoke_model,
-                modelId=self._model_id,
-                contentType="application/json",
-                accept="application/json",
-                body=json.dumps(body).encode(),
-            )
-            result = json.loads(response["body"].read())
-            content_blocks = result.get("content", [])
-            text_parts = [
-                block["text"]
-                for block in content_blocks
-                if block.get("type") == "text"
-            ]
-            return "\n".join(text_parts)
-
+            return await asyncio.to_thread(_invoke)
         except Exception as e:
             logger.error("Bedrock invoke failed: %s: %s", type(e).__name__, e)
             raise BedrockError(f"Bedrock invocation failed: {e}") from e
@@ -115,40 +234,44 @@ class BedrockClient:
         temperature: float = 0.0,
         max_tokens: int | None = None,
     ) -> AsyncGenerator[str, None]:
-        """Invoke Claude with streaming response.
+        """Streaming text response via Converse stream API."""
+        converse_messages = []
+        for msg in messages:
+            role = msg.get("role", "user")
+            content = msg.get("content", "")
+            if isinstance(content, str):
+                converse_messages.append({
+                    "role": role,
+                    "content": [{"text": content}],
+                })
+            elif isinstance(content, list):
+                converse_messages.append({
+                    "role": role,
+                    "content": content,
+                })
 
-        Yields text chunks as they arrive.
-        """
-        body = {
-            "anthropic_version": "bedrock-2023-05-31",
-            "messages": messages,
-            "max_tokens": max_tokens or self._max_tokens,
-            "temperature": temperature,
-        }
-        if system:
-            body["system"] = system
+        def _invoke_stream():
+            kw: dict[str, Any] = {
+                "modelId": self._model_id,
+                "messages": converse_messages,
+                "inferenceConfig": {"maxTokens": max_tokens or self._max_tokens},
+            }
+            if system:
+                kw["system"] = [{"text": system}]
+            return self._client.converse_stream(**kw)
 
         try:
-            response = await asyncio.to_thread(
-                self._client.invoke_model_with_response_stream,
-                modelId=self._model_id,
-                contentType="application/json",
-                accept="application/json",
-                body=json.dumps(body).encode(),
-            )
-
-            stream = response.get("body")
+            response = await asyncio.to_thread(_invoke_stream)
+            stream = response.get("stream")
             if stream is None:
                 raise BedrockError("No response stream from Bedrock")
 
             for event in stream:
-                chunk = event.get("chunk")
-                if chunk:
-                    data = json.loads(chunk["bytes"].decode())
-                    if data.get("type") == "content_block_delta":
-                        delta = data.get("delta", {})
-                        if delta.get("type") == "text_delta":
-                            yield delta.get("text", "")
+                if "contentBlockDelta" in event:
+                    delta = event["contentBlockDelta"].get("delta", {})
+                    text = delta.get("text", "")
+                    if text:
+                        yield text
 
         except BedrockError:
             raise
@@ -157,41 +280,26 @@ class BedrockClient:
             raise BedrockError(f"Bedrock streaming failed: {e}") from e
 
     async def classify_intent(self, query: str) -> dict[str, Any]:
-        """Classify the user's intent for routing.
-
-        Returns dict with: intent, confidence, entities, requires_sql
-        """
-        system_prompt = """You are an intent classifier for a financial data query system.
-Classify the user's query into one of these intents:
-- data_query: User wants to retrieve/analyze data (requires SQL)
-- aggregation: User wants summary statistics or aggregations (requires SQL)
-- comparison: User wants to compare data across dimensions (requires SQL)
-- definition: User asks about a term/concept definition (no SQL needed)
-- greeting: General greeting or off-topic (no SQL needed)
-- unsupported: Query about data we don't have
-
-Respond in JSON format only:
-{
-  "intent": "<intent_type>",
-  "confidence": <0.0-1.0>,
-  "entities": ["<extracted entities>"],
-  "requires_sql": <true/false>,
-  "domain_hint": "<customer|transaction|product|merchant|soleprop|null>"
-}"""
-
-        messages = [{"role": "user", "content": query}]
-        response = await self.invoke(messages, system=system_prompt, temperature=0.0)
+        """Classify user intent using forced tool schema."""
+        system_prompt = """당신은 신한금융그룹 원데이터 플랫폼의 의도 분류기입니다.
+사용자 질문을 다음 의도 중 하나로 분류하세요:
+- data_query: 데이터 조회/분석 (SQL 필요)
+- aggregation: 요약 통계/집계 (SQL 필요)
+- comparison: 차원별 비교 분석 (SQL 필요)
+- definition: 용어/개념 정의 질문 (SQL 불필요)
+- greeting: 인사/잡담 (SQL 불필요)
+- unsupported: 보유하지 않은 데이터에 대한 질문"""
 
         try:
-            # Extract JSON from response
-            json_str = response.strip()
-            if json_str.startswith("```"):
-                json_str = json_str.split("```")[1]
-                if json_str.startswith("json"):
-                    json_str = json_str[4:]
-            return json.loads(json_str)
-        except (json.JSONDecodeError, IndexError):
-            logger.warning("Failed to parse intent response: %s", response[:200])
+            result = await self.tool_call(
+                system=system_prompt,
+                user=query,
+                tool=TOOL_INTENT_CLASSIFY,
+                max_tokens=512,
+            )
+            return result
+        except BedrockError:
+            logger.warning("Intent classification via tool_call failed, returning default")
             return {
                 "intent": "data_query",
                 "confidence": 0.5,
@@ -206,65 +314,54 @@ Respond in JSON format only:
         context: str,
         examples: list[dict[str, str]] | None = None,
     ) -> dict[str, Any]:
-        """Generate SQL from natural language query with ontology context.
+        """Generate SQL using forced tool schema (Converse + toolChoice).
 
-        Args:
-            query: User's natural language question.
-            context: Ontology context (table schemas, relationships).
-            examples: Optional few-shot examples.
-
-        Returns:
-            Dict with: sql, explanation, tables_used, confidence
+        This guarantees structured JSON output without text parsing.
         """
-        system_prompt = f"""You are a SQL generation expert for Shinhan Financial Group's Onedata platform.
-Generate Athena-compatible SQL (Presto/Trino dialect) based on the user's question.
+        system_prompt = f"""당신은 신한금융그룹 원데이터 플랫폼의 SQL 생성 전문가입니다.
+사용자 질문에 답할 Athena(Presto/Trino) SQL을 생성합니다.
 
-CRITICAL RULES:
-1. Generate ONLY SELECT queries - never INSERT/UPDATE/DELETE/DROP
-2. Always include LIMIT clause (max 1000 rows)
-3. Use the exact table and column names from the provided context (Korean names)
-4. IMPORTANT: All Korean column names MUST be wrapped in double quotes. Example: "그룹md번호", "고객연령", "성별구분코드"
-5. The Glue database is "ai_ready_v2" - use fully qualified names: ai_ready_v2.<table_name>
-6. The universal join key across all tables is "그룹md번호" (group MD number = customer ID)
-7. For date columns, use appropriate date functions (date_parse, date_format)
-8. NULL handling: use COALESCE where appropriate
-9. Aggregations: always include GROUP BY for non-aggregated columns
-10. Column aliases also must be in double quotes if they contain Korean: e.g. COUNT(*) as "이용건수"
+## 필수 규칙
 
-ONTOLOGY CONTEXT:
-{context}
+1. SELECT 쿼리만 생성 — INSERT/UPDATE/DELETE/DROP 금지
+2. 반드시 LIMIT 포함 (최대 1000행)
+3. 아래 온톨로지 컨텍스트에 있는 정확한 테이블·컬럼 이름을 사용
+4. 한국어 컬럼명은 반드시 큰따옴표로 감싸기: "그룹md번호", "고객연령"
+5. 데이터베이스 접두어: ai_ready_v2.<테이블명>
+6. 모든 테이블의 공통 조인 키: "그룹md번호" (고객 ID)
+7. 집계 함수 사용 시 GROUP BY 필수
+8. 컬럼 별칭도 한국어면 큰따옴표: COUNT(*) as "이용건수"
+9. 날짜 컬럼: date_parse, date_format 사용
+10. NULL 처리: COALESCE 적절히 사용
 
-Respond in JSON format:
-{{
-  "sql": "<the SQL query>",
-  "explanation": "<brief explanation of what the query does>",
-  "tables_used": ["<table1>", "<table2>"],
-  "confidence": <0.0-1.0>,
-  "assumptions": ["<any assumptions made>"]
-}}"""
+## 쿼리 품질 기준
 
-        messages: list[dict[str, Any]] = []
+- 결과는 집계·정렬해 상위 건으로 줄이세요 (LIMIT)
+- 기간 필터가 있으면 반드시 WHERE에 포함
+- 드릴다운 질문("위 결과를 X별로")이면 이전 쿼리를 기반으로 X 차원 추가
 
-        # Add few-shot examples if provided
+## 온톨로지 컨텍스트
+
+{context}"""
+
+        # Build user message with few-shot examples inline
+        user_parts = []
         if examples:
+            user_parts.append("## 참고 예시\n")
             for ex in examples[:3]:
-                messages.append({"role": "user", "content": ex["question"]})
-                messages.append({"role": "assistant", "content": json.dumps(ex["answer"], ensure_ascii=False)})
+                user_parts.append(f"Q: {ex['question']}")
+                user_parts.append(f"A: {json.dumps(ex['answer'], ensure_ascii=False)}\n")
+            user_parts.append("---\n")
 
-        messages.append({"role": "user", "content": query})
+        user_parts.append(f"## 사용자 질문\n{query}")
+        user_msg = "\n".join(user_parts)
 
-        response = await self.invoke(messages, system=system_prompt, temperature=0.0)
-
-        try:
-            json_str = response.strip()
-            if json_str.startswith("```"):
-                json_str = json_str.split("```")[1]
-                if json_str.startswith("json"):
-                    json_str = json_str[4:]
-            return json.loads(json_str)
-        except (json.JSONDecodeError, IndexError):
-            logger.warning("Failed to parse SQL generation response: %s", response[:300])
-            raise BedrockError("Failed to generate valid SQL from the model response")
+        result = await self.tool_call(
+            system=system_prompt,
+            user=user_msg,
+            tool=TOOL_SQL_GENERATE,
+        )
+        return result
 
     async def compose_answer(
         self,
@@ -273,29 +370,19 @@ Respond in JSON format:
         results: dict[str, Any],
         context: str | None = None,
     ) -> str:
-        """Compose a natural language answer from query results.
+        """Compose a natural language answer from query results."""
+        system_prompt = """당신은 신한금융그룹의 데이터 분석 어시스턴트입니다.
+SQL 쿼리 결과를 바탕으로 명확하고 간결한 한국어 답변을 작성합니다.
 
-        Args:
-            query: Original user question.
-            sql: The SQL that was executed.
-            results: Query results (columns, rows).
-            context: Additional context for answer composition.
-
-        Returns:
-            Natural language answer string.
-        """
-        system_prompt = """You are a data analyst assistant for Shinhan Financial Group.
-Compose a clear, concise Korean answer based on the SQL query results.
-
-Rules:
-1. Answer in Korean
-2. Include specific numbers and data points from the results
-3. Format large numbers with commas (e.g., 1,234,567)
-4. If results are empty, say so clearly and suggest why
-5. For aggregations, highlight key findings
-6. Keep the answer concise (2-5 sentences for simple queries, more for complex)
-7. Do NOT reveal the SQL query itself unless asked
-8. Use polite language (합니다/입니다 체)"""
+규칙:
+1. 한국어로 답변
+2. 결과에서 구체적인 숫자와 데이터 포인트 포함
+3. 큰 숫자는 쉼표로 형식화 (예: 1,234,567)
+4. 결과가 비어있으면 명확히 설명하고 이유 제시
+5. 집계 결과의 핵심 인사이트 강조
+6. 간결하게 작성 (간단한 쿼리는 2-5문장, 복잡한 것은 더 길게)
+7. SQL 쿼리 자체는 노출하지 않음
+8. 존댓말 사용 (합니다/입니다 체)"""
 
         result_summary = self._format_results_for_prompt(results)
 
@@ -306,8 +393,7 @@ Rules:
 
 위 결과를 바탕으로 사용자 질문에 답변해 주세요."""
 
-        messages = [{"role": "user", "content": user_msg}]
-        return await self.invoke(messages, system=system_prompt, temperature=0.3)
+        return await self.text(system=system_prompt, user=user_msg, max_tokens=2048)
 
     def _format_results_for_prompt(self, results: dict[str, Any]) -> str:
         """Format query results into a readable string for the LLM."""
@@ -323,7 +409,6 @@ Rules:
         lines.append("| " + " | ".join(columns) + " |")
         lines.append("|" + "|".join(["---"] * len(columns)) + "|")
 
-        # Show up to 20 rows in the prompt
         for row in rows[:20]:
             values = [str(row.get(col, "NULL")) for col in columns]
             lines.append("| " + " | ".join(values) + " |")

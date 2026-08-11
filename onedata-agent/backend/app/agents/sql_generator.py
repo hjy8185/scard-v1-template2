@@ -2,7 +2,7 @@
 
 Generates Athena-compatible SQL queries from natural language,
 using ontology context (table schemas, relationships, column descriptions)
-to improve accuracy.
+and the Bedrock Converse API with forced tool schema for reliable structured output.
 """
 
 from __future__ import annotations
@@ -19,7 +19,6 @@ from app.services.opensearch_client import OpenSearchClient, OpenSearchError
 
 logger = logging.getLogger(__name__)
 
-# Few-shot examples for SQL generation
 _FEW_SHOT_EXAMPLES = [
     {
         "question": "최근 3개월간 카드 이용 건수가 가장 많은 고객 상위 10명을 알려줘",
@@ -34,8 +33,6 @@ _FEW_SHOT_EXAMPLES = [
             ),
             "explanation": "카드 거래 테이블에서 최근 3개월 기준으로 고객별 이용 건수를 집계하여 상위 10명을 조회합니다.",
             "tables_used": ["igd_m_cust_txn_card"],
-            "confidence": 0.9,
-            "assumptions": ["기준년월 컬럼으로 최근 3개월 필터링"],
         },
     },
     {
@@ -51,25 +48,53 @@ _FEW_SHOT_EXAMPLES = [
             ),
             "explanation": "고객 기본 테이블과 카드 거래 테이블을 조인하여 30대 여성의 온라인쇼핑 평균 결제금액을 계산합니다.",
             "tables_used": ["igd_m_cust_txn_card", "igd_m_cust_base"],
-            "confidence": 0.85,
-            "assumptions": ["성별 코드 'F'가 여성을 의미", "업종대분류에 '온라인쇼핑' 값 존재"],
         },
     },
     {
-        "question": "가맹점별 월간 매출 추이를 보여줘",
+        "question": "위 결과를 연령대별로 분석해줘",
         "answer": {
             "sql": (
-                'SELECT "가맹점명", "기준년월", SUM("이용금액") as "월매출" '
-                "FROM ai_ready_v2.trs_m_merchant_delivery "
-                'WHERE "기준년월" >= date_format(date_add(\'month\', -6, current_date), \'%Y%m\') '
-                'GROUP BY "가맹점명", "기준년월" '
-                'ORDER BY "가맹점명", "기준년월" '
-                "LIMIT 1000"
+                'SELECT c."연령대", COUNT(*) as "이용건수", SUM(t."이용금액") as "총이용금액", '
+                'AVG(t."이용금액") as "평균이용금액" '
+                "FROM ai_ready_v2.igd_m_cust_txn_card t "
+                'JOIN ai_ready_v2.igd_m_cust_base c ON t."그룹md번호" = c."그룹md번호" '
+                'GROUP BY c."연령대" '
+                'ORDER BY "총이용금액" DESC '
+                "LIMIT 20"
             ),
-            "explanation": "배달 가맹점 테이블에서 최근 6개월간 가맹점별 월간 매출을 집계합니다.",
-            "tables_used": ["trs_m_merchant_delivery"],
-            "confidence": 0.8,
-            "assumptions": ["최근 6개월 기준", "배달 가맹점 매출 기준"],
+            "explanation": "연령대별 카드 이용 건수와 금액을 분석합니다.",
+            "tables_used": ["igd_m_cust_txn_card", "igd_m_cust_base"],
+        },
+    },
+    {
+        "question": "위 결과를 성별로 비교해줘",
+        "answer": {
+            "sql": (
+                'SELECT c."성별", COUNT(*) as "이용건수", SUM(t."이용금액") as "총이용금액", '
+                'AVG(t."이용금액") as "평균이용금액" '
+                "FROM ai_ready_v2.igd_m_cust_txn_card t "
+                'JOIN ai_ready_v2.igd_m_cust_base c ON t."그룹md번호" = c."그룹md번호" '
+                'GROUP BY c."성별" '
+                'ORDER BY "총이용금액" DESC '
+                "LIMIT 10"
+            ),
+            "explanation": "성별로 카드 이용 패턴을 비교합니다.",
+            "tables_used": ["igd_m_cust_txn_card", "igd_m_cust_base"],
+        },
+    },
+    {
+        "question": "위 결과를 월별 추이로 보여줘",
+        "answer": {
+            "sql": (
+                'SELECT "기준년월", COUNT(*) as "이용건수", SUM("이용금액") as "총이용금액" '
+                "FROM ai_ready_v2.igd_m_cust_txn_card "
+                'WHERE "기준년월" >= date_format(date_add(\'month\', -6, current_date), \'%Y%m\') '
+                'GROUP BY "기준년월" '
+                'ORDER BY "기준년월" '
+                "LIMIT 12"
+            ),
+            "explanation": "최근 6개월간 월별 카드 이용 추이를 보여줍니다.",
+            "tables_used": ["igd_m_cust_txn_card"],
         },
     },
 ]
@@ -126,45 +151,31 @@ class SQLGenerator:
         1. Resolve synonyms in the query
         2. Search for relevant tables (OpenSearch + mapper)
         3. Build ontology context
-        4. Generate SQL via LLM
-
-        Args:
-            query: User's natural language question.
-            domain_hint: Optional domain hint from intent classification.
-            conversation_context: Previous conversation for drill-down queries.
-
-        Returns:
-            SQLGenerationResult with the generated SQL and metadata.
+        4. Generate SQL via LLM (Converse API with forced tool schema)
         """
-        # Step 1: Resolve synonyms
         resolved_terms = self._mapper.resolve_terms_in_query(query)
         logger.info("Resolved %d terms from query", len(resolved_terms))
 
-        # Step 2: Find relevant tables
         relevant_tables = await self._find_relevant_tables(query, domain_hint, resolved_terms)
         logger.info("Found %d relevant tables", len(relevant_tables))
 
         if not relevant_tables:
-            # Fallback: use all tables from the hinted domain
             if domain_hint:
                 relevant_tables = [
                     t.table_name for t in self._ontology.get_tables_by_domain(domain_hint)
                 ]
             if not relevant_tables:
-                # Last resort: provide a minimal set of common tables
                 relevant_tables = [
                     "igd_m_cust_base",
                     "igd_m_cust_txn_card",
                     "igd_d_cust_mas",
                 ]
 
-        # Step 3: Build ontology context
         context = self._ontology.build_context(relevant_tables)
         context_str = self._ontology.format_context_for_prompt(context)
 
-        # Add resolved synonyms to context
         if resolved_terms:
-            synonym_context = "\n\n=== TERM MAPPINGS ===\n"
+            synonym_context = "\n\n=== 용어 매핑 ===\n"
             for term_info in resolved_terms:
                 synonym_context += (
                     f"  '{term_info['term']}' → "
@@ -173,12 +184,18 @@ class SQLGenerator:
                 )
             context_str += synonym_context
 
-        # Add conversation context for drill-down queries
         if conversation_context:
-            context_str += f"\n\n=== CONVERSATION HISTORY (for drill-down context) ===\n{conversation_context}\n"
-            context_str += "\nIMPORTANT: '위 결과를' 또는 이전 대화를 참조하는 질문의 경우, 이전 SQL을 기반으로 확장/수정하세요.\n"
+            context_str += f"\n\n=== 대화 이력 (드릴다운 컨텍스트) ===\n{conversation_context}\n"
+            context_str += (
+                "\n★ 드릴다운 규칙: '위 결과를 X별로' 형태의 질문이면 "
+                "이전 쿼리를 기반으로 GROUP BY에 X 차원을 추가하세요. "
+                "각 차원에 맞는 컬럼을 사용:\n"
+                "  - 연령대별 → c.\"연령대\" (igd_m_cust_base JOIN 필요)\n"
+                "  - 성별 → c.\"성별\" (igd_m_cust_base JOIN 필요)\n"
+                "  - 계열사별 → \"계열사명\" 또는 \"계열사코드\"\n"
+                "  - 월별/추이 → \"기준년월\" GROUP BY + ORDER BY\n"
+            )
 
-        # Step 4: Generate SQL via LLM
         try:
             result = await self._bedrock.generate_sql(
                 query=query,
@@ -187,7 +204,6 @@ class SQLGenerator:
             )
 
             sql = result.get("sql", "")
-            # Post-process: ensure database prefix
             sql = self._ensure_database_prefix(sql)
 
             return SQLGenerationResult(
@@ -210,27 +226,23 @@ class SQLGenerator:
         """Find tables relevant to the query using multiple strategies."""
         tables: set[str] = set()
 
-        # From resolved synonyms
         for term in resolved_terms:
             if term.get("table_name"):
                 tables.add(term["table_name"])
 
-        # From ontology mapper
         all_tables = self._ontology.get_all_tables()
         mapper_suggestions = self._mapper.suggest_tables(query, all_tables)
         tables.update(mapper_suggestions)
 
-        # From OpenSearch (if available)
         if self._opensearch:
             try:
                 search_results = await self._opensearch.search_tables(query, top_k=5)
                 for result in search_results:
-                    if result.get("score", 0) > 1.0:  # Relevance threshold
+                    if result.get("score", 0) > 1.0:
                         tables.add(result["table_name"])
             except OpenSearchError as e:
                 logger.warning("OpenSearch table search failed: %s", e)
 
-        # From domain hint
         if domain_hint and len(tables) < 3:
             domain_tables = self._ontology.get_tables_by_domain(domain_hint)
             for t in domain_tables[:5]:
@@ -241,44 +253,32 @@ class SQLGenerator:
     def _ensure_database_prefix(self, sql: str) -> str:
         """Ensure all table references include the database prefix."""
         db = "ai_ready_v2"
-        # Find table names that don't have the prefix
         all_table_names = [t.table_name for t in self._ontology.get_all_tables()]
         for table_name in all_table_names:
-            # Replace bare table names with fully qualified names
-            # But only if not already prefixed
             pattern = rf"(?<!\w)(?<!\.){re.escape(table_name)}(?!\w)"
             replacement = f"{db}.{table_name}"
-            # Avoid double-prefixing
             if f"{db}.{table_name}" not in sql:
                 sql = re.sub(pattern, replacement, sql)
         return sql
 
     async def validate_sql(self, sql: str) -> dict[str, Any]:
-        """Validate generated SQL for common issues.
-
-        Returns dict with: valid, issues, suggestions
-        """
+        """Validate generated SQL for common issues."""
         issues = []
         suggestions = []
 
-        # Check for SELECT only
         stripped = sql.strip().upper()
         if not (stripped.startswith("SELECT") or stripped.startswith("WITH")):
             issues.append("Query does not start with SELECT or WITH")
 
-        # Check for LIMIT
         if not re.search(r"\bLIMIT\s+\d+", sql, re.IGNORECASE):
             issues.append("Missing LIMIT clause")
             suggestions.append("Add LIMIT 1000 to prevent excessive results")
 
-        # Check for proper database prefix
         if "ai_ready_v2." not in sql:
             issues.append("Tables may be missing database prefix 'ai_ready_v2.'")
 
-        # Check for GROUP BY consistency
         if re.search(r"\b(SUM|AVG|COUNT|MIN|MAX)\s*\(", sql, re.IGNORECASE):
             if not re.search(r"\bGROUP\s+BY\b", sql, re.IGNORECASE):
-                # Only an issue if there are non-aggregated columns in SELECT
                 select_match = re.search(
                     r"SELECT\s+(.+?)\s+FROM", sql, re.IGNORECASE | re.DOTALL
                 )

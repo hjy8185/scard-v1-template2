@@ -12,7 +12,7 @@ class Settings:
         # AWS
         self.AWS_REGION: str = os.environ.get("AWS_REGION", "ap-northeast-1")
         self.ATHENA_REGION: str = os.environ.get("ATHENA_REGION", "ap-northeast-2")
-        self.BEDROCK_REGION: str = os.environ.get("BEDROCK_REGION", "ap-northeast-1")
+        self.BEDROCK_REGION: str = os.environ.get("BEDROCK_REGION", "us-west-2")
 
         # Neptune Graph DB
         self.NEPTUNE_ENDPOINT: str = os.environ.get(
@@ -40,7 +40,7 @@ class Settings:
 
         # Bedrock
         self.BEDROCK_MODEL_ID: str = os.environ.get(
-            "BEDROCK_MODEL_ID", "jp.anthropic.claude-haiku-4-5-20251001-v1:0"
+            "BEDROCK_MODEL_ID", "us.anthropic.claude-sonnet-4-20250514-v1:0"
         )
         self.BEDROCK_MAX_TOKENS: int = int(
             os.environ.get("BEDROCK_MAX_TOKENS", "4096")
