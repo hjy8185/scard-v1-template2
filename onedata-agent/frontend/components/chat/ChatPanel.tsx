@@ -6,10 +6,10 @@ import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';
 
 const EXAMPLE_QUERIES = [
-  '그룹사별 고객 수 현황을 알려줘',
-  '연령대별 고객 분포를 보여줘',
-  '카드 거래 금액 상위 10명의 고객을 알려줘',
-  '신한은행과 신한카드 동시 보유 고객은 몇 명이야?',
+  '슈퍼솔 설치 현황을 알려줘',
+  '개인사업자 업종별 카드매출 현황을 보여줘',
+  '슈퍼솔 가맹점 월별 매출 추이를 알려줘',
+  '개인사업자 자산 규모 상위 10명을 보여줘',
 ];
 
 export function ChatPanel() {
