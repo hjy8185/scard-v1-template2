@@ -6,10 +6,10 @@ import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';
 
 const EXAMPLE_QUERIES = [
-  '슈퍼솔 앱 사용 고객 수를 알려줘',
-  '연령대별 슈퍼솔 앱 사용 현황을 보여줘',
-  '슈퍼솔 가입 채널별 고객 분포는?',
-  '슈퍼솔 사용 고객 중 신한카드 보유 비율은?',
+  '월 카드이용 200만원 이상 고객의 각사별 슈퍼솔 MAU 추이는?',
+  '지역별 카드회원 중 슈퍼솔 미가입자 비율이 높은 시도 TOP5',
+  '30~40대 카드only회원의 최근 6개월 이용금액 변화 추이',
+  '슈퍼솔 월체류시간 상위 10% 고객의 카드 업종별 소비 패턴',
 ];
 
 export function ChatPanel() {
