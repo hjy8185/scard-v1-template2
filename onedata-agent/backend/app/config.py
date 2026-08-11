@@ -28,7 +28,7 @@ class Settings:
         )
 
         # Athena
-        self.ATHENA_DATABASE: str = os.environ.get("ATHENA_DATABASE", "ai_ready_v2")
+        self.ATHENA_DATABASE: str = os.environ.get("ATHENA_DATABASE", "ai_ready_v3")
         self.ATHENA_OUTPUT_BUCKET: str = os.environ.get(
             "ATHENA_OUTPUT_BUCKET", "s3://scard-aiready-poc-124962528632/athena-results/"
         )

@@ -327,7 +327,7 @@ class BedrockClient:
 2. 반드시 LIMIT 포함 (최대 1000행)
 3. 아래 온톨로지 컨텍스트에 있는 정확한 테이블·컬럼 이름을 사용
 4. 한국어 컬럼명은 반드시 큰따옴표로 감싸기: "그룹md번호", "고객연령"
-5. 데이터베이스 접두어: ai_ready_v2.<테이블명>
+5. 데이터베이스 접두어: ai_ready_v3.<테이블명>
 6. 모든 테이블의 공통 조인 키: "그룹md번호" (고객 ID)
 7. 집계 함수 사용 시 GROUP BY 필수
 8. 컬럼 별칭도 한국어면 큰따옴표: COUNT(*) AS "이용건수"
@@ -344,8 +344,8 @@ class BedrockClient:
   SELECT
     "컬럼1",
     COUNT(*) AS "별칭"
-  FROM ai_ready_v2.테이블명 t
-  JOIN ai_ready_v2.테이블2 c
+  FROM ai_ready_v3.테이블명 t
+  JOIN ai_ready_v3.테이블2 c
     ON t."키" = c."키"
   WHERE t."조건" = '값'
   GROUP BY "컬럼1"
@@ -402,6 +402,33 @@ class BedrockClient:
 - 카테고리 축 합계 ≠ 결제수단 축 합계 (이중계상 주의)
 - 잔액(point_in_time) ≠ 평잔(period_average) ≠ 자산금액(valuation) — 합산 불가
 - RFM 등급은 계열사별 기준이 달라 직접 비교 불가
+
+### 지역 분석 규칙
+- 지역별 분석 시 반드시 시도명(이름)으로 표시 (코드만 보여주지 말 것)
+- cln_m_cust_base_card."자택광역도시코드" (2자리, 17종) 사용하여 CASE WHEN으로 변환:
+  CASE "자택광역도시코드"
+    WHEN '11' THEN '서울특별시' WHEN '26' THEN '부산광역시'
+    WHEN '27' THEN '대구광역시' WHEN '28' THEN '인천광역시'
+    WHEN '29' THEN '광주광역시' WHEN '30' THEN '대전광역시'
+    WHEN '31' THEN '울산광역시' WHEN '36' THEN '세종특별자치시'
+    WHEN '41' THEN '경기도' WHEN '42' THEN '강원도'
+    WHEN '43' THEN '충청북도' WHEN '44' THEN '충청남도'
+    WHEN '45' THEN '전라북도' WHEN '46' THEN '전라남도'
+    WHEN '47' THEN '경상북도' WHEN '48' THEN '경상남도'
+    WHEN '50' THEN '제주특별자치도' ELSE '기타'
+  END AS "시도명"
+- 지역 분석은 cln_m_cust_base_card 또는 cln_d_cust_mas_card 테이블의 자택광역도시코드 사용
+
+### ★★ 슈퍼솔 테이블 용도 구분 (매우 중요)
+- jaz_sh_fanclub_membership_chghist: 앱 **가입** 여부만 (new앱사용여부 Y/N). 이력 테이블.
+  → "가입 고객수", "가입 여부" 질문에만 사용
+- sol_m_supersol_visit: 앱 **이용** 빈도/횟수/체류시간 (월 집계)
+  → "이용건수", "방문횟수", "MAU", "사용빈도", "접속빈도", "체류시간" 질문에 사용
+- sol_d_supersol_session: 앱 세션 상세 (일별)
+  → "일별 세션", "접속 시간대", "기기별" 질문에 사용
+- ★★ "슈퍼솔 이용건수" = SUM("월방문횟수") FROM sol_m_supersol_visit
+- ★★ "슈퍼솔 사용 고객수" = COUNT(DISTINCT "그룹md번호") FROM sol_m_supersol_visit WHERE "월방문일수" > 0
+- ★★ jaz 테이블의 COUNT(*)를 "이용건수"라고 부르지 말 것 (그것은 이력변경건수일 뿐)
 
 ### rpt_d_unit_deposit_acct 특이사항
 - 고객번호가 CHAR(150)이므로 조인 시 rtrim 필수:

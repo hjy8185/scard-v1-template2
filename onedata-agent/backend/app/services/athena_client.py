@@ -1,6 +1,6 @@
 """Athena SQL execution client.
 
-Executes read-only SQL queries against the Onedata Glue database (ai_ready_v2).
+Executes read-only SQL queries against the Onedata Glue database (ai_ready_v3).
 Enforces safety constraints: SELECT only, row limits, timeouts.
 """
 

@@ -472,14 +472,14 @@
       "description": "라이프이벤트 유형='출산'"
     },
     "슈퍼솔": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "슈퍼솔(신한SOL) 통합 앱 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 이용 현황 (방문/체류/이용건수)"
     },
     "SuperSOL": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "슈퍼솔(SuperSOL) 통합 앱 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "SuperSOL 앱 이용 현황 (방문/체류/이용건수)"
     },
     "개인사업자매출": {
       "column_name": "신한카드취급금액",
@@ -497,49 +497,49 @@
       "description": "사업자 카드 이용 금액"
     },
     "신한SOL": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "신한SOL 앱 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "신한SOL 앱 이용 현황 (방문/이용건수/체류시간)"
     },
     "SOL앱": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "SOL 앱 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "SOL 앱 이용 현황"
     },
     "뉴앱": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "슈퍼솔 새 앱 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 새 앱 이용 현황"
     },
     "앱사용": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "슈퍼솔 앱 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 이용 현황 (방문/체류/이용건수)"
     },
     "앱가입": {
       "column_name": "신한그룹통합플랫폼가입채널코드",
       "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "슈퍼솔 앱 가입 채널"
+      "description": "슈퍼솔 앱 가입 채널 (가입 여부 전용)"
     },
     "앱가입채널": {
       "column_name": "신한그룹통합플랫폼가입채널코드",
       "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "슈퍼솔 가입 채널 (은행/카드/증권)"
+      "description": "슈퍼솔 가입 채널 (은행/카드/증권) (가입 관련 전용)"
     },
     "모바일앱": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "모바일 앱(슈퍼솔) 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "모바일 앱(슈퍼솔) 이용 현황"
     },
     "통합앱": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "신한그룹 통합앱(슈퍼솔) 사용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "신한그룹 통합앱(슈퍼솔) 이용 현황"
     },
     "디지털채널": {
-      "column_name": "new앱사용여부",
-      "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "디지털 채널(슈퍼솔) 이용 여부"
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "디지털 채널(슈퍼솔) 이용 현황"
     },
     "멤버십앱": {
       "column_name": "신한그룹멤버쉽신어플리케이션여부",
@@ -554,7 +554,17 @@
     "앱전환": {
       "column_name": "신한플러스new앱여부",
       "table_name": "jaz_sh_fanclub_membership_chghist",
-      "description": "신한플러스에서 슈퍼솔 새 앱으로 전환 여부"
+      "description": "신한플러스에서 슈퍼솔 새 앱으로 전환 여부 (가입 이력 전용)"
+    },
+    "슈퍼솔가입": {
+      "column_name": "new앱사용여부",
+      "table_name": "jaz_sh_fanclub_membership_chghist",
+      "description": "슈퍼솔 앱 가입 여부 (Y/N) - 가입만 확인할 때 사용"
+    },
+    "앱가입여부": {
+      "column_name": "new앱사용여부",
+      "table_name": "jaz_sh_fanclub_membership_chghist",
+      "description": "슈퍼솔 앱 가입 여부 (Y/N)"
     },
     "카드회원": {
       "column_name": "그룹md번호",
@@ -640,6 +650,31 @@
       "column_name": "월방문횟수",
       "table_name": "sol_m_supersol_visit",
       "description": "슈퍼솔 앱 사용 빈도"
+    },
+    "이용건수": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 이용 건수 (월간 방문 횟수)"
+    },
+    "접속건수": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 접속 건수"
+    },
+    "사용빈도": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 사용 빈도 (월방문횟수)"
+    },
+    "지역별": {
+      "column_name": "자택광역도시코드",
+      "table_name": "cln_m_cust_base_card",
+      "description": "고객 거주 지역 (광역시도 코드 → 시도명 CASE WHEN 변환 필요)"
+    },
+    "시도별": {
+      "column_name": "자택광역도시코드",
+      "table_name": "cln_m_cust_base_card",
+      "description": "시도별 분석 (광역시도코드 17종)"
     }
   }
 }

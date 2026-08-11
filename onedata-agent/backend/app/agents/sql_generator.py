@@ -27,7 +27,7 @@ _FEW_SHOT_EXAMPLES = [
                 "SELECT\n"
                 '  "그룹md번호",\n'
                 '  COUNT(*) AS "이용건수"\n'
-                "FROM ai_ready_v2.igd_m_cust_txn_card\n"
+                "FROM ai_ready_v3.igd_m_cust_txn_card\n"
                 "WHERE \"기준년월\" >= date_format(date_add('month', -3, current_date), '%Y%m')\n"
                 'GROUP BY "그룹md번호"\n'
                 'ORDER BY "이용건수" DESC\n'
@@ -43,8 +43,8 @@ _FEW_SHOT_EXAMPLES = [
             "sql": (
                 "SELECT\n"
                 '  AVG(t."이용금액") AS "평균결제금액"\n'
-                "FROM ai_ready_v2.igd_m_cust_txn_card t\n"
-                "JOIN ai_ready_v2.igd_m_cust_base c\n"
+                "FROM ai_ready_v3.igd_m_cust_txn_card t\n"
+                "JOIN ai_ready_v3.igd_m_cust_base c\n"
                 '  ON t."그룹md번호" = c."그룹md번호"\n'
                 "WHERE c.\"연령대\" = '30대'\n"
                 "  AND c.\"성별\" = 'F'\n"
@@ -62,8 +62,8 @@ _FEW_SHOT_EXAMPLES = [
                 "SELECT\n"
                 '  c."연령5년구간코드",\n'
                 '  COUNT(DISTINCT f."그룹md") AS "슈퍼솔앱사용고객수"\n'
-                "FROM ai_ready_v2.jaz_sh_fanclub_membership_chghist f\n"
-                "JOIN ai_ready_v2.igd_m_cust_base c\n"
+                "FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist f\n"
+                "JOIN ai_ready_v3.igd_m_cust_base c\n"
                 '  ON f."그룹md" = c."그룹md번호"\n'
                 "WHERE f.\"new앱사용여부\" = 'Y'\n"
                 'GROUP BY c."연령5년구간코드"\n'
@@ -81,8 +81,8 @@ _FEW_SHOT_EXAMPLES = [
                 "SELECT\n"
                 '  m."성별구분코드",\n'
                 '  COUNT(DISTINCT f."그룹md") AS "슈퍼솔앱사용고객수"\n'
-                "FROM ai_ready_v2.jaz_sh_fanclub_membership_chghist f\n"
-                "JOIN ai_ready_v2.igd_d_cust_mas m\n"
+                "FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist f\n"
+                "JOIN ai_ready_v3.igd_d_cust_mas m\n"
                 '  ON f."그룹md" = m."그룹md번호"\n'
                 "WHERE f.\"new앱사용여부\" = 'Y'\n"
                 'GROUP BY m."성별구분코드"\n'
@@ -101,7 +101,7 @@ _FEW_SHOT_EXAMPLES = [
                 '  "기준년월",\n'
                 '  COUNT(*) AS "이용건수",\n'
                 '  SUM("이용금액") AS "총이용금액"\n'
-                "FROM ai_ready_v2.igd_m_cust_txn_card\n"
+                "FROM ai_ready_v3.igd_m_cust_txn_card\n"
                 "WHERE \"기준년월\" >= date_format(date_add('month', -6, current_date), '%Y%m')\n"
                 'GROUP BY "기준년월"\n'
                 'ORDER BY "기준년월"\n'
@@ -119,7 +119,7 @@ _FEW_SHOT_EXAMPLES = [
                 "  SELECT\n"
                 '    "그룹md",\n'
                 '    COUNT(*) AS usage_cnt\n'
-                "  FROM ai_ready_v2.jaz_sh_fanclub_membership_chghist\n"
+                "  FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist\n"
                 "  WHERE \"new앱사용여부\" = 'Y'  -- 값: Y/N 문자열\n"
                 '  GROUP BY "그룹md"\n'
                 "),\n"
@@ -138,9 +138,9 @@ _FEW_SHOT_EXAMPLES = [
                 '  AVG(c."체크카드이용금액") AS "평균체크이용금액",\n'
                 '  AVG(r."신한은행6개월수신평균잔액") AS "평균은행수신평잔"\n'
                 "FROM top_users t\n"
-                "JOIN ai_ready_v2.igd_m_cust_txn_card c\n"
+                "JOIN ai_ready_v3.igd_m_cust_txn_card c\n"
                 '  ON t."그룹md" = c."그룹md번호"\n'
-                "LEFT JOIN ai_ready_v2.igd_m_shg_rfm_base_ledger r\n"
+                "LEFT JOIN ai_ready_v3.igd_m_shg_rfm_base_ledger r\n"
                 '  ON t."그룹md" = r."그룹md번호"\n'
                 "LIMIT 1000"
             ),
@@ -303,7 +303,7 @@ class SQLGenerator:
 
     def _ensure_database_prefix(self, sql: str) -> str:
         """Ensure all table references include the database prefix."""
-        db = "ai_ready_v2"
+        db = "ai_ready_v3"
         all_table_names = [t.table_name for t in self._ontology.get_all_tables()]
         for table_name in all_table_names:
             pattern = rf"(?<!\w)(?<!\.){re.escape(table_name)}(?!\w)"
@@ -325,8 +325,8 @@ class SQLGenerator:
             issues.append("Missing LIMIT clause")
             suggestions.append("Add LIMIT 1000 to prevent excessive results")
 
-        if "ai_ready_v2." not in sql:
-            issues.append("Tables may be missing database prefix 'ai_ready_v2.'")
+        if "ai_ready_v3." not in sql:
+            issues.append("Tables may be missing database prefix 'ai_ready_v3.'")
 
         if re.search(r"\b(SUM|AVG|COUNT|MIN|MAX)\s*\(", sql, re.IGNORECASE):
             if not re.search(r"\bGROUP\s+BY\b", sql, re.IGNORECASE):

@@ -30,8 +30,8 @@ _DIMENSION_AGE = {
         '    COUNT(DISTINCT "그룹md번호") * 100.0\n'
         '    / SUM(COUNT(DISTINCT "그룹md번호")) OVER(), 1\n'
         '  ) AS "비율"\n'
-        'FROM ai_ready_v2.igd_m_cust_base c\n'
-        'JOIN ai_ready_v2.igd_m_cust_txn_card t\n'
+        'FROM ai_ready_v3.igd_m_cust_base c\n'
+        'JOIN ai_ready_v3.igd_m_cust_txn_card t\n'
         '  ON c."그룹md번호" = t."그룹md번호"\n'
         'GROUP BY "고객연령대"\n'
         'ORDER BY "고객연령대"\n'
@@ -60,8 +60,8 @@ _DIMENSION_GENDER = {
         '  SUM("이용금액") AS "이용금액합계",\n'
         '  AVG("이용금액") AS "평균이용금액",\n'
         '  COUNT(*) AS "거래건수"\n'
-        'FROM ai_ready_v2.igd_d_cust_mas c\n'
-        'JOIN ai_ready_v2.igd_m_cust_txn_card t\n'
+        'FROM ai_ready_v3.igd_d_cust_mas c\n'
+        'JOIN ai_ready_v3.igd_m_cust_txn_card t\n'
         '  ON c."그룹md번호" = t."그룹md번호"\n'
         'GROUP BY "성별구분코드"\n'
         'ORDER BY "고객수" DESC\n'
@@ -86,8 +86,8 @@ _DIMENSION_SUBSIDIARY = {
         '  SUM("이용금액") AS "거래금액",\n'
         '  COUNT(*) AS "거래건수",\n'
         '  AVG("이용금액") AS "건당평균금액"\n'
-        'FROM ai_ready_v2.igd_m_cust_holding_base h\n'
-        'JOIN ai_ready_v2.igd_m_cust_txn t\n'
+        'FROM ai_ready_v3.igd_m_cust_holding_base h\n'
+        'JOIN ai_ready_v3.igd_m_cust_txn t\n'
         '  ON h."그룹md번호" = t."그룹md번호"\n'
         'GROUP BY "계열사코드"\n'
         'ORDER BY "거래금액" DESC\n'
@@ -116,7 +116,7 @@ _DIMENSION_MONTHLY = {
         '  SUM("이용금액") AS "월매출",\n'
         '  COUNT(*) AS "거래건수",\n'
         '  AVG("이용금액") AS "건당평균"\n'
-        'FROM ai_ready_v2.igd_m_cust_txn_card\n'
+        'FROM ai_ready_v3.igd_m_cust_txn_card\n'
         "WHERE \"기준년월\" >= '202602'\n"
         'GROUP BY "기준년월"\n'
         'ORDER BY "기준년월"\n'
@@ -147,7 +147,7 @@ _QUERY_TEMPLATES = {
             'SELECT\n'
             '  "계열사코드",\n'
             '  COUNT(DISTINCT "그룹md번호") AS "고객수"\n'
-            'FROM ai_ready_v2.igd_m_cust_holding_base\n'
+            'FROM ai_ready_v3.igd_m_cust_holding_base\n'
             'GROUP BY "계열사코드"\n'
             'ORDER BY "고객수" DESC\n'
             'LIMIT 20'
@@ -167,7 +167,7 @@ _QUERY_TEMPLATES = {
             '  SUM("이용금액") AS "총이용금액",\n'
             '  COUNT(*) AS "거래건수",\n'
             '  AVG("이용금액") AS "평균이용금액"\n'
-            'FROM ai_ready_v2.igd_m_cust_txn_card\n'
+            'FROM ai_ready_v3.igd_m_cust_txn_card\n'
             'GROUP BY "그룹md번호"\n'
             'ORDER BY "총이용금액" DESC\n'
             'LIMIT 10'
@@ -179,8 +179,8 @@ _QUERY_TEMPLATES = {
         "sql": (
             'SELECT\n'
             '  COUNT(DISTINCT a."그룹md번호") AS "동시보유고객수"\n'
-            'FROM ai_ready_v2.cln_m_cust_base_bank a\n'
-            'INNER JOIN ai_ready_v2.cln_m_cust_base_card b\n'
+            'FROM ai_ready_v3.cln_m_cust_base_bank a\n'
+            'INNER JOIN ai_ready_v3.cln_m_cust_base_card b\n'
             '  ON a."그룹md번호" = b."그룹md번호"\n'
             'LIMIT 1000'
         ),
@@ -205,7 +205,7 @@ _QUERY_TEMPLATES = {
             '  SUM("이용금액") AS "총매출",\n'
             '  COUNT(*) AS "거래건수",\n'
             '  COUNT(DISTINCT "그룹md번호") AS "이용고객수"\n'
-            'FROM ai_ready_v2.trs_m_merchant_delivery\n'
+            'FROM ai_ready_v3.trs_m_merchant_delivery\n'
             'GROUP BY "가맹점명", "업종대분류"\n'
             'ORDER BY "총매출" DESC\n'
             'LIMIT 20'
@@ -219,7 +219,7 @@ _QUERY_TEMPLATES = {
             '  COUNT(DISTINCT "그룹md번호") AS "전체고객수",\n'
             '  COUNT(DISTINCT CASE WHEN "성별구분코드" = \'M\' THEN "그룹md번호" END) AS "남성고객수",\n'
             '  COUNT(DISTINCT CASE WHEN "성별구분코드" = \'F\' THEN "그룹md번호" END) AS "여성고객수"\n'
-            'FROM ai_ready_v2.igd_d_cust_mas\n'
+            'FROM ai_ready_v3.igd_d_cust_mas\n'
             'LIMIT 1000'
         ),
         "explanation": "그룹 통합 고객 마스터에서 전체 고객 수를 성별로 집계합니다.",
@@ -635,7 +635,7 @@ class MockBedrockClient:
         # Assemble SQL
         select_clause = ",\n  ".join(select_parts)
         sql_lines = [f"SELECT\n  {select_clause}"]
-        sql_lines.append(f"FROM ai_ready_v2.{table_name}")
+        sql_lines.append(f"FROM ai_ready_v3.{table_name}")
 
         if where_parts:
             sql_lines.append(f"WHERE {' AND '.join(where_parts)}")
@@ -704,7 +704,7 @@ class MockBedrockClient:
                     '  "기준년월",\n'
                     '  COUNT(*) AS "건수",\n'
                     '  SUM("이용금액") AS "총이용금액"\n'
-                    f'FROM ai_ready_v2.{table}\n'
+                    f'FROM ai_ready_v3.{table}\n'
                     'GROUP BY "기준년월"\n'
                     'ORDER BY "기준년월" DESC\n'
                     'LIMIT 12'
@@ -720,7 +720,7 @@ class MockBedrockClient:
                 "sql": (
                     'SELECT\n'
                     '  COUNT(DISTINCT "그룹md번호") AS "고객수"\n'
-                    f'FROM ai_ready_v2.{table}\n'
+                    f'FROM ai_ready_v3.{table}\n'
                     'LIMIT 1000'
                 ),
                 "explanation": "그룹 통합 고객 마스터에서 고객 정보를 조회합니다.",
@@ -733,7 +733,7 @@ class MockBedrockClient:
                 "sql": (
                     'SELECT\n'
                     '  COUNT(DISTINCT "그룹md번호") AS "고객수"\n'
-                    'FROM ai_ready_v2.igd_d_cust_mas\n'
+                    'FROM ai_ready_v3.igd_d_cust_mas\n'
                     'LIMIT 1000'
                 ),
                 "explanation": "기본 고객 수를 조회합니다.",
