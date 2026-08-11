@@ -4135,13 +4135,13 @@
     },
     {
       "table_name": "jaz_sh_fanclub_membership_chghist",
-      "domain": "membership",
-      "description": "팬클럽 멤버십 변경이력",
+      "domain": "digital_channel",
+      "description": "슈퍼솔(신한SOL) 앱 가입 및 사용 현황 변경이력 - 개인고객의 슈퍼솔 앱 사용여부, 가입채널 등",
       "columns": [
         {
           "name": "처리일자",
           "dtype": "string",
-          "comment": ""
+          "comment": "처리일자 (YYYYMMDD)"
         },
         {
           "name": "처리순번",
@@ -4151,7 +4151,7 @@
         {
           "name": "fan클럽거래유형코드",
           "dtype": "string",
-          "comment": ""
+          "comment": "거래유형 (01:가입, 02:변경, 03:해지 등)"
         },
         {
           "name": "고객번호",
@@ -4161,22 +4161,22 @@
         {
           "name": "그룹md",
           "dtype": "string",
-          "comment": ""
+          "comment": "고객 그룹MD 번호 (조인키)"
         },
         {
           "name": "신한그룹통합플랫폼회원구분코드",
           "dtype": "string",
-          "comment": ""
+          "comment": "통합플랫폼 회원 구분 (01:일반, 02:정회원 등)"
         },
         {
           "name": "신한그룹통합플랫폼가입채널코드",
           "dtype": "string",
-          "comment": ""
+          "comment": "슈퍼솔 가입 채널 코드 (01:은행, 02:카드, 03:증권 등)"
         },
         {
           "name": "신한플러스new앱여부",
           "dtype": "string",
-          "comment": ""
+          "comment": "신한플러스 새 앱(슈퍼솔) 전환 여부 (Y/N)"
         },
         {
           "name": "신한그룹통합플랫폼추천인신한그룹사코드",
@@ -4186,7 +4186,7 @@
         {
           "name": "new앱사용여부",
           "dtype": "string",
-          "comment": ""
+          "comment": "슈퍼솔(신한SOL) 새 앱 사용 여부 (Y/N)"
         },
         {
           "name": "aws적재일시",
@@ -6234,8 +6234,8 @@
     },
     {
       "table_name": "shg_membership_cust_hist",
-      "domain": "membership",
-      "description": "신한그룹 멤버십 이력",
+      "domain": "digital_channel",
+      "description": "신한그룹 통합 멤버십(슈퍼솔 리워드) 고객 상태 이력 - 앱 가입/활성/휴면 상태 추적",
       "columns": [
         {
           "name": "신한그룹통합리워드앱고객정보변경일자",
@@ -6250,12 +6250,12 @@
         {
           "name": "신한그룹통합리워드앱고객상태코드",
           "dtype": "string",
-          "comment": ""
+          "comment": "슈퍼솔 리워드 앱 고객 상태 (활성/휴면/탈퇴 등)"
         },
         {
           "name": "그룹md",
           "dtype": "string",
-          "comment": ""
+          "comment": "고객 그룹MD 번호 (조인키)"
         },
         {
           "name": "신한그룹통합플랫폼회원구분코드",
@@ -6265,12 +6265,12 @@
         {
           "name": "신한그룹통합플랫폼가입채널코드",
           "dtype": "string",
-          "comment": ""
+          "comment": "슈퍼솔 가입 채널 코드"
         },
         {
           "name": "신한그룹멤버쉽신어플리케이션여부",
           "dtype": "string",
-          "comment": ""
+          "comment": "슈퍼솔 새 앱(신 어플리케이션) 사용 여부 (Y/N)"
         },
         {
           "name": "신한그룹통합플랫폼추천인신한그룹사코드",

@@ -6,10 +6,10 @@ import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';
 
 const EXAMPLE_QUERIES = [
-  '슈퍼솔 설치 현황을 알려줘',
-  '개인사업자 업종별 카드매출 현황을 보여줘',
-  '슈퍼솔 가맹점 월별 매출 추이를 알려줘',
-  '개인사업자 자산 규모 상위 10명을 보여줘',
+  '슈퍼솔 앱 사용 고객 수를 알려줘',
+  '연령대별 슈퍼솔 앱 사용 현황을 보여줘',
+  '슈퍼솔 가입 채널별 고객 분포는?',
+  '슈퍼솔 사용 고객 중 신한카드 보유 비율은?',
 ];
 
 export function ChatPanel() {
