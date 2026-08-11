@@ -330,9 +330,27 @@ class BedrockClient:
 5. 데이터베이스 접두어: ai_ready_v2.<테이블명>
 6. 모든 테이블의 공통 조인 키: "그룹md번호" (고객 ID)
 7. 집계 함수 사용 시 GROUP BY 필수
-8. 컬럼 별칭도 한국어면 큰따옴표: COUNT(*) as "이용건수"
+8. 컬럼 별칭도 한국어면 큰따옴표: COUNT(*) AS "이용건수"
 9. 날짜 컬럼: date_parse, date_format 사용
 10. NULL 처리: COALESCE 적절히 사용
+
+## SQL 포맷 규칙 (반드시 준수)
+
+- 각 절(SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY, LIMIT)은 새 줄에서 시작
+- SELECT 컬럼은 줄바꿈 후 2칸 들여쓰기로 한 컬럼씩 나열
+- JOIN의 ON 조건은 2칸 들여쓰기
+- WHERE 조건이 여러 개면 AND/OR를 2칸 들여쓰기로 구분
+- 예시:
+  SELECT
+    "컬럼1",
+    COUNT(*) AS "별칭"
+  FROM ai_ready_v2.테이블명 t
+  JOIN ai_ready_v2.테이블2 c
+    ON t."키" = c."키"
+  WHERE t."조건" = '값'
+  GROUP BY "컬럼1"
+  ORDER BY "별칭" DESC
+  LIMIT 20
 
 ## 쿼리 품질 기준
 

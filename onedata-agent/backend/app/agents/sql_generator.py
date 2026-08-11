@@ -24,11 +24,13 @@ _FEW_SHOT_EXAMPLES = [
         "question": "최근 3개월간 카드 이용 건수가 가장 많은 고객 상위 10명을 알려줘",
         "answer": {
             "sql": (
-                'SELECT "그룹md번호", COUNT(*) as "이용건수" '
-                "FROM ai_ready_v2.igd_m_cust_txn_card "
-                'WHERE "기준년월" >= date_format(date_add(\'month\', -3, current_date), \'%Y%m\') '
-                'GROUP BY "그룹md번호" '
-                'ORDER BY "이용건수" DESC '
+                "SELECT\n"
+                '  "그룹md번호",\n'
+                '  COUNT(*) AS "이용건수"\n'
+                "FROM ai_ready_v2.igd_m_cust_txn_card\n"
+                "WHERE \"기준년월\" >= date_format(date_add('month', -3, current_date), '%Y%m')\n"
+                'GROUP BY "그룹md번호"\n'
+                'ORDER BY "이용건수" DESC\n'
                 "LIMIT 10"
             ),
             "explanation": "카드 거래 테이블에서 최근 3개월 기준으로 고객별 이용 건수를 집계하여 상위 10명을 조회합니다.",
@@ -39,11 +41,14 @@ _FEW_SHOT_EXAMPLES = [
         "question": "30대 여성 고객의 온라인 쇼핑 평균 결제금액은?",
         "answer": {
             "sql": (
-                'SELECT AVG(t."이용금액") as "평균결제금액" '
-                "FROM ai_ready_v2.igd_m_cust_txn_card t "
-                'JOIN ai_ready_v2.igd_m_cust_base c ON t."그룹md번호" = c."그룹md번호" '
-                'WHERE c."연령대" = \'30대\' AND c."성별" = \'F\' '
-                'AND t."업종대분류" = \'온라인쇼핑\' '
+                "SELECT\n"
+                '  AVG(t."이용금액") AS "평균결제금액"\n'
+                "FROM ai_ready_v2.igd_m_cust_txn_card t\n"
+                "JOIN ai_ready_v2.igd_m_cust_base c\n"
+                '  ON t."그룹md번호" = c."그룹md번호"\n'
+                "WHERE c.\"연령대\" = '30대'\n"
+                "  AND c.\"성별\" = 'F'\n"
+                "  AND t.\"업종대분류\" = '온라인쇼핑'\n"
                 "LIMIT 1000"
             ),
             "explanation": "고객 기본 테이블과 카드 거래 테이블을 조인하여 30대 여성의 온라인쇼핑 평균 결제금액을 계산합니다.",
@@ -54,12 +59,16 @@ _FEW_SHOT_EXAMPLES = [
         "question": "위 결과를 연령대별로 분석해줘",
         "answer": {
             "sql": (
-                'SELECT c."연령대", COUNT(*) as "이용건수", SUM(t."이용금액") as "총이용금액", '
-                'AVG(t."이용금액") as "평균이용금액" '
-                "FROM ai_ready_v2.igd_m_cust_txn_card t "
-                'JOIN ai_ready_v2.igd_m_cust_base c ON t."그룹md번호" = c."그룹md번호" '
-                'GROUP BY c."연령대" '
-                'ORDER BY "총이용금액" DESC '
+                "SELECT\n"
+                '  c."연령대",\n'
+                '  COUNT(*) AS "이용건수",\n'
+                '  SUM(t."이용금액") AS "총이용금액",\n'
+                '  AVG(t."이용금액") AS "평균이용금액"\n'
+                "FROM ai_ready_v2.igd_m_cust_txn_card t\n"
+                "JOIN ai_ready_v2.igd_m_cust_base c\n"
+                '  ON t."그룹md번호" = c."그룹md번호"\n'
+                'GROUP BY c."연령대"\n'
+                'ORDER BY "총이용금액" DESC\n'
                 "LIMIT 20"
             ),
             "explanation": "연령대별 카드 이용 건수와 금액을 분석합니다.",
@@ -70,12 +79,16 @@ _FEW_SHOT_EXAMPLES = [
         "question": "위 결과를 성별로 비교해줘",
         "answer": {
             "sql": (
-                'SELECT c."성별", COUNT(*) as "이용건수", SUM(t."이용금액") as "총이용금액", '
-                'AVG(t."이용금액") as "평균이용금액" '
-                "FROM ai_ready_v2.igd_m_cust_txn_card t "
-                'JOIN ai_ready_v2.igd_m_cust_base c ON t."그룹md번호" = c."그룹md번호" '
-                'GROUP BY c."성별" '
-                'ORDER BY "총이용금액" DESC '
+                "SELECT\n"
+                '  c."성별",\n'
+                '  COUNT(*) AS "이용건수",\n'
+                '  SUM(t."이용금액") AS "총이용금액",\n'
+                '  AVG(t."이용금액") AS "평균이용금액"\n'
+                "FROM ai_ready_v2.igd_m_cust_txn_card t\n"
+                "JOIN ai_ready_v2.igd_m_cust_base c\n"
+                '  ON t."그룹md번호" = c."그룹md번호"\n'
+                'GROUP BY c."성별"\n'
+                'ORDER BY "총이용금액" DESC\n'
                 "LIMIT 10"
             ),
             "explanation": "성별로 카드 이용 패턴을 비교합니다.",
@@ -86,11 +99,14 @@ _FEW_SHOT_EXAMPLES = [
         "question": "위 결과를 월별 추이로 보여줘",
         "answer": {
             "sql": (
-                'SELECT "기준년월", COUNT(*) as "이용건수", SUM("이용금액") as "총이용금액" '
-                "FROM ai_ready_v2.igd_m_cust_txn_card "
-                'WHERE "기준년월" >= date_format(date_add(\'month\', -6, current_date), \'%Y%m\') '
-                'GROUP BY "기준년월" '
-                'ORDER BY "기준년월" '
+                "SELECT\n"
+                '  "기준년월",\n'
+                '  COUNT(*) AS "이용건수",\n'
+                '  SUM("이용금액") AS "총이용금액"\n'
+                "FROM ai_ready_v2.igd_m_cust_txn_card\n"
+                "WHERE \"기준년월\" >= date_format(date_add('month', -6, current_date), '%Y%m')\n"
+                'GROUP BY "기준년월"\n'
+                'ORDER BY "기준년월"\n'
                 "LIMIT 12"
             ),
             "explanation": "최근 6개월간 월별 카드 이용 추이를 보여줍니다.",

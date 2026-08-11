@@ -22,14 +22,20 @@ logger = logging.getLogger(__name__)
 
 _DIMENSION_AGE = {
     "sql": (
-        'SELECT "고객연령대", COUNT(DISTINCT "그룹md번호") as "고객수", '
-        'SUM("이용금액") as "이용금액합계", '
-        'ROUND(COUNT(DISTINCT "그룹md번호") * 100.0 / SUM(COUNT(DISTINCT "그룹md번호")) OVER(), 1) as "비율" '
-        "FROM ai_ready_v2.igd_m_cust_base c "
-        "JOIN ai_ready_v2.igd_m_cust_txn_card t ON c.\"그룹md번호\" = t.\"그룹md번호\" "
-        'GROUP BY "고객연령대" '
-        'ORDER BY "고객연령대" '
-        "LIMIT 20"
+        'SELECT\n'
+        '  "고객연령대",\n'
+        '  COUNT(DISTINCT "그룹md번호") AS "고객수",\n'
+        '  SUM("이용금액") AS "이용금액합계",\n'
+        '  ROUND(\n'
+        '    COUNT(DISTINCT "그룹md번호") * 100.0\n'
+        '    / SUM(COUNT(DISTINCT "그룹md번호")) OVER(), 1\n'
+        '  ) AS "비율"\n'
+        'FROM ai_ready_v2.igd_m_cust_base c\n'
+        'JOIN ai_ready_v2.igd_m_cust_txn_card t\n'
+        '  ON c."그룹md번호" = t."그룹md번호"\n'
+        'GROUP BY "고객연령대"\n'
+        'ORDER BY "고객연령대"\n'
+        'LIMIT 20'
     ),
     "explanation": "이전 결과를 연령대별로 세분화하여 고객 수와 이용금액을 분석합니다.",
     "tables_used": ["igd_m_cust_base", "igd_m_cust_txn_card"],
@@ -48,15 +54,18 @@ _DIMENSION_AGE = {
 
 _DIMENSION_GENDER = {
     "sql": (
-        'SELECT "성별구분코드", COUNT(DISTINCT "그룹md번호") as "고객수", '
-        'SUM("이용금액") as "이용금액합계", '
-        'AVG("이용금액") as "평균이용금액", '
-        'COUNT(*) as "거래건수" '
-        "FROM ai_ready_v2.igd_d_cust_mas c "
-        "JOIN ai_ready_v2.igd_m_cust_txn_card t ON c.\"그룹md번호\" = t.\"그룹md번호\" "
-        'GROUP BY "성별구분코드" '
-        'ORDER BY "고객수" DESC '
-        "LIMIT 10"
+        'SELECT\n'
+        '  "성별구분코드",\n'
+        '  COUNT(DISTINCT "그룹md번호") AS "고객수",\n'
+        '  SUM("이용금액") AS "이용금액합계",\n'
+        '  AVG("이용금액") AS "평균이용금액",\n'
+        '  COUNT(*) AS "거래건수"\n'
+        'FROM ai_ready_v2.igd_d_cust_mas c\n'
+        'JOIN ai_ready_v2.igd_m_cust_txn_card t\n'
+        '  ON c."그룹md번호" = t."그룹md번호"\n'
+        'GROUP BY "성별구분코드"\n'
+        'ORDER BY "고객수" DESC\n'
+        'LIMIT 10'
     ),
     "explanation": "이전 결과를 성별로 구분하여 고객 수, 이용금액, 거래건수를 비교합니다.",
     "tables_used": ["igd_d_cust_mas", "igd_m_cust_txn_card"],
@@ -71,15 +80,18 @@ _DIMENSION_GENDER = {
 
 _DIMENSION_SUBSIDIARY = {
     "sql": (
-        'SELECT "계열사코드", COUNT(DISTINCT "그룹md번호") as "고객수", '
-        'SUM("이용금액") as "거래금액", '
-        'COUNT(*) as "거래건수", '
-        'AVG("이용금액") as "건당평균금액" '
-        "FROM ai_ready_v2.igd_m_cust_holding_base h "
-        "JOIN ai_ready_v2.igd_m_cust_txn t ON h.\"그룹md번호\" = t.\"그룹md번호\" "
-        'GROUP BY "계열사코드" '
-        'ORDER BY "거래금액" DESC '
-        "LIMIT 10"
+        'SELECT\n'
+        '  "계열사코드",\n'
+        '  COUNT(DISTINCT "그룹md번호") AS "고객수",\n'
+        '  SUM("이용금액") AS "거래금액",\n'
+        '  COUNT(*) AS "거래건수",\n'
+        '  AVG("이용금액") AS "건당평균금액"\n'
+        'FROM ai_ready_v2.igd_m_cust_holding_base h\n'
+        'JOIN ai_ready_v2.igd_m_cust_txn t\n'
+        '  ON h."그룹md번호" = t."그룹md번호"\n'
+        'GROUP BY "계열사코드"\n'
+        'ORDER BY "거래금액" DESC\n'
+        'LIMIT 10'
     ),
     "explanation": "이전 결과를 계열사별(은행/카드/증권/라이프)로 나누어 고객 수와 거래현황을 비교합니다.",
     "tables_used": ["igd_m_cust_holding_base", "igd_m_cust_txn"],
@@ -98,16 +110,17 @@ _DIMENSION_SUBSIDIARY = {
 
 _DIMENSION_MONTHLY = {
     "sql": (
-        'SELECT "기준년월", '
-        'COUNT(DISTINCT "그룹md번호") as "활성고객수", '
-        'SUM("이용금액") as "월매출", '
-        'COUNT(*) as "거래건수", '
-        'AVG("이용금액") as "건당평균" '
-        "FROM ai_ready_v2.igd_m_cust_txn_card "
-        "WHERE \"기준년월\" >= '202602' "
-        'GROUP BY "기준년월" '
-        'ORDER BY "기준년월" '
-        "LIMIT 12"
+        'SELECT\n'
+        '  "기준년월",\n'
+        '  COUNT(DISTINCT "그룹md번호") AS "활성고객수",\n'
+        '  SUM("이용금액") AS "월매출",\n'
+        '  COUNT(*) AS "거래건수",\n'
+        '  AVG("이용금액") AS "건당평균"\n'
+        'FROM ai_ready_v2.igd_m_cust_txn_card\n'
+        "WHERE \"기준년월\" >= '202602'\n"
+        'GROUP BY "기준년월"\n'
+        'ORDER BY "기준년월"\n'
+        'LIMIT 12'
     ),
     "explanation": "최근 6개월간 월별 추이를 분석합니다. 활성고객수, 매출, 거래건수 추이를 보여줍니다.",
     "tables_used": ["igd_m_cust_txn_card"],
@@ -131,11 +144,13 @@ _DIMENSION_MONTHLY = {
 _QUERY_TEMPLATES = {
     "그룹사별 고객": {
         "sql": (
-            'SELECT "계열사코드", COUNT(DISTINCT "그룹md번호") as "고객수" '
-            "FROM ai_ready_v2.igd_m_cust_holding_base "
-            'GROUP BY "계열사코드" '
-            'ORDER BY "고객수" DESC '
-            "LIMIT 20"
+            'SELECT\n'
+            '  "계열사코드",\n'
+            '  COUNT(DISTINCT "그룹md번호") AS "고객수"\n'
+            'FROM ai_ready_v2.igd_m_cust_holding_base\n'
+            'GROUP BY "계열사코드"\n'
+            'ORDER BY "고객수" DESC\n'
+            'LIMIT 20'
         ),
         "explanation": "고객 보유 상품 현황 테이블에서 계열사별 고유 고객 수를 집계합니다.",
         "tables_used": ["igd_m_cust_holding_base"],
@@ -147,23 +162,27 @@ _QUERY_TEMPLATES = {
     },
     "카드 거래 금액 상위": {
         "sql": (
-            'SELECT "그룹md번호", SUM("이용금액") as "총이용금액", '
-            'COUNT(*) as "거래건수", AVG("이용금액") as "평균이용금액" '
-            "FROM ai_ready_v2.igd_m_cust_txn_card "
-            'GROUP BY "그룹md번호" '
-            'ORDER BY "총이용금액" DESC '
-            "LIMIT 10"
+            'SELECT\n'
+            '  "그룹md번호",\n'
+            '  SUM("이용금액") AS "총이용금액",\n'
+            '  COUNT(*) AS "거래건수",\n'
+            '  AVG("이용금액") AS "평균이용금액"\n'
+            'FROM ai_ready_v2.igd_m_cust_txn_card\n'
+            'GROUP BY "그룹md번호"\n'
+            'ORDER BY "총이용금액" DESC\n'
+            'LIMIT 10'
         ),
         "explanation": "카드 거래 테이블에서 이용금액 합계 기준 상위 10명의 고객을 조회합니다.",
         "tables_used": ["igd_m_cust_txn_card"],
     },
     "동시 보유": {
         "sql": (
-            "SELECT COUNT(DISTINCT a.\"그룹md번호\") as \"동시보유고객수\" "
-            "FROM ai_ready_v2.cln_m_cust_base_bank a "
-            "INNER JOIN ai_ready_v2.cln_m_cust_base_card b "
-            "ON a.\"그룹md번호\" = b.\"그룹md번호\" "
-            "LIMIT 1000"
+            'SELECT\n'
+            '  COUNT(DISTINCT a."그룹md번호") AS "동시보유고객수"\n'
+            'FROM ai_ready_v2.cln_m_cust_base_bank a\n'
+            'INNER JOIN ai_ready_v2.cln_m_cust_base_card b\n'
+            '  ON a."그룹md번호" = b."그룹md번호"\n'
+            'LIMIT 1000'
         ),
         "explanation": "은행과 카드 고객 테이블을 조인하여 동시 보유 고객 수를 산출합니다.",
         "tables_used": ["cln_m_cust_base_bank", "cln_m_cust_base_card"],
@@ -180,23 +199,28 @@ _QUERY_TEMPLATES = {
     },
     "가맹점": {
         "sql": (
-            'SELECT "가맹점명", "업종대분류", SUM("이용금액") as "총매출", '
-            'COUNT(*) as "거래건수", COUNT(DISTINCT "그룹md번호") as "이용고객수" '
-            "FROM ai_ready_v2.trs_m_merchant_delivery "
-            'GROUP BY "가맹점명", "업종대분류" '
-            'ORDER BY "총매출" DESC '
-            "LIMIT 20"
+            'SELECT\n'
+            '  "가맹점명",\n'
+            '  "업종대분류",\n'
+            '  SUM("이용금액") AS "총매출",\n'
+            '  COUNT(*) AS "거래건수",\n'
+            '  COUNT(DISTINCT "그룹md번호") AS "이용고객수"\n'
+            'FROM ai_ready_v2.trs_m_merchant_delivery\n'
+            'GROUP BY "가맹점명", "업종대분류"\n'
+            'ORDER BY "총매출" DESC\n'
+            'LIMIT 20'
         ),
         "explanation": "배달 가맹점 거래 테이블에서 가맹점별 매출 현황을 조회합니다.",
         "tables_used": ["trs_m_merchant_delivery"],
     },
     "고객 수": {
         "sql": (
-            'SELECT COUNT(DISTINCT "그룹md번호") as "전체고객수", '
-            'COUNT(DISTINCT CASE WHEN "성별구분코드" = \'M\' THEN "그룹md번호" END) as "남성고객수", '
-            'COUNT(DISTINCT CASE WHEN "성별구분코드" = \'F\' THEN "그룹md번호" END) as "여성고객수" '
-            "FROM ai_ready_v2.igd_d_cust_mas "
-            "LIMIT 1000"
+            'SELECT\n'
+            '  COUNT(DISTINCT "그룹md번호") AS "전체고객수",\n'
+            '  COUNT(DISTINCT CASE WHEN "성별구분코드" = \'M\' THEN "그룹md번호" END) AS "남성고객수",\n'
+            '  COUNT(DISTINCT CASE WHEN "성별구분코드" = \'F\' THEN "그룹md번호" END) AS "여성고객수"\n'
+            'FROM ai_ready_v2.igd_d_cust_mas\n'
+            'LIMIT 1000'
         ),
         "explanation": "그룹 통합 고객 마스터에서 전체 고객 수를 성별로 집계합니다.",
         "tables_used": ["igd_d_cust_mas"],
@@ -438,7 +462,16 @@ class MockBedrockClient:
         if any(k in query for k in ["거래", "결제", "이용금액", "이용", "매출", "카드"]):
             table = "igd_m_cust_txn_card"
             return {
-                "sql": f'SELECT "기준년월", COUNT(*) as "건수", SUM("이용금액") as "총이용금액" FROM ai_ready_v2.{table} GROUP BY "기준년월" ORDER BY "기준년월" DESC LIMIT 12',
+                "sql": (
+                    'SELECT\n'
+                    '  "기준년월",\n'
+                    '  COUNT(*) AS "건수",\n'
+                    '  SUM("이용금액") AS "총이용금액"\n'
+                    f'FROM ai_ready_v2.{table}\n'
+                    'GROUP BY "기준년월"\n'
+                    'ORDER BY "기준년월" DESC\n'
+                    'LIMIT 12'
+                ),
                 "explanation": "카드 거래 테이블에서 월별 거래 현황을 조회합니다.",
                 "tables_used": [table],
                 "confidence": 0.7,
@@ -447,7 +480,12 @@ class MockBedrockClient:
         elif any(k in query for k in ["고객", "회원", "연령", "성별"]):
             table = "igd_d_cust_mas"
             return {
-                "sql": f'SELECT COUNT(DISTINCT "그룹md번호") as "고객수" FROM ai_ready_v2.{table} LIMIT 1000',
+                "sql": (
+                    'SELECT\n'
+                    '  COUNT(DISTINCT "그룹md번호") AS "고객수"\n'
+                    f'FROM ai_ready_v2.{table}\n'
+                    'LIMIT 1000'
+                ),
                 "explanation": "그룹 통합 고객 마스터에서 고객 정보를 조회합니다.",
                 "tables_used": [table],
                 "confidence": 0.7,
@@ -455,7 +493,12 @@ class MockBedrockClient:
             }
         else:
             return {
-                "sql": 'SELECT COUNT(DISTINCT "그룹md번호") as "고객수" FROM ai_ready_v2.igd_d_cust_mas LIMIT 1000',
+                "sql": (
+                    'SELECT\n'
+                    '  COUNT(DISTINCT "그룹md번호") AS "고객수"\n'
+                    'FROM ai_ready_v2.igd_d_cust_mas\n'
+                    'LIMIT 1000'
+                ),
                 "explanation": "기본 고객 수를 조회합니다.",
                 "tables_used": ["igd_d_cust_mas"],
                 "confidence": 0.5,
