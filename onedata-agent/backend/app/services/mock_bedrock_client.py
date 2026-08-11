@@ -1,6 +1,8 @@
 """Mock Bedrock client for local development without AWS credentials.
 
 Uses ontology-based heuristic SQL generation instead of Claude LLM calls.
+Supports drill-down queries by detecting dimension keywords and generating
+appropriate SQL + mock results for each analysis dimension.
 """
 
 from __future__ import annotations
@@ -12,7 +14,120 @@ from typing import Any, AsyncGenerator
 
 logger = logging.getLogger(__name__)
 
-# Query pattern -> SQL template mappings
+
+# ============================================================
+# Drill-down dimension definitions
+# Each dimension has: SQL template, mock results, explanation
+# ============================================================
+
+_DIMENSION_AGE = {
+    "sql": (
+        'SELECT "고객연령대", COUNT(DISTINCT "그룹md번호") as "고객수", '
+        'SUM("이용금액") as "이용금액합계", '
+        'ROUND(COUNT(DISTINCT "그룹md번호") * 100.0 / SUM(COUNT(DISTINCT "그룹md번호")) OVER(), 1) as "비율" '
+        "FROM ai_ready_v2.igd_m_cust_base c "
+        "JOIN ai_ready_v2.igd_m_cust_txn_card t ON c.\"그룹md번호\" = t.\"그룹md번호\" "
+        'GROUP BY "고객연령대" '
+        'ORDER BY "고객연령대" '
+        "LIMIT 20"
+    ),
+    "explanation": "이전 결과를 연령대별로 세분화하여 고객 수와 이용금액을 분석합니다.",
+    "tables_used": ["igd_m_cust_base", "igd_m_cust_txn_card"],
+    "results": {
+        "columns": ["고객연령대", "고객수", "이용금액합계", "비율"],
+        "rows": [
+            {"고객연령대": "20대", "고객수": "3214587", "이용금액합계": "2847123000", "비율": "15.2"},
+            {"고객연령대": "30대", "고객수": "5128743", "이용금액합계": "5841273000", "비율": "24.3"},
+            {"고객연령대": "40대", "고객수": "4987234", "이용금액합계": "6125847000", "비율": "23.6"},
+            {"고객연령대": "50대", "고객수": "4125893", "이용금액합계": "4847123000", "비율": "19.5"},
+            {"고객연령대": "60대", "고객수": "2547891", "이용금액합계": "2125847000", "비율": "12.1"},
+            {"고객연령대": "70대 이상", "고객수": "1123456", "이용금액합계": "847523000", "비율": "5.3"},
+        ],
+    },
+}
+
+_DIMENSION_GENDER = {
+    "sql": (
+        'SELECT "성별구분코드", COUNT(DISTINCT "그룹md번호") as "고객수", '
+        'SUM("이용금액") as "이용금액합계", '
+        'AVG("이용금액") as "평균이용금액", '
+        'COUNT(*) as "거래건수" '
+        "FROM ai_ready_v2.igd_d_cust_mas c "
+        "JOIN ai_ready_v2.igd_m_cust_txn_card t ON c.\"그룹md번호\" = t.\"그룹md번호\" "
+        'GROUP BY "성별구분코드" '
+        'ORDER BY "고객수" DESC '
+        "LIMIT 10"
+    ),
+    "explanation": "이전 결과를 성별로 구분하여 고객 수, 이용금액, 거래건수를 비교합니다.",
+    "tables_used": ["igd_d_cust_mas", "igd_m_cust_txn_card"],
+    "results": {
+        "columns": ["성별구분코드", "고객수", "이용금액합계", "평균이용금액", "거래건수"],
+        "rows": [
+            {"성별구분코드": "남성(M)", "고객수": "10847291", "이용금액합계": "12584712000", "평균이용금액": "1160284", "거래건수": "15847523"},
+            {"성별구분코드": "여성(F)", "고객수": "10280513", "이용금액합계": "11247583000", "평균이용금액": "1094083", "거래건수": "14523841"},
+        ],
+    },
+}
+
+_DIMENSION_SUBSIDIARY = {
+    "sql": (
+        'SELECT "계열사코드", COUNT(DISTINCT "그룹md번호") as "고객수", '
+        'SUM("이용금액") as "거래금액", '
+        'COUNT(*) as "거래건수", '
+        'AVG("이용금액") as "건당평균금액" '
+        "FROM ai_ready_v2.igd_m_cust_holding_base h "
+        "JOIN ai_ready_v2.igd_m_cust_txn t ON h.\"그룹md번호\" = t.\"그룹md번호\" "
+        'GROUP BY "계열사코드" '
+        'ORDER BY "거래금액" DESC '
+        "LIMIT 10"
+    ),
+    "explanation": "이전 결과를 계열사별(은행/카드/증권/라이프)로 나누어 고객 수와 거래현황을 비교합니다.",
+    "tables_used": ["igd_m_cust_holding_base", "igd_m_cust_txn"],
+    "results": {
+        "columns": ["계열사코드", "고객수", "거래금액", "거래건수", "건당평균금액"],
+        "rows": [
+            {"계열사코드": "신한카드", "고객수": "9523841", "거래금액": "15847523000", "거래건수": "28475123", "건당평균금액": "556521"},
+            {"계열사코드": "신한은행", "고객수": "12847352", "거래금액": "42584712000", "거래건수": "18475231", "건당평균금액": "2304712"},
+            {"계열사코드": "신한투자증권", "고객수": "2847291", "거래금액": "28475231000", "거래건수": "4521873", "건당평균금액": "6297842"},
+            {"계열사코드": "신한생명", "고객수": "4215673", "거래금액": "8475123000", "거래건수": "6214587", "건당평균금액": "1363821"},
+            {"계열사코드": "신한캐피탈", "고객수": "1523847", "거래금액": "5847123000", "거래건수": "2847291", "건당평균금액": "2053284"},
+            {"계열사코드": "제주은행", "고객수": "847291", "거래금액": "2125847000", "거래건수": "1523847", "건당평균금액": "1395024"},
+        ],
+    },
+}
+
+_DIMENSION_MONTHLY = {
+    "sql": (
+        'SELECT "기준년월", '
+        'COUNT(DISTINCT "그룹md번호") as "활성고객수", '
+        'SUM("이용금액") as "월매출", '
+        'COUNT(*) as "거래건수", '
+        'AVG("이용금액") as "건당평균" '
+        "FROM ai_ready_v2.igd_m_cust_txn_card "
+        "WHERE \"기준년월\" >= '202602' "
+        'GROUP BY "기준년월" '
+        'ORDER BY "기준년월" '
+        "LIMIT 12"
+    ),
+    "explanation": "최근 6개월간 월별 추이를 분석합니다. 활성고객수, 매출, 거래건수 추이를 보여줍니다.",
+    "tables_used": ["igd_m_cust_txn_card"],
+    "results": {
+        "columns": ["기준년월", "활성고객수", "월매출", "거래건수", "건당평균"],
+        "rows": [
+            {"기준년월": "2026-02", "활성고객수": "3987254", "월매출": "12584712300", "거래건수": "24125847", "건당평균": "521582"},
+            {"기준년월": "2026-03", "활성고객수": "4128453", "월매출": "13847521800", "거래건수": "25847123", "건당평균": "535784"},
+            {"기준년월": "2026-04", "활성고객수": "4215873", "월매출": "14128473200", "거래건수": "26584721", "건당평균": "531428"},
+            {"기준년월": "2026-05", "활성고객수": "4498721", "월매출": "15284713500", "거래건수": "28012847", "건당평균": "545617"},
+            {"기준년월": "2026-06", "활성고객수": "4387291", "월매출": "14925841200", "거래건수": "27128453", "건당평균": "550132"},
+            {"기준년월": "2026-07", "활성고객수": "4521873", "월매출": "15847523100", "거래건수": "28475123", "건당평균": "556521"},
+        ],
+    },
+}
+
+# ============================================================
+# Primary query templates (direct questions)
+# ============================================================
+
 _QUERY_TEMPLATES = {
     "그룹사별 고객": {
         "sql": (
@@ -25,17 +140,10 @@ _QUERY_TEMPLATES = {
         "explanation": "고객 보유 상품 현황 테이블에서 계열사별 고유 고객 수를 집계합니다.",
         "tables_used": ["igd_m_cust_holding_base"],
     },
-    "연령대별 고객": {
-        "sql": (
-            'SELECT "고객연령대", COUNT(DISTINCT "그룹md번호") as "고객수", '
-            'ROUND(COUNT(DISTINCT "그룹md번호") * 100.0 / SUM(COUNT(DISTINCT "그룹md번호")) OVER(), 1) as "비율" '
-            "FROM ai_ready_v2.igd_m_cust_base "
-            'GROUP BY "고객연령대" '
-            'ORDER BY "고객연령대" '
-            "LIMIT 20"
-        ),
+    "연령대별": {
+        "sql": _DIMENSION_AGE["sql"],
         "explanation": "그룹 통합 고객 월간 기본 테이블에서 연령대별 고객 수와 비율을 산출합니다.",
-        "tables_used": ["igd_m_cust_base"],
+        "tables_used": _DIMENSION_AGE["tables_used"],
     },
     "카드 거래 금액 상위": {
         "sql": (
@@ -49,7 +157,7 @@ _QUERY_TEMPLATES = {
         "explanation": "카드 거래 테이블에서 이용금액 합계 기준 상위 10명의 고객을 조회합니다.",
         "tables_used": ["igd_m_cust_txn_card"],
     },
-    "동시 보유 고객": {
+    "동시 보유": {
         "sql": (
             "SELECT COUNT(DISTINCT a.\"그룹md번호\") as \"동시보유고객수\" "
             "FROM ai_ready_v2.cln_m_cust_base_bank a "
@@ -61,17 +169,14 @@ _QUERY_TEMPLATES = {
         "tables_used": ["cln_m_cust_base_bank", "cln_m_cust_base_card"],
     },
     "월간 매출": {
-        "sql": (
-            'SELECT "기준년월", SUM("이용금액") as "월매출", '
-            'COUNT(DISTINCT "그룹md번호") as "이용고객수", '
-            'COUNT(*) as "거래건수" '
-            "FROM ai_ready_v2.igd_m_cust_txn_card "
-            'GROUP BY "기준년월" '
-            'ORDER BY "기준년월" DESC '
-            "LIMIT 12"
-        ),
+        "sql": _DIMENSION_MONTHLY["sql"],
         "explanation": "카드 거래 테이블에서 월별 매출 추이를 집계합니다.",
-        "tables_used": ["igd_m_cust_txn_card"],
+        "tables_used": _DIMENSION_MONTHLY["tables_used"],
+    },
+    "월별 추이": {
+        "sql": _DIMENSION_MONTHLY["sql"],
+        "explanation": "카드 거래 테이블에서 월별 추이를 분석합니다.",
+        "tables_used": _DIMENSION_MONTHLY["tables_used"],
     },
     "가맹점": {
         "sql": (
@@ -98,7 +203,10 @@ _QUERY_TEMPLATES = {
     },
 }
 
-# Mock result data corresponding to each query pattern
+# ============================================================
+# Mock result data for primary queries
+# ============================================================
+
 _MOCK_RESULTS = {
     "그룹사별 고객": {
         "columns": ["계열사코드", "고객수"],
@@ -111,17 +219,7 @@ _MOCK_RESULTS = {
             {"계열사코드": "제주은행", "고객수": "847291"},
         ],
     },
-    "연령대별 고객": {
-        "columns": ["고객연령대", "고객수", "비율"],
-        "rows": [
-            {"고객연령대": "20대", "고객수": "3214587", "비율": "15.2"},
-            {"고객연령대": "30대", "고객수": "5128743", "비율": "24.3"},
-            {"고객연령대": "40대", "고객수": "4987234", "비율": "23.6"},
-            {"고객연령대": "50대", "고객수": "4125893", "비율": "19.5"},
-            {"고객연령대": "60대", "고객수": "2547891", "비율": "12.1"},
-            {"고객연령대": "70대 이상", "고객수": "1123456", "비율": "5.3"},
-        ],
-    },
+    "연령대별": _DIMENSION_AGE["results"],
     "카드 거래 금액 상위": {
         "columns": ["그룹md번호", "총이용금액", "거래건수", "평균이용금액"],
         "rows": [
@@ -137,21 +235,12 @@ _MOCK_RESULTS = {
             {"그룹md번호": "MD01024581", "총이용금액": "228471500", "거래건수": "176", "평균이용금액": "1298134"},
         ],
     },
-    "동시 보유 고객": {
+    "동시 보유": {
         "columns": ["동시보유고객수"],
         "rows": [{"동시보유고객수": "7284531"}],
     },
-    "월간 매출": {
-        "columns": ["기준년월", "월매출", "이용고객수", "거래건수"],
-        "rows": [
-            {"기준년월": "202607", "월매출": "15847523100", "이용고객수": "4521873", "거래건수": "28475123"},
-            {"기준년월": "202606", "월매출": "14925841200", "이용고객수": "4387291", "거래건수": "27128453"},
-            {"기준년월": "202605", "월매출": "15284713500", "이용고객수": "4498721", "거래건수": "28012847"},
-            {"기준년월": "202604", "월매출": "14128473200", "이용고객수": "4215873", "거래건수": "26584721"},
-            {"기준년월": "202603", "월매출": "13847521800", "이용고객수": "4128453", "거래건수": "25847123"},
-            {"기준년월": "202602", "월매출": "12584712300", "이용고객수": "3987254", "거래건수": "24125847"},
-        ],
-    },
+    "월간 매출": _DIMENSION_MONTHLY["results"],
+    "월별 추이": _DIMENSION_MONTHLY["results"],
     "가맹점": {
         "columns": ["가맹점명", "업종대분류", "총매출", "거래건수", "이용고객수"],
         "rows": [
@@ -166,7 +255,29 @@ _MOCK_RESULTS = {
         "columns": ["전체고객수", "남성고객수", "여성고객수"],
         "rows": [{"전체고객수": "21127804", "남성고객수": "10847291", "여성고객수": "10280513"}],
     },
+    "성별": _DIMENSION_GENDER["results"],
+    "계열사별": _DIMENSION_SUBSIDIARY["results"],
 }
+
+
+def _detect_drilldown_dimension(query: str) -> dict | None:
+    """Detect if query is a drill-down request and return the dimension config."""
+    drill_indicators = ["위 결과", "나눠", "구분", "세분화", "분류", "기준으로"]
+    is_drilldown = any(ind in query for ind in drill_indicators)
+
+    if "연령" in query or "나이" in query:
+        return _DIMENSION_AGE
+    if "성별" in query:
+        return _DIMENSION_GENDER
+    if "계열사" in query or "은행/카드" in query or "그룹사" in query:
+        return _DIMENSION_SUBSIDIARY
+    if "월별" in query or "추이" in query or "월간" in query or "기간" in query:
+        return _DIMENSION_MONTHLY
+
+    if is_drilldown:
+        return _DIMENSION_AGE
+
+    return None
 
 
 class MockBedrockClient:
@@ -215,6 +326,18 @@ class MockBedrockClient:
         context: str,
         examples: list[dict[str, str]] | None = None,
     ) -> dict[str, Any]:
+        # Check for drill-down queries first
+        dimension = _detect_drilldown_dimension(query)
+        if dimension:
+            return {
+                "sql": dimension["sql"],
+                "explanation": dimension["explanation"],
+                "tables_used": dimension["tables_used"],
+                "confidence": 0.88,
+                "assumptions": ["드릴다운 분석 - 차원별 세분화"],
+            }
+
+        # Then check primary templates
         template = self._find_matching_template(query)
         if template:
             return {
@@ -222,7 +345,7 @@ class MockBedrockClient:
                 "explanation": template["explanation"],
                 "tables_used": template["tables_used"],
                 "confidence": 0.85,
-                "assumptions": ["로컬 개발 모드 - 규칙 기반 SQL 생성"],
+                "assumptions": ["온톨로지 기반 SQL 생성"],
             }
         return self._generate_fallback_sql(query, context)
 
@@ -265,6 +388,16 @@ class MockBedrockClient:
         })
 
     def _mock_sql(self, query: str) -> str:
+        dimension = _detect_drilldown_dimension(query)
+        if dimension:
+            return json.dumps({
+                "sql": dimension["sql"],
+                "explanation": dimension["explanation"],
+                "tables_used": dimension["tables_used"],
+                "confidence": 0.88,
+                "assumptions": [],
+            }, ensure_ascii=False)
+
         template = self._find_matching_template(query)
         if template:
             return json.dumps({
@@ -336,7 +469,6 @@ class MockBedrockClient:
         else:
             lines.append(f"총 **{row_count:,}건**의 결과를 조회했습니다.\n")
 
-            # Find numeric columns for stats
             numeric_col = None
             for col in columns[1:]:
                 try:
@@ -359,7 +491,6 @@ class MockBedrockClient:
             if row_count > 10:
                 lines.append(f"\n  ... 외 {row_count - 10:,}건")
 
-            # Add statistical summary
             if numeric_col and len(rows) > 1:
                 values = []
                 for row in rows:
@@ -411,25 +542,35 @@ class MockAthenaClient:
     def _find_mock_data(self, sql: str) -> dict[str, Any]:
         sql_lower = sql.lower()
 
-        if "holding" in sql_lower or "계열사" in sql:
+        # Drill-down dimensions (detected by SQL structure)
+        if "성별구분코드" in sql and "group by" in sql_lower:
+            return _DIMENSION_GENDER["results"]
+        if "고객연령대" in sql and "group by" in sql_lower:
+            return _DIMENSION_AGE["results"]
+        if "계열사코드" in sql and "igd_m_cust_txn" in sql_lower:
+            return _DIMENSION_SUBSIDIARY["results"]
+        if "기준년월" in sql and "활성고객수" in sql:
+            return _DIMENSION_MONTHLY["results"]
+
+        # Primary query patterns
+        if "holding" in sql_lower and "계열사" in sql:
             return _MOCK_RESULTS["그룹사별 고객"]
-        elif "연령" in sql or "고객연령대" in sql:
-            return _MOCK_RESULTS["연령대별 고객"]
-        elif "join" in sql_lower and "bank" in sql_lower and "card" in sql_lower:
-            return _MOCK_RESULTS["동시 보유 고객"]
-        elif "이용금액" in sql and "desc" in sql_lower and "그룹md번호" in sql:
+        if "고객연령대" in sql:
+            return _DIMENSION_AGE["results"]
+        if "join" in sql_lower and "bank" in sql_lower and "card" in sql_lower:
+            return _MOCK_RESULTS["동시 보유"]
+        if "이용금액" in sql and "desc" in sql_lower and "그룹md번호" in sql and "group by" in sql_lower:
             return _MOCK_RESULTS["카드 거래 금액 상위"]
-        elif "기준년월" in sql and "sum" in sql_lower:
-            return _MOCK_RESULTS["월간 매출"]
-        elif "merchant" in sql_lower or "가맹점" in sql:
+        if "기준년월" in sql and ("sum" in sql_lower or "count" in sql_lower):
+            return _DIMENSION_MONTHLY["results"]
+        if "merchant" in sql_lower or "가맹점" in sql:
             return _MOCK_RESULTS["가맹점"]
-        elif "count" in sql_lower and "cust_mas" in sql_lower:
-            return _MOCK_RESULTS["고객 수"]
-        else:
+        if "성별" in sql:
+            return _DIMENSION_GENDER["results"]
+        if "count" in sql_lower and "cust_mas" in sql_lower:
             return _MOCK_RESULTS["고객 수"]
 
-    def _extract_context(self, sql: str) -> list[str]:
-        return re.findall(r'"([^"]+)"', sql)
+        return _MOCK_RESULTS["고객 수"]
 
     async def health_check(self) -> bool:
         return True
