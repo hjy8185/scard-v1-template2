@@ -23,7 +23,8 @@ services:
       - ATHENA_WORKGROUP=primary
       - BEDROCK_MODEL_ID=anthropic.claude-sonnet-4-20250514
       - APP_PORT=8000
-      - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000
+      - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000,http://54.249.68.205:3000
+      - LOCAL_DEV=true
       - SQL_READ_ONLY=true
       - ONTOLOGY_CACHE_PATH=data/ontology_cache.json
       - TABLE_METADATA_PATH=data/table_metadata.json
@@ -55,6 +56,7 @@ services:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - BFF_URL=http://backend:8000
       - NODE_ENV=development
     volumes:
       - ./frontend:/app
@@ -78,8 +80,10 @@ services:
     environment:
       - discovery.type=single-node
       - plugins.security.disabled=true
+      - DISABLE_INSTALL_DEMO_CONFIG=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
       - bootstrap.memory_lock=true
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=OneData@2024!
     ulimits:
       memlock:
         soft: -1
@@ -102,7 +106,7 @@ services:
   # Neptune (simulated with Apache Jena Fuseki for local dev)
   # ===========================================================================
   neptune:
-    image: stain/jena-fuseki:4.10.0
+    image: secoresearch/fuseki:4.10.0
     container_name: onedata-neptune
     ports:
       - "8182:3030"

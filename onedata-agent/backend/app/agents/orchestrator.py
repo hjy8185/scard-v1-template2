@@ -15,6 +15,8 @@ import logging
 import time
 from typing import Any, AsyncGenerator
 
+import os
+
 from app.agents.answer_composer import AnswerComposer
 from app.agents.intent import IntentClassifier, IntentResult, SQL_INTENTS
 from app.agents.sql_generator import SQLGenerator, SQLGenerationResult
@@ -61,10 +63,18 @@ class Orchestrator:
         ontology_loader: OntologyLoader | None = None,
         ontology_mapper: OntologyMapper | None = None,
     ) -> None:
-        self._bedrock = bedrock_client or BedrockClient()
+        is_local_dev = os.environ.get("LOCAL_DEV", "").lower() in ("true", "1", "yes")
+
+        if is_local_dev:
+            from app.services.mock_bedrock_client import MockBedrockClient, MockAthenaClient
+            self._bedrock = bedrock_client or MockBedrockClient()
+            self._athena = athena_client or MockAthenaClient()
+        else:
+            self._bedrock = bedrock_client or BedrockClient()
+            self._athena = athena_client or AthenaClient()
+
         self._neptune = neptune_client or NeptuneClient()
         self._opensearch = opensearch_client or OpenSearchClient()
-        self._athena = athena_client or AthenaClient()
 
         # Ontology
         self._ontology = ontology_loader or OntologyLoader()
