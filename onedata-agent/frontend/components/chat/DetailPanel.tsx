@@ -149,7 +149,7 @@ export function DetailPanel() {
           <ResultTable result={selectedMessage.queryResults} />
         )}
         {detailView === 'report' && selectedMessage.queryResults && (
-          <ReportChart result={selectedMessage.queryResults} />
+          <ReportChart result={selectedMessage.queryResults} answer={selectedMessage.content} />
         )}
         {detailView === 'ontology' && (
           <OntologyView context={selectedMessage.reasoning} tablesUsed={

@@ -6,9 +6,10 @@ import type { QueryResult } from '@/lib/types';
 interface ReportChartProps {
   result: QueryResult;
   title?: string;
+  answer?: string;
 }
 
-export function ReportChart({ result, title }: ReportChartProps) {
+export function ReportChart({ result, title, answer }: ReportChartProps) {
   const chartData = useMemo(() => {
     if (!result || result.rows.length === 0 || result.columns.length < 2) {
       return null;
@@ -38,59 +39,57 @@ export function ReportChart({ result, title }: ReportChartProps) {
 
     const labelCol = result.columns.find((col) => col !== valueCol) || result.columns[0];
 
-    const items = result.rows.slice(0, 10).map((row) => ({
-      label: String(row[labelCol] ?? ''),
+    const items = result.rows.slice(0, 12).map((row) => ({
+      label: formatLabel(String(row[labelCol] ?? ''), labelCol),
       value: parseFloat(String(row[valueCol] ?? '0')) || 0,
     }));
 
     const maxValue = Math.max(...items.map((d) => d.value), 1);
     const totalValue = items.reduce((sum, d) => sum + d.value, 0);
 
-    const insight = generateInsight(items, labelCol, valueCol!);
-
-    return { items, maxValue, totalValue, labelCol, valueCol, insight };
+    return { items, maxValue, totalValue, labelCol, valueCol };
   }, [result]);
 
   if (!chartData) {
     return null;
   }
 
-  const { items, maxValue, totalValue, labelCol, valueCol, insight } = chartData;
+  const { items, maxValue, totalValue, labelCol, valueCol } = chartData;
 
   return (
-    <div className="px-4 py-3">
-      {/* Compact header */}
-      <div className="flex items-center justify-between mb-2">
+    <div className="px-4 py-3 space-y-3">
+      {/* Header */}
+      <div className="flex items-center justify-between">
         <span className="text-xs font-medium text-mist">
-          {title || valueCol}
+          {title || `${labelCol} × ${valueCol}`}
         </span>
         <span className="text-[11px] text-slate">
-          합계 {totalValue.toLocaleString('ko-KR')}
+          {items.length}건 · 합계 {totalValue.toLocaleString('ko-KR')}
         </span>
       </div>
 
       {/* Compact bar chart */}
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         {items.map((item, i) => {
           const pct = (item.value / maxValue) * 100;
           const share = ((item.value / totalValue) * 100).toFixed(1);
           const color = getColor(i);
 
           return (
-            <div key={i} className="flex items-center gap-2 h-6">
-              <span className="text-[11px] text-mist w-[72px] truncate text-right shrink-0">
-                {item.label || '(없음)'}
+            <div key={i} className="flex items-center gap-2 h-5">
+              <span className="text-[10px] text-mist w-[64px] truncate text-right shrink-0">
+                {item.label}
               </span>
-              <div className="flex-1 h-4 rounded bg-ink-800 overflow-hidden relative">
+              <div className="flex-1 h-3.5 rounded-sm bg-ink-800/80 overflow-hidden">
                 <div
-                  className="h-full rounded transition-all duration-500"
-                  style={{ width: `${pct}%`, background: color }}
+                  className="h-full rounded-sm transition-all duration-500"
+                  style={{ width: `${pct}%`, background: color, opacity: 0.85 }}
                 />
               </div>
-              <span className="text-[11px] font-mono text-pearl w-[60px] text-right shrink-0">
+              <span className="text-[10px] font-mono text-pearl w-[52px] text-right shrink-0">
                 {item.value.toLocaleString('ko-KR')}
               </span>
-              <span className="text-[10px] text-slate w-[36px] text-right shrink-0">
+              <span className="text-[9px] text-slate w-[30px] text-right shrink-0">
                 {share}%
               </span>
             </div>
@@ -98,51 +97,40 @@ export function ReportChart({ result, title }: ReportChartProps) {
         })}
       </div>
 
-      {/* Insight line */}
-      {insight && (
-        <p className="mt-2.5 text-[11px] text-slate leading-relaxed border-t border-ink-700 pt-2">
-          {insight}
-        </p>
+      {/* AI Answer as insight/commentary */}
+      {answer && (
+        <div className="border-t border-ink-700 pt-2.5">
+          <div className="flex items-start gap-2">
+            <span className="text-[10px] text-aqua mt-0.5 shrink-0">AI 해설</span>
+            <p className="text-[11px] text-mist/90 leading-[1.6] whitespace-pre-wrap">
+              {answer}
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
 }
 
-function generateInsight(
-  items: { label: string; value: number }[],
-  labelCol: string,
-  valueCol: string,
-): string {
-  if (items.length === 0) return '';
-  if (items.length === 1) return `${items[0].label}: ${items[0].value.toLocaleString('ko-KR')}`;
-
-  const sorted = [...items].sort((a, b) => b.value - a.value);
-  const top = sorted[0];
-  const total = items.reduce((s, d) => s + d.value, 0);
-  const topPct = ((top.value / total) * 100).toFixed(1);
-
-  const bottom = sorted[sorted.length - 1];
-  const ratio = top.value / Math.max(bottom.value, 1);
-
-  if (items.length <= 3) {
-    return `${top.label}(${topPct}%)이 가장 높고, ${bottom.label}이 가장 낮아요.`;
+function formatLabel(raw: string, colName: string): string {
+  if (colName.includes('연령') || colName.includes('구간')) {
+    const num = parseInt(raw, 10);
+    if (!isNaN(num)) {
+      if (num >= 70) return `${num}대+`;
+      return `${num}~${num + 4}세`;
+    }
   }
-
-  const top3 = sorted.slice(0, 3);
-  const top3Pct = ((top3.reduce((s, d) => s + d.value, 0) / total) * 100).toFixed(0);
-
-  if (ratio > 5) {
-    return `${top.label}이 ${topPct}%로 압도적이며, 최하위(${bottom.label}) 대비 ${ratio.toFixed(1)}배 차이가 나요.`;
+  if (colName.includes('년월') && raw.length === 6) {
+    return `${raw.slice(0, 4)}.${raw.slice(4)}`;
   }
-
-  return `상위 3개(${top3.map(d => d.label).join(', ')})가 전체의 ${top3Pct}%를 차지해요.`;
+  return raw;
 }
 
 function getColor(index: number): string {
   const colors = [
     '#38c7e0', '#3dd68c', '#f5a623', '#ec4899',
     '#a78bfa', '#60a5fa', '#f97316', '#10b981',
-    '#8b5cf6', '#6b7280',
+    '#8b5cf6', '#f472b6', '#22d3ee', '#6b7280',
   ];
   return colors[index % colors.length];
 }
