@@ -114,7 +114,7 @@ export function ResultTable({ result }: ResultTableProps) {
                       key={col}
                       className="px-4 py-2.5 text-sm text-pearl whitespace-nowrap"
                     >
-                      <CellValue value={row[col]} />
+                      <CellValue value={row[col]} column={col} />
                     </td>
                   ))}
                 </tr>
@@ -176,17 +176,30 @@ export function ResultTable({ result }: ResultTableProps) {
   );
 }
 
+// Format age range code (010 -> 10~14세, 030 -> 30~34세, 070 -> 70세+)
+function formatAgeRange(code: string): string {
+  const num = parseInt(code, 10);
+  if (isNaN(num)) return code;
+  if (num >= 70) return `${num}세+`;
+  return `${num}~${num + 4}세`;
+}
+
+// Format number: remove decimals, add thousand separators
+function formatNumber(value: number | string): string {
+  const num = typeof value === 'string' ? parseFloat(value) : value;
+  if (isNaN(num)) return String(value);
+  return Math.round(num).toLocaleString('ko-KR');
+}
+
+// Check if a value looks like a numeric string
+function isNumericString(value: string): boolean {
+  return /^-?\d+(\.\d+)?$/.test(value.trim());
+}
+
 // Cell value renderer
-function CellValue({ value }: { value: unknown }) {
+function CellValue({ value, column }: { value: unknown; column?: string }) {
   if (value === null || value === undefined) {
     return <span className="text-slate italic">NULL</span>;
-  }
-  if (typeof value === 'number') {
-    return (
-      <span className="font-mono text-amber">
-        {value.toLocaleString('ko-KR')}
-      </span>
-    );
   }
   if (typeof value === 'boolean') {
     return (
@@ -195,5 +208,31 @@ function CellValue({ value }: { value: unknown }) {
       </span>
     );
   }
-  return <span>{String(value)}</span>;
+
+  const strVal = String(value);
+
+  // Age range code formatting
+  if (column && (column.includes('연령') || column.includes('나이')) && column.includes('구간') || column?.includes('연령대')) {
+    if (/^\d{2,3}$/.test(strVal)) {
+      return <span>{formatAgeRange(strVal)}</span>;
+    }
+  }
+
+  // Number formatting (remove decimals, add thousand separators)
+  if (typeof value === 'number') {
+    return (
+      <span className="font-mono text-amber">
+        {formatNumber(value)}
+      </span>
+    );
+  }
+  if (typeof value === 'string' && isNumericString(value)) {
+    return (
+      <span className="font-mono text-amber">
+        {formatNumber(value)}
+      </span>
+    );
+  }
+
+  return <span>{strVal}</span>;
 }
