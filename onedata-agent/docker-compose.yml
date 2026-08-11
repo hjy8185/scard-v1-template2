@@ -14,19 +14,20 @@ services:
       - "8000:8000"
     environment:
       - AWS_REGION=ap-northeast-2
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-test}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-test}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
       - NEPTUNE_ENDPOINT=http://neptune:8182
       - OPENSEARCH_ENDPOINT=http://opensearch:9200
       - OPENSEARCH_INDEX=onedata-ontology
       - ATHENA_DATABASE=ai_ready_v2
       - ATHENA_OUTPUT_BUCKET=s3://onedata-athena-results/
       - ATHENA_WORKGROUP=primary
-      - BEDROCK_MODEL_ID=us.anthropic.claude-sonnet-4-20250514-v1:0
+      - BEDROCK_MODEL_ID=us.anthropic.claude-haiku-4-5-20251001-v1:0
       - BEDROCK_REGION=us-west-2
       - APP_PORT=8000
       - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000,http://54.249.68.205:3000
-      - LOCAL_DEV=true
+      - LOCAL_DEV=false
       - SQL_READ_ONLY=true
       - ONTOLOGY_CACHE_PATH=data/ontology_cache.json
       - TABLE_METADATA_PATH=data/table_metadata.json

@@ -390,6 +390,12 @@ class MockBedrockClient:
                 "confidence": 0.85,
                 "assumptions": ["온톨로지 기반 SQL 생성"],
             }
+
+        # Dynamic ontology-based SQL generation from context
+        dynamic = self._generate_dynamic_sql(query, context)
+        if dynamic:
+            return dynamic
+
         return self._generate_fallback_sql(query, context)
 
     async def compose_answer(
@@ -457,6 +463,237 @@ class MockBedrockClient:
             if pattern in query:
                 return template
         return None
+
+    def _generate_dynamic_sql(self, query: str, context: str) -> dict[str, Any] | None:
+        """Dynamically generate SQL from ontology context.
+
+        Parses the ontology context string to find tables and columns
+        that match the user's question, then builds appropriate SQL
+        using actual column names from the ontology.
+        """
+        if not context or "AVAILABLE TABLES" not in context:
+            return None
+
+        tables_info = self._parse_context_tables(context)
+        if not tables_info:
+            return None
+
+        # Score each table against the query
+        best_table = None
+        best_score = 0
+        for tinfo in tables_info:
+            score = 0
+            tname = tinfo["table_name"]
+            desc = tinfo.get("description", "")
+
+            # Domain keyword matching
+            if "soleprop" in tname and any(k in query for k in ["사업자", "슈퍼솔", "자영업", "소상공인", "SuperSOL"]):
+                score += 10
+            if "merchant" in tname and any(k in query for k in ["가맹점", "매장", "업종", "배달"]):
+                score += 8
+            if "asset" in tname and any(k in query for k in ["자산", "잔액", "대출", "예금"]):
+                score += 8
+            if "txn_card" in tname and any(k in query for k in ["카드거래", "카드이용", "결제"]):
+                score += 7
+            if "txn" in tname and any(k in query for k in ["거래", "이용"]):
+                score += 5
+            if "cust_base" in tname and any(k in query for k in ["고객현황", "고객정보", "회원"]):
+                score += 5
+            if "cust_mas" in tname and any(k in query for k in ["고객", "인구"]):
+                score += 4
+            if "card" in tname and any(k in query for k in ["카드", "신용카드"]):
+                score += 3
+            if "holding" in tname and any(k in query for k in ["보유", "상품보유"]):
+                score += 5
+
+            # Description matching
+            for word in query.replace(" ", ""):
+                if len(word) > 1 and word in desc:
+                    score += 3
+
+            # Column name matching (exact hits)
+            for col in tinfo["columns"]:
+                cname = col["name"]
+                if cname in query:
+                    score += 4
+
+            # Specific combos
+            if "soleprop" in tname and "sales" in tname and any(k in query for k in ["매출", "카드매출"]):
+                score += 12
+            if "soleprop" in tname and "asset" in tname and any(k in query for k in ["자산", "대출"]):
+                score += 12
+
+            if score > best_score:
+                best_score = score
+                best_table = tinfo
+
+        if not best_table or best_score < 3:
+            return None
+
+        table_name = best_table["table_name"]
+        columns = best_table["columns"]
+        description = best_table.get("description", "")
+
+        # Classify columns by role
+        skip_cols = {"aws적재일시", "기준일자_파티션", "파티션키"}
+        time_col = None
+        dim_cols = []
+        measure_cols = []
+        flag_cols = []
+
+        for col in columns:
+            name = col["name"]
+            dtype = col["dtype"]
+            if name in skip_cols:
+                continue
+            if col.get("is_key"):
+                continue
+
+            if name in ("기준년월", "기준일자"):
+                time_col = name
+            elif name.endswith("tf") or name.endswith("여부"):
+                flag_cols.append(col)
+            elif dtype in ("bigint", "int", "smallint", "double", "float") or "decimal" in dtype:
+                if "금액" in name or "건수" in name or "수" in name or "잔액" in name:
+                    measure_cols.append(col)
+                elif name.endswith("수") or "금" in name:
+                    measure_cols.append(col)
+                else:
+                    measure_cols.append(col)
+            elif dtype == "string":
+                if any(k in name for k in ["코드", "구분", "분류", "명", "등급"]):
+                    dim_cols.append(col)
+
+        # Determine query intent
+        wants_trend = any(k in query for k in ["추이", "월별", "기간별", "변화"])
+        wants_count = any(k in query for k in ["몇", "현황", "수", "건수", "인원", "설치"])
+        wants_sum = any(k in query for k in ["금액", "매출", "합계", "총액"])
+        wants_avg = any(k in query for k in ["평균", "건당", "인당"])
+
+        # Build SQL
+        select_parts = []
+        group_by_parts = []
+        where_parts = []
+        order_col = None
+
+        # Dimension selection
+        if wants_trend and time_col:
+            select_parts.append(f'"{time_col}"')
+            group_by_parts.append(f'"{time_col}"')
+            where_parts.append(f'"{time_col}" >= \'202601\'')
+            order_col = f'"{time_col}"'
+        elif dim_cols:
+            # Pick most relevant dimension
+            chosen_dim = dim_cols[0]["name"]
+            for dc in dim_cols:
+                if dc["name"] in query or any(k in dc["name"] for k in query.split() if len(k) > 1):
+                    chosen_dim = dc["name"]
+                    break
+            select_parts.append(f'"{chosen_dim}"')
+            group_by_parts.append(f'"{chosen_dim}"')
+
+        # Measures
+        if measure_cols:
+            added = 0
+            for mc in measure_cols:
+                if added >= 3:
+                    break
+                name = mc["name"]
+                if wants_sum and ("금액" in name or "매출" in name or "잔액" in name):
+                    select_parts.append(f'SUM("{name}") AS "총{name}"')
+                    if not order_col:
+                        order_col = f'"총{name}"'
+                    added += 1
+                elif wants_avg:
+                    select_parts.append(f'AVG("{name}") AS "평균{name}"')
+                    added += 1
+                elif "건수" in name or "수" in name:
+                    select_parts.append(f'SUM("{name}") AS "총{name}"')
+                    if not order_col:
+                        order_col = f'"총{name}"'
+                    added += 1
+
+            # If nothing was added yet, use defaults for this table
+            if added == 0:
+                select_parts.append('COUNT(DISTINCT "그룹md번호") AS "사업자수"')
+                for mc in measure_cols[:2]:
+                    select_parts.append(f'SUM("{mc["name"]}") AS "총{mc["name"]}"')
+                if not order_col:
+                    order_col = '"사업자수"'
+        else:
+            # No numeric columns found; just count
+            select_parts.append('COUNT(DISTINCT "그룹md번호") AS "사업자수"')
+            if flag_cols:
+                for fc in flag_cols[:2]:
+                    select_parts.append(f'SUM("{fc["name"]}") AS "{fc["name"]}_합계"')
+            if not order_col:
+                order_col = '"사업자수"'
+
+        if not select_parts:
+            select_parts = ['COUNT(*) AS "건수"']
+
+        # Assemble SQL
+        select_clause = ",\n  ".join(select_parts)
+        sql_lines = [f"SELECT\n  {select_clause}"]
+        sql_lines.append(f"FROM ai_ready_v2.{table_name}")
+
+        if where_parts:
+            sql_lines.append(f"WHERE {' AND '.join(where_parts)}")
+
+        if group_by_parts:
+            sql_lines.append(f"GROUP BY {', '.join(group_by_parts)}")
+
+        if order_col:
+            direction = "" if wants_trend else " DESC"
+            sql_lines.append(f"ORDER BY {order_col}{direction}")
+
+        sql_lines.append("LIMIT 20")
+        sql = "\n".join(sql_lines)
+
+        return {
+            "sql": sql,
+            "explanation": f"{description or table_name} 테이블에서 데이터를 조회합니다.",
+            "tables_used": [table_name],
+            "confidence": 0.75,
+            "assumptions": ["온톨로지 컨텍스트 기반 동적 SQL 생성"],
+        }
+
+    def _parse_context_tables(self, context: str) -> list[dict[str, Any]]:
+        """Parse table info from the formatted ontology context string."""
+        tables = []
+        current_table = None
+
+        for line in context.split("\n"):
+            line = line.strip()
+            if line.startswith("## ") and not line.startswith("## 참고"):
+                if current_table:
+                    tables.append(current_table)
+                current_table = {
+                    "table_name": line[3:].strip(),
+                    "description": "",
+                    "columns": [],
+                }
+            elif current_table:
+                if line.startswith("설명:"):
+                    current_table["description"] = line[3:].strip()
+                elif line.startswith("- ") and "(" in line:
+                    # Column line: "- col_name (dtype): description [KEY]"
+                    col_match = re.match(r"- (.+?) \((.+?)\):?\s*(.*)", line)
+                    if col_match:
+                        col_name = col_match.group(1).strip()
+                        col_dtype = col_match.group(2).strip()
+                        col_rest = col_match.group(3).strip()
+                        is_key = "[KEY]" in col_rest
+                        current_table["columns"].append({
+                            "name": col_name,
+                            "dtype": col_dtype,
+                            "is_key": is_key,
+                        })
+
+        if current_table:
+            tables.append(current_table)
+
+        return tables
 
     def _generate_fallback_sql(self, query: str, context: str) -> dict[str, Any]:
         if any(k in query for k in ["거래", "결제", "이용금액", "이용", "매출", "카드"]):

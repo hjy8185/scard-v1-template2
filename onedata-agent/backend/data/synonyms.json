@@ -470,6 +470,31 @@
       "column_name": "이벤트유형",
       "table_name": "igd_m_cust_life_event",
       "description": "라이프이벤트 유형='출산'"
+    },
+    "슈퍼솔": {
+      "column_name": "사업자등록번호",
+      "table_name": "igd_m_soleprop_base",
+      "description": "개인사업자(슈퍼솔/SuperSOL) 정보"
+    },
+    "SuperSOL": {
+      "column_name": "사업자등록번호",
+      "table_name": "igd_m_soleprop_base",
+      "description": "개인사업자 SuperSOL 서비스"
+    },
+    "개인사업자매출": {
+      "column_name": "신한카드취급금액",
+      "table_name": "trs_m_soleprop_merchant_sales_card",
+      "description": "개인사업자 가맹점 카드 매출"
+    },
+    "사업자대출": {
+      "column_name": "개인사업자대출잔액",
+      "table_name": "igd_m_soleprop_asset",
+      "description": "개인사업자 대출 잔액"
+    },
+    "사업자카드이용": {
+      "column_name": "사업자카드신판이용금액",
+      "table_name": "igd_m_soleprop_asset",
+      "description": "사업자 카드 이용 금액"
     }
   }
 }
