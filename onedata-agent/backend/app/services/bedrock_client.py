@@ -367,6 +367,16 @@ class BedrockClient:
 - jaz_sh_fanclub_membership_chghist 테이블의 조인키는 "그룹md" (not "그룹md번호")
 - igd_m_cust_base, igd_m_cust_txn_card 등의 조인키는 "그룹md번호"
 
+## 계열사 회원 필터링 패턴
+
+- "카드회원" = cln_d_cust_mas_card에 존재하는 고객 (JOIN으로 필터)
+- "은행회원" = cln_d_cust_mas_bank에 존재하는 고객
+- "카드 only 회원" = 카드 마스터에는 있지만 은행 마스터에는 없는 고객:
+  JOIN cln_d_cust_mas_card ON ... (카드 보유)
+  LEFT JOIN cln_d_cust_mas_bank ON ... (은행 미보유 확인)
+  WHERE cln_d_cust_mas_bank."그룹md번호" IS NULL
+- "X에 대해서만" = 이전 쿼리 결과를 X 조건으로 필터링
+
 ## 기간 기본값 규칙 (매우 중요)
 
 - 사용자가 기간을 명시하지 않으면 "최근 1개월" 또는 "가장 최신 기준년월" 데이터를 사용
@@ -385,6 +395,14 @@ class BedrockClient:
   ★ 예: 이전 "총 고객수 8,906" → 성별별 합 = 8,906 이어야 함
 - 복잡한 분석(상위 N%, 서브그룹 필터링)은 WITH절(CTE)로 단계별 분리
 - 연령대별 분석은 반드시 ORDER BY 연령구간코드 ASC (오름차순)
+
+## 사용자 수정/피드백 패턴 (대화 이력이 있을 때)
+
+- "X로 물어본 적 없고, Y로 알려줘" → 이전 쿼리에서 X 차원 제거하고 Y 조건으로 변경
+- "Y에 대해서만 알려줘" → 이전 쿼리에 Y 필터 조건 추가 (WHERE)
+- "X only" / "X만" → X에 해당하는 WHERE 필터 추가
+- "그게 아니고" / "다시" → 이전 쿼리를 사용자 피드백에 맞게 수정
+- 핵심: 사용자의 수정 요청은 이전 SQL을 기반으로 조건을 추가/변경하는 것임
 
 ## 온톨로지 컨텍스트
 

@@ -555,6 +555,56 @@
       "column_name": "신한플러스new앱여부",
       "table_name": "jaz_sh_fanclub_membership_chghist",
       "description": "신한플러스에서 슈퍼솔 새 앱으로 전환 여부"
+    },
+    "카드회원": {
+      "column_name": "그룹md번호",
+      "table_name": "cln_d_cust_mas_card",
+      "description": "신한카드 회원 (카드 고객 마스터에 존재하는 고객)"
+    },
+    "카드고객": {
+      "column_name": "그룹md번호",
+      "table_name": "cln_d_cust_mas_card",
+      "description": "신한카드 보유 고객"
+    },
+    "카드only회원": {
+      "column_name": "그룹md번호",
+      "table_name": "cln_d_cust_mas_card",
+      "description": "카드만 보유한 회원 (은행/보험/증권 미보유, 카드 고객 마스터에만 존재)"
+    },
+    "카드만": {
+      "column_name": "그룹md번호",
+      "table_name": "cln_d_cust_mas_card",
+      "description": "카드만 보유한 회원"
+    },
+    "슈퍼솔방문": {
+      "column_name": "방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 월간 방문 횟수"
+    },
+    "MAU": {
+      "column_name": "방문일수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 Monthly Active Users(월간 방문 일수)"
+    },
+    "앱방문": {
+      "column_name": "방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 방문 횟수"
+    },
+    "체류시간": {
+      "column_name": "체류시간",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 체류시간(초)"
+    },
+    "앱세션": {
+      "column_name": "세션id",
+      "table_name": "sol_d_supersol_session",
+      "description": "슈퍼솔 앱 접속 세션"
+    },
+    "접속기기": {
+      "column_name": "접속기기",
+      "table_name": "sol_d_supersol_session",
+      "description": "앱 접속 기기 유형 (Android/iOS)"
     }
   }
 }

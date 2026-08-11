@@ -154,6 +154,18 @@ class Orchestrator:
                 {"stage": "intent", "status": "done", "ms": 0, "payload": intent_result.to_dict()},
             )
 
+        # Override: if there's conversation history, short follow-up queries are likely drill-downs
+        has_history = bool(history) or session_id in self._session_history
+        if has_history and not intent_result.requires_sql and intent_result.intent in ("definition", "unsupported"):
+            logger.info("Overriding intent %s → data_query (has conversation history)", intent_result.intent)
+            intent_result = IntentResult(
+                intent="data_query",
+                confidence=0.7,
+                entities=intent_result.entities,
+                requires_sql=True,
+                domain_hint=intent_result.domain_hint,
+            )
+
         # Handle non-SQL intents
         if not intent_result.requires_sql:
             answer = await self._handle_non_sql_intent(query, intent_result)

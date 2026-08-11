@@ -7405,6 +7405,95 @@
           "comment": ""
         }
       ]
+    },
+    {
+      "table_name": "sol_m_supersol_visit",
+      "domain": "digital_channel",
+      "description": "슈퍼솔(SuperSOL) 앱 월간 방문(MAU) 현황 - 고객별 월간 앱 접속 빈도 및 방문 패턴",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string",
+          "comment": "기준년월 (YYYYMM)"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "comment": "그룹 통합 고객 식별번호"
+        },
+        {
+          "name": "방문일수",
+          "dtype": "bigint",
+          "comment": "월간 앱 방문 일수"
+        },
+        {
+          "name": "방문횟수",
+          "dtype": "bigint",
+          "comment": "월간 앱 방문 총 횟수"
+        },
+        {
+          "name": "체류시간",
+          "dtype": "bigint",
+          "comment": "월간 앱 총 체류시간(초)"
+        },
+        {
+          "name": "마지막접속일자",
+          "dtype": "string",
+          "comment": "마지막 앱 접속 일자 (YYYYMMDD)"
+        }
+      ]
+    },
+    {
+      "table_name": "sol_d_supersol_session",
+      "domain": "digital_channel",
+      "description": "슈퍼솔(SuperSOL) 앱 일별 세션 로그 - 개별 접속 세션 단위 상세 이력",
+      "columns": [
+        {
+          "name": "기준일자",
+          "dtype": "string",
+          "comment": "기준일자 (YYYYMMDD)"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "comment": "그룹 통합 고객 식별번호"
+        },
+        {
+          "name": "세션id",
+          "dtype": "string",
+          "comment": "앱 접속 세션 고유 ID"
+        },
+        {
+          "name": "접속시작시간",
+          "dtype": "string",
+          "comment": "세션 시작 시간 (HHmmss)"
+        },
+        {
+          "name": "접속종료시간",
+          "dtype": "string",
+          "comment": "세션 종료 시간 (HHmmss)"
+        },
+        {
+          "name": "체류시간",
+          "dtype": "bigint",
+          "comment": "세션 체류시간(초)"
+        },
+        {
+          "name": "접속채널",
+          "dtype": "string",
+          "comment": "접속 채널 (앱/웹 등)"
+        },
+        {
+          "name": "접속기기",
+          "dtype": "string",
+          "comment": "접속 기기 유형 (Android/iOS)"
+        },
+        {
+          "name": "화면수",
+          "dtype": "bigint",
+          "comment": "세션 내 조회 화면 수"
+        }
+      ]
     }
   ],
   "relationships": [
