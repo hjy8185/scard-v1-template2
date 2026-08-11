@@ -38,10 +38,15 @@ const DOMAIN_COLORS: Record<string, string> = {
   common: '#6b7280',
   marketing: '#f472b6',
   membership: '#34d399',
+  digital_channel: '#22d3ee',
 };
 
 const ONEDATA_ONTOLOGY = {
   master: { id: 'igd_d_cust_mas', label: '그룹 통합 고객 마스터', domain: 'customer' },
+  digital: [
+    { id: 'jaz_sh_fanclub_membership_chghist', label: '슈퍼솔 앱 사용', domain: 'digital_channel' },
+    { id: 'shg_membership_cust_hist', label: '멤버십 상태', domain: 'digital_channel' },
+  ],
   subsidiaries: [
     { id: 'cln_d_cust_mas_bank', label: '은행 고객', domain: 'bank' },
     { id: 'cln_d_cust_mas_card', label: '카드 고객', domain: 'card' },
@@ -57,14 +62,8 @@ const ONEDATA_ONTOLOGY = {
   ],
   analytics: [
     { id: 'igd_m_cust_base', label: '고객 기본정보', domain: 'customer' },
-    { id: 'igd_m_cust_holding_base', label: '보유상품 현황', domain: 'product' },
     { id: 'igd_m_shg_rfm_base_ledger', label: 'RFM 분석', domain: 'marketing' },
     { id: 'm_cust_dim', label: '고객 디멘션', domain: 'customer' },
-  ],
-  merchants: [
-    { id: 'com_m_merchant_franchise', label: '가맹점 프랜차이즈', domain: 'merchant' },
-    { id: 'trs_m_merchant_delivery', label: '배달 거래', domain: 'merchant' },
-    { id: 'trs_m_soleprop_merchant_sales_card', label: '사업자 카드매출', domain: 'merchant' },
   ],
 };
 
@@ -210,6 +209,10 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
       {/* Legend */}
       <div className="mt-4 flex flex-wrap items-center gap-4">
         <div className="flex items-center gap-2">
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: '#22d3ee' }} />
+          <span className="text-xs text-mist">디지털채널(슈퍼솔)</span>
+        </div>
+        <div className="flex items-center gap-2">
           <div className="h-3 w-3 rounded-full border-2 border-aqua bg-ink-800" />
           <span className="text-xs text-mist">고객</span>
         </div>
@@ -218,16 +221,16 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
           <span className="text-xs text-mist">거래</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-2 border-amber bg-ink-800" />
-          <span className="text-xs text-mist">상품</span>
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: '#60a5fa' }} />
+          <span className="text-xs text-mist">은행</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: '#ec4899' }} />
-          <span className="text-xs text-mist">가맹점</span>
+          <div className="h-3 w-3 rounded-full border-2" style={{ borderColor: '#f97316' }} />
+          <span className="text-xs text-mist">카드</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="h-[2px] w-6 bg-aqua/60" />
-          <span className="text-xs text-mist">그룹md번호 조인</span>
+          <span className="text-xs text-mist">그룹md 조인</span>
         </div>
       </div>
     </div>
@@ -296,7 +299,7 @@ function buildDefaultOntology(): { nodes: VisNode[]; edges: VisEdge[] } {
   const nodes: VisNode[] = [];
   const edges: VisEdge[] = [];
   const centerX = 400;
-  const centerY = 275;
+  const centerY = 280;
 
   // Master node
   nodes.push({
@@ -308,36 +311,37 @@ function buildDefaultOntology(): { nodes: VisNode[]; edges: VisEdge[] } {
     color: DOMAIN_COLORS.customer,
   });
 
-  // Subsidiaries (top)
-  ONEDATA_ONTOLOGY.subsidiaries.forEach((s, i) => {
-    const x = 150 + (i * 170);
-    nodes.push({ id: s.id, label: s.label, type: 'table', x, y: 80, color: DOMAIN_COLORS[s.domain] });
-    edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: s.id, label: '1:N', type: 'subsidiary' });
+  // Digital channel (top-center, most prominent)
+  ONEDATA_ONTOLOGY.digital.forEach((d, i) => {
+    const x = 300 + (i * 200);
+    nodes.push({ id: d.id, label: d.label, type: 'table', x, y: 80, color: DOMAIN_COLORS.digital_channel || '#22d3ee' });
+    edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: d.id, label: '그룹md', type: 'join' });
   });
 
-  // Transactions (bottom-left)
-  ONEDATA_ONTOLOGY.transactions.slice(0, 3).forEach((t, i) => {
-    const x = 100 + (i * 150);
-    nodes.push({ id: t.id, label: t.label, type: 'table', x, y: 470, color: DOMAIN_COLORS[t.domain] });
+  // Subsidiaries (left side)
+  ONEDATA_ONTOLOGY.subsidiaries.forEach((s, i) => {
+    nodes.push({ id: s.id, label: s.label, type: 'table', x: 80, y: 120 + (i * 100), color: DOMAIN_COLORS[s.domain] });
+    edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: s.id, label: '1:1', type: 'subsidiary' });
+  });
+
+  // Transactions (bottom)
+  ONEDATA_ONTOLOGY.transactions.slice(0, 4).forEach((t, i) => {
+    const x = 150 + (i * 170);
+    nodes.push({ id: t.id, label: t.label, type: 'table', x, y: 490, color: DOMAIN_COLORS[t.domain] });
     edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: t.id, label: '1:N', type: 'join' });
   });
 
-  // Analytics (right)
-  ONEDATA_ONTOLOGY.analytics.slice(0, 3).forEach((a, i) => {
-    nodes.push({ id: a.id, label: a.label, type: 'table', x: 680, y: 150 + (i * 130), color: DOMAIN_COLORS[a.domain] });
+  // Analytics (right side)
+  ONEDATA_ONTOLOGY.analytics.forEach((a, i) => {
+    nodes.push({ id: a.id, label: a.label, type: 'table', x: 700, y: 160 + (i * 120), color: DOMAIN_COLORS[a.domain] || DOMAIN_COLORS.common });
     edges.push({ from: ONEDATA_ONTOLOGY.master.id, to: a.id, label: '1:1', type: 'join' });
-  });
-
-  // Merchants (bottom-right)
-  ONEDATA_ONTOLOGY.merchants.slice(0, 2).forEach((m, i) => {
-    nodes.push({ id: m.id, label: m.label, type: 'table', x: 550 + (i * 150), y: 470, color: DOMAIN_COLORS[m.domain] });
-    edges.push({ from: ONEDATA_ONTOLOGY.transactions[0].id, to: m.id, label: 'N:1', type: 'join' });
   });
 
   return { nodes, edges };
 }
 
 function getDomain(tableId: string): string {
+  if (tableId.includes('fanclub') || tableId.includes('membership') || tableId.startsWith('shg_')) return 'digital_channel';
   if (tableId.includes('cust') && !tableId.includes('txn')) return 'customer';
   if (tableId.includes('txn') || tableId.startsWith('trs_')) return 'transaction';
   if (tableId.startsWith('pdt_') || tableId.includes('prod')) return 'product';
@@ -356,8 +360,8 @@ function getTableLabel(tableId: string): string {
     'igd_d_cust_mas': '그룹 통합 고객 마스터',
     'igd_m_cust_base': '고객 기본정보',
     'igd_m_cust_txn': '통합 거래',
-    'igd_m_cust_txn_card': '카드 거래',
     'igd_m_cust_txn_bank': '은행 거래',
+    'igd_m_cust_txn_card': '카드 거래',
     'igd_m_cust_txn_life': '라이프 거래',
     'igd_m_cust_txn_sec': '증권 거래',
     'igd_m_cust_holding_base': '보유상품 현황',
@@ -374,6 +378,8 @@ function getTableLabel(tableId: string): string {
     'm_card_dim': '카드 디멘션',
     'igd_m_shg_rfm_base_ledger': 'RFM 분석',
     'vam_cus_mkt_mas_m': '마케팅 고객',
+    'jaz_sh_fanclub_membership_chghist': '슈퍼솔 앱 사용',
+    'shg_membership_cust_hist': '멤버십 상태',
   };
-  return labels[tableId] || tableId.replace(/^(igd_|cln_|trs_|pdt_|com_|rpt_)/, '');
+  return labels[tableId] || tableId.replace(/^(igd_|cln_|trs_|pdt_|com_|rpt_|jaz_|shg_)/, '');
 }

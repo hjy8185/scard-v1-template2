@@ -260,58 +260,98 @@ class Orchestrator:
             )
             return
 
-        # === Stage 4: Execution & Answer ===
+        # === Stage 4: Execution & Answer (with retry on SQL errors) ===
         yield PipelineEvent("stage", {"stage": "execute", "status": "active"})
         t0 = time.monotonic()
 
-        try:
-            exec_result = await self._athena.execute_query(
-                sql=sql_result.sql,
-                max_rows=max_rows,
-            )
-            exec_ms = int((time.monotonic() - t0) * 1000)
-            exec_result["execution_time_ms"] = exec_ms
+        exec_result = None
+        max_retries = 2
 
-            yield PipelineEvent(
-                "stage",
-                {
-                    "stage": "execute",
-                    "status": "done",
-                    "ms": exec_ms,
-                    "payload": {
-                        "row_count": exec_result.get("row_count", 0),
-                        "truncated": exec_result.get("truncated", False),
+        for attempt in range(max_retries + 1):
+            try:
+                exec_result = await self._athena.execute_query(
+                    sql=sql_result.sql,
+                    max_rows=max_rows,
+                )
+                exec_ms = int((time.monotonic() - t0) * 1000)
+                exec_result["execution_time_ms"] = exec_ms
+
+                yield PipelineEvent(
+                    "stage",
+                    {
+                        "stage": "execute",
+                        "status": "done",
+                        "ms": exec_ms,
+                        "payload": {
+                            "row_count": exec_result.get("row_count", 0),
+                            "truncated": exec_result.get("truncated", False),
+                        },
                     },
-                },
-            )
-        except SQLSafetyError as e:
-            exec_ms = int((time.monotonic() - t0) * 1000)
-            logger.error("SQL safety violation: %s", e)
-            yield PipelineEvent(
-                "stage",
-                {"stage": "execute", "status": "error", "ms": exec_ms},
-            )
-            error_answer = "안전 정책에 의해 해당 쿼리는 실행할 수 없습니다. 데이터 조회(SELECT)만 가능합니다."
-            yield PipelineEvent("token", {"content": error_answer})
-            total_ms = int((time.monotonic() - pipeline_start) * 1000)
-            yield PipelineEvent(
-                "done", {"answer": error_answer, "error": str(e), "total_ms": total_ms}
-            )
-            return
-        except AthenaError as e:
-            exec_ms = int((time.monotonic() - t0) * 1000)
-            logger.error("Athena execution failed: %s", e)
-            yield PipelineEvent(
-                "stage",
-                {"stage": "execute", "status": "error", "ms": exec_ms},
-            )
-            exec_result = {
-                "sql": sql_result.sql,
-                "columns": [],
-                "rows": [],
-                "row_count": 0,
-                "error": str(e),
-            }
+                )
+                break
+            except SQLSafetyError as e:
+                exec_ms = int((time.monotonic() - t0) * 1000)
+                logger.error("SQL safety violation: %s", e)
+                yield PipelineEvent(
+                    "stage",
+                    {"stage": "execute", "status": "error", "ms": exec_ms},
+                )
+                error_answer = "안전 정책에 의해 해당 쿼리는 실행할 수 없습니다. 데이터 조회(SELECT)만 가능합니다."
+                yield PipelineEvent("token", {"content": error_answer})
+                total_ms = int((time.monotonic() - pipeline_start) * 1000)
+                yield PipelineEvent(
+                    "done", {"answer": error_answer, "error": str(e), "total_ms": total_ms}
+                )
+                return
+            except AthenaError as e:
+                exec_ms = int((time.monotonic() - t0) * 1000)
+                logger.error("Athena execution failed (attempt %d): %s", attempt + 1, e)
+
+                if attempt < max_retries:
+                    logger.info("Retrying SQL generation with error context")
+                    try:
+                        error_context = (
+                            f"\n\n## 이전 SQL 실행 오류 (수정 필요)\n"
+                            f"오류 메시지: {str(e)}\n"
+                            f"실패한 SQL:\n{sql_result.sql}\n\n"
+                            f"위 오류를 수정하여 올바른 Athena SQL을 다시 생성하세요."
+                        )
+                        retry_result = await self._sql_generator.generate(
+                            query=query + error_context,
+                            domain_hint=intent_result.domain_hint,
+                            conversation_context=conversation_context,
+                        )
+                        sql_result = retry_result
+                        yield PipelineEvent(
+                            "stage",
+                            {
+                                "stage": "sql_generate",
+                                "status": "done",
+                                "ms": 0,
+                                "payload": {
+                                    "sql": sql_result.sql,
+                                    "explanation": sql_result.explanation + " (재생성)",
+                                    "tables_used": sql_result.tables_used,
+                                    "confidence": sql_result.confidence,
+                                },
+                            },
+                        )
+                        t0 = time.monotonic()
+                        continue
+                    except Exception as retry_err:
+                        logger.error("SQL retry failed: %s", retry_err)
+
+                yield PipelineEvent(
+                    "stage",
+                    {"stage": "execute", "status": "error", "ms": exec_ms},
+                )
+                exec_result = {
+                    "sql": sql_result.sql,
+                    "columns": [],
+                    "rows": [],
+                    "row_count": 0,
+                    "error": str(e),
+                }
 
         # === Compose Answer ===
         yield PipelineEvent("stage", {"stage": "answer", "status": "active"})

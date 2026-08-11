@@ -352,11 +352,27 @@ class BedrockClient:
   ORDER BY "별칭" DESC
   LIMIT 20
 
+## Athena(Presto) 문법 제약 (반드시 준수)
+
+- PERCENTILE_CONT(...) WITHIN GROUP 사용 금지 → 대신 approx_percentile(column, 0.9) 사용
+- MEDIAN 함수 없음 → approx_percentile(column, 0.5) 사용
+- LIMIT 절에 서브쿼리/수식 사용 불가 → 반드시 정수 리터럴만 (예: LIMIT 100)
+- 한국어 CTE 이름 사용 금지 → 영문 alias만 사용 (예: WITH sol_usage AS ...)
+- 서브쿼리에서 컬럼 별칭 사용 시 큰따옴표 금지 (AS cnt → 따옴표 없이)
+- HAVING 절에 서브쿼리 사용 가능하나, 단순 CTE(WITH절)로 대체 권장
+- 복잡한 쿼리는 WITH절(CTE)로 단계별 분리
+- JOIN 시 동일 컬럼명이 여러 테이블에 있으면 반드시 테이블 alias로 구분
+- "상위 N%" 패턴: approx_percentile로 임계값 구하고 WHERE로 필터링
+  예: WITH stats AS (SELECT approx_percentile("사용건수", 0.9) AS threshold FROM ...) → WHERE x >= threshold
+- jaz_sh_fanclub_membership_chghist 테이블의 조인키는 "그룹md" (not "그룹md번호")
+- igd_m_cust_base, igd_m_cust_txn_card 등의 조인키는 "그룹md번호"
+
 ## 쿼리 품질 기준
 
 - 결과는 집계·정렬해 상위 건으로 줄이세요 (LIMIT)
 - 기간 필터가 있으면 반드시 WHERE에 포함
 - 드릴다운 질문("위 결과를 X별로")이면 이전 쿼리를 기반으로 X 차원 추가
+- 복잡한 분석(상위 N%, 서브그룹 필터링)은 WITH절(CTE)로 단계별 분리
 
 ## 온톨로지 컨텍스트
 

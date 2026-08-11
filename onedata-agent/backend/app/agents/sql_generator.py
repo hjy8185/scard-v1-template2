@@ -113,6 +113,43 @@ _FEW_SHOT_EXAMPLES = [
             "tables_used": ["igd_m_cust_txn_card"],
         },
     },
+    {
+        "question": "슈퍼솔 사용 상위 10% 고객의 카드 이용금액과 은행 수신평잔을 보여줘",
+        "answer": {
+            "sql": (
+                "WITH sol_usage AS (\n"
+                "  SELECT\n"
+                '    "그룹md",\n'
+                '    COUNT(*) AS usage_cnt\n'
+                "  FROM ai_ready_v2.jaz_sh_fanclub_membership_chghist\n"
+                "  WHERE \"new앱사용여부\" = 'Y'  -- 값: Y/N 문자열\n"
+                '  GROUP BY "그룹md"\n'
+                "),\n"
+                "sol_threshold AS (\n"
+                "  SELECT approx_percentile(usage_cnt, 0.9) AS threshold\n"
+                "  FROM sol_usage\n"
+                "),\n"
+                "top_users AS (\n"
+                "  SELECT u.\"그룹md\"\n"
+                "  FROM sol_usage u\n"
+                "  CROSS JOIN sol_threshold t\n"
+                "  WHERE u.usage_cnt >= t.threshold\n"
+                ")\n"
+                "SELECT\n"
+                '  AVG(c."신용신판이용금액") AS "평균카드이용금액",\n'
+                '  AVG(c."체크카드이용금액") AS "평균체크이용금액",\n'
+                '  AVG(r."신한은행6개월수신평균잔액") AS "평균은행수신평잔"\n'
+                "FROM top_users t\n"
+                "JOIN ai_ready_v2.igd_m_cust_txn_card c\n"
+                '  ON t."그룹md" = c."그룹md번호"\n'
+                "LEFT JOIN ai_ready_v2.igd_m_shg_rfm_base_ledger r\n"
+                '  ON t."그룹md" = r."그룹md번호"\n'
+                "LIMIT 1000"
+            ),
+            "explanation": "슈퍼솔 사용 빈도 상위 10% 고객을 추출하고, 해당 고객의 평균 카드 이용금액과 은행 수신평잔을 조회합니다.",
+            "tables_used": ["jaz_sh_fanclub_membership_chghist", "igd_m_cust_txn_card", "igd_m_shg_rfm_base_ledger"],
+        },
+    },
 ]
 
 

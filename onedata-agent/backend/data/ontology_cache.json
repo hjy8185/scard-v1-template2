@@ -4141,7 +4141,7 @@
         {
           "name": "처리일자",
           "dtype": "string",
-          "comment": "처리일자 (YYYYMMDD)"
+          "comment": "처리일자 (YYYYMMDD 문자열)"
         },
         {
           "name": "처리순번",
@@ -4186,7 +4186,7 @@
         {
           "name": "new앱사용여부",
           "dtype": "string",
-          "comment": "슈퍼솔(신한SOL) 새 앱 사용 여부 (Y/N)"
+          "comment": "슈퍼솔(신한SOL) 새 앱 사용 여부 (값: Y=사용, N=미사용, 문자열 타입)"
         },
         {
           "name": "aws적재일시",
