@@ -60,19 +60,18 @@ _FEW_SHOT_EXAMPLES = [
         "answer": {
             "sql": (
                 "SELECT\n"
-                '  c."연령대",\n'
-                '  COUNT(*) AS "이용건수",\n'
-                '  SUM(t."이용금액") AS "총이용금액",\n'
-                '  AVG(t."이용금액") AS "평균이용금액"\n'
-                "FROM ai_ready_v2.igd_m_cust_txn_card t\n"
+                '  c."연령5년구간코드",\n'
+                '  COUNT(DISTINCT f."그룹md") AS "슈퍼솔앱사용고객수"\n'
+                "FROM ai_ready_v2.jaz_sh_fanclub_membership_chghist f\n"
                 "JOIN ai_ready_v2.igd_m_cust_base c\n"
-                '  ON t."그룹md번호" = c."그룹md번호"\n'
-                'GROUP BY c."연령대"\n'
-                'ORDER BY "총이용금액" DESC\n'
-                "LIMIT 20"
+                '  ON f."그룹md" = c."그룹md번호"\n'
+                "WHERE f.\"new앱사용여부\" = 'Y'\n"
+                'GROUP BY c."연령5년구간코드"\n'
+                'ORDER BY c."연령5년구간코드" ASC\n'
+                "LIMIT 1000"
             ),
-            "explanation": "연령대별 카드 이용 건수와 금액을 분석합니다.",
-            "tables_used": ["igd_m_cust_txn_card", "igd_m_cust_base"],
+            "explanation": "드릴다운: 이전 쿼리의 FROM/WHERE 조건을 유지하고 연령대 GROUP BY를 추가합니다. 합계는 이전 결과와 동일해야 합니다.",
+            "tables_used": ["jaz_sh_fanclub_membership_chghist", "igd_m_cust_base"],
         },
     },
     {
@@ -80,19 +79,18 @@ _FEW_SHOT_EXAMPLES = [
         "answer": {
             "sql": (
                 "SELECT\n"
-                '  c."성별",\n'
-                '  COUNT(*) AS "이용건수",\n'
-                '  SUM(t."이용금액") AS "총이용금액",\n'
-                '  AVG(t."이용금액") AS "평균이용금액"\n'
-                "FROM ai_ready_v2.igd_m_cust_txn_card t\n"
-                "JOIN ai_ready_v2.igd_m_cust_base c\n"
-                '  ON t."그룹md번호" = c."그룹md번호"\n'
-                'GROUP BY c."성별"\n'
-                'ORDER BY "총이용금액" DESC\n'
+                '  m."성별구분코드",\n'
+                '  COUNT(DISTINCT f."그룹md") AS "슈퍼솔앱사용고객수"\n'
+                "FROM ai_ready_v2.jaz_sh_fanclub_membership_chghist f\n"
+                "JOIN ai_ready_v2.igd_d_cust_mas m\n"
+                '  ON f."그룹md" = m."그룹md번호"\n'
+                "WHERE f.\"new앱사용여부\" = 'Y'\n"
+                'GROUP BY m."성별구분코드"\n'
+                'ORDER BY "슈퍼솔앱사용고객수" DESC\n'
                 "LIMIT 10"
             ),
-            "explanation": "성별로 카드 이용 패턴을 비교합니다.",
-            "tables_used": ["igd_m_cust_txn_card", "igd_m_cust_base"],
+            "explanation": "드릴다운: 이전 쿼리의 FROM/WHERE 조건을 유지하고 성별 GROUP BY를 추가합니다. 합계는 이전 결과와 동일해야 합니다.",
+            "tables_used": ["jaz_sh_fanclub_membership_chghist", "igd_d_cust_mas"],
         },
     },
     {

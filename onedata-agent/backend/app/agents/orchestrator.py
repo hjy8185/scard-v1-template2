@@ -88,6 +88,7 @@ class Orchestrator:
         self._answer_composer = AnswerComposer(self._bedrock)
 
         self._initialized = False
+        self._session_history: dict[str, list[dict]] = {}
 
     async def initialize(self) -> None:
         """Initialize ontology and synonyms. Call once at startup."""
@@ -200,18 +201,49 @@ class Orchestrator:
         try:
             # Build conversation context for drill-down queries
             conversation_context = None
-            if history:
+            effective_history = history if history else []
+
+            # Fall back to server-side session history if frontend sends empty history
+            if not effective_history and session_id in self._session_history:
+                effective_history = self._session_history[session_id]
+                logger.info("Using server-side session history (%d entries) for session %s: %s",
+                           len(effective_history), session_id,
+                           [m.get('sql', '')[:50] for m in effective_history if m.get('sql')])
+            elif not effective_history:
+                logger.info("No history available for session %s (known sessions: %s)",
+                           session_id, list(self._session_history.keys())[:5])
+
+            if effective_history:
                 ctx_parts = []
-                for msg in history[-4:]:
+                last_sql = None
+                for msg in effective_history[-4:]:
                     if hasattr(msg, 'role'):
-                        if msg.role == 'user':
-                            ctx_parts.append(f"사용자: {msg.content}")
-                        elif msg.role == 'assistant' and msg.content:
-                            ctx_parts.append(f"AI: {msg.content[:200]}")
-                            if hasattr(msg, 'sql') and msg.sql:
-                                ctx_parts.append(f"이전 SQL: {msg.sql}")
+                        role = msg.role
+                        content = msg.content
+                        sql = getattr(msg, 'sql', None)
+                    elif isinstance(msg, dict):
+                        role = msg.get('role', '')
+                        content = msg.get('content', '')
+                        sql = msg.get('sql')
+                    else:
+                        continue
+
+                    if role == 'user':
+                        ctx_parts.append(f"사용자: {content}")
+                    elif role == 'assistant' and content:
+                        ctx_parts.append(f"AI: {content[:200]}")
+                        if sql:
+                            ctx_parts.append(f"이전 SQL:\n{sql}")
+                            last_sql = sql
                 if ctx_parts:
                     conversation_context = "\n".join(ctx_parts)
+                    if last_sql:
+                        conversation_context += (
+                            f"\n\n★★★ 중요: '위 결과'는 위의 이전 SQL 결과를 의미합니다. "
+                            f"드릴다운 시 반드시 이전 SQL의 FROM/WHERE/JOIN을 유지하고 "
+                            f"GROUP BY 차원만 변경하세요. 테이블이나 조건을 바꾸지 마세요. ★★★"
+                        )
+                    logger.info("Built conversation context: %d parts, last_sql=%s", len(ctx_parts), bool(last_sql))
 
             sql_result = await self._sql_generator.generate(
                 query=query,
@@ -380,6 +412,17 @@ class Orchestrator:
 
         # Emit answer tokens
         yield PipelineEvent("token", {"content": answer})
+
+        # Store in server-side session history for drill-down support
+        if session_id not in self._session_history:
+            self._session_history[session_id] = []
+        self._session_history[session_id].append({"role": "user", "content": query})
+        self._session_history[session_id].append({"role": "assistant", "content": answer[:300], "sql": sql_result.sql})
+        # Keep only last 6 messages per session
+        self._session_history[session_id] = self._session_history[session_id][-6:]
+        logger.info("Stored session history for %s: %d entries, last_sql=%s",
+                   session_id, len(self._session_history[session_id]),
+                   sql_result.sql[:60] if sql_result.sql else None)
 
         # Final done event
         total_ms = int((time.monotonic() - pipeline_start) * 1000)

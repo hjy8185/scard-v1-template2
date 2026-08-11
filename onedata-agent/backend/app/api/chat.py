@@ -101,7 +101,8 @@ async def _stream_chat(query: str, session_id: str, max_rows: int | None = None,
 @router.post("/api/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
     session_id = request.session_id or str(uuid.uuid4())
-    logger.info("Chat request: session=%s query=%s history=%d", session_id, request.query[:80], len(request.history))
+    history_sql_count = sum(1 for m in request.history if m.sql)
+    logger.info("Chat request: session=%s query=%s history=%d (sql=%d)", session_id, request.query[:80], len(request.history), history_sql_count)
 
     return StreamingResponse(
         _stream_chat(request.query, session_id, request.max_rows, request.history or None),

@@ -102,6 +102,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
         if (event.event_type === 'sql_generate' && event.status === 'done' && event.data) {
           msg.sql = event.data.sql as string;
+          if (event.data.tables_used) {
+            msg.tablesUsed = event.data.tables_used as string[];
+          }
         }
 
         if (event.event_type === 'execute' && event.status === 'done' && event.data) {
@@ -126,6 +129,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           }
           if (event.data.sql) {
             msg.sql = event.data.sql as string;
+          }
+          if (event.data.tables_used) {
+            msg.tablesUsed = event.data.tables_used as string[];
           }
           if (!msg.content && event.data.answer) {
             msg.content = event.data.answer as string;

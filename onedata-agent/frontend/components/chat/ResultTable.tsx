@@ -176,7 +176,7 @@ export function ResultTable({ result }: ResultTableProps) {
   );
 }
 
-// Format age range code (010 -> 10~14세, 030 -> 30~34세, 070 -> 70세+)
+// Format age range code (010 -> 10~14세, 015 -> 15~19세, 070 -> 70세+)
 function formatAgeRange(code: string): string {
   const num = parseInt(code, 10);
   if (isNaN(num)) return code;
@@ -212,7 +212,8 @@ function CellValue({ value, column }: { value: unknown; column?: string }) {
   const strVal = String(value);
 
   // Age range code formatting
-  if (column && (column.includes('연령') || column.includes('나이')) && column.includes('구간') || column?.includes('연령대')) {
+  if (column && (column.includes('연령') || column.includes('나이') || column.includes('age')) &&
+      (column.includes('구간') || column.includes('코드') || column.includes('대'))) {
     if (/^\d{2,3}$/.test(strVal)) {
       return <span>{formatAgeRange(strVal)}</span>;
     }

@@ -153,6 +153,7 @@ export function DetailPanel() {
         )}
         {detailView === 'ontology' && (
           <OntologyView context={selectedMessage.reasoning} tablesUsed={
+            selectedMessage.tablesUsed ||
             selectedMessage.reasoning?.find(s => s.id === 'sql_generate')?.data?.tables_used as string[] | undefined
           } />
         )}

@@ -1,5 +1,13 @@
 import type { SSEEvent } from './types';
 
+let _sessionId: string | null = null;
+export function getSessionId(): string {
+  if (!_sessionId) {
+    _sessionId = crypto.randomUUID();
+  }
+  return _sessionId;
+}
+
 /**
  * Parse SSE stream from the BFF backend.
  * The backend sends newline-delimited JSON events with an optional "event:" prefix.
@@ -109,7 +117,7 @@ export async function sendChatMessage(
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, history: history?.slice(-6) }),
+      body: JSON.stringify({ query, session_id: getSessionId(), history: history?.slice(-6) }),
       signal,
     });
 

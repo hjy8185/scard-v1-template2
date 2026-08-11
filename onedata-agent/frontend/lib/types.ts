@@ -32,6 +32,7 @@ export interface ChatMessage {
   timestamp: number;
   reasoning?: ReasoningStep[];
   sql?: string;
+  tablesUsed?: string[];
   queryResults?: QueryResult;
   error?: string;
 }

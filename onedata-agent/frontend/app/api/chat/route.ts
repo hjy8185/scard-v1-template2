@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     backendResponse = await fetch(`${BFF_URL}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: query.trim(), history: body.history || [] }),
+      body: JSON.stringify({ query: query.trim(), session_id: body.session_id || undefined, history: body.history || [] }),
     });
   } catch (err) {
     // Backend unreachable - return error as SSE event
