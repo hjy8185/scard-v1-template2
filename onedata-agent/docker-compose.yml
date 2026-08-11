@@ -20,7 +20,7 @@ services:
       - NEPTUNE_ENDPOINT=http://neptune:8182
       - OPENSEARCH_ENDPOINT=http://opensearch:9200
       - OPENSEARCH_INDEX=onedata-ontology
-      - ATHENA_DATABASE=ai_ready_v2
+      - ATHENA_DATABASE=ai_ready_v3
       - ATHENA_OUTPUT_BUCKET=s3://onedata-athena-results/
       - ATHENA_WORKGROUP=primary
       - BEDROCK_MODEL_ID=us.anthropic.claude-haiku-4-5-20251001-v1:0

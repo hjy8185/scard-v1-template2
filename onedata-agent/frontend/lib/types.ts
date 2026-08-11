@@ -117,5 +117,5 @@ export interface AppState {
   isStreaming: boolean;
   activeMessageId: string | null;
   selectedMessage: ChatMessage | null;
-  detailView: 'reasoning' | 'sql' | 'results' | 'ontology' | 'lineage';
+  detailView: 'reasoning' | 'sql' | 'results' | 'report' | 'ontology' | 'lineage';
 }
