@@ -71,11 +71,8 @@ const ONEDATA_ONTOLOGY = {
 
 export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
   const graphData = useMemo(() => {
-    if (tablesUsed && tablesUsed.length > 0) {
-      return buildQueryOntology(tablesUsed);
-    }
     return buildDefaultOntology();
-  }, [tablesUsed]);
+  }, []);
 
   return (
     <div className="p-6">
