@@ -577,34 +577,69 @@
       "description": "카드만 보유한 회원"
     },
     "슈퍼솔방문": {
-      "column_name": "방문횟수",
+      "column_name": "월방문횟수",
       "table_name": "sol_m_supersol_visit",
-      "description": "슈퍼솔 앱 월간 방문 횟수"
+      "description": "슈퍼솔 앱 월간 방문 횟수 (세션 수)"
     },
     "MAU": {
-      "column_name": "방문일수",
+      "column_name": "월방문일수",
       "table_name": "sol_m_supersol_visit",
-      "description": "슈퍼솔 앱 Monthly Active Users(월간 방문 일수)"
+      "description": "슈퍼솔 앱 MAU - 월간 방문 일수 (DISTINCT 접속 일수)"
     },
     "앱방문": {
-      "column_name": "방문횟수",
+      "column_name": "월방문횟수",
       "table_name": "sol_m_supersol_visit",
       "description": "슈퍼솔 앱 방문 횟수"
     },
     "체류시간": {
-      "column_name": "체류시간",
+      "column_name": "월체류분",
       "table_name": "sol_m_supersol_visit",
-      "description": "슈퍼솔 앱 체류시간(초)"
+      "description": "슈퍼솔 앱 월간 총 체류시간(분)"
     },
     "앱세션": {
-      "column_name": "세션id",
+      "column_name": "세션순번",
       "table_name": "sol_d_supersol_session",
-      "description": "슈퍼솔 앱 접속 세션"
+      "description": "슈퍼솔 앱 접속 세션 순번"
     },
     "접속기기": {
       "column_name": "접속기기",
       "table_name": "sol_d_supersol_session",
       "description": "앱 접속 기기 유형 (Android/iOS)"
+    },
+    "방문일수": {
+      "column_name": "월방문일수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "월간 슈퍼솔 앱 방문 일수"
+    },
+    "방문횟수": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "월간 슈퍼솔 앱 방문 횟수(세션수)"
+    },
+    "슈퍼솔MAU": {
+      "column_name": "월방문일수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 MAU (월간 방문 일수)"
+    },
+    "슈퍼솔접속": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 접속 횟수"
+    },
+    "앱사용빈도": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 사용 빈도 (월방문횟수)"
+    },
+    "앱이용빈도": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 이용 빈도"
+    },
+    "슈퍼솔사용빈도": {
+      "column_name": "월방문횟수",
+      "table_name": "sol_m_supersol_visit",
+      "description": "슈퍼솔 앱 사용 빈도"
     }
   }
 }

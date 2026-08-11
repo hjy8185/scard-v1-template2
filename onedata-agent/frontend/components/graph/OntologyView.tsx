@@ -44,10 +44,10 @@ const DOMAIN_COLORS: Record<string, string> = {
 const ONEDATA_ONTOLOGY = {
   master: { id: 'igd_d_cust_mas', label: '그룹 통합 고객 마스터', domain: 'customer' },
   digital: [
-    { id: 'jaz_sh_fanclub_membership_chghist', label: '슈퍼솔 앱 사용', domain: 'digital_channel' },
-    { id: 'sol_m_supersol_visit', label: '슈퍼솔 월간방문', domain: 'digital_channel' },
-    { id: 'sol_d_supersol_session', label: '슈퍼솔 세션로그', domain: 'digital_channel' },
-    { id: 'shg_membership_cust_hist', label: '멤버십 상태', domain: 'digital_channel' },
+    { id: 'sol_m_supersol_visit', label: '슈퍼솔 월간MAU', domain: 'digital_channel' },
+    { id: 'sol_d_supersol_session', label: '슈퍼솔 일세션', domain: 'digital_channel' },
+    { id: 'jaz_sh_fanclub_membership_chghist', label: '팬클럽 멤버십', domain: 'digital_channel' },
+    { id: 'shg_membership_cust_hist', label: '리워드앱 이력', domain: 'digital_channel' },
   ],
   subsidiaries: [
     { id: 'cln_d_cust_mas_bank', label: '은행 고객', domain: 'bank' },
@@ -377,10 +377,10 @@ function getTableLabel(tableId: string): string {
     'm_card_dim': '카드 디멘션',
     'igd_m_shg_rfm_base_ledger': 'RFM 분석',
     'vam_cus_mkt_mas_m': '마케팅 고객',
-    'jaz_sh_fanclub_membership_chghist': '슈퍼솔 앱 사용',
-    'sol_m_supersol_visit': '슈퍼솔 월간방문',
-    'sol_d_supersol_session': '슈퍼솔 세션로그',
-    'shg_membership_cust_hist': '멤버십 상태',
+    'jaz_sh_fanclub_membership_chghist': '팬클럽 멤버십',
+    'sol_m_supersol_visit': '슈퍼솔 월간MAU',
+    'sol_d_supersol_session': '슈퍼솔 일세션',
+    'shg_membership_cust_hist': '리워드앱 이력',
   };
   return labels[tableId] || tableId.replace(/^(igd_|cln_|trs_|pdt_|com_|rpt_|jaz_|shg_)/, '');
 }

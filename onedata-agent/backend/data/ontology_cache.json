@@ -7407,46 +7407,9 @@
       ]
     },
     {
-      "table_name": "sol_m_supersol_visit",
-      "domain": "digital_channel",
-      "description": "슈퍼솔(SuperSOL) 앱 월간 방문(MAU) 현황 - 고객별 월간 앱 접속 빈도 및 방문 패턴",
-      "columns": [
-        {
-          "name": "기준년월",
-          "dtype": "string",
-          "comment": "기준년월 (YYYYMM)"
-        },
-        {
-          "name": "그룹md번호",
-          "dtype": "string",
-          "comment": "그룹 통합 고객 식별번호"
-        },
-        {
-          "name": "방문일수",
-          "dtype": "bigint",
-          "comment": "월간 앱 방문 일수"
-        },
-        {
-          "name": "방문횟수",
-          "dtype": "bigint",
-          "comment": "월간 앱 방문 총 횟수"
-        },
-        {
-          "name": "체류시간",
-          "dtype": "bigint",
-          "comment": "월간 앱 총 체류시간(초)"
-        },
-        {
-          "name": "마지막접속일자",
-          "dtype": "string",
-          "comment": "마지막 앱 접속 일자 (YYYYMMDD)"
-        }
-      ]
-    },
-    {
       "table_name": "sol_d_supersol_session",
       "domain": "digital_channel",
-      "description": "슈퍼솔(SuperSOL) 앱 일별 세션 로그 - 개별 접속 세션 단위 상세 이력",
+      "description": "SOL_일슈퍼솔방문이력 - 일×고객×세션 단위 상세 이력 (가상생성, 3,382,059행)",
       "columns": [
         {
           "name": "기준일자",
@@ -7459,29 +7422,29 @@
           "comment": "그룹 통합 고객 식별번호"
         },
         {
-          "name": "세션id",
-          "dtype": "string",
-          "comment": "앱 접속 세션 고유 ID"
+          "name": "세션순번",
+          "dtype": "bigint",
+          "comment": "일별 세션 순번 (PK)"
         },
         {
           "name": "접속시작시간",
           "dtype": "string",
-          "comment": "세션 시작 시간 (HHmmss)"
+          "comment": "세션 시작 시간"
         },
         {
           "name": "접속종료시간",
           "dtype": "string",
-          "comment": "세션 종료 시간 (HHmmss)"
+          "comment": "세션 종료 시간"
         },
         {
-          "name": "체류시간",
-          "dtype": "bigint",
-          "comment": "세션 체류시간(초)"
+          "name": "슈퍼솔체류분",
+          "dtype": "double",
+          "comment": "세션 체류시간(분)"
         },
         {
           "name": "접속채널",
           "dtype": "string",
-          "comment": "접속 채널 (앱/웹 등)"
+          "comment": "접속 채널"
         },
         {
           "name": "접속기기",
@@ -7492,6 +7455,73 @@
           "name": "화면수",
           "dtype": "bigint",
           "comment": "세션 내 조회 화면 수"
+        }
+      ]
+    },
+    {
+      "table_name": "sol_m_supersol_visit",
+      "domain": "digital_channel",
+      "description": "SOL_월슈퍼솔방문집계 - 월×고객 MAU (세션 롤업, 237,187행). 미가입자 35,000명은 행이 없음(0이 아님)",
+      "columns": [
+        {
+          "name": "기준년월",
+          "dtype": "string",
+          "comment": "기준년월 (YYYYMM)"
+        },
+        {
+          "name": "그룹md번호",
+          "dtype": "string",
+          "comment": "그룹 통합 고객 식별번호"
+        },
+        {
+          "name": "월방문일수",
+          "dtype": "bigint",
+          "comment": "count(DISTINCT 기준일자) - 월간 앱 방문 일수"
+        },
+        {
+          "name": "월방문횟수",
+          "dtype": "bigint",
+          "comment": "count(*) - 월간 앱 방문 총 횟수(세션수)"
+        },
+        {
+          "name": "월체류분",
+          "dtype": "double",
+          "comment": "sum(슈퍼솔체류분) - 월간 총 체류시간(분)"
+        },
+        {
+          "name": "평균체류분",
+          "dtype": "double",
+          "comment": "방문당 평균 체류시간(분)"
+        },
+        {
+          "name": "최대체류분",
+          "dtype": "double",
+          "comment": "방문당 최대 체류시간(분)"
+        },
+        {
+          "name": "주간방문비율",
+          "dtype": "double",
+          "comment": "주간(9-18시) 방문 비율"
+        },
+        {
+          "name": "야간방문비율",
+          "dtype": "double",
+          "comment": "야간(18-9시) 방문 비율"
+        },
+        {
+          "name": "안드로이드비율",
+          "dtype": "double",
+          "comment": "Android 접속 비율"
+        },
+        {
+          "name": "ios비율",
+          "dtype": "double",
+          "comment": "iOS 접속 비율"
+        },
+        {
+          "name": "마지막접속일자",
+          "dtype": "string",
+          "comment": "해당 월 마지막 접속 일자"
         }
       ]
     }
