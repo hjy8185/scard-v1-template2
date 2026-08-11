@@ -14,8 +14,6 @@ export function ReportChart({ result, title }: ReportChartProps) {
       return null;
     }
 
-    // Find the best value column: prefer columns with 수, 금액, 건수, 평균, 합계 in the name
-    // and that contain numeric data. Exclude date/code columns.
     const isCodeCol = (col: string) =>
       col.includes('년월') || col.includes('일자') || col.includes('날짜') ||
       col.includes('코드') || col.includes('번호') || col.includes('구분');
@@ -23,9 +21,9 @@ export function ReportChart({ result, title }: ReportChartProps) {
     const isValueCol = (col: string) =>
       col.includes('수') || col.includes('금액') || col.includes('건수') ||
       col.includes('평균') || col.includes('합계') || col.includes('잔액') ||
-      col.includes('비율') || col.includes('cnt') || col.includes('amount');
+      col.includes('비율') || col.includes('cnt') || col.includes('amount') ||
+      col.includes('MAU');
 
-    // Pick value column: first try explicit value-like name, then first numeric non-code column
     let valueCol = result.columns.find((col) => isValueCol(col) && !isCodeCol(col));
     if (!valueCol) {
       valueCol = result.columns.find((col) => {
@@ -38,10 +36,9 @@ export function ReportChart({ result, title }: ReportChartProps) {
       valueCol = result.columns[1];
     }
 
-    // Label column: first non-value column (prefer category/date)
     const labelCol = result.columns.find((col) => col !== valueCol) || result.columns[0];
 
-    const items = result.rows.map((row) => ({
+    const items = result.rows.slice(0, 10).map((row) => ({
       label: String(row[labelCol] ?? ''),
       value: parseFloat(String(row[valueCol] ?? '0')) || 0,
     }));
@@ -49,98 +46,103 @@ export function ReportChart({ result, title }: ReportChartProps) {
     const maxValue = Math.max(...items.map((d) => d.value), 1);
     const totalValue = items.reduce((sum, d) => sum + d.value, 0);
 
-    return { items, maxValue, totalValue, labelCol, valueCol };
+    const insight = generateInsight(items, labelCol, valueCol!);
+
+    return { items, maxValue, totalValue, labelCol, valueCol, insight };
   }, [result]);
 
   if (!chartData) {
     return null;
   }
 
-  const { items, maxValue, totalValue, labelCol, valueCol } = chartData;
+  const { items, maxValue, totalValue, labelCol, valueCol, insight } = chartData;
 
   return (
-    <div className="p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base font-semibold text-pearl">
-          {title || '데이터 시각화'}
-        </h3>
-        <span className="text-xs text-mist bg-ink-700 px-2.5 py-1 rounded-full border border-ink-600">
-          합계: {totalValue.toLocaleString('ko-KR')}
+    <div className="px-4 py-3">
+      {/* Compact header */}
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-medium text-mist">
+          {title || valueCol}
+        </span>
+        <span className="text-[11px] text-slate">
+          합계 {totalValue.toLocaleString('ko-KR')}
         </span>
       </div>
 
-      {/* Bar Chart */}
-      <div className="rounded-xl bg-ink-800/50 border border-ink-600 p-5">
-        <div className="space-y-3">
-          {items.map((item, i) => {
-            const percentage = (item.value / maxValue) * 100;
-            const share = ((item.value / totalValue) * 100).toFixed(1);
-            const barColor = getBarColor(i, items.length);
+      {/* Compact bar chart */}
+      <div className="space-y-1.5">
+        {items.map((item, i) => {
+          const pct = (item.value / maxValue) * 100;
+          const share = ((item.value / totalValue) * 100).toFixed(1);
+          const color = getColor(i);
 
-            return (
-              <div key={i} className="group">
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-sm font-medium text-pearl">
-                    {item.label || '(없음)'}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-mono text-pearl">
-                      {item.value.toLocaleString('ko-KR')}
-                    </span>
-                    <span className="text-[11px] text-slate">
-                      ({share}%)
-                    </span>
-                  </div>
-                </div>
-                <div className="h-7 rounded-lg bg-ink-900 border border-ink-600 overflow-hidden relative">
-                  <div
-                    className="h-full rounded-lg transition-all duration-700 ease-out relative overflow-hidden"
-                    style={{
-                      width: `${percentage}%`,
-                      background: `linear-gradient(90deg, ${barColor}33, ${barColor}66)`,
-                      borderRight: `2px solid ${barColor}`,
-                    }}
-                  >
-                    <div
-                      className="absolute inset-0 opacity-30"
-                      style={{
-                        background: `repeating-linear-gradient(90deg, transparent, transparent 4px, ${barColor}22 4px, ${barColor}22 8px)`,
-                      }}
-                    />
-                  </div>
-                </div>
+          return (
+            <div key={i} className="flex items-center gap-2 h-6">
+              <span className="text-[11px] text-mist w-[72px] truncate text-right shrink-0">
+                {item.label || '(없음)'}
+              </span>
+              <div className="flex-1 h-4 rounded bg-ink-800 overflow-hidden relative">
+                <div
+                  className="h-full rounded transition-all duration-500"
+                  style={{ width: `${pct}%`, background: color }}
+                />
               </div>
-            );
-          })}
-        </div>
-
-        {/* Axis labels */}
-        <div className="flex items-center justify-between mt-4 pt-3 border-t border-ink-600">
-          <span className="text-[11px] text-slate">{labelCol}</span>
-          <span className="text-[11px] text-slate">{valueCol}</span>
-        </div>
+              <span className="text-[11px] font-mono text-pearl w-[60px] text-right shrink-0">
+                {item.value.toLocaleString('ko-KR')}
+              </span>
+              <span className="text-[10px] text-slate w-[36px] text-right shrink-0">
+                {share}%
+              </span>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Summary Stats */}
-      <div className="grid grid-cols-3 gap-3 mt-4">
-        <StatCard label="전체" value={totalValue.toLocaleString('ko-KR')} color="aqua" />
-        <StatCard label="최대" value={Math.max(...items.map(d => d.value)).toLocaleString('ko-KR')} color="jade" />
-        <StatCard label="평균" value={Math.round(totalValue / items.length).toLocaleString('ko-KR')} color="amber" />
-      </div>
+      {/* Insight line */}
+      {insight && (
+        <p className="mt-2.5 text-[11px] text-slate leading-relaxed border-t border-ink-700 pt-2">
+          {insight}
+        </p>
+      )}
     </div>
   );
 }
 
-function StatCard({ label, value, color }: { label: string; value: string; color: string }) {
-  return (
-    <div className={`rounded-lg bg-ink-800 border border-ink-600 p-3 text-center`}>
-      <p className="text-[11px] text-slate mb-0.5">{label}</p>
-      <p className={`text-sm font-semibold text-${color}`}>{value}</p>
-    </div>
-  );
+function generateInsight(
+  items: { label: string; value: number }[],
+  labelCol: string,
+  valueCol: string,
+): string {
+  if (items.length === 0) return '';
+  if (items.length === 1) return `${items[0].label}: ${items[0].value.toLocaleString('ko-KR')}`;
+
+  const sorted = [...items].sort((a, b) => b.value - a.value);
+  const top = sorted[0];
+  const total = items.reduce((s, d) => s + d.value, 0);
+  const topPct = ((top.value / total) * 100).toFixed(1);
+
+  const bottom = sorted[sorted.length - 1];
+  const ratio = top.value / Math.max(bottom.value, 1);
+
+  if (items.length <= 3) {
+    return `${top.label}(${topPct}%)이 가장 높고, ${bottom.label}이 가장 낮아요.`;
+  }
+
+  const top3 = sorted.slice(0, 3);
+  const top3Pct = ((top3.reduce((s, d) => s + d.value, 0) / total) * 100).toFixed(0);
+
+  if (ratio > 5) {
+    return `${top.label}이 ${topPct}%로 압도적이며, 최하위(${bottom.label}) 대비 ${ratio.toFixed(1)}배 차이가 나요.`;
+  }
+
+  return `상위 3개(${top3.map(d => d.label).join(', ')})가 전체의 ${top3Pct}%를 차지해요.`;
 }
 
-function getBarColor(index: number, total: number): string {
-  const colors = ['#38c7e0', '#3dd68c', '#f5a623', '#ff6b6b', '#a78bfa', '#ec4899'];
+function getColor(index: number): string {
+  const colors = [
+    '#38c7e0', '#3dd68c', '#f5a623', '#ec4899',
+    '#a78bfa', '#60a5fa', '#f97316', '#10b981',
+    '#8b5cf6', '#6b7280',
+  ];
   return colors[index % colors.length];
 }
