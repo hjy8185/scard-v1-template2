@@ -14,8 +14,32 @@ export function ReportChart({ result, title }: ReportChartProps) {
       return null;
     }
 
-    const labelCol = result.columns[0];
-    const valueCol = result.columns[result.columns.length > 1 ? 1 : 0];
+    // Find the best value column: prefer columns with 수, 금액, 건수, 평균, 합계 in the name
+    // and that contain numeric data. Exclude date/code columns.
+    const isCodeCol = (col: string) =>
+      col.includes('년월') || col.includes('일자') || col.includes('날짜') ||
+      col.includes('코드') || col.includes('번호') || col.includes('구분');
+
+    const isValueCol = (col: string) =>
+      col.includes('수') || col.includes('금액') || col.includes('건수') ||
+      col.includes('평균') || col.includes('합계') || col.includes('잔액') ||
+      col.includes('비율') || col.includes('cnt') || col.includes('amount');
+
+    // Pick value column: first try explicit value-like name, then first numeric non-code column
+    let valueCol = result.columns.find((col) => isValueCol(col) && !isCodeCol(col));
+    if (!valueCol) {
+      valueCol = result.columns.find((col) => {
+        if (isCodeCol(col)) return false;
+        const sample = result.rows[0]?.[col];
+        return sample !== null && sample !== undefined && !isNaN(Number(sample));
+      });
+    }
+    if (!valueCol) {
+      valueCol = result.columns[1];
+    }
+
+    // Label column: first non-value column (prefer category/date)
+    const labelCol = result.columns.find((col) => col !== valueCol) || result.columns[0];
 
     const items = result.rows.map((row) => ({
       label: String(row[labelCol] ?? ''),
