@@ -219,15 +219,21 @@ function CellValue({ value, column }: { value: unknown; column?: string }) {
     }
   }
 
+  // Skip number formatting for date/code columns (기준년월, 코드, 구간코드 etc.)
+  const isCodeColumn = column && (
+    column.includes('년월') || column.includes('일자') || column.includes('날짜') ||
+    column.includes('코드') || column.includes('번호')
+  );
+
   // Number formatting (remove decimals, add thousand separators)
-  if (typeof value === 'number') {
+  if (!isCodeColumn && typeof value === 'number') {
     return (
       <span className="font-mono text-amber">
         {formatNumber(value)}
       </span>
     );
   }
-  if (typeof value === 'string' && isNumericString(value)) {
+  if (!isCodeColumn && typeof value === 'string' && isNumericString(value)) {
     return (
       <span className="font-mono text-amber">
         {formatNumber(value)}
