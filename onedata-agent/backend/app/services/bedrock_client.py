@@ -426,9 +426,29 @@ class BedrockClient:
   → "이용건수", "방문횟수", "MAU", "사용빈도", "접속빈도", "체류시간" 질문에 사용
 - sol_d_supersol_session: 앱 세션 상세 (일별)
   → "일별 세션", "접속 시간대", "기기별" 질문에 사용
-- ★★ "슈퍼솔 이용건수" = SUM("월방문횟수") FROM sol_m_supersol_visit
-- ★★ "슈퍼솔 사용 고객수" = COUNT(DISTINCT "그룹md번호") FROM sol_m_supersol_visit WHERE "월방문일수" > 0
+- ★★ "슈퍼솔 이용건수" = SUM("슈퍼솔월방문횟수") FROM sol_m_supersol_visit
+- ★★ "슈퍼솔 MAU" = COUNT(DISTINCT "그룹md번호") FROM sol_m_supersol_visit WHERE "슈퍼솔월방문일수" > 0
+- ★★ "슈퍼솔 사용 고객수" = COUNT(DISTINCT "그룹md번호") FROM sol_m_supersol_visit WHERE "슈퍼솔월방문일수" > 0
 - ★★ jaz 테이블의 COUNT(*)를 "이용건수"라고 부르지 말 것 (그것은 이력변경건수일 뿐)
+- ★★ "각사별" / "계열사별" MAU 분석:
+  sol_m_supersol_visit에는 계열사 구분 컬럼이 없으므로, jaz_sh_fanclub_membership_chghist의
+  "신한그룹통합플랫폼가입채널코드"를 JOIN하여 계열사 구분:
+  SELECT s."기준년월",
+    CASE j."신한그룹통합플랫폼가입채널코드"
+      WHEN '01' THEN '신한은행' WHEN '02' THEN '신한카드'
+      WHEN '03' THEN '신한투자증권' WHEN '04' THEN '신한생명'
+      WHEN '05' THEN '신한캐피탈' ELSE '기타'
+    END AS "계열사",
+    COUNT(DISTINCT s."그룹md번호") AS "MAU"
+  FROM ai_ready_v3.sol_m_supersol_visit s
+  JOIN ai_ready_v3.jaz_sh_fanclub_membership_chghist j
+    ON s."그룹md번호" = j."그룹md"
+    AND j."처리일자" = (SELECT MAX("처리일자") FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist)
+  GROUP BY s."기준년월", j."신한그룹통합플랫폼가입채널코드"
+  ORDER BY s."기준년월" DESC, "MAU" DESC
+- ★★ jaz 조인 키 주의: jaz."그룹md" = sol."그룹md번호" (jaz는 "그룹md"이고 sol은 "그룹md번호")
+- ★★ sol 실제 컬럼명: "슈퍼솔월방문일수", "슈퍼솔월방문횟수", "슈퍼솔월체류분", "슈퍼솔mau대상tf"
+  (ontology에서는 월방문일수/월방문횟수로 단축했지만, 실제 SQL에는 "슈퍼솔월방문횟수" 사용)
 
 ### rpt_d_unit_deposit_acct 특이사항
 - 고객번호가 CHAR(150)이므로 조인 시 rtrim 필수:
