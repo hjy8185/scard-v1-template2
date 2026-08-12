@@ -8,20 +8,6 @@ interface OntologyViewProps {
   tablesUsed?: string[];
 }
 
-interface VisNode {
-  id: string;
-  label: string;
-  x: number;
-  y: number;
-  color: string;
-}
-
-interface VisEdge {
-  from: string;
-  to: string;
-  joinKey: string;
-}
-
 const DOMAIN_COLORS: Record<string, string> = {
   customer: '#38c7e0',
   bank: '#60a5fa',
@@ -35,6 +21,125 @@ const DOMAIN_COLORS: Record<string, string> = {
   soleprop: '#a78bfa',
   marketing: '#f472b6',
   common: '#6b7280',
+};
+
+const TABLE_META: Record<string, { label: string; attrs: string[] }> = {
+  'igd_d_cust_mas': {
+    label: '통합고객마스터',
+    attrs: ['고객연령', '성별', '거주지역', '고객등급'],
+  },
+  'igd_m_cust_base': {
+    label: '고객기본(월)',
+    attrs: ['연령5년구간', '성별', '총자산', '소득추정'],
+  },
+  'igd_m_cust_txn_card': {
+    label: '카드거래(월)',
+    attrs: ['월이용금액', '월이용건수', '업종분류', '결제수단'],
+  },
+  'igd_m_cust_txn_bank': {
+    label: '은행거래(월)',
+    attrs: ['월평균수신잔액', '월평균여신잔액', '거래건수'],
+  },
+  'igd_m_cust_txn_life': {
+    label: '보험거래(월)',
+    attrs: ['월보험료', '계약건수', '보험유형'],
+  },
+  'igd_m_cust_txn_sec': {
+    label: '증권거래(월)',
+    attrs: ['월거래금액', '보유종목수', '자산규모'],
+  },
+  'cln_d_cust_mas_bank': {
+    label: '은행고객',
+    attrs: ['최초거래일', '주거래점', '고객등급'],
+  },
+  'cln_d_cust_mas_card': {
+    label: '카드고객',
+    attrs: ['카드종류', '발급일', '한도', '지역코드'],
+  },
+  'cln_d_cust_mas_life': {
+    label: '라이프고객',
+    attrs: ['보험유형', '가입일', '만기일'],
+  },
+  'cln_d_cust_mas_sec': {
+    label: '증권고객',
+    attrs: ['계좌유형', '개설일', '투자성향'],
+  },
+  'cln_m_cust_base_bank': {
+    label: '은행고객(월)',
+    attrs: ['수신평잔', '여신평잔', '거래빈도', '지역'],
+  },
+  'cln_m_cust_base_card': {
+    label: '카드고객(월)',
+    attrs: ['월이용금액', '이용건수', '지역코드', '연체여부'],
+  },
+  'sol_m_supersol_visit': {
+    label: '슈퍼솔MAU(월)',
+    attrs: ['월방문횟수', '월방문일수', '월체류시간', '주이용기능'],
+  },
+  'sol_d_supersol_session': {
+    label: '슈퍼솔세션(일)',
+    attrs: ['접속시각', '체류분', '진입기능', '기기구분'],
+  },
+  'jaz_sh_fanclub_membership_chghist': {
+    label: '신한FAN가입이력',
+    attrs: ['가입채널(계열사)', '앱사용여부', '처리일자'],
+  },
+  'shg_membership_cust_hist': {
+    label: '리워드앱이력',
+    attrs: ['멤버십등급', '포인트잔액', '가입일'],
+  },
+  'trs_m_cust_card_txn_card': {
+    label: '카드결제상세',
+    attrs: ['결제금액', '가맹점', '업종', '할부개월'],
+  },
+  'trs_m_cust_acct_txn_bank': {
+    label: '은행계좌거래',
+    attrs: ['거래금액', '거래유형', '상대방', '채널'],
+  },
+  'trs_m_cust_acct_txn_sec': {
+    label: '증권계좌거래',
+    attrs: ['거래금액', '종목', '매매구분'],
+  },
+  'trs_m_merchant_delivery': {
+    label: '배달거래',
+    attrs: ['주문금액', '배달지역', '업종'],
+  },
+  'com_m_merchant_franchise': {
+    label: '가맹점',
+    attrs: ['가맹점명', '업종', '지역', '매출규모'],
+  },
+  'pdt_m_acct_holding_base_bank': {
+    label: '예금계좌',
+    attrs: ['잔액', '상품유형', '금리', '만기일'],
+  },
+  'pdt_m_contract_holding_base_life': {
+    label: '보험계약',
+    attrs: ['보험료', '보장내용', '만기일'],
+  },
+  'pdt_m_loan_prod_base_card': {
+    label: '대출상품',
+    attrs: ['대출잔액', '금리', '상환방식'],
+  },
+  'igd_m_shg_rfm_base_ledger': {
+    label: 'RFM분석',
+    attrs: ['R등급', 'F등급', 'M등급', '은행수신평잔'],
+  },
+  'rpt_d_assetsize_sec': {
+    label: '증권자산',
+    attrs: ['총자산', '주식비중', '채권비중'],
+  },
+  'rpt_d_unit_deposit_acct': {
+    label: '단위예금',
+    attrs: ['계좌잔액', '상품명', '만기일'],
+  },
+  'm_cust_dim': {
+    label: '고객디멘션',
+    attrs: ['세그먼트', '라이프스테이지', '가치등급'],
+  },
+  'vam_cus_mkt_mas_m': {
+    label: '마케팅고객',
+    attrs: ['캠페인반응', '선호채널', '이탈확률'],
+  },
 };
 
 const JOIN_RULES: Record<string, Record<string, string>> = {
@@ -70,186 +175,126 @@ const JOIN_RULES: Record<string, Record<string, string>> = {
 };
 
 export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
-  const graphData = useMemo(() => {
+  const viewData = useMemo(() => {
     if (tablesUsed && tablesUsed.length > 0) {
-      return buildQueryGraph(tablesUsed);
+      return buildEntityView(tablesUsed);
     }
-    return buildEmptyState();
+    return null;
   }, [tablesUsed]);
 
-  if (!graphData) {
+  if (!viewData) {
     return (
-      <div className="flex items-center justify-center h-full p-8">
-        <p className="text-sm text-slate">쿼리를 실행하면 사용된 테이블 간 관계를 보여줍니다.</p>
+      <div className="flex items-center justify-center h-full p-6">
+        <p className="text-xs text-slate">쿼리를 실행하면 사용된 엔티티와 속성을 보여줍니다.</p>
       </div>
     );
   }
 
   return (
-    <div className="p-4">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-medium text-pearl">테이블 관계도</h3>
-        <span className="text-[11px] text-mist bg-ink-700 px-2 py-0.5 rounded-full border border-ink-600">
-          {graphData.nodes.length}개 테이블
+    <div className="p-3 space-y-2">
+      <div className="flex items-center justify-between">
+        <h3 className="text-[11px] font-medium text-pearl">데이터 엔티티</h3>
+        <span className="text-[10px] text-mist bg-ink-700 px-1.5 py-0.5 rounded border border-ink-600">
+          {viewData.tables.length}개 테이블
         </span>
       </div>
 
-      <div className="rounded-xl bg-ink-900 border border-ink-600 overflow-hidden">
-        <svg
-          viewBox={`0 0 ${graphData.width} ${graphData.height}`}
-          className="w-full"
-          style={{
-            height: Math.min(400, graphData.height),
-            background: 'radial-gradient(circle at 50% 50%, #0d1f2d, #08151f)',
-          }}
-        >
-          {/* Edges with join key labels */}
-          {graphData.edges.map((edge, i) => {
-            const from = graphData.nodes.find((n) => n.id === edge.from);
-            const to = graphData.nodes.find((n) => n.id === edge.to);
-            if (!from || !to) return null;
-
-            const midX = (from.x + to.x) / 2;
-            const midY = (from.y + to.y) / 2;
-
-            return (
-              <g key={`edge-${i}`}>
-                <line
-                  x1={from.x} y1={from.y} x2={to.x} y2={to.y}
-                  stroke="#38c7e0" strokeWidth="1.5" opacity="0.6"
-                  markerEnd="url(#arrowhead)"
-                />
-                {/* Join key pill */}
-                <rect
-                  x={midX - edge.joinKey.length * 3.2 - 6}
-                  y={midY - 9}
-                  width={edge.joinKey.length * 6.4 + 12}
-                  height={18}
-                  rx="9"
-                  fill="#0d1f2d"
-                  stroke="#1e3a4f"
-                  strokeWidth="1"
-                />
-                <text
-                  x={midX} y={midY + 3}
-                  textAnchor="middle"
-                  fill="#38c7e0"
-                  fontSize="9"
-                  fontFamily="monospace"
-                >
-                  {edge.joinKey}
-                </text>
-              </g>
-            );
-          })}
-
-          {/* Arrow marker */}
-          <defs>
-            <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-              <polygon points="0 0, 8 3, 0 6" fill="#38c7e0" opacity="0.6" />
-            </marker>
-          </defs>
-
-          {/* Nodes */}
-          {graphData.nodes.map((node) => {
-            const labelWidth = Math.max(node.label.length * 7 + 24, 80);
-            return (
-              <g key={node.id}>
-                <rect
-                  x={node.x - labelWidth / 2}
-                  y={node.y - 16}
-                  width={labelWidth}
-                  height={32}
-                  rx="6"
-                  fill="#0a1520"
-                  stroke={node.color}
-                  strokeWidth="1.5"
-                />
-                <circle
-                  cx={node.x - labelWidth / 2 + 12}
-                  cy={node.y}
-                  r="4"
-                  fill={node.color}
-                  opacity="0.8"
-                />
-                <text
-                  x={node.x - labelWidth / 2 + 22}
-                  y={node.y + 4}
-                  fill="#e0f0f4"
-                  fontSize="10"
-                  fontFamily="system-ui"
-                >
-                  {node.label}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-
-      {/* Table list with domains */}
-      <div className="mt-2 flex flex-wrap gap-1.5">
-        {graphData.nodes.map((node) => (
-          <span
-            key={node.id}
-            className="text-[10px] px-2 py-0.5 rounded border"
-            style={{ color: node.color, borderColor: `${node.color}33`, background: `${node.color}08` }}
+      {/* Entity cards with attributes */}
+      <div className="space-y-1.5">
+        {viewData.tables.map((table) => (
+          <div
+            key={table.id}
+            className="rounded-lg border overflow-hidden"
+            style={{ borderColor: `${table.color}40` }}
           >
-            {node.id}
-          </span>
+            {/* Table header */}
+            <div
+              className="flex items-center gap-2 px-2.5 py-1.5"
+              style={{ background: `${table.color}0a` }}
+            >
+              <div
+                className="w-2 h-2 rounded-full shrink-0"
+                style={{ background: table.color }}
+              />
+              <span className="text-[11px] font-medium" style={{ color: table.color }}>
+                {table.label}
+              </span>
+            </div>
+            {/* Attributes */}
+            <div className="px-2.5 py-1.5 flex flex-wrap gap-1">
+              {table.attrs.map((attr, i) => (
+                <span
+                  key={i}
+                  className="text-[9px] px-1.5 py-0.5 rounded bg-ink-800 text-mist border border-ink-600"
+                >
+                  {attr}
+                </span>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
+
+      {/* Join relationships */}
+      {viewData.joins.length > 0 && (
+        <div className="pt-1.5 border-t border-ink-700">
+          <p className="text-[10px] text-slate mb-1.5">연결 관계</p>
+          <div className="space-y-1">
+            {viewData.joins.map((join, i) => (
+              <div key={i} className="flex items-center gap-1.5 text-[10px]">
+                <span className="text-mist font-medium">{join.fromLabel}</span>
+                <span className="text-aqua">—</span>
+                <span className="text-aqua bg-ink-800 px-1.5 py-0.5 rounded border border-ink-700">
+                  {join.relation}
+                </span>
+                <span className="text-aqua">→</span>
+                <span className="text-mist font-medium">{join.toLabel}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function buildQueryGraph(tablesUsed: string[]): { nodes: VisNode[]; edges: VisEdge[]; width: number; height: number } {
-  const nodes: VisNode[] = [];
-  const edges: VisEdge[] = [];
-  const count = tablesUsed.length;
+interface TableView {
+  id: string;
+  label: string;
+  color: string;
+  attrs: string[];
+}
 
-  if (count === 1) {
-    nodes.push({
-      id: tablesUsed[0],
-      label: getTableLabel(tablesUsed[0]),
-      x: 250, y: 50,
-      color: DOMAIN_COLORS[getDomain(tablesUsed[0])],
-    });
-    return { nodes, edges, width: 500, height: 100 };
-  }
+interface JoinView {
+  fromLabel: string;
+  toLabel: string;
+  relation: string;
+}
 
-  // Layout: vertical list for 2-3 tables, grid for more
-  const width = 500;
-  const rowHeight = 70;
-  const height = Math.max(count * rowHeight + 40, 160);
-
-  tablesUsed.forEach((tableId, i) => {
-    const x = count <= 3 ? 250 : (i % 2 === 0 ? 160 : 340);
-    const y = count <= 3 ? 40 + i * rowHeight : 40 + Math.floor(i / 2) * rowHeight;
-
-    nodes.push({
-      id: tableId,
-      label: getTableLabel(tableId),
-      x, y,
-      color: DOMAIN_COLORS[getDomain(tableId)],
-    });
+function buildEntityView(tablesUsed: string[]): { tables: TableView[]; joins: JoinView[] } {
+  const tables: TableView[] = tablesUsed.map((tid) => {
+    const meta = TABLE_META[tid];
+    return {
+      id: tid,
+      label: meta?.label || tid,
+      color: DOMAIN_COLORS[getDomain(tid)],
+      attrs: meta?.attrs || [],
+    };
   });
 
-  // Find join relationships between used tables
+  const joins: JoinView[] = [];
   for (let i = 0; i < tablesUsed.length; i++) {
     for (let j = i + 1; j < tablesUsed.length; j++) {
-      const joinKey = getJoinKey(tablesUsed[i], tablesUsed[j]);
-      if (joinKey) {
-        edges.push({ from: tablesUsed[i], to: tablesUsed[j], joinKey });
+      const rel = getJoinKey(tablesUsed[i], tablesUsed[j]);
+      if (rel) {
+        const labelA = TABLE_META[tablesUsed[i]]?.label || tablesUsed[i];
+        const labelB = TABLE_META[tablesUsed[j]]?.label || tablesUsed[j];
+        joins.push({ fromLabel: labelA, toLabel: labelB, relation: rel });
       }
     }
   }
 
-  return { nodes, edges, width, height };
-}
-
-function buildEmptyState(): null {
-  return null;
+  return { tables, joins };
 }
 
 function getJoinKey(tableA: string, tableB: string): string | null {
@@ -289,39 +334,4 @@ function getDomain(tableId: string): string {
   if (tableId.startsWith('vam_')) return 'marketing';
   if (tableId.includes('cust')) return 'customer';
   return 'common';
-}
-
-function getTableLabel(tableId: string): string {
-  const labels: Record<string, string> = {
-    'igd_d_cust_mas': '통합고객마스터',
-    'igd_m_cust_base': '고객기본(월)',
-    'igd_m_cust_txn_card': '카드거래(월)',
-    'igd_m_cust_txn_bank': '은행거래(월)',
-    'igd_m_cust_txn_life': '보험거래(월)',
-    'igd_m_cust_txn_sec': '증권거래(월)',
-    'cln_d_cust_mas_bank': '은행고객',
-    'cln_d_cust_mas_card': '카드고객',
-    'cln_d_cust_mas_life': '라이프고객',
-    'cln_d_cust_mas_sec': '증권고객',
-    'cln_m_cust_base_bank': '은행고객(월)',
-    'cln_m_cust_base_card': '카드고객(월)',
-    'sol_m_supersol_visit': '슈퍼솔MAU(월)',
-    'sol_d_supersol_session': '슈퍼솔세션(일)',
-    'jaz_sh_fanclub_membership_chghist': '신한FAN가입이력',
-    'shg_membership_cust_hist': '리워드앱이력',
-    'trs_m_cust_card_txn_card': '카드결제상세',
-    'trs_m_cust_acct_txn_bank': '은행계좌거래',
-    'trs_m_cust_acct_txn_sec': '증권계좌거래',
-    'trs_m_merchant_delivery': '배달거래',
-    'com_m_merchant_franchise': '가맹점',
-    'pdt_m_acct_holding_base_bank': '예금계좌',
-    'pdt_m_contract_holding_base_life': '보험계약',
-    'pdt_m_loan_prod_base_card': '대출상품',
-    'igd_m_shg_rfm_base_ledger': 'RFM분석',
-    'rpt_d_assetsize_sec': '증권자산',
-    'rpt_d_unit_deposit_acct': '단위예금',
-    'm_cust_dim': '고객디멘션',
-    'vam_cus_mkt_mas_m': '마케팅고객',
-  };
-  return labels[tableId] || tableId.replace(/^(igd_|cln_|trs_|pdt_|com_|rpt_|jaz_|shg_|sol_)[a-z]_/, '');
 }
