@@ -180,8 +180,14 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
         .map((tid) => ENTITY_MAP[tid])
         .filter(Boolean) as EntityDef[];
     }
+    // tablesUsed 없으면 context에서 도메인 힌트로 관련 엔티티 표시
+    const domainHint = context?.find(s => s.id === 'intent')?.data?.domain_hint as string | undefined;
+    const intentEntities = context?.find(s => s.id === 'intent')?.data?.entities as string[] | undefined;
+    if (domainHint || intentEntities) {
+      return inferEntities(domainHint, intentEntities);
+    }
     return null;
-  }, [tablesUsed]);
+  }, [tablesUsed, context]);
 
   if (!entities || entities.length === 0) {
     return (
@@ -228,4 +234,52 @@ export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
       })}
     </div>
   );
+}
+
+const DOMAIN_TABLE_MAP: Record<string, string[]> = {
+  bank: ['cln_d_cust_mas_bank', 'cln_m_cust_base_bank', 'igd_m_cust_txn_bank', 'trs_m_cust_acct_txn_bank', 'pdt_m_acct_holding_base_bank'],
+  card: ['cln_d_cust_mas_card', 'cln_m_cust_base_card', 'igd_m_cust_txn_card', 'trs_m_cust_card_txn_card', 'pdt_m_loan_prod_base_card'],
+  life: ['cln_d_cust_mas_life', 'igd_m_cust_txn_life', 'pdt_m_contract_holding_base_life'],
+  securities: ['cln_d_cust_mas_sec', 'igd_m_cust_txn_sec', 'trs_m_cust_acct_txn_sec', 'rpt_d_assetsize_sec'],
+  digital: ['sol_m_supersol_visit', 'sol_d_supersol_session', 'jaz_sh_fanclub_membership_chghist'],
+  customer: ['igd_d_cust_mas', 'igd_m_cust_base', 'm_cust_dim'],
+};
+
+const KEYWORD_DOMAIN: Record<string, string> = {
+  '은행': 'bank', '수신': 'bank', '예금': 'bank', '여신': 'bank', '대출': 'bank',
+  '카드': 'card', '이용금액': 'card', '결제': 'card', '신용': 'card',
+  '보험': 'life', '생명': 'life', '계약': 'life',
+  '증권': 'securities', '투자': 'securities', '주식': 'securities', '자산': 'securities',
+  '슈퍼솔': 'digital', '앱': 'digital', 'MAU': 'digital', '방문': 'digital',
+  '고객': 'customer', '연령': 'customer', '성별': 'customer',
+};
+
+function inferEntities(domainHint?: string, intentEntities?: string[]): EntityDef[] | null {
+  const domains = new Set<string>();
+
+  if (domainHint) {
+    const mapped = domainHint === 'transaction' ? 'card' : domainHint === 'product' ? 'bank' : domainHint;
+    if (DOMAIN_TABLE_MAP[mapped]) domains.add(mapped);
+  }
+
+  if (intentEntities) {
+    for (const ent of intentEntities) {
+      for (const [keyword, domain] of Object.entries(KEYWORD_DOMAIN)) {
+        if (ent.includes(keyword)) {
+          domains.add(domain);
+        }
+      }
+    }
+  }
+
+  if (domains.size === 0) domains.add('customer');
+
+  const tableIds: string[] = [];
+  for (const domain of domains) {
+    const tables = DOMAIN_TABLE_MAP[domain] || [];
+    tableIds.push(...tables.slice(0, 3));
+  }
+
+  const results = tableIds.map((tid) => ENTITY_MAP[tid]).filter(Boolean) as EntityDef[];
+  return results.length > 0 ? results : null;
 }
