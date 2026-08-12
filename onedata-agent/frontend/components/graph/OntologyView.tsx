@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import type { ReasoningStep } from '@/lib/types';
+import type { ReasoningStep, ChatMessage } from '@/lib/types';
 
 interface OntologyViewProps {
   context?: ReasoningStep[];
   tablesUsed?: string[];
+  allMessages?: ChatMessage[];
 }
 
 const DOMAIN_COLORS: Record<string, string> = {
@@ -201,22 +202,42 @@ const DOMAIN_LABEL: Record<string, string> = {
   customer: '고객',
 };
 
-export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
+export function OntologyView({ context, tablesUsed, allMessages }: OntologyViewProps) {
   const graphData = useMemo(() => {
+    // 현재 + 이전 대화 모든 intent entities 수집
+    const allIntentEntities: string[] = [];
+    const allTablesUsed = new Set<string>();
+
+    if (allMessages) {
+      for (const msg of allMessages) {
+        if (msg.role !== 'assistant') continue;
+        if (msg.tablesUsed) msg.tablesUsed.forEach(t => allTablesUsed.add(t));
+        const intentStep = msg.reasoning?.find(s => s.id === 'intent');
+        const ents = intentStep?.data?.entities as string[] | undefined;
+        if (ents) allIntentEntities.push(...ents);
+      }
+    }
+
+    // 현재 메시지도 추가
     const intentEntities = context?.find(s => s.id === 'intent')?.data?.entities as string[] | undefined;
-    const hasGroupKeyword = intentEntities?.some(e =>
+    if (intentEntities) allIntentEntities.push(...intentEntities);
+    if (tablesUsed) tablesUsed.forEach(t => allTablesUsed.add(t));
+
+    const hasGroupKeyword = allIntentEntities.some(e =>
       e.includes('각사') || e.includes('그룹사') || e.includes('계열사')
     );
 
-    if (tablesUsed && tablesUsed.length > 0) {
-      return buildGraphFromTables(tablesUsed, hasGroupKeyword);
+    const combinedTables = Array.from(allTablesUsed);
+
+    if (combinedTables.length > 0) {
+      return buildGraphFromTables(combinedTables, hasGroupKeyword);
     }
     const domainHint = context?.find(s => s.id === 'intent')?.data?.domain_hint as string | undefined;
-    if (domainHint || intentEntities) {
-      return buildGraphFromHint(domainHint, intentEntities);
+    if (domainHint || allIntentEntities.length > 0) {
+      return buildGraphFromHint(domainHint, allIntentEntities);
     }
     return null;
-  }, [tablesUsed, context]);
+  }, [tablesUsed, context, allMessages]);
 
   if (!graphData) {
     return (

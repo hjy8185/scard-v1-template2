@@ -19,7 +19,7 @@ interface Tab {
 }
 
 export function DetailPanel() {
-  const { selectedMessage, detailView, setDetailView } = useAppContext();
+  const { selectedMessage, detailView, setDetailView, messages } = useAppContext();
 
   const tabs: Tab[] = [
     {
@@ -152,10 +152,14 @@ export function DetailPanel() {
           <ReportChart result={selectedMessage.queryResults} answer={selectedMessage.content} />
         )}
         {detailView === 'ontology' && (
-          <OntologyView context={selectedMessage.reasoning} tablesUsed={
-            selectedMessage.tablesUsed ||
-            selectedMessage.reasoning?.find(s => s.id === 'sql_generate')?.data?.tables_used as string[] | undefined
-          } />
+          <OntologyView
+            context={selectedMessage.reasoning}
+            tablesUsed={
+              selectedMessage.tablesUsed ||
+              selectedMessage.reasoning?.find(s => s.id === 'sql_generate')?.data?.tables_used as string[] | undefined
+            }
+            allMessages={messages}
+          />
         )}
       </div>
     </div>
