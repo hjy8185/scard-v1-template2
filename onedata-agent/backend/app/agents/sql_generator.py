@@ -61,17 +61,19 @@ _FEW_SHOT_EXAMPLES = [
             "sql": (
                 "SELECT\n"
                 '  c."연령5년구간코드",\n'
-                '  COUNT(DISTINCT f."그룹md") AS "슈퍼솔앱사용고객수"\n'
-                "FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist f\n"
+                '  COUNT(DISTINCT t."그룹md번호") AS "고객수",\n'
+                '  SUM(t."이용금액") AS "총이용금액"\n'
+                "FROM ai_ready_v3.igd_m_cust_txn_card t\n"
                 "JOIN ai_ready_v3.igd_m_cust_base c\n"
-                '  ON f."그룹md" = c."그룹md번호"\n'
-                "WHERE f.\"new앱사용여부\" = 'Y'\n"
+                '  ON t."그룹md번호" = c."그룹md번호"\n'
+                '  AND t."기준년월" = c."기준년월"\n'
+                "WHERE t.\"기준년월\" = (SELECT MAX(\"기준년월\") FROM ai_ready_v3.igd_m_cust_txn_card)\n"
                 'GROUP BY c."연령5년구간코드"\n'
                 'ORDER BY c."연령5년구간코드" ASC\n'
-                "LIMIT 1000"
+                "LIMIT 20"
             ),
-            "explanation": "드릴다운: 이전 쿼리의 FROM/WHERE 조건을 유지하고 연령대 GROUP BY를 추가합니다. 합계는 이전 결과와 동일해야 합니다.",
-            "tables_used": ["jaz_sh_fanclub_membership_chghist", "igd_m_cust_base"],
+            "explanation": "드릴다운: 이전 쿼리의 FROM/WHERE 조건을 유지하고 연령대 GROUP BY를 추가합니다. 연령대는 igd_m_cust_base에서 조회합니다.",
+            "tables_used": ["igd_m_cust_txn_card", "igd_m_cust_base"],
         },
     },
     {
@@ -79,18 +81,20 @@ _FEW_SHOT_EXAMPLES = [
         "answer": {
             "sql": (
                 "SELECT\n"
-                '  m."성별구분코드",\n'
-                '  COUNT(DISTINCT f."그룹md") AS "슈퍼솔앱사용고객수"\n'
-                "FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist f\n"
-                "JOIN ai_ready_v3.igd_d_cust_mas m\n"
-                '  ON f."그룹md" = m."그룹md번호"\n'
-                "WHERE f.\"new앱사용여부\" = 'Y'\n"
-                'GROUP BY m."성별구분코드"\n'
-                'ORDER BY "슈퍼솔앱사용고객수" DESC\n'
+                '  c."성별",\n'
+                '  COUNT(DISTINCT t."그룹md번호") AS "고객수",\n'
+                '  SUM(t."이용금액") AS "총이용금액"\n'
+                "FROM ai_ready_v3.igd_m_cust_txn_card t\n"
+                "JOIN ai_ready_v3.igd_m_cust_base c\n"
+                '  ON t."그룹md번호" = c."그룹md번호"\n'
+                '  AND t."기준년월" = c."기준년월"\n'
+                "WHERE t.\"기준년월\" = (SELECT MAX(\"기준년월\") FROM ai_ready_v3.igd_m_cust_txn_card)\n"
+                'GROUP BY c."성별"\n'
+                'ORDER BY "고객수" DESC\n'
                 "LIMIT 10"
             ),
-            "explanation": "드릴다운: 이전 쿼리의 FROM/WHERE 조건을 유지하고 성별 GROUP BY를 추가합니다. 합계는 이전 결과와 동일해야 합니다.",
-            "tables_used": ["jaz_sh_fanclub_membership_chghist", "igd_d_cust_mas"],
+            "explanation": "드릴다운: 이전 쿼리의 FROM/WHERE 조건을 유지하고 성별 GROUP BY를 추가합니다. 성별은 igd_m_cust_base에서 조회합니다.",
+            "tables_used": ["igd_m_cust_txn_card", "igd_m_cust_base"],
         },
     },
     {
@@ -240,11 +244,13 @@ class SQLGenerator:
             context_str += (
                 "\n★ 드릴다운 규칙: '위 결과를 X별로' 형태의 질문이면 "
                 "이전 쿼리를 기반으로 GROUP BY에 X 차원을 추가하세요. "
-                "각 차원에 맞는 컬럼을 사용:\n"
-                "  - 연령대별 → c.\"연령대\" (igd_m_cust_base JOIN 필요)\n"
-                "  - 성별 → c.\"성별\" (igd_m_cust_base JOIN 필요)\n"
-                "  - 계열사별 → \"계열사명\" 또는 \"계열사코드\"\n"
-                "  - 월별/추이 → \"기준년월\" GROUP BY + ORDER BY\n"
+                "이전 쿼리의 FROM/WHERE/JOIN을 유지한 채 차원만 추가.\n"
+                "각 차원에 맞는 테이블·컬럼:\n"
+                "  - 연령대별 → igd_m_cust_base.\"연령5년구간코드\" (통합 고객 기본 JOIN)\n"
+                "  - 성별 → igd_m_cust_base.\"성별\" (통합 고객 기본 JOIN)\n"
+                "  - 계열사별 → jaz의 \"신한그룹통합플랫폼가입채널코드\" CASE WHEN 변환\n"
+                "  - 월별/추이 → \"기준년월\" GROUP BY + ORDER BY ASC\n"
+                "  ★ 연령대/성별은 igd_m_cust_base만 사용. 절대 cln_*_life, cln_*_sec 등 사용 금지.\n"
             )
 
         try:

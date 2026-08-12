@@ -461,6 +461,22 @@ class BedrockClient:
 - 예: "슈퍼솔 앱 사용 고객수 알려줘" → WHERE "기준년월" = (SELECT MAX("기준년월") FROM 해당테이블)
 - 기간이 명시된 경우에만 해당 기간으로 필터링
 
+## ★★ 테이블 선택 우선순위 (반드시 준수)
+
+사용자 질문에 특정 계열사 언급이 없으면 아래 우선순위를 따라 범용 테이블 사용:
+1. 연령대/성별/기본 고객속성 → igd_m_cust_base (통합 월별 기본)
+2. 카드 거래 → igd_m_cust_txn_card (통합 카드 거래)
+3. 슈퍼솔 MAU/방문 → sol_m_supersol_visit
+4. 고객 마스터(고정) → igd_d_cust_mas
+
+계열사별 테이블(cln_d_cust_mas_bank/card/life/sec 등)은:
+- 사용자가 "카드회원", "은행고객", "생명보험" 등 특정 계열사를 명시했을 때만 사용
+- "연령대별" 단독 요청에 신한생명(life)/증권(sec) 테이블 사용 금지
+- 카드회원 관련 → cln_d_cust_mas_card 또는 cln_m_cust_base_card
+- 은행 관련 → cln_d_cust_mas_bank 또는 cln_m_cust_base_bank
+
+★★ 금지: 사용자가 계열사를 특정하지 않았는데 cln_*_life, cln_*_sec 등 선택
+
 ## 쿼리 품질 기준
 
 - 결과는 집계·정렬해 상위 건으로 줄이세요 (LIMIT)

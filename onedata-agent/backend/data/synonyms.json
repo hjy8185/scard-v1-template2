@@ -82,9 +82,19 @@
       "description": "고객 나이"
     },
     "연령대": {
-      "column_name": "연령대",
+      "column_name": "연령5년구간코드",
       "table_name": "igd_m_cust_base",
-      "description": "연령대 구간 (20대, 30대 등)"
+      "description": "연령대 5년 구간 (010=10~14세, 020=15~19세, ..., 070=60세+). 반드시 igd_m_cust_base 테이블 사용."
+    },
+    "연령대별": {
+      "column_name": "연령5년구간코드",
+      "table_name": "igd_m_cust_base",
+      "description": "연령대별 분석 시 GROUP BY 대상. 반드시 igd_m_cust_base 테이블 사용."
+    },
+    "연령구간": {
+      "column_name": "연령5년구간코드",
+      "table_name": "igd_m_cust_base",
+      "description": "연령 5년 구간 코드. 반드시 igd_m_cust_base 테이블 사용."
     },
     "성별": {
       "column_name": "성별",
