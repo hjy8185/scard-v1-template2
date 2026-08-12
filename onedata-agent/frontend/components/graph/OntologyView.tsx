@@ -203,11 +203,15 @@ const DOMAIN_LABEL: Record<string, string> = {
 
 export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
   const graphData = useMemo(() => {
+    const intentEntities = context?.find(s => s.id === 'intent')?.data?.entities as string[] | undefined;
+    const hasGroupKeyword = intentEntities?.some(e =>
+      e.includes('각사') || e.includes('그룹사') || e.includes('계열사')
+    );
+
     if (tablesUsed && tablesUsed.length > 0) {
-      return buildGraphFromTables(tablesUsed);
+      return buildGraphFromTables(tablesUsed, hasGroupKeyword);
     }
     const domainHint = context?.find(s => s.id === 'intent')?.data?.domain_hint as string | undefined;
-    const intentEntities = context?.find(s => s.id === 'intent')?.data?.entities as string[] | undefined;
     if (domainHint || intentEntities) {
       return buildGraphFromHint(domainHint, intentEntities);
     }
@@ -317,10 +321,27 @@ interface GraphData {
   height: number;
 }
 
-function buildGraphFromTables(tablesUsed: string[]): GraphData {
+const GROUP_ENTITIES: EntityDef[] = [
+  { label: '신한은행', domain: '은행', attrs: ['수신평균잔액', '여신잔액', '이체건수'] },
+  { label: '신한카드', domain: '카드', attrs: ['월이용금액', '월이용건수', '신용한도'] },
+  { label: '신한투자증권', domain: '증권', attrs: ['월거래금액', '투자자산', '보유종목수'] },
+  { label: '신한라이프', domain: '보험', attrs: ['월보험료', '보유계약건수', '보장금액'] },
+];
+
+function buildGraphFromTables(tablesUsed: string[], hasGroupKeyword?: boolean): GraphData {
   const entities = tablesUsed
     .map((tid) => ENTITY_MAP[tid])
     .filter(Boolean) as EntityDef[];
+
+  if (hasGroupKeyword) {
+    // 그룹사 키워드가 있으면 4개 계열사 엔티티를 추가 (중복 제거)
+    const existingLabels = new Set(entities.map(e => e.label));
+    for (const ge of GROUP_ENTITIES) {
+      if (!existingLabels.has(ge.label)) {
+        entities.push(ge);
+      }
+    }
+  }
 
   return layoutGraph(entities);
 }
