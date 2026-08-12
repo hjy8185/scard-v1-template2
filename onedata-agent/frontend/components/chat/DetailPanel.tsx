@@ -113,14 +113,14 @@ export function DetailPanel() {
   return (
     <div className="flex h-full flex-col">
       {/* Tab Bar */}
-      <div className="flex items-center gap-1 px-4 pt-3 pb-0 border-b border-ink-600">
+      <div className="flex items-center gap-0.5 px-3 pt-2 pb-0 border-b border-ink-600">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => tab.enabled && setDetailView(tab.id)}
             disabled={!tab.enabled}
             className={cn(
-              'flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium rounded-t-lg transition-all duration-200 border-b-2',
+              'flex items-center gap-1 px-2.5 py-2 text-[11px] font-medium rounded-t-md transition-all duration-200 border-b-2',
               detailView === tab.id
                 ? 'text-aqua border-aqua bg-ink-800/50'
                 : tab.enabled

@@ -57,39 +57,39 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
   const { items, maxValue, totalValue, labelCol, valueCol } = chartData;
 
   return (
-    <div className="px-4 py-3 space-y-3">
+    <div className="px-3 py-2.5 space-y-2">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-xs font-medium text-mist">
+        <span className="text-[11px] font-medium text-mist">
           {title || `${labelCol} × ${valueCol}`}
         </span>
-        <span className="text-[11px] text-slate">
-          {items.length}건 · 합계 {totalValue.toLocaleString('ko-KR')}
+        <span className="text-[10px] text-slate">
+          {items.length}건 · {totalValue.toLocaleString('ko-KR')}
         </span>
       </div>
 
       {/* Compact bar chart */}
-      <div className="space-y-1">
+      <div className="space-y-0.5">
         {items.map((item, i) => {
           const pct = (item.value / maxValue) * 100;
           const share = ((item.value / totalValue) * 100).toFixed(1);
           const color = getColor(i);
 
           return (
-            <div key={i} className="flex items-center gap-2 h-5">
-              <span className="text-[10px] text-mist w-[64px] truncate text-right shrink-0">
+            <div key={i} className="flex items-center gap-1.5 h-[18px]">
+              <span className="text-[9px] text-mist w-[56px] truncate text-right shrink-0">
                 {item.label}
               </span>
-              <div className="flex-1 h-3.5 rounded-sm bg-ink-800/80 overflow-hidden">
+              <div className="flex-1 h-3 rounded-sm bg-ink-800/80 overflow-hidden">
                 <div
                   className="h-full rounded-sm transition-all duration-500"
                   style={{ width: `${pct}%`, background: color, opacity: 0.85 }}
                 />
               </div>
-              <span className="text-[10px] font-mono text-pearl w-[52px] text-right shrink-0">
+              <span className="text-[9px] font-mono text-pearl w-[44px] text-right shrink-0">
                 {item.value.toLocaleString('ko-KR')}
               </span>
-              <span className="text-[9px] text-slate w-[30px] text-right shrink-0">
+              <span className="text-[8px] text-slate w-[26px] text-right shrink-0">
                 {share}%
               </span>
             </div>
@@ -99,10 +99,10 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
 
       {/* AI Answer as insight/commentary */}
       {answer && (
-        <div className="border-t border-ink-700 pt-2.5">
-          <div className="flex items-start gap-2">
-            <span className="text-[10px] text-aqua mt-0.5 shrink-0">AI 해설</span>
-            <p className="text-[11px] text-mist/90 leading-[1.6] whitespace-pre-wrap">
+        <div className="border-t border-ink-700 pt-2">
+          <div className="flex items-start gap-1.5">
+            <span className="text-[9px] text-aqua mt-0.5 shrink-0">AI</span>
+            <p className="text-[10px] text-mist/90 leading-[1.5] whitespace-pre-wrap">
               {answer}
             </p>
           </div>

@@ -11,11 +11,11 @@ export function AppLayout() {
       <Header />
       <main className="flex flex-1 min-h-0 overflow-hidden">
         {/* Left Panel - Chat */}
-        <div className="flex w-[480px] min-w-[400px] flex-col border-r border-ink-600">
+        <div className="flex w-[420px] min-w-[360px] flex-col border-r border-ink-600">
           <ChatPanel />
         </div>
         {/* Right Panel - Detail View */}
-        <div className="flex flex-1 min-w-0 flex-col">
+        <div className="flex flex-1 min-w-0 max-w-[560px] flex-col">
           <DetailPanel />
         </div>
       </main>

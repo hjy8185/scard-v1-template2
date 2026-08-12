@@ -53,32 +53,25 @@ export function ResultTable({ result }: ResultTableProps) {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-3">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <h3 className="text-base font-semibold text-pearl">조회 결과</h3>
-          <span className="text-xs text-mist bg-ink-700 px-2.5 py-1 rounded-full border border-ink-600">
-            {result.rowCount}건
-          </span>
-          {result.executionMs !== undefined && (
-            <span className="text-xs text-slate">
-              {result.executionMs}ms
-            </span>
-          )}
-        </div>
+      <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          {totalPages > 1 && (
-            <span className="text-xs text-mist">
-              {currentPage + 1} / {totalPages} 페이지
-            </span>
-          )}
+          <h3 className="text-xs font-medium text-pearl">조회 결과</h3>
+          <span className="text-[10px] text-mist bg-ink-700 px-2 py-0.5 rounded-full border border-ink-600">
+            {result.rowCount}건{result.executionMs !== undefined && ` · ${result.executionMs}ms`}
+          </span>
         </div>
+        {totalPages > 1 && (
+          <span className="text-[10px] text-mist">
+            {currentPage + 1}/{totalPages}
+          </span>
+        )}
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border border-ink-600 overflow-hidden">
-        <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
+      <div className="rounded-lg border border-ink-600 overflow-hidden">
+        <div className="overflow-x-auto max-h-[360px] overflow-y-auto">
           <table className="w-full data-table">
             <thead>
               <tr className="border-b border-ink-600">
@@ -86,9 +79,9 @@ export function ResultTable({ result }: ResultTableProps) {
                   <th
                     key={col}
                     onClick={() => handleSort(col)}
-                    className="px-4 py-3 text-left text-xs font-semibold text-mist whitespace-nowrap cursor-pointer hover:text-pearl transition-colors bg-ink-800"
+                    className="px-2.5 py-1.5 text-left text-[10px] font-semibold text-mist whitespace-nowrap cursor-pointer hover:text-pearl transition-colors bg-ink-800"
                   >
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-0.5">
                       <span>{col}</span>
                       {sortColumn === col && (
                         <span className="text-aqua">
@@ -112,7 +105,7 @@ export function ResultTable({ result }: ResultTableProps) {
                   {result.columns.map((col) => (
                     <td
                       key={col}
-                      className="px-4 py-2.5 text-sm text-pearl whitespace-nowrap"
+                      className="px-2.5 py-1.5 text-[11px] text-pearl whitespace-nowrap"
                     >
                       <CellValue value={row[col]} column={col} />
                     </td>
