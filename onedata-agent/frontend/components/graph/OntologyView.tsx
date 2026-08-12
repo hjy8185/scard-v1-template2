@@ -38,35 +38,35 @@ const DOMAIN_COLORS: Record<string, string> = {
 };
 
 const JOIN_RULES: Record<string, Record<string, string>> = {
-  'igd_d_cust_mas': { _default: '그룹md번호' },
-  'igd_m_cust_base': { _default: '그룹md번호 + 기준년월' },
-  'igd_m_cust_txn_card': { _default: '그룹md번호 + 기준년월' },
-  'igd_m_cust_txn_bank': { _default: '그룹md번호 + 기준년월' },
-  'igd_m_cust_txn_life': { _default: '그룹md번호 + 기준년월' },
-  'igd_m_cust_txn_sec': { _default: '그룹md번호 + 기준년월' },
-  'cln_d_cust_mas_bank': { _default: '그룹md번호' },
-  'cln_d_cust_mas_card': { _default: '그룹md번호' },
-  'cln_d_cust_mas_life': { _default: '그룹md번호' },
-  'cln_d_cust_mas_sec': { _default: '그룹md번호' },
-  'cln_m_cust_base_bank': { _default: '그룹md번호 + 기준년월' },
-  'cln_m_cust_base_card': { _default: '그룹md번호 + 기준년월' },
-  'sol_m_supersol_visit': { _default: '그룹md번호 + 기준년월', 'jaz_sh_fanclub_membership_chghist': '그룹md번호 = 그룹md' },
-  'sol_d_supersol_session': { _default: '그룹md번호 + 기준일자', 'sol_m_supersol_visit': '그룹md번호 (롤업)' },
-  'jaz_sh_fanclub_membership_chghist': { _default: '그룹md', 'sol_m_supersol_visit': '그룹md = 그룹md번호' },
-  'shg_membership_cust_hist': { _default: '고객번호' },
-  'trs_m_cust_card_txn_card': { _default: '그룹md번호 + 기준년월' },
-  'trs_m_cust_acct_txn_bank': { _default: '그룹md번호 + 기준년월' },
-  'trs_m_cust_acct_txn_sec': { _default: '그룹md번호 + 기준년월' },
-  'trs_m_merchant_delivery': { _default: '가맹점번호' },
-  'com_m_merchant_franchise': { _default: '가맹점번호' },
-  'pdt_m_acct_holding_base_bank': { _default: '그룹md번호 + 기준년월' },
-  'pdt_m_contract_holding_base_life': { _default: '그룹md번호 + 기준년월' },
-  'pdt_m_loan_prod_base_card': { _default: '그룹md번호' },
-  'igd_m_shg_rfm_base_ledger': { _default: '그룹md번호 + 기준년월' },
-  'rpt_d_assetsize_sec': { _default: '그룹md번호' },
-  'rpt_d_unit_deposit_acct': { _default: 'rtrim(고객번호)' },
-  'vam_cus_mkt_mas_m': { _default: '고객번호' },
-  'm_cust_dim': { _default: '그룹md번호' },
+  'igd_d_cust_mas': { _default: '같은 고객' },
+  'igd_m_cust_base': { _default: '같은 고객 · 같은 월' },
+  'igd_m_cust_txn_card': { _default: '같은 고객 · 같은 월' },
+  'igd_m_cust_txn_bank': { _default: '같은 고객 · 같은 월' },
+  'igd_m_cust_txn_life': { _default: '같은 고객 · 같은 월' },
+  'igd_m_cust_txn_sec': { _default: '같은 고객 · 같은 월' },
+  'cln_d_cust_mas_bank': { _default: '같은 고객' },
+  'cln_d_cust_mas_card': { _default: '같은 고객' },
+  'cln_d_cust_mas_life': { _default: '같은 고객' },
+  'cln_d_cust_mas_sec': { _default: '같은 고객' },
+  'cln_m_cust_base_bank': { _default: '같은 고객 · 같은 월' },
+  'cln_m_cust_base_card': { _default: '같은 고객 · 같은 월' },
+  'sol_m_supersol_visit': { _default: '같은 고객 · 같은 월', 'jaz_sh_fanclub_membership_chghist': '같은 고객' },
+  'sol_d_supersol_session': { _default: '같은 고객 · 같은 일', 'sol_m_supersol_visit': '같은 고객 (일→월)' },
+  'jaz_sh_fanclub_membership_chghist': { _default: '같은 고객', 'sol_m_supersol_visit': '같은 고객' },
+  'shg_membership_cust_hist': { _default: '같은 고객' },
+  'trs_m_cust_card_txn_card': { _default: '같은 고객 · 같은 월' },
+  'trs_m_cust_acct_txn_bank': { _default: '같은 고객 · 같은 월' },
+  'trs_m_cust_acct_txn_sec': { _default: '같은 고객 · 같은 월' },
+  'trs_m_merchant_delivery': { _default: '같은 가맹점' },
+  'com_m_merchant_franchise': { _default: '같은 가맹점' },
+  'pdt_m_acct_holding_base_bank': { _default: '같은 고객 · 같은 월' },
+  'pdt_m_contract_holding_base_life': { _default: '같은 고객 · 같은 월' },
+  'pdt_m_loan_prod_base_card': { _default: '같은 고객' },
+  'igd_m_shg_rfm_base_ledger': { _default: '같은 고객 · 같은 월' },
+  'rpt_d_assetsize_sec': { _default: '같은 고객' },
+  'rpt_d_unit_deposit_acct': { _default: '같은 고객' },
+  'vam_cus_mkt_mas_m': { _default: '같은 고객' },
+  'm_cust_dim': { _default: '같은 고객' },
 };
 
 export function OntologyView({ context, tablesUsed }: OntologyViewProps) {
@@ -264,18 +264,13 @@ function getJoinKey(tableA: string, tableB: string): string | null {
 
   if (!keyA || !keyB) return null;
 
-  // If both tables share 그룹md번호, they can join
-  if (keyA.includes('그룹md') && keyB.includes('그룹md')) {
-    if (keyA.includes('기준년월') && keyB.includes('기준년월')) {
-      return '그룹md번호 + 기준년월';
-    }
-    return '그룹md번호';
-  }
-  if (keyA.includes('고객번호') && keyB.includes('고객번호')) {
-    return '고객번호';
+  if (keyA.includes('고객') && keyB.includes('고객')) {
+    if (keyA.includes('월') && keyB.includes('월')) return '같은 고객 · 같은 월';
+    if (keyA.includes('일') && keyB.includes('일')) return '같은 고객 · 같은 일';
+    return '같은 고객';
   }
   if (keyA.includes('가맹점') && keyB.includes('가맹점')) {
-    return '가맹점번호';
+    return '같은 가맹점';
   }
 
   return null;
