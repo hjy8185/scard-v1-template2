@@ -14,9 +14,6 @@ services:
       - "8000:8000"
     environment:
       - AWS_REGION=ap-northeast-2
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
       - NEPTUNE_ENDPOINT=http://neptune:8182
       - OPENSEARCH_ENDPOINT=http://opensearch:9200
       - OPENSEARCH_INDEX=onedata-ontology

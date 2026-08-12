@@ -315,7 +315,7 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
             <span className="text-pearl font-medium">분석된 의도:</span>{' '}
             {(step.data.intent as string) || (step.data.description as string) || JSON.stringify(step.data)}
           </p>
-          {step.data.entities && (step.data.entities as string[]).length > 0 && (
+          {Array.isArray(step.data.entities) && (step.data.entities as string[]).length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1">
               {(step.data.entities as string[]).map((e, i) => (
                 <span key={i} className="px-2 py-0.5 rounded-full bg-aqua/10 text-aqua text-[11px] border border-aqua/20">
@@ -324,7 +324,7 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
               ))}
             </div>
           )}
-          {step.data.confidence && (
+          {!!step.data.confidence && (
             <p className="text-[11px] text-slate mt-1">
               신뢰도: {Math.round((step.data.confidence as number) * 100)}%
             </p>
@@ -334,12 +334,12 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
     case 'context':
       return (
         <div className="mt-2 p-3 rounded-lg bg-ink-700/50 border border-ink-600">
-          {step.data.domain_hint && (
+          {!!step.data.domain_hint && (
             <p className="text-xs text-mist">
               <span className="text-pearl font-medium">도메인:</span> {step.data.domain_hint as string}
             </p>
           )}
-          {step.data.tables && (
+          {!!step.data.tables && (
             <div className="mt-2">
               <p className="text-[11px] text-slate mb-1.5">관련 테이블</p>
               <div className="flex flex-wrap gap-1.5">
@@ -356,10 +356,10 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
     case 'sql_generate':
       return (
         <div className="mt-2 p-3 rounded-lg bg-ink-700/50 border border-ink-600">
-          {step.data.explanation && (
+          {!!step.data.explanation && (
             <p className="text-xs text-mist mb-2">{step.data.explanation as string}</p>
           )}
-          {step.data.tables_used && (
+          {!!step.data.tables_used && (
             <div>
               <p className="text-[11px] text-slate mb-1">사용 테이블</p>
               <div className="flex flex-wrap gap-1.5">
@@ -371,7 +371,7 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
               </div>
             </div>
           )}
-          {step.data.confidence && (
+          {!!step.data.confidence && (
             <p className="text-[11px] text-slate mt-1.5">
               SQL 생성 신뢰도: {Math.round((step.data.confidence as number) * 100)}%
             </p>
@@ -387,7 +387,7 @@ function StepDataDetail({ step }: { step: ReasoningStep }) {
             {rowCount !== undefined && (
               <span className="text-xs text-jade">{rowCount}건 조회됨</span>
             )}
-            {step.data.truncated && (
+            {!!step.data.truncated && (
               <span className="text-[11px] text-amber">결과 일부 표시</span>
             )}
           </div>
