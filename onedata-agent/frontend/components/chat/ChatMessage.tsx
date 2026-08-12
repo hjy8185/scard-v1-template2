@@ -13,6 +13,26 @@ interface ChatMessageProps {
   onDrillDown?: (query: string) => void;
 }
 
+function getMainContent(content: string): string {
+  const idx = content.indexOf('💡');
+  if (idx === -1) return content;
+  return content.slice(0, idx).trim();
+}
+
+function getInsightSuggestions(content: string): string[] {
+  const idx = content.indexOf('💡');
+  if (idx === -1) return [];
+  const block = content.slice(idx);
+  const afterColon = block.indexOf(':');
+  if (afterColon === -1) return [];
+  const rest = block.slice(afterColon + 1).trim();
+  // Split by newline-dash, slash, or comma
+  return rest
+    .split(/\n-\s*|[\/,]/)
+    .map(s => s.replace(/^[-•]\s*/, '').trim())
+    .filter(s => s.length > 1 && s.length < 50);
+}
+
 export function ChatMessage({ message, onClick, onDrillDown }: ChatMessageProps) {
   const isUser = message.role === 'user';
 
@@ -51,8 +71,21 @@ export function ChatMessage({ message, onClick, onDrillDown }: ChatMessageProps)
             {message.content && (
               <div className="mt-2">
                 <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                  {message.content}
+                  {getMainContent(message.content)}
                 </p>
+                {getInsightSuggestions(message.content).length > 0 && onDrillDown && (
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {getInsightSuggestions(message.content).map((s, i) => (
+                      <button
+                        key={i}
+                        onClick={(e) => { e.stopPropagation(); onDrillDown(s); }}
+                        className="text-[11px] px-2.5 py-1 rounded-full bg-aqua/10 text-aqua border border-aqua/20 hover:bg-aqua/20 transition-colors"
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 
