@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <defs>
+    <linearGradient id="shinhan-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0046FF"/>
+      <stop offset="100%" style="stop-color:#0064FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Shinhan Symbol - stylized S shape -->
+  <path d="M8 8 C8 8 16 4 22 8 C28 12 20 16 20 20 C20 24 28 20 28 24 C28 32 16 36 8 32" stroke="url(#shinhan-grad)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Text: 신한금융그룹 -->
+  <text x="38" y="27" font-family="'Noto Sans KR', sans-serif" font-size="16" font-weight="700" fill="#1a1a1a">신한금융그룹</text>
+</svg>

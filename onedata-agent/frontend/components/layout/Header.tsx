@@ -9,19 +9,13 @@ export function Header() {
   return (
     <header className="flex items-center justify-between px-6 py-3 bg-white border-b border-gray-200">
       <div className="flex items-center gap-3">
-        <div className="h-8 w-8 rounded-[10px] bg-blue-500 flex items-center justify-center">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-            <path d="M2 17l10 5 10-5" />
-            <path d="M2 12l10 5 10-5" />
-          </svg>
-        </div>
+        <img src="/logo_shinhan.svg" alt="신한금융그룹" className="h-8" />
         <div>
           <h1 className="text-[15px] font-bold text-gray-900 leading-tight">
             Onedata AI
           </h1>
           <p className="text-[11px] text-gray-500 leading-tight">
-            신한금융그룹 데이터 플랫폼
+            데이터 분석 플랫폼
           </p>
         </div>
       </div>

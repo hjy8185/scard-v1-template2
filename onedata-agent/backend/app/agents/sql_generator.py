@@ -229,6 +229,18 @@ class SQLGenerator:
         context = self._ontology.build_context(relevant_tables)
         context_str = self._ontology.format_context_for_prompt(context)
 
+        # Add critical column value format hints
+        context_str += (
+            "\n\n=== 컬럼값 형식 주의사항 ===\n"
+            "★ \"연령5년구간코드\"는 3자리 문자열입니다: '010','015','020','025','030','035','040','045','050','055','060','065','070'\n"
+            "  - 30대 = '030','035' / 40대 = '040','045' / 50대 = '050','055'\n"
+            "  - 절대 '30','35' 같은 2자리를 사용하지 마세요.\n"
+            "★ \"기준년월\"은 6자리 문자열입니다: '202601'~'202606' (현재 데이터 범위)\n"
+            "  - 최근 6개월 조회 시 >= '202601' 조건 사용을 권장합니다.\n"
+            "  - date_add/current_date 함수 대신 명시적 문자열 비교를 사용하세요.\n"
+            "★ \"성별\"은 'M','F' 입니다.\n"
+        )
+
         if resolved_terms:
             synonym_context = "\n\n=== 용어 매핑 ===\n"
             for term_info in resolved_terms:

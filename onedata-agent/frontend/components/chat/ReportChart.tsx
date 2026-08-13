@@ -228,6 +228,23 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
   );
 }
 
+const GROUP_CODE_MAP: Record<string, string> = {
+  '01': '신한은행',
+  '02': '신한카드',
+  '03': '신한투자증권',
+  '04': '신한라이프',
+  '05': '슈퍼솔(앱)',
+  '06': '신한캐피탈',
+  '07': '신한저축은행',
+  'bank': '신한은행',
+  'card': '신한카드',
+  'securities': '신한투자증권',
+  'sec': '신한투자증권',
+  'life': '신한라이프',
+  'digital': '슈퍼솔(앱)',
+  'app': '슈퍼솔(앱)',
+};
+
 function formatLabel(raw: string, colName: string): string {
   if (colName.includes('연령') || colName.includes('구간') || colName.includes('대')) {
     const num = parseInt(raw, 10);
@@ -238,6 +255,12 @@ function formatLabel(raw: string, colName: string): string {
   }
   if (colName.includes('년월') && raw.length === 6) {
     return `${raw.slice(0, 4)}.${raw.slice(4)}`;
+  }
+  // Map group codes to company names
+  if (colName.includes('계열') || colName.includes('그룹') || colName.includes('회사') ||
+      colName.includes('사') || colName.includes('구분') || colName.includes('채널')) {
+    const mapped = GROUP_CODE_MAP[raw.toLowerCase().trim()];
+    if (mapped) return mapped;
   }
   return raw;
 }

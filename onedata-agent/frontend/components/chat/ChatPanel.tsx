@@ -8,8 +8,8 @@ import { ChatMessage } from './ChatMessage';
 const EXAMPLE_QUERIES = [
   '최근 각사별 슈퍼솔 MAU 동향을 알려줘',
   '지역별 카드회원 수와 슈퍼솔 미가입자 비율은?',
-  '30~40대 카드회원의 최근 6개월 이용금액 변화 추이',
-  '슈퍼솔 월방문횟수 기준 상위 고객의 연령대 분포',
+  '카드 결제 업종별 이용금액과 슈퍼솔 MAU를 함께 비교해줘',
+  '각 그룹사별 최근 월간 실적 요약해줘',
 ];
 
 export function ChatPanel() {

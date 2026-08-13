@@ -9,260 +9,366 @@ interface OntologyViewProps {
   allMessages?: ChatMessage[];
 }
 
-const DOMAIN_COLORS: Record<string, string> = {
-  통합: '#0064FF',
-  은행: '#3b82f6',
-  카드: '#f59e0b',
-  보험: '#10b981',
-  증권: '#8b5cf6',
-  앱: '#06b6d4',
-  마케팅: '#ec4899',
-  기타: '#6b7280',
-};
-
-interface TableMeta {
-  domain: string;
-  attrs: string[];
-}
-
-const TABLE_DOMAIN_MAP: Record<string, TableMeta> = {
-  'igd_d_cust_mas': { domain: '통합', attrs: ['고객연령', '성별', '거주지역', '고객등급'] },
-  'igd_m_cust_base': { domain: '통합', attrs: ['연령대', '성별', '총자산', '추정소득'] },
-  'igd_m_cust_txn_card': { domain: '카드', attrs: ['월이용금액', '월이용건수', '신용판매금액', '체크이용금액'] },
-  'igd_m_cust_txn_bank': { domain: '은행', attrs: ['월평균수신잔액', '월평균여신잔액', '이체건수'] },
-  'igd_m_cust_txn_life': { domain: '보험', attrs: ['월납입보험료', '보유계약건수', '보장금액'] },
-  'igd_m_cust_txn_sec': { domain: '증권', attrs: ['월거래금액', '보유종목수', '투자자산규모'] },
-  'cln_d_cust_mas_bank': { domain: '은행', attrs: ['주거래점', '고객등급', '수신잔액'] },
-  'cln_d_cust_mas_card': { domain: '카드', attrs: ['카드종류', '신용한도', '발급일'] },
-  'cln_d_cust_mas_life': { domain: '보험', attrs: ['보험유형', '가입일', '만기일'] },
-  'cln_d_cust_mas_sec': { domain: '증권', attrs: ['계좌유형', '투자성향', '자산규모'] },
-  'cln_m_cust_base_bank': { domain: '은행', attrs: ['수신평균잔액', '여신평균잔액', '거래빈도'] },
-  'cln_m_cust_base_card': { domain: '카드', attrs: ['월이용금액', '이용건수', '연체여부'] },
-  'sol_m_supersol_visit': { domain: '앱', attrs: ['월방문횟수', '월방문일수', '월체류시간', 'MAU여부'] },
-  'sol_d_supersol_session': { domain: '앱', attrs: ['접속시각', '체류시간', '기기구분'] },
-  'shg_membership_cust_hist': { domain: '앱', attrs: ['멤버십등급', '포인트잔액'] },
-  'trs_m_cust_card_txn_card': { domain: '카드', attrs: ['결제금액', '가맹점', '업종', '할부'] },
-  'trs_m_cust_acct_txn_bank': { domain: '은행', attrs: ['거래금액', '거래유형', '채널'] },
-  'trs_m_cust_acct_txn_sec': { domain: '증권', attrs: ['거래금액', '종목명', '매매구분'] },
-  'pdt_m_acct_holding_base_bank': { domain: '은행', attrs: ['잔액', '금리', '만기일'] },
-  'pdt_m_contract_holding_base_life': { domain: '보험', attrs: ['보험료', '보장내용', '만기일'] },
-  'pdt_m_loan_prod_base_card': { domain: '카드', attrs: ['대출잔액', '금리', '상환방식'] },
-  'igd_m_shg_rfm_base_ledger': { domain: '통합', attrs: ['R등급', 'F등급', 'M등급', '수신평잔'] },
-  'rpt_d_assetsize_sec': { domain: '증권', attrs: ['총자산', '주식비중', '채권비중'] },
-  'rpt_d_unit_deposit_acct': { domain: '은행', attrs: ['계좌잔액', '상품명'] },
-  'm_cust_dim': { domain: '통합', attrs: ['세그먼트', '라이프스테이지', '가치등급'] },
-  'vam_cus_mkt_mas_m': { domain: '마케팅', attrs: ['캠페인반응', '선호채널', '이탈확률'] },
-  'jaz_sh_fanclub_membership_chghist': { domain: '앱', attrs: ['가입채널'] },
-};
-
-const DOMAIN_TABLE_MAP: Record<string, string[]> = {
-  bank: ['cln_d_cust_mas_bank', 'cln_m_cust_base_bank', 'igd_m_cust_txn_bank'],
-  card: ['cln_d_cust_mas_card', 'cln_m_cust_base_card', 'igd_m_cust_txn_card'],
-  life: ['cln_d_cust_mas_life', 'igd_m_cust_txn_life'],
-  securities: ['cln_d_cust_mas_sec', 'igd_m_cust_txn_sec'],
-  digital: ['sol_m_supersol_visit', 'sol_d_supersol_session'],
-  customer: ['igd_d_cust_mas', 'igd_m_cust_base', 'm_cust_dim'],
-};
-
-const KEYWORD_DOMAIN: Record<string, string> = {
-  '은행': 'bank', '수신': 'bank', '예금': 'bank', '여신': 'bank', '대출': 'bank', '평잔': 'bank',
-  '카드': 'card', '이용금액': 'card', '결제': 'card', '신용': 'card', '월사용': 'card',
-  '보험': 'life', '생명': 'life', '계약': 'life',
-  '증권': 'securities', '투자': 'securities', '주식': 'securities', '자산': 'securities',
-  '슈퍼솔': 'digital', '앱': 'digital', 'MAU': 'digital', '방문': 'digital',
-  '고객': 'customer', '연령': 'customer', '성별': 'customer', '나이': 'customer',
-  '그룹사': 'group', '계열사': 'group', '각사': 'group',
-};
-
-const DOMAIN_LABELS: Record<string, string> = {
-  '통합': '그룹 고객',
-  '은행': '신한은행',
-  '카드': '신한카드',
-  '보험': '신한라이프',
-  '증권': '신한투자증권',
-  '앱': '슈퍼솔(앱)',
-  '마케팅': '마케팅',
-  '기타': '기타',
-};
-
-const ATTR_KEYWORDS: Record<string, string[]> = {
-  '평잔': ['수신평균잔액', '월평균수신잔액', '여신평균잔액', '수신잔액', '잔액', '수신평잔'],
-  '수신': ['수신평균잔액', '월평균수신잔액', '수신잔액', '수신평잔'],
-  '이용금액': ['월이용금액', '신용판매금액', '체크이용금액'],
-  '월사용': ['월이용금액'],
-  '결제': ['결제금액'],
-  'MAU': ['MAU여부', '월방문횟수', '월방문일수'],
-  '방문': ['월방문횟수', '월방문일수', '월체류시간'],
-  '연령': ['연령대', '고객연령'],
-  '나이': ['연령대', '고객연령'],
-  '성별': ['성별'],
-  '투자': ['투자자산규모', '투자자산'],
-  '보험료': ['월납입보험료', '보험료'],
-  '거래': ['거래금액', '월거래금액', '거래빈도'],
-  '건수': ['월이용건수', '보유계약건수', '이체건수', '이용건수'],
-  '동향': ['MAU여부', '월방문횟수', '월방문일수'],
-  '추이': ['MAU여부', '월방문횟수', '월방문일수'],
-};
-
-// Extra attributes that should be injected when a keyword appears in query
-const KEYWORD_EXTRA_ATTRS: Record<string, { domain: string; attrs: string[] }> = {
-  '연령': { domain: '통합', attrs: ['연령대', '고객연령'] },
-  '나이': { domain: '통합', attrs: ['연령대', '고객연령'] },
-  '성별': { domain: '통합', attrs: ['성별'] },
-  'MAU': { domain: '앱', attrs: ['MAU여부', '월방문횟수', '월방문일수'] },
-  '슈퍼솔': { domain: '앱', attrs: ['월방문횟수', '월방문일수', '월체류시간', 'MAU여부'] },
-  '동향': { domain: '앱', attrs: ['MAU여부', '월방문횟수'] },
-  '추이': { domain: '앱', attrs: ['MAU여부', '월방문횟수'] },
-};
-
-interface DomainNode {
-  domain: string;
+interface ConceptDef {
   label: string;
   color: string;
-  attrs: string[];
-  x: number;
-  y: number;
+  keywords: string[];
+  children?: string[];
 }
 
-interface AttrDot {
+const CONCEPTS: ConceptDef[] = [
+  // 계열사 (large nodes)
+  { label: '신한은행', color: '#3b82f6', keywords: ['은행', '수신', '예금', '여신', '대출', '평잔', '이체', '신한은행'] },
+  { label: '신한카드', color: '#f59e0b', keywords: ['카드', '카드회원', '카드사', '신한카드'] },
+  { label: '신한투자증권', color: '#8b5cf6', keywords: ['증권', '투자', '주식', '종목', '신한투자증권'] },
+  { label: '신한라이프', color: '#10b981', keywords: ['보험', '생명', '라이프', '계약', '신한라이프'] },
+  { label: '슈퍼솔(앱)', color: '#06b6d4', keywords: ['슈퍼솔', '앱', 'MAU', '방문', '미가입'] },
+  // 카드 이용금액 구조: 이용금액 > (신용신판, 체크) / 신용신판 > (신용할부, 신용일시불) / 업종은 이용금액 내 세부 분류 차원
+  {
+    label: '이용금액',
+    color: '#f59e0b',
+    keywords: ['이용금액', '사용액', '결제금액'],
+    children: ['신용신판', '체크'],
+  },
+  {
+    label: '신용신판',
+    color: '#f59e0b',
+    keywords: ['신용신판', '신판', '할부', '일시불', '신용카드'],
+    children: ['신용할부', '신용일시불'],
+  },
+  {
+    label: '업종',
+    color: '#d946ef',
+    keywords: ['업종', '업종별', '가맹점', '가맹점별'],
+    children: ['음식/배달', '종합쇼핑', '식품/마트', '교통/주유', '의료/교육', '여행/숙박', '온라인쇼핑'],
+  },
+  { label: '지역', color: '#6366f1', keywords: ['지역', '거주', '지역별'] },
+  { label: '연령대', color: '#0064FF', keywords: ['연령', '나이', '대별'] },
+  { label: '성별', color: '#0064FF', keywords: ['성별'] },
+  // 지표 — 그룹사별 실적 지표 (색상 = 해당 그룹사와 동일 → 자동 edge 연결)
+  { label: '수신평잔', color: '#3b82f6', keywords: ['수신평잔', '수신 평잔', '예금잔액'] },
+  { label: '대출잔액', color: '#3b82f6', keywords: ['대출잔액', '대출 잔액', '여신잔액'] },
+  { label: '이용건수', color: '#f59e0b', keywords: ['이용건수', '결제건수', '건수'] },
+  { label: '월평균거래액', color: '#8b5cf6', keywords: ['거래액', '거래금액', '월평균거래'] },
+  { label: '예수금', color: '#8b5cf6', keywords: ['예수금', '예수금현황'] },
+  { label: '수입보험료', color: '#10b981', keywords: ['수입보험료', '보험료', '납입'] },
+  // 공통 지표
+  { label: '회원수', color: '#0064FF', keywords: ['회원', '인원', '고객수'] },
+  { label: 'MAU', color: '#06b6d4', keywords: ['MAU', 'mau', '월방문'] },
+  { label: '미가입', color: '#ef4444', keywords: ['미가입', '비가입'] },
+  { label: '가입여부', color: '#06b6d4', keywords: ['가입'] },
+  { label: '교차고객', color: '#0064FF', keywords: ['교차', '공통'] },
+  { label: '비율', color: '#ec4899', keywords: ['비율', '비중'] },
+];
+
+interface VisNode {
+  id: string;
   label: string;
   color: string;
   x: number;
   y: number;
-  parentX: number;
-  parentY: number;
-  highlighted: boolean;
+  size: 'large' | 'small' | 'child';
 }
 
-interface Edge {
-  x1: number; y1: number;
-  x2: number; y2: number;
+interface VisEdge {
+  from: string;
+  to: string;
   color: string;
-  dashed?: boolean;
-  label?: string;
-}
-
-interface GraphData {
-  rootNode: { x: number; y: number } | null;
-  domainNodes: DomainNode[];
-  attrDots: AttrDot[];
-  edges: Edge[];
-  crossEdges: Edge[];
-  width: number;
-  height: number;
+  isHierarchy?: boolean;
 }
 
 export function OntologyView({ context, tablesUsed, allMessages }: OntologyViewProps) {
   const graphData = useMemo(() => {
-    const allIntentEntities: string[] = [];
-    const allTablesUsed = new Set<string>();
     const allUserQueries: string[] = [];
-
     if (allMessages) {
       for (const msg of allMessages) {
         if (msg.role === 'user') allUserQueries.push(msg.content);
-        if (msg.role !== 'assistant') continue;
-        if (msg.tablesUsed) msg.tablesUsed.forEach(t => allTablesUsed.add(t));
-        const intentStep = msg.reasoning?.find(s => s.id === 'intent');
-        const ents = intentStep?.data?.entities as string[] | undefined;
-        if (ents) allIntentEntities.push(...ents);
+      }
+    }
+    if (allUserQueries.length === 0) return null;
+
+    const combinedText = allUserQueries.join(' ');
+
+    const groupMentioned = ['각사', '그룹사', '계열사'].some(kw => combinedText.includes(kw));
+    const performanceMentioned = ['실적', '성과', '현황', '요약'].some(kw => combinedText.includes(kw));
+
+    // 1. Find all activated concepts
+    const activeLabels = new Set<string>();
+    const conceptMap = new Map<string, ConceptDef>();
+
+    for (const c of CONCEPTS) {
+      const activated = c.keywords.some(kw => combinedText.includes(kw));
+      if (activated && !activeLabels.has(c.label)) {
+        activeLabels.add(c.label);
+        conceptMap.set(c.label, c);
       }
     }
 
-    const intentEntities = context?.find(s => s.id === 'intent')?.data?.entities as string[] | undefined;
-    if (intentEntities) allIntentEntities.push(...intentEntities);
-    if (tablesUsed) tablesUsed.forEach(t => allTablesUsed.add(t));
-
-    // Use ALL user queries for keyword detection (not just entities)
-    const combinedQueryText = allUserQueries.join(' ');
-
-    const hasGroupKeyword = combinedQueryText.includes('각사') ||
-      combinedQueryText.includes('그룹사') || combinedQueryText.includes('계열사') ||
-      allIntentEntities.some(e => e.includes('각사') || e.includes('그룹사') || e.includes('계열사'));
-
-    // Collect tables
-    let tableIds = Array.from(allTablesUsed);
-
-    // Also detect domains from ALL user query text (not just intent entities)
-    const keywordDomains = new Set<string>();
-    for (const [kw, dom] of Object.entries(KEYWORD_DOMAIN)) {
-      if (combinedQueryText.includes(kw)) keywordDomains.add(dom);
-    }
-
-    if (tableIds.length === 0) {
-      const domainHint = context?.find(s => s.id === 'intent')?.data?.domain_hint as string | undefined;
-      const domains = new Set<string>(keywordDomains);
-      if (domainHint) {
-        const mapped = domainHint === 'transaction' ? 'card' : domainHint === 'product' ? 'bank' : domainHint;
-        if (DOMAIN_TABLE_MAP[mapped]) domains.add(mapped);
-      }
-      for (const ent of allIntentEntities) {
-        for (const [kw, dom] of Object.entries(KEYWORD_DOMAIN)) {
-          if (ent.includes(kw)) domains.add(dom);
+    // "각사/그룹사/계열사" → activate all subsidiaries
+    if (groupMentioned) {
+      const subsidiaries = ['신한은행', '신한카드', '신한투자증권', '신한라이프', '슈퍼솔(앱)'];
+      for (const s of subsidiaries) {
+        if (!activeLabels.has(s)) {
+          const def = CONCEPTS.find(c => c.label === s);
+          if (def) { activeLabels.add(s); conceptMap.set(s, def); }
         }
       }
-      if (domains.has('group')) {
-        domains.delete('group');
-        ['bank', 'card', 'life', 'securities'].forEach(d => domains.add(d));
+    }
+
+    // "실적/현황/요약" → activate all subsidiaries + 각사 대표 지표
+    if (performanceMentioned) {
+      const kpiMap: Record<string, string[]> = {
+        '신한은행': ['수신평잔', '대출잔액'],
+        '신한카드': ['이용금액', '이용건수'],
+        '신한투자증권': ['월평균거래액', '예수금'],
+        '신한라이프': ['수입보험료'],
+        '슈퍼솔(앱)': ['MAU'],
+      };
+      // Activate all subsidiaries
+      for (const sub of Object.keys(kpiMap)) {
+        if (!activeLabels.has(sub)) {
+          const def = CONCEPTS.find(c => c.label === sub);
+          if (def) { activeLabels.add(sub); conceptMap.set(sub, def); }
+        }
       }
-      for (const d of domains) {
-        const tables = DOMAIN_TABLE_MAP[d] || [];
-        tableIds.push(...tables.slice(0, 2));
+      // Activate each subsidiary's KPI indicators
+      for (const kpis of Object.values(kpiMap)) {
+        for (const kpi of kpis) {
+          if (!activeLabels.has(kpi)) {
+            const def = CONCEPTS.find(c => c.label === kpi);
+            if (def) { activeLabels.add(kpi); conceptMap.set(kpi, def); }
+          }
+        }
       }
     }
 
-    if (hasGroupKeyword && tableIds.length === 0) {
-      tableIds = ['igd_m_cust_txn_bank', 'igd_m_cust_txn_card', 'igd_m_cust_txn_sec', 'igd_m_cust_txn_life'];
-    }
+    if (activeLabels.size === 0) return null;
 
-    // Build domain → attrs from tables
-    const domainAttrs: Record<string, Set<string>> = {};
-    for (const tid of tableIds) {
-      const meta = TABLE_DOMAIN_MAP[tid];
-      if (!meta) continue;
-      if (!domainAttrs[meta.domain]) domainAttrs[meta.domain] = new Set();
-      for (const a of meta.attrs) domainAttrs[meta.domain].add(a);
+    // Track which concepts have children to display
+    // A concept is a "top-level hierarchy parent" only if no other active parent lists it as a child
+    const hierarchyParents = new Set<string>();
+    const nestedUnder = new Set<string>();
+    for (const label of activeLabels) {
+      const def = conceptMap.get(label)!;
+      if (def.children && def.children.length > 0) {
+        hierarchyParents.add(label);
+      }
     }
-
-    if (hasGroupKeyword) {
-      if (!domainAttrs['은행']) domainAttrs['은행'] = new Set(['수신평균잔액', '여신잔액', '이체건수']);
-      if (!domainAttrs['카드']) domainAttrs['카드'] = new Set(['월이용금액', '월이용건수', '신용한도']);
-      if (!domainAttrs['증권']) domainAttrs['증권'] = new Set(['월거래금액', '투자자산', '보유종목수']);
-      if (!domainAttrs['보험']) domainAttrs['보험'] = new Set(['월납입보험료', '보유계약건수', '보장금액']);
+    // Find concepts that are children of another active hierarchy parent
+    for (const label of hierarchyParents) {
+      const def = conceptMap.get(label)!;
+      for (const child of def.children || []) {
+        if (hierarchyParents.has(child)) nestedUnder.add(child);
+      }
     }
+    // Top-level hierarchy parents = those not nested under another
+    const topHierarchyParents = new Set([...hierarchyParents].filter(l => !nestedUnder.has(l)));
 
-    // Inject extra attributes from keyword detection in ALL queries
+    // 2. Build edges
+    const edgeSet = new Set<string>();
+    const edges: VisEdge[] = [];
+
+    const addEdge = (a: string, b: string, isHierarchy = false) => {
+      if (a === b) return;
+      const key = [a, b].sort().join('↔');
+      if (edgeSet.has(key)) return;
+      edgeSet.add(key);
+      const cA = conceptMap.get(a);
+      const cB = conceptMap.get(b);
+      const colorA = cA?.color || '#d946ef';
+      const colorB = cB?.color || '#d946ef';
+      edges.push({
+        from: a, to: b,
+        color: colorA === colorB ? colorA : '#9ca3af',
+        isHierarchy,
+      });
+    };
+
+    // Rule 1: co-occurring concepts in same query
     for (const query of allUserQueries) {
-      for (const [kw, extra] of Object.entries(KEYWORD_EXTRA_ATTRS)) {
-        if (query.includes(kw)) {
-          if (!domainAttrs[extra.domain]) domainAttrs[extra.domain] = new Set();
-          for (const a of extra.attrs) domainAttrs[extra.domain].add(a);
+      const queryActivated: string[] = [];
+      for (const c of CONCEPTS) {
+        if (c.keywords.some(kw => query.includes(kw)) && activeLabels.has(c.label)) {
+          if (!queryActivated.includes(c.label)) queryActivated.push(c.label);
+        }
+      }
+      if (['각사', '그룹사', '계열사'].some(kw => query.includes(kw))) {
+        for (const s of ['신한은행', '신한카드', '신한투자증권', '신한라이프', '슈퍼솔(앱)']) {
+          if (activeLabels.has(s) && !queryActivated.includes(s)) queryActivated.push(s);
+        }
+      }
+      for (let i = 0; i < queryActivated.length; i++) {
+        for (let j = i + 1; j < queryActivated.length; j++) {
+          addEdge(queryActivated[i], queryActivated[j]);
         }
       }
     }
 
-    // Also inject domains detected from keywords even if no tables found
-    if (keywordDomains.has('digital') && !domainAttrs['앱']) {
-      domainAttrs['앱'] = new Set(['월방문횟수', '월방문일수', '월체류시간', 'MAU여부']);
-    }
-    if (keywordDomains.has('customer') && !domainAttrs['통합']) {
-      domainAttrs['통합'] = new Set(['연령대', '성별', '고객등급']);
-    }
+    // Rule 2: common dimensions connect to ALL active subsidiaries
+    const COMMON_DIMENSIONS = new Set(['성별', '연령대', '지역']);
+    const activeSubs = ['신한은행', '신한카드', '신한투자증권', '신한라이프', '슈퍼솔(앱)']
+      .filter(s => activeLabels.has(s));
 
-    const domainKeys = Object.keys(domainAttrs);
-    if (domainKeys.length === 0) return null;
-
-    // Determine highlighted attrs from ALL user queries (accumulative)
-    const highlightedAttrs = new Set<string>();
-    for (const query of allUserQueries) {
-      for (const [kw, matchAttrs] of Object.entries(ATTR_KEYWORDS)) {
-        if (query.includes(kw)) {
-          for (const a of matchAttrs) highlightedAttrs.add(a);
-        }
+    for (const dim of COMMON_DIMENSIONS) {
+      if (!activeLabels.has(dim)) continue;
+      for (const sub of activeSubs) {
+        addEdge(dim, sub);
       }
     }
 
-    return buildGraph(domainKeys, domainAttrs, highlightedAttrs);
+    // Rule 3: remaining orphan nodes connect to related nodes
+    const connectedNodes = new Set<string>();
+    for (const e of edges) { connectedNodes.add(e.from); connectedNodes.add(e.to); }
+    for (const label of activeLabels) {
+      if (connectedNodes.has(label)) continue;
+      const self = conceptMap.get(label)!;
+      // Try same-color node
+      let bestMatch: string | null = null;
+      for (const other of activeLabels) {
+        if (other === label) continue;
+        const otherDef = conceptMap.get(other)!;
+        if (otherDef.color === self.color) { bestMatch = other; break; }
+      }
+      // Fallback: any active subsidiary
+      if (!bestMatch) {
+        bestMatch = activeSubs.find(s => s !== label) || null;
+      }
+      // Last resort: any other node
+      if (!bestMatch) {
+        for (const other of activeLabels) { if (other !== label) { bestMatch = other; break; } }
+      }
+      if (bestMatch) {
+        addEdge(label, bestMatch);
+        connectedNodes.add(label); connectedNodes.add(bestMatch);
+      }
+    }
+
+    // 3. Layout
+    const subsidiaries = new Set(['신한은행', '신한카드', '신한투자증권', '신한라이프', '슈퍼솔(앱)']);
+    const WIDTH = 520;
+    const nodeList = Array.from(activeLabels);
+    const largeNodeLabels = nodeList.filter(n => subsidiaries.has(n));
+    const smallNodeLabels = nodeList.filter(n => !subsidiaries.has(n) && !hierarchyParents.has(n));
+    const topHierarchyList = nodeList.filter(n => topHierarchyParents.has(n));
+
+    const nodes: VisNode[] = [];
+
+    // Row 1: Large (subsidiary) nodes
+    const largeY = 55;
+    const largeGap = Math.max(110, WIDTH / (largeNodeLabels.length + 1));
+    const largeStartX = (WIDTH - (largeNodeLabels.length - 1) * largeGap) / 2;
+    largeNodeLabels.forEach((label, i) => {
+      nodes.push({
+        id: label, label,
+        color: conceptMap.get(label)!.color,
+        x: largeStartX + i * largeGap, y: largeY,
+        size: 'large',
+      });
+    });
+
+    // Row 2+: Small attribute nodes (non-hierarchy)
+    const smallStartY = largeNodeLabels.length > 0 ? 155 : 55;
+    const SMALL_ROW_GAP = 55;
+    const SMALL_COL_GAP = 140;
+    const COLS_PER_ROW = 3;
+
+    smallNodeLabels.forEach((label, i) => {
+      const row = Math.floor(i / COLS_PER_ROW);
+      const col = i % COLS_PER_ROW;
+      const rowCount = Math.min(COLS_PER_ROW, smallNodeLabels.length - row * COLS_PER_ROW);
+      const rowWidth = (rowCount - 1) * SMALL_COL_GAP;
+      const startX = (WIDTH - rowWidth) / 2;
+      nodes.push({
+        id: label, label,
+        color: conceptMap.get(label)!.color,
+        x: startX + col * SMALL_COL_GAP,
+        y: smallStartY + row * SMALL_ROW_GAP,
+        size: 'small',
+      });
+    });
+
+    // Hierarchy section: render tree for each top-level hierarchy parent
+    const lastSmallRow = smallNodeLabels.length > 0
+      ? Math.floor((smallNodeLabels.length - 1) / COLS_PER_ROW)
+      : -1;
+    let hierarchyStartY = smallStartY + (lastSmallRow + 1) * SMALL_ROW_GAP + 30;
+    if (smallNodeLabels.length === 0 && largeNodeLabels.length > 0) hierarchyStartY = 155;
+    if (smallNodeLabels.length === 0 && largeNodeLabels.length === 0) hierarchyStartY = 55;
+
+    const CHILD_COLS = 4;
+    const CHILD_COL_GAP = 120;
+    const CHILD_ROW_GAP = 35;
+
+    const renderHierarchy = (parentLabel: string, parentId: string, startY: number): number => {
+      const def = conceptMap.get(parentLabel);
+      if (!def || !def.children) return startY;
+      const children = def.children;
+      const parentX = WIDTH / 2;
+      const parentY = startY;
+
+      nodes.push({
+        id: parentId, label: parentLabel,
+        color: def.color,
+        x: parentX, y: parentY,
+        size: 'small',
+      });
+
+      let lastChildY = parentY;
+      children.forEach((childLabel, ci) => {
+        const row = Math.floor(ci / CHILD_COLS);
+        const col = ci % CHILD_COLS;
+        const rowCount = Math.min(CHILD_COLS, children.length - row * CHILD_COLS);
+        const rowWidth = (rowCount - 1) * CHILD_COL_GAP;
+        const startX = (WIDTH - rowWidth) / 2;
+        const cx = startX + col * CHILD_COL_GAP;
+        const cy = parentY + 42 + row * CHILD_ROW_GAP;
+        lastChildY = Math.max(lastChildY, cy);
+
+        const childId = `${parentId}::${childLabel}`;
+        nodes.push({
+          id: childId, label: childLabel,
+          color: def.color,
+          x: cx, y: cy,
+          size: 'child',
+        });
+        edges.push({ from: parentId, to: childId, color: def.color, isHierarchy: true });
+
+        // If this child is itself a hierarchy parent, render its sub-tree
+        const childConcept = CONCEPTS.find(c => c.label === childLabel);
+        if (childConcept && childConcept.children && childConcept.children.length > 0) {
+          const subChildren = childConcept.children;
+          subChildren.forEach((subLabel, si) => {
+            const subId = `${childId}::${subLabel}`;
+            const subRow = Math.floor(si / CHILD_COLS);
+            const subCol = si % CHILD_COLS;
+            const subRowCount = Math.min(CHILD_COLS, subChildren.length - subRow * CHILD_COLS);
+            const subRowWidth = (subRowCount - 1) * 100;
+            const subStartX = cx - subRowWidth / 2 + subCol * 100;
+            const subY = cy + 32 + subRow * 28;
+            lastChildY = Math.max(lastChildY, subY);
+
+            nodes.push({
+              id: subId, label: subLabel,
+              color: childConcept.color || def.color,
+              x: subStartX, y: subY,
+              size: 'child',
+            });
+            edges.push({ from: childId, to: subId, color: def.color, isHierarchy: true });
+          });
+        }
+      });
+
+      return lastChildY;
+    };
+
+    for (const parentLabel of topHierarchyList) {
+      const lastY = renderHierarchy(parentLabel, parentLabel, hierarchyStartY);
+      hierarchyStartY = lastY + 55;
+    }
+
+    const maxY = nodes.reduce((max, n) => Math.max(max, n.y), 0);
+    const height = Math.max(250, maxY + 50);
+    return { nodes, edges, width: WIDTH, height };
   }, [tablesUsed, context, allMessages]);
 
   if (!graphData) {
@@ -273,138 +379,118 @@ export function OntologyView({ context, tablesUsed, allMessages }: OntologyViewP
     );
   }
 
-  const { rootNode, domainNodes, attrDots, edges, crossEdges, width, height } = graphData;
+  const { nodes, edges, width, height } = graphData;
+  const posMap = new Map<string, { x: number; y: number }>();
+  for (const n of nodes) posMap.set(n.id, { x: n.x, y: n.y });
 
   return (
     <div className="p-2 h-full overflow-y-auto">
-      <div className="rounded-[12px] bg-white border border-gray-200 shadow-card">
+      <div className="rounded-[12px] bg-white border border-gray-200 shadow-card p-3">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           width={width}
           height={height}
           className="block mx-auto"
         >
-          {/* Root → domain edges */}
-          {edges.map((e, i) => (
-            <path
-              key={`e-${i}`}
-              d={`M${e.x1},${e.y1} C${e.x1},${(e.y1 + e.y2) / 2} ${e.x2},${(e.y1 + e.y2) / 2} ${e.x2},${e.y2}`}
-              fill="none"
-              stroke={e.color}
-              strokeWidth="1.5"
-              opacity="0.5"
-            />
-          ))}
+          {/* Edges */}
+          {edges.map((e, i) => {
+            const from = posMap.get(e.from);
+            const to = posMap.get(e.to);
+            if (!from || !to) return null;
 
-          {/* Cross-domain edges */}
-          {crossEdges.map((e, i) => (
-            <g key={`ce-${i}`}>
-              <line
-                x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2}
-                stroke="#6b7280"
-                strokeWidth="1"
-                strokeDasharray="4,3"
+            const fromNode = nodes.find(n => n.id === e.from);
+            const toNode = nodes.find(n => n.id === e.to);
+
+            if (e.isHierarchy) {
+              // Simple vertical line for hierarchy
+              const fromHH = fromNode?.size === 'child' ? 10 : 13;
+              const toHH = toNode?.size === 'child' ? 10 : 13;
+              const y1 = from.y + fromHH;
+              const y2 = to.y - toHH;
+              return (
+                <line
+                  key={`e-${i}`}
+                  x1={from.x} y1={y1}
+                  x2={to.x} y2={y2}
+                  stroke={e.color}
+                  strokeWidth="1"
+                  opacity="0.35"
+                />
+              );
+            }
+
+            const fromHH = fromNode?.size === 'large' ? 16 : 13;
+            const toHH = toNode?.size === 'large' ? 16 : 13;
+            const sameRow = Math.abs(from.y - to.y) < 20;
+
+            let pathD: string;
+
+            if (sameRow) {
+              const fromHW = fromNode ? (fromNode.label.length * (fromNode.size === 'large' ? 11 : 9.5) + (fromNode.size === 'large' ? 26 : 20)) / 2 : 30;
+              const toHW = toNode ? (toNode.label.length * (toNode.size === 'large' ? 11 : 9.5) + (toNode.size === 'large' ? 26 : 20)) / 2 : 30;
+
+              const x1 = from.x < to.x ? from.x + fromHW : from.x - fromHW;
+              const x2 = from.x < to.x ? to.x - toHW : to.x + toHW;
+              const midX = (x1 + x2) / 2;
+              const arcY = from.y + 35 + Math.abs(x2 - x1) * 0.15;
+              pathD = `M${x1},${from.y} Q${midX},${arcY} ${x2},${to.y}`;
+            } else {
+              const goingDown = from.y < to.y;
+              const x1 = from.x;
+              const y1 = goingDown ? from.y + fromHH : from.y - fromHH;
+              const x2 = to.x;
+              const y2 = goingDown ? to.y - toHH : to.y + toHH;
+              const midX = (x1 + x2) / 2;
+              const midY = (y1 + y2) / 2;
+              pathD = `M${x1},${y1} Q${midX},${midY} ${x2},${y2}`;
+            }
+
+            return (
+              <path
+                key={`e-${i}`}
+                d={pathD}
+                fill="none"
+                stroke={e.color}
+                strokeWidth="1.2"
                 opacity="0.4"
               />
-              {e.label && (
-                <text
-                  x={(e.x1 + e.x2) / 2}
-                  y={(e.y1 + e.y2) / 2 - 5}
-                  textAnchor="middle"
-                  fill="#6b7280"
-                  fontSize="7.5"
-                  opacity="0.7"
-                  fontFamily="system-ui"
-                >
-                  {e.label}
-                </text>
-              )}
-            </g>
-          ))}
+            );
+          })}
 
-          {/* Attr edges */}
-          {attrDots.map((a, i) => (
-            <line
-              key={`al-${i}`}
-              x1={a.parentX} y1={a.parentY}
-              x2={a.x} y2={a.y}
-              stroke={a.highlighted ? a.color : '#d1d5db'}
-              strokeWidth={a.highlighted ? '1.8' : '0.8'}
-              opacity={a.highlighted ? 0.8 : 0.4}
-            />
-          ))}
+          {/* Nodes */}
+          {nodes.map((n) => {
+            const isLarge = n.size === 'large';
+            const isChild = n.size === 'child';
+            const fontSize = isLarge ? 12 : isChild ? 9 : 10.5;
+            const charW = isLarge ? 11 : isChild ? 8 : 9.5;
+            const padding = isLarge ? 26 : isChild ? 14 : 20;
+            const labelW = n.label.length * charW + padding;
+            const pillH = isLarge ? 32 : isChild ? 20 : 26;
 
-          {/* Attr dots + labels */}
-          {attrDots.map((a, i) => (
-            <g key={`ad-${i}`}>
-              <circle
-                cx={a.x} cy={a.y}
-                r={a.highlighted ? 5 : 3}
-                fill={a.highlighted ? a.color : '#9ca3af'}
-                opacity={a.highlighted ? 1 : 0.6}
-              />
-              {a.highlighted && (
-                <circle cx={a.x} cy={a.y} r="9" fill="none" stroke={a.color} strokeWidth="1.5" opacity="0.3" />
-              )}
-              <text
-                x={a.x + (a.x > a.parentX ? 9 : -9)}
-                y={a.y + 3.5}
-                textAnchor={a.x > a.parentX ? 'start' : 'end'}
-                fill={a.highlighted ? '#111827' : '#6b7280'}
-                fontSize={a.highlighted ? '10' : '9'}
-                fontWeight={a.highlighted ? '600' : '400'}
-                fontFamily="system-ui"
-              >
-                {a.label}
-              </text>
-            </g>
-          ))}
-
-          {/* Root node */}
-          {rootNode && (
-            <g>
-              <rect
-                x={rootNode.x - 52} y={rootNode.y - 14}
-                width={104} height={28}
-                rx="14"
-                fill="#0064FF"
-                stroke="none"
-              />
-              <text
-                x={rootNode.x} y={rootNode.y + 5}
-                textAnchor="middle"
-                fill="#ffffff"
-                fontSize="11"
-                fontWeight="700"
-                fontFamily="system-ui"
-              >
-                신한금융그룹
-              </text>
-            </g>
-          )}
-
-          {/* Domain nodes */}
-          {domainNodes.map((d, i) => {
-            const labelW = d.label.length * 9 + 22;
             return (
-              <g key={`dn-${i}`}>
+              <g key={n.id}>
                 <rect
-                  x={d.x - labelW / 2} y={d.y - 13}
-                  width={labelW} height={26}
-                  rx="13"
-                  fill="#ffffff"
-                  stroke={d.color}
-                  strokeWidth="1.8"
+                  x={n.x - labelW / 2}
+                  y={n.y - pillH / 2}
+                  width={labelW}
+                  height={pillH}
+                  rx={pillH / 2}
+                  fill={isLarge ? n.color : isChild ? n.color : '#ffffff'}
+                  fillOpacity={isLarge ? 0.1 : isChild ? 0.08 : 1}
+                  stroke={n.color}
+                  strokeWidth={isLarge ? 2 : isChild ? 1 : 1.5}
+                  strokeDasharray={isChild ? '3,2' : undefined}
                 />
                 <text
-                  x={d.x} y={d.y + 4.5}
+                  x={n.x}
+                  y={n.y + (isLarge ? 5 : isChild ? 3 : 4)}
                   textAnchor="middle"
-                  fill={d.color}
-                  fontSize="10.5"
-                  fontWeight="600"
+                  fill={n.color}
+                  fontSize={fontSize}
+                  fontWeight={isLarge ? 700 : isChild ? 400 : 500}
                   fontFamily="system-ui"
                 >
-                  {d.label}
+                  {n.label}
                 </text>
               </g>
             );
@@ -413,101 +499,4 @@ export function OntologyView({ context, tablesUsed, allMessages }: OntologyViewP
       </div>
     </div>
   );
-}
-
-function buildGraph(
-  domainKeys: string[],
-  domainAttrs: Record<string, Set<string>>,
-  highlightedAttrs: Set<string>,
-): GraphData {
-  const width = 520;
-  const domainNodes: DomainNode[] = [];
-  const attrDots: AttrDot[] = [];
-  const edges: Edge[] = [];
-  const crossEdges: Edge[] = [];
-
-  const showRoot = domainKeys.length > 1;
-  const rootX = width / 2;
-  const rootY = showRoot ? 35 : 0;
-  const rootNode = showRoot ? { x: rootX, y: rootY } : null;
-
-  const domainStartY = showRoot ? 100 : 40;
-  const domainCount = domainKeys.length;
-
-  const usableWidth = width - 100;
-  const domainGap = domainCount > 1 ? usableWidth / (domainCount - 1) : 0;
-  const startX = domainCount > 1 ? 50 : width / 2;
-
-  domainKeys.forEach((domain, di) => {
-    const color = DOMAIN_COLORS[domain] || DOMAIN_COLORS['기타'];
-    const label = DOMAIN_LABELS[domain] || domain;
-    const dx = startX + di * domainGap;
-    const dy = domainStartY;
-
-    domainNodes.push({ domain, label, color, attrs: Array.from(domainAttrs[domain]), x: dx, y: dy });
-
-    if (showRoot) {
-      edges.push({ x1: rootX, y1: rootY + 14, x2: dx, y2: dy - 13, color });
-    }
-
-    const attrs = Array.from(domainAttrs[domain]);
-    const lineHeight = 24;
-    const attrStartY = dy + 38;
-
-    attrs.forEach((attr, ai) => {
-      const ay = attrStartY + ai * lineHeight;
-      const offsetX = (ai % 2 === 0 ? -14 : 14);
-      const ax = dx + offsetX;
-
-      attrDots.push({
-        label: attr,
-        color,
-        x: Math.max(55, Math.min(width - 55, ax)),
-        y: ay,
-        parentX: dx,
-        parentY: dy,
-        highlighted: highlightedAttrs.has(attr),
-      });
-    });
-  });
-
-  // Cross-domain edges between domains that share highlighted attrs (교차 관계)
-  if (domainNodes.length > 1) {
-    const highlightedDomains = domainNodes.filter(d =>
-      attrDots.some(a => a.parentX === d.x && a.parentY === d.y && a.highlighted)
-    );
-
-    if (highlightedDomains.length > 1) {
-      for (let i = 0; i < highlightedDomains.length - 1; i++) {
-        const a = highlightedDomains[i];
-        const b = highlightedDomains[i + 1];
-        crossEdges.push({
-          x1: a.x, y1: a.y,
-          x2: b.x, y2: b.y,
-          color: '#6b7280',
-          label: '교차',
-        });
-      }
-    } else {
-      for (let i = 0; i < domainNodes.length - 1; i++) {
-        const a = domainNodes[i];
-        const b = domainNodes[i + 1];
-        crossEdges.push({
-          x1: a.x, y1: a.y,
-          x2: b.x, y2: b.y,
-          color: '#6b7280',
-          label: '교차',
-        });
-      }
-    }
-  }
-
-  let maxAttrBottom = domainStartY + 80;
-  for (const dk of domainKeys) {
-    const count = domainAttrs[dk].size;
-    const bottom = domainStartY + 38 + count * 24 + 20;
-    if (bottom > maxAttrBottom) maxAttrBottom = bottom;
-  }
-  const height = maxAttrBottom;
-  return { rootNode, domainNodes, attrDots, edges, crossEdges, width, height };
 }

@@ -148,6 +148,16 @@ export function ResultTable({ result }: ResultTableProps) {
   );
 }
 
+const GROUP_CODE_MAP: Record<string, string> = {
+  '01': '신한은행',
+  '02': '신한카드',
+  '03': '신한투자증권',
+  '04': '신한라이프',
+  '05': '슈퍼솔(앱)',
+  '06': '신한캐피탈',
+  '07': '신한저축은행',
+};
+
 function formatAgeRange(code: string): string {
   const num = parseInt(code, 10);
   if (isNaN(num)) return code;
@@ -174,6 +184,13 @@ function CellValue({ value, column }: { value: unknown; column?: string }) {
   }
 
   const strVal = String(value);
+
+  // Map group/company codes to names
+  if (column && (column.includes('계열') || column.includes('그룹') || column.includes('회사') ||
+      column.includes('사') || column.includes('구분'))) {
+    const mapped = GROUP_CODE_MAP[strVal.trim()];
+    if (mapped) return <span className="font-medium">{mapped}</span>;
+  }
 
   if (column && (column.includes('연령') || column.includes('나이') || column.includes('age')) &&
       (column.includes('구간') || column.includes('코드') || column.includes('대'))) {

@@ -61,7 +61,7 @@ export function SqlDisplay({ sql, executionMs }: SqlDisplayProps) {
           <span className="text-[10px] text-gray-400 font-mono ml-2">query.sql</span>
         </div>
         <div className="p-4 overflow-x-auto">
-          <pre className="text-[12px] leading-[1.7] font-mono">
+          <pre className="text-[12px] leading-[1.7] font-mono text-[#D4D4D4]">
             <code dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
           </pre>
         </div>
