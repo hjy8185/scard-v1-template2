@@ -9,6 +9,11 @@ interface ReportChartProps {
   answer?: string;
 }
 
+interface ChartGroup {
+  groupLabel: string;
+  items: { label: string; value: number }[];
+}
+
 export function ReportChart({ result, title, answer }: ReportChartProps) {
   const chartData = useMemo(() => {
     if (!result || result.rows.length === 0 || result.columns.length < 2) {
@@ -17,14 +22,22 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
 
     const isCodeCol = (col: string) =>
       col.includes('년월') || col.includes('일자') || col.includes('날짜') ||
-      col.includes('코드') || col.includes('번호') || col.includes('구분');
+      col.includes('코드') || col.includes('번호');
 
     const isValueCol = (col: string) =>
       col.includes('수') || col.includes('금액') || col.includes('건수') ||
       col.includes('평균') || col.includes('합계') || col.includes('잔액') ||
       col.includes('비율') || col.includes('cnt') || col.includes('amount') ||
-      col.includes('MAU');
+      col.includes('MAU') || col.includes('mau');
 
+    const isGroupCol = (col: string) =>
+      col.includes('계열') || col.includes('그룹') || col.includes('회사') ||
+      col.includes('사') || col.includes('구분') || col.includes('채널');
+
+    const isAgeCol = (col: string) =>
+      col.includes('연령') || col.includes('나이') || col.includes('age') || col.includes('대');
+
+    // Find value column
     let valueCol = result.columns.find((col) => isValueCol(col) && !isCodeCol(col));
     if (!valueCol) {
       valueCol = result.columns.find((col) => {
@@ -33,63 +46,169 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
         return sample !== null && sample !== undefined && !isNaN(Number(sample));
       });
     }
-    if (!valueCol) {
-      valueCol = result.columns[1];
+    if (!valueCol) valueCol = result.columns[result.columns.length - 1];
+
+    // Find group column (각사) and sub-group column (연령대)
+    const otherCols = result.columns.filter(c => c !== valueCol);
+    let groupCol = otherCols.find(c => isGroupCol(c));
+    let subCol = otherCols.find(c => isAgeCol(c));
+
+    // If no explicit group/sub columns, use first two non-value columns
+    if (!groupCol && !subCol && otherCols.length >= 2) {
+      groupCol = otherCols[0];
+      subCol = otherCols[1];
+    } else if (!groupCol && !subCol && otherCols.length === 1) {
+      // Only one dimension — flat chart
+      groupCol = undefined;
+      subCol = otherCols[0];
     }
 
-    const labelCol = result.columns.find((col) => col !== valueCol) || result.columns[0];
+    // If we have both groupCol and subCol, build grouped charts
+    if (groupCol && subCol) {
+      const groupMap = new Map<string, { label: string; value: number }[]>();
+      for (const row of result.rows) {
+        const gKey = String(row[groupCol] ?? '');
+        const sKey = formatLabel(String(row[subCol] ?? ''), subCol);
+        const val = parseFloat(String(row[valueCol] ?? '0')) || 0;
+        if (!groupMap.has(gKey)) groupMap.set(gKey, []);
+        groupMap.get(gKey)!.push({ label: sKey, value: val });
+      }
+      const groups: ChartGroup[] = Array.from(groupMap.entries()).map(([k, items]) => ({
+        groupLabel: k,
+        items: items.slice(0, 10),
+      }));
+      const globalMax = Math.max(...groups.flatMap(g => g.items.map(i => i.value)), 1);
+      return { mode: 'grouped' as const, groups, globalMax, valueCol, groupCol, subCol };
+    }
 
-    const items = result.rows.slice(0, 12).map((row) => ({
+    // If only groupCol, use it as the label axis
+    if (groupCol && !subCol) {
+      const items = result.rows.slice(0, 12).map(row => ({
+        label: formatLabel(String(row[groupCol] ?? ''), groupCol!),
+        value: parseFloat(String(row[valueCol] ?? '0')) || 0,
+      }));
+      const globalMax = Math.max(...items.map(i => i.value), 1);
+      return { mode: 'flat' as const, items, globalMax, valueCol, labelCol: groupCol };
+    }
+
+    // Flat: use subCol or first other col as label
+    const labelCol = subCol || otherCols[0] || result.columns[0];
+    const items = result.rows.slice(0, 12).map(row => ({
       label: formatLabel(String(row[labelCol] ?? ''), labelCol),
       value: parseFloat(String(row[valueCol] ?? '0')) || 0,
     }));
-
-    const maxValue = Math.max(...items.map((d) => d.value), 1);
-    const totalValue = items.reduce((sum, d) => sum + d.value, 0);
-
-    return { items, maxValue, totalValue, labelCol, valueCol };
+    const globalMax = Math.max(...items.map(i => i.value), 1);
+    return { mode: 'flat' as const, items, globalMax, valueCol, labelCol };
   }, [result]);
 
-  if (!chartData) {
-    return null;
+  if (!chartData) return null;
+
+  if (chartData.mode === 'grouped') {
+    const { groups, globalMax, valueCol, groupCol, subCol } = chartData;
+    const totalValue = groups.reduce((s, g) => s + g.items.reduce((ss, i) => ss + i.value, 0), 0);
+
+    return (
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-[15px] font-bold text-gray-900">
+            {title || `${groupCol}별 ${subCol} × ${valueCol}`}
+          </h3>
+          <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
+            합계 {totalValue.toLocaleString('ko-KR')}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-3">
+          {groups.map((group, gi) => {
+            const groupTotal = group.items.reduce((s, i) => s + i.value, 0);
+            return (
+              <div key={gi} className="rounded-[12px] border border-gray-200 bg-white shadow-card p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[13px] font-semibold text-gray-900">{group.groupLabel}</span>
+                  <span className="text-[11px] text-gray-500">
+                    합계 {groupTotal.toLocaleString('ko-KR')}
+                  </span>
+                </div>
+                <div className="space-y-1">
+                  {group.items.map((item, ii) => {
+                    const pct = (item.value / globalMax) * 100;
+                    return (
+                      <div key={ii} className="flex items-center gap-2 h-[20px]">
+                        <span className="text-[10px] text-gray-600 w-[56px] truncate text-right shrink-0">
+                          {item.label}
+                        </span>
+                        <div className="flex-1 h-3.5 rounded-[3px] bg-gray-100 overflow-hidden">
+                          <div
+                            className="h-full rounded-[3px] transition-all duration-500"
+                            style={{ width: `${pct}%`, background: getColor(gi) }}
+                          />
+                        </div>
+                        <span className="text-[10px] font-mono text-gray-800 w-[48px] text-right shrink-0">
+                          {item.value.toLocaleString('ko-KR')}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Scale reference */}
+        <div className="flex items-center gap-2 px-1">
+          <span className="text-[10px] text-gray-400">0</span>
+          <div className="flex-1 h-[1px] bg-gray-200" />
+          <span className="text-[10px] text-gray-400">{globalMax.toLocaleString('ko-KR')}</span>
+        </div>
+
+        {answer && (
+          <div className="p-3 rounded-[10px] bg-gray-50 border border-gray-200">
+            <div className="flex items-start gap-2">
+              <span className="text-[11px] font-semibold text-blue-500 mt-0.5 shrink-0">AI</span>
+              <p className="text-[12px] text-gray-700 leading-[1.6] whitespace-pre-wrap">{answer}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    );
   }
 
-  const { items, maxValue, totalValue, labelCol, valueCol } = chartData;
+  // Flat mode
+  const { items, globalMax, valueCol, labelCol } = chartData;
+  const totalValue = items.reduce((s, i) => s + i.value, 0);
 
   return (
-    <div className="px-3 py-2.5 space-y-2">
-      {/* Header */}
+    <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <span className="text-[11px] font-medium text-mist">
+        <h3 className="text-[15px] font-bold text-gray-900">
           {title || `${labelCol} × ${valueCol}`}
-        </span>
-        <span className="text-[10px] text-slate">
+        </h3>
+        <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
           {items.length}건 · {totalValue.toLocaleString('ko-KR')}
         </span>
       </div>
 
-      {/* Compact bar chart */}
-      <div className="space-y-0.5">
+      <div className="rounded-[12px] border border-gray-200 bg-white shadow-card p-4 space-y-1.5">
         {items.map((item, i) => {
-          const pct = (item.value / maxValue) * 100;
+          const pct = (item.value / globalMax) * 100;
           const share = ((item.value / totalValue) * 100).toFixed(1);
-          const color = getColor(i);
 
           return (
-            <div key={i} className="flex items-center gap-1.5 h-[18px]">
-              <span className="text-[9px] text-mist w-[56px] truncate text-right shrink-0">
+            <div key={i} className="flex items-center gap-2 h-[22px]">
+              <span className="text-[11px] text-gray-600 w-[64px] truncate text-right shrink-0">
                 {item.label}
               </span>
-              <div className="flex-1 h-3 rounded-sm bg-ink-800/80 overflow-hidden">
+              <div className="flex-1 h-4 rounded-[4px] bg-gray-100 overflow-hidden">
                 <div
-                  className="h-full rounded-sm transition-all duration-500"
-                  style={{ width: `${pct}%`, background: color, opacity: 0.85 }}
+                  className="h-full rounded-[4px] transition-all duration-500"
+                  style={{ width: `${pct}%`, background: getColor(i) }}
                 />
               </div>
-              <span className="text-[9px] font-mono text-pearl w-[44px] text-right shrink-0">
+              <span className="text-[11px] font-mono text-gray-800 w-[52px] text-right shrink-0">
                 {item.value.toLocaleString('ko-KR')}
               </span>
-              <span className="text-[8px] text-slate w-[26px] text-right shrink-0">
+              <span className="text-[10px] text-gray-500 w-[30px] text-right shrink-0">
                 {share}%
               </span>
             </div>
@@ -97,14 +216,11 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
         })}
       </div>
 
-      {/* AI Answer as insight/commentary */}
       {answer && (
-        <div className="border-t border-ink-700 pt-2">
-          <div className="flex items-start gap-1.5">
-            <span className="text-[9px] text-aqua mt-0.5 shrink-0">AI</span>
-            <p className="text-[10px] text-mist/90 leading-[1.5] whitespace-pre-wrap">
-              {answer}
-            </p>
+        <div className="p-3 rounded-[10px] bg-gray-50 border border-gray-200">
+          <div className="flex items-start gap-2">
+            <span className="text-[11px] font-semibold text-blue-500 mt-0.5 shrink-0">AI</span>
+            <p className="text-[12px] text-gray-700 leading-[1.6] whitespace-pre-wrap">{answer}</p>
           </div>
         </div>
       )}
@@ -113,7 +229,7 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
 }
 
 function formatLabel(raw: string, colName: string): string {
-  if (colName.includes('연령') || colName.includes('구간')) {
+  if (colName.includes('연령') || colName.includes('구간') || colName.includes('대')) {
     const num = parseInt(raw, 10);
     if (!isNaN(num)) {
       if (num >= 70) return `${num}대+`;
@@ -128,9 +244,9 @@ function formatLabel(raw: string, colName: string): string {
 
 function getColor(index: number): string {
   const colors = [
-    '#38c7e0', '#3dd68c', '#f5a623', '#ec4899',
+    '#0064FF', '#00c471', '#f59e0b', '#ec4899',
     '#a78bfa', '#60a5fa', '#f97316', '#10b981',
-    '#8b5cf6', '#f472b6', '#22d3ee', '#6b7280',
+    '#8b5cf6', '#f472b6', '#06b6d4', '#6b7280',
   ];
   return colors[index % colors.length];
 }

@@ -12,7 +12,6 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
   const [value, setValue] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Auto-resize textarea
   useEffect(() => {
     const ta = textareaRef.current;
     if (!ta) return;
@@ -25,7 +24,6 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
     if (!trimmed || isLoading) return;
     onSend(trimmed);
     setValue('');
-    // Reset textarea height
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
     }
@@ -42,8 +40,8 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
   );
 
   return (
-    <div className="border-t border-ink-600 p-4 bg-ink-900/50">
-      <div className="flex items-end gap-3">
+    <div className="border-t border-gray-100 p-4 bg-white">
+      <div className="flex items-end gap-2">
         <div className="flex-1 relative">
           <textarea
             ref={textareaRef}
@@ -52,8 +50,8 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={isLoading}
-            placeholder="데이터에 대해 질문하세요... (Shift+Enter: 줄바꿈)"
-            className="w-full resize-none rounded-xl px-4 py-3 text-sm leading-relaxed outline-none transition-all duration-200 bg-ink-800 text-pearl border border-ink-600 placeholder:text-slate focus:border-aqua/50 focus:ring-1 focus:ring-aqua/20 disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="데이터에 대해 질문하세요..."
+            className="w-full resize-none rounded-[12px] px-4 py-3 text-[14px] leading-relaxed outline-none transition-all duration-150 bg-gray-50 text-gray-900 border border-gray-200 placeholder:text-gray-400 focus:border-blue-500 focus:bg-white focus:shadow-input disabled:cursor-not-allowed disabled:opacity-50"
           />
         </div>
         <Button
@@ -61,7 +59,7 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
           size="icon"
           onClick={handleSend}
           disabled={isLoading || !value.trim()}
-          className="shrink-0 h-11 w-11 rounded-xl"
+          className="shrink-0 h-11 w-11 rounded-[12px]"
         >
           {isLoading ? (
             <svg className="h-4 w-4 animate-spin-slow" viewBox="0 0 24 24" fill="none">
@@ -75,9 +73,6 @@ export function ChatInput({ onSend, isLoading }: ChatInputProps) {
           )}
         </Button>
       </div>
-      <p className="mt-2 text-[11px] text-slate text-center">
-        AI가 Onedata 온톨로지를 기반으로 SQL을 자동 생성합니다
-      </p>
     </div>
   );
 }

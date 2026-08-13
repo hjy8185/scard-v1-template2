@@ -16,9 +16,9 @@ export function DrillDownSuggestions({ message, onSelect }: DrillDownSuggestions
   if (suggestions.length === 0) return null;
 
   return (
-    <div className="mt-3 pt-3 border-t border-ink-600/50">
-      <p className="text-[11px] text-slate mb-2 flex items-center gap-1">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-aqua/60">
+    <div className="mt-3 pt-3 border-t border-gray-100">
+      <p className="text-[11px] text-gray-500 mb-2 flex items-center gap-1">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-400">
           <polyline points="7 13 12 18 17 13" />
           <polyline points="7 6 12 11 17 6" />
         </svg>
@@ -32,7 +32,7 @@ export function DrillDownSuggestions({ message, onSelect }: DrillDownSuggestions
               e.stopPropagation();
               onSelect(s.query);
             }}
-            className="px-3 py-1.5 rounded-lg bg-ink-700 border border-ink-600 text-[12px] text-mist hover:text-pearl hover:border-aqua/30 hover:bg-ink-600 transition-all duration-200"
+            className="px-3 py-1.5 rounded-[8px] bg-gray-50 border border-gray-200 text-[12px] text-gray-700 hover:text-blue-500 hover:border-blue-200 hover:bg-blue-50 transition-all duration-150"
           >
             {s.label}
           </button>
@@ -61,7 +61,6 @@ function generateDrillDowns(message: ChatMessage): Suggestion[] {
   const hasCountCol = columns.some(c => c.includes('수') || c.includes('건') || c.includes('count'));
   const hasTimeCol = columns.some(c => c.includes('년월') || c.includes('일자') || c.includes('기간'));
 
-  // Dimension drill-downs
   if (!hasAgeCol) {
     suggestions.push({
       label: '연령대별 분포',
@@ -87,7 +86,6 @@ function generateDrillDowns(message: ChatMessage): Suggestion[] {
     });
   }
 
-  // Drill-down into specific values
   if (rows.length > 0 && rows.length <= 10) {
     const firstCol = columns[0];
     const topValue = rows[0][firstCol];
@@ -99,7 +97,6 @@ function generateDrillDowns(message: ChatMessage): Suggestion[] {
     }
   }
 
-  // Top N extension
   if (rows.length >= 5 && !hasTimeCol) {
     suggestions.push({
       label: '상위 20개로 확장',

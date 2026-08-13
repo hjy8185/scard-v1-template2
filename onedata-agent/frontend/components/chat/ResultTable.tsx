@@ -18,7 +18,6 @@ export function ResultTable({ result }: ResultTableProps) {
 
   const totalPages = Math.ceil(result.rows.length / PAGE_SIZE);
 
-  // Sort rows
   const sortedRows = useMemo(() => {
     if (!sortColumn) return result.rows;
     return [...result.rows].sort((a, b) => {
@@ -37,7 +36,6 @@ export function ResultTable({ result }: ResultTableProps) {
     });
   }, [result.rows, sortColumn, sortDirection]);
 
-  // Paginate
   const pageRows = sortedRows.slice(
     currentPage * PAGE_SIZE,
     (currentPage + 1) * PAGE_SIZE,
@@ -53,38 +51,34 @@ export function ResultTable({ result }: ResultTableProps) {
   };
 
   return (
-    <div className="p-3">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-2">
+    <div>
+      <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <h3 className="text-xs font-medium text-pearl">조회 결과</h3>
-          <span className="text-[10px] text-mist bg-ink-700 px-2 py-0.5 rounded-full border border-ink-600">
+          <h3 className="text-[15px] font-bold text-gray-900">조회 결과</h3>
+          <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
             {result.rowCount}건{result.executionMs !== undefined && ` · ${result.executionMs}ms`}
           </span>
         </div>
         {totalPages > 1 && (
-          <span className="text-[10px] text-mist">
-            {currentPage + 1}/{totalPages}
-          </span>
+          <span className="text-[11px] text-gray-500">{currentPage + 1}/{totalPages}</span>
         )}
       </div>
 
-      {/* Table */}
-      <div className="rounded-lg border border-ink-600 overflow-hidden">
-        <div className="overflow-x-auto max-h-[360px] overflow-y-auto">
+      <div className="rounded-[12px] border border-gray-200 overflow-hidden shadow-card">
+        <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
           <table className="w-full data-table">
             <thead>
-              <tr className="border-b border-ink-600">
+              <tr className="border-b border-gray-200">
                 {result.columns.map((col) => (
                   <th
                     key={col}
                     onClick={() => handleSort(col)}
-                    className="px-2.5 py-1.5 text-left text-[10px] font-semibold text-mist whitespace-nowrap cursor-pointer hover:text-pearl transition-colors bg-ink-800"
+                    className="px-3 py-2 text-left text-[11px] font-semibold text-gray-600 whitespace-nowrap cursor-pointer hover:text-gray-900 transition-colors bg-gray-50"
                   >
                     <div className="flex items-center gap-0.5">
                       <span>{col}</span>
                       {sortColumn === col && (
-                        <span className="text-aqua">
+                        <span className="text-blue-500">
                           {sortDirection === 'asc' ? '↑' : '↓'}
                         </span>
                       )}
@@ -98,15 +92,12 @@ export function ResultTable({ result }: ResultTableProps) {
                 <tr
                   key={rowIdx}
                   className={cn(
-                    'border-b border-ink-600/50 hover:bg-ink-700/30 transition-colors',
-                    rowIdx % 2 === 0 ? 'bg-ink-900' : 'bg-ink-800/30',
+                    'border-b border-gray-100 hover:bg-blue-50/30 transition-colors',
+                    rowIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50/50',
                   )}
                 >
                   {result.columns.map((col) => (
-                    <td
-                      key={col}
-                      className="px-2.5 py-1.5 text-[11px] text-pearl whitespace-nowrap"
-                    >
+                    <td key={col} className="px-3 py-2 text-[12px] text-gray-800 whitespace-nowrap">
                       <CellValue value={row[col]} column={col} />
                     </td>
                   ))}
@@ -117,51 +108,39 @@ export function ResultTable({ result }: ResultTableProps) {
         </div>
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 mt-4">
+        <div className="flex items-center justify-center gap-1 mt-3">
           <Button
-            variant="ghost"
-            size="sm"
+            variant="ghost" size="sm"
             onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
             disabled={currentPage === 0}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
+            ‹
           </Button>
           {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
             let pageNum: number;
-            if (totalPages <= 5) {
-              pageNum = i;
-            } else if (currentPage < 3) {
-              pageNum = i;
-            } else if (currentPage > totalPages - 4) {
-              pageNum = totalPages - 5 + i;
-            } else {
-              pageNum = currentPage - 2 + i;
-            }
+            if (totalPages <= 5) pageNum = i;
+            else if (currentPage < 3) pageNum = i;
+            else if (currentPage > totalPages - 4) pageNum = totalPages - 5 + i;
+            else pageNum = currentPage - 2 + i;
             return (
               <Button
                 key={pageNum}
                 variant={currentPage === pageNum ? 'primary' : 'ghost'}
                 size="sm"
                 onClick={() => setCurrentPage(pageNum)}
-                className="w-8 h-8"
+                className="w-7 h-7 text-[11px]"
               >
                 {pageNum + 1}
               </Button>
             );
           })}
           <Button
-            variant="ghost"
-            size="sm"
+            variant="ghost" size="sm"
             onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
             disabled={currentPage === totalPages - 1}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
+            ›
           </Button>
         </div>
       )}
@@ -169,7 +148,6 @@ export function ResultTable({ result }: ResultTableProps) {
   );
 }
 
-// Format age range code (010 -> 10~14세, 015 -> 15~19세, 070 -> 70세+)
 function formatAgeRange(code: string): string {
   const num = parseInt(code, 10);
   if (isNaN(num)) return code;
@@ -177,34 +155,26 @@ function formatAgeRange(code: string): string {
   return `${num}~${num + 4}세`;
 }
 
-// Format number: remove decimals, add thousand separators
 function formatNumber(value: number | string): string {
   const num = typeof value === 'string' ? parseFloat(value) : value;
   if (isNaN(num)) return String(value);
   return Math.round(num).toLocaleString('ko-KR');
 }
 
-// Check if a value looks like a numeric string
 function isNumericString(value: string): boolean {
   return /^-?\d+(\.\d+)?$/.test(value.trim());
 }
 
-// Cell value renderer
 function CellValue({ value, column }: { value: unknown; column?: string }) {
   if (value === null || value === undefined) {
-    return <span className="text-slate italic">NULL</span>;
+    return <span className="text-gray-400 italic">-</span>;
   }
   if (typeof value === 'boolean') {
-    return (
-      <span className={value ? 'text-jade' : 'text-coral'}>
-        {value ? 'true' : 'false'}
-      </span>
-    );
+    return <span className={value ? 'text-green-600' : 'text-red-500'}>{value ? 'Y' : 'N'}</span>;
   }
 
   const strVal = String(value);
 
-  // Age range code formatting
   if (column && (column.includes('연령') || column.includes('나이') || column.includes('age')) &&
       (column.includes('구간') || column.includes('코드') || column.includes('대'))) {
     if (/^\d{2,3}$/.test(strVal)) {
@@ -212,26 +182,16 @@ function CellValue({ value, column }: { value: unknown; column?: string }) {
     }
   }
 
-  // Skip number formatting for date/code columns (기준년월, 코드, 구간코드 etc.)
   const isCodeColumn = column && (
     column.includes('년월') || column.includes('일자') || column.includes('날짜') ||
     column.includes('코드') || column.includes('번호')
   );
 
-  // Number formatting (remove decimals, add thousand separators)
   if (!isCodeColumn && typeof value === 'number') {
-    return (
-      <span className="font-mono text-amber">
-        {formatNumber(value)}
-      </span>
-    );
+    return <span className="font-mono text-blue-600">{formatNumber(value)}</span>;
   }
   if (!isCodeColumn && typeof value === 'string' && isNumericString(value)) {
-    return (
-      <span className="font-mono text-amber">
-        {formatNumber(value)}
-      </span>
-    );
+    return <span className="font-mono text-blue-600">{formatNumber(value)}</span>;
   }
 
   return <span>{strVal}</span>;

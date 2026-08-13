@@ -7,38 +7,36 @@ export function Header() {
   const { clearMessages, messages } = useAppContext();
 
   return (
-    <header className="flex items-center justify-between px-6 py-3 border-b border-ink-600 bg-ink-900/90 backdrop-blur-sm">
+    <header className="flex items-center justify-between px-6 py-3 bg-white border-b border-gray-200">
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-aqua to-jade flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink-900">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </div>
-          <div>
-            <h1 className="text-base font-semibold text-pearl leading-tight">
-              Onedata AI Agent
-            </h1>
-            <p className="text-[11px] text-mist leading-tight">
-              신한금융그룹 데이터 플랫폼
-            </p>
-          </div>
+        <div className="h-8 w-8 rounded-[10px] bg-blue-500 flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+        </div>
+        <div>
+          <h1 className="text-[15px] font-bold text-gray-900 leading-tight">
+            Onedata AI
+          </h1>
+          <p className="text-[11px] text-gray-500 leading-tight">
+            신한금융그룹 데이터 플랫폼
+          </p>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ink-700 border border-ink-600">
-          <span className="h-2 w-2 rounded-full bg-jade animate-pulse" />
-          <span className="text-xs text-mist">Agent Ready</span>
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 border border-green-500/20">
+          <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+          <span className="text-[11px] text-green-500 font-medium">Ready</span>
         </div>
         {messages.length > 0 && (
           <button
             onClick={clearMessages}
-            className="px-3 py-1.5 text-xs text-mist hover:text-pearl rounded-lg bg-ink-700 border border-ink-600 hover:border-ink-600 transition-colors"
+            className="px-3 py-1.5 text-[12px] text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100 transition-colors font-medium"
           >
-            대화 초기화
+            초기화
           </button>
         )}
       </div>

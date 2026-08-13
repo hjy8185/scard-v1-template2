@@ -17,7 +17,6 @@ export function ChatPanel() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom on new messages
   useEffect(() => {
     if (bottomRef.current) {
       bottomRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -30,7 +29,6 @@ export function ChatPanel() {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Messages Area */}
       <div
         ref={scrollRef}
         className="flex flex-1 min-h-0 flex-col overflow-y-auto"
@@ -38,36 +36,34 @@ export function ChatPanel() {
         {messages.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center p-6">
             <div className="mb-6 text-center">
-              <div className="mx-auto mb-4 h-16 w-16 rounded-2xl bg-gradient-to-br from-aqua/20 to-jade/20 border border-aqua/20 flex items-center justify-center">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-aqua">
+              <div className="mx-auto mb-4 h-14 w-14 rounded-2xl bg-blue-50 flex items-center justify-center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-blue-500">
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   <path d="M8 10h.01M12 10h.01M16 10h.01" />
                 </svg>
               </div>
-              <h2 className="text-lg font-semibold text-pearl mb-1">
-                Onedata AI Agent
+              <h2 className="text-[18px] font-bold text-gray-900 mb-1">
+                무엇이 궁금하세요?
               </h2>
-              <p className="text-sm text-mist max-w-[300px]">
-                자연어로 데이터를 조회하세요. AI가 SQL을 생성하고 결과를 분석합니다.
+              <p className="text-[13px] text-gray-500 max-w-[280px]">
+                자연어로 질문하면 AI가 데이터를 조회하고 분석해 드려요.
               </p>
             </div>
 
-            <div className="w-full max-w-[360px] space-y-2">
-              <p className="text-xs text-slate font-medium mb-2 text-center">예시 질문</p>
+            <div className="w-full max-w-[340px] space-y-2">
               {EXAMPLE_QUERIES.map((query, i) => (
                 <button
                   key={i}
                   onClick={() => handleExampleClick(query)}
-                  className="w-full text-left px-4 py-3 rounded-xl bg-ink-800 border border-ink-600 text-sm text-pearl/90 hover:bg-ink-700 hover:border-aqua/30 transition-all duration-200 group"
+                  className="w-full text-left px-4 py-3 rounded-[12px] bg-white border border-gray-200 text-[13px] text-gray-700 hover:border-blue-300 hover:bg-blue-50/30 transition-all duration-150 shadow-card"
                 >
-                  <span className="text-aqua/60 group-hover:text-aqua mr-2">Q.</span>
                   {query}
                 </button>
               ))}
             </div>
           </div>
         ) : (
-          <div className="flex flex-col gap-1 p-4">
+          <div className="flex flex-col gap-3 p-4">
             {messages.map((msg) => (
               <ChatMessage
                 key={msg.id}
@@ -81,14 +77,14 @@ export function ChatPanel() {
               />
             ))}
             {isStreaming && (
-              <div className="flex justify-start px-2 py-1">
-                <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-ink-800 border border-aqua/20">
+              <div className="flex justify-start">
+                <div className="flex items-center gap-2 px-4 py-3 rounded-[16px] bg-gray-50 border border-gray-100">
                   <div className="flex gap-1">
-                    <span className="loading-dot h-2 w-2 rounded-full bg-aqua" />
-                    <span className="loading-dot h-2 w-2 rounded-full bg-aqua" />
-                    <span className="loading-dot h-2 w-2 rounded-full bg-aqua" />
+                    <span className="loading-dot h-2 w-2 rounded-full bg-blue-500" />
+                    <span className="loading-dot h-2 w-2 rounded-full bg-blue-500" />
+                    <span className="loading-dot h-2 w-2 rounded-full bg-blue-500" />
                   </div>
-                  <span className="text-xs text-aqua">처리 중...</span>
+                  <span className="text-[12px] text-gray-500">분석 중...</span>
                 </div>
               </div>
             )}
@@ -97,7 +93,6 @@ export function ChatPanel() {
         )}
       </div>
 
-      {/* Input Area */}
       <div className="shrink-0">
         <ChatInput onSend={sendMessage} isLoading={isStreaming} />
       </div>
