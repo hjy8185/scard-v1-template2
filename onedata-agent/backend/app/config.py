@@ -34,7 +34,7 @@ class Settings:
         )
         self.ATHENA_WORKGROUP: str = os.environ.get("ATHENA_WORKGROUP", "primary")
         self.ATHENA_TIMEOUT_SECONDS: int = int(
-            os.environ.get("ATHENA_TIMEOUT_SECONDS", "30")
+            os.environ.get("ATHENA_TIMEOUT_SECONDS", "25")
         )
         self.ATHENA_MAX_ROWS: int = int(os.environ.get("ATHENA_MAX_ROWS", "1000"))
 

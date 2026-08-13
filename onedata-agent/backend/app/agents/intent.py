@@ -66,7 +66,7 @@ class IntentClassifier:
         """
         # Fast heuristic for obvious cases
         heuristic = self._heuristic_classify(query)
-        if heuristic and heuristic.confidence >= 0.9:
+        if heuristic and heuristic.confidence >= 0.7:
             logger.info("Intent classified by heuristic: %s (%.2f)", heuristic.intent, heuristic.confidence)
             return heuristic
 
@@ -144,11 +144,15 @@ class IntentClassifier:
             )
 
         # Data query (catch-all for SQL-like requests)
-        data_patterns = ["조회", "보여", "알려", "목록", "리스트", "검색", "찾아"]
+        data_patterns = [
+            "조회", "보여", "알려", "목록", "리스트", "검색", "찾아",
+            "별로", "동향", "추이", "현황", "실적", "MAU", "mau",
+            "볼 수", "보고 싶", "확인", "분석", "요약", "상위", "하위",
+        ]
         if any(p in query_stripped for p in data_patterns):
             return IntentResult(
                 intent=INTENT_DATA_QUERY,
-                confidence=0.7,
+                confidence=0.85,
                 entities=[],
                 requires_sql=True,
                 domain_hint=self._detect_domain(query_stripped),

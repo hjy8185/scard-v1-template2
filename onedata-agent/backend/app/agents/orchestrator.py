@@ -129,30 +129,47 @@ class Orchestrator:
         yield PipelineEvent("stage", {"stage": "intent", "status": "active"})
         t0 = time.monotonic()
 
-        try:
-            intent_result = await self._intent_classifier.classify(query)
-            intent_ms = int((time.monotonic() - t0) * 1000)
-            yield PipelineEvent(
-                "stage",
-                {
-                    "stage": "intent",
-                    "status": "done",
-                    "ms": intent_ms,
-                    "payload": intent_result.to_dict(),
-                },
-            )
-        except Exception as e:
-            logger.error("Intent classification failed: %s", e)
+        # Skip LLM intent classification if conversation has history (follow-up is always data_query)
+        has_history = bool(history) or session_id in self._session_history
+        if has_history:
             intent_result = IntentResult(
                 intent="data_query",
-                confidence=0.3,
+                confidence=0.9,
                 entities=[],
                 requires_sql=True,
+                domain_hint=self._intent_classifier._detect_domain(query) if hasattr(self._intent_classifier, '_detect_domain') else None,
             )
+            intent_ms = 0
+            logger.info("Intent fast-path (has history): data_query")
             yield PipelineEvent(
                 "stage",
-                {"stage": "intent", "status": "done", "ms": 0, "payload": intent_result.to_dict()},
+                {"stage": "intent", "status": "done", "ms": intent_ms, "payload": intent_result.to_dict()},
             )
+        else:
+            try:
+                intent_result = await self._intent_classifier.classify(query)
+                intent_ms = int((time.monotonic() - t0) * 1000)
+                yield PipelineEvent(
+                    "stage",
+                    {
+                        "stage": "intent",
+                        "status": "done",
+                        "ms": intent_ms,
+                        "payload": intent_result.to_dict(),
+                    },
+                )
+            except Exception as e:
+                logger.error("Intent classification failed: %s", e)
+                intent_result = IntentResult(
+                    intent="data_query",
+                    confidence=0.3,
+                    entities=[],
+                    requires_sql=True,
+                )
+                yield PipelineEvent(
+                    "stage",
+                    {"stage": "intent", "status": "done", "ms": 0, "payload": intent_result.to_dict()},
+                )
 
         # Override: if there's conversation history, short follow-up queries are likely drill-downs
         has_history = bool(history) or session_id in self._session_history
@@ -311,7 +328,7 @@ class Orchestrator:
         t0 = time.monotonic()
 
         exec_result = None
-        max_retries = 2
+        max_retries = 1
 
         for attempt in range(max_retries + 1):
             try:

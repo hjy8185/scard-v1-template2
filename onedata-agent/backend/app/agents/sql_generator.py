@@ -361,6 +361,7 @@ class SQLGenerator:
             )
 
             sql = result.get("sql", "")
+            sql = self._quote_korean_identifiers(sql)
             sql = self._fix_case_when_syntax(sql)
             sql = self._fix_group_by_alias(sql)
             sql = self._ensure_database_prefix(sql)
@@ -408,6 +409,49 @@ class SQLGenerator:
                 tables.add(t.table_name)
 
         return list(tables)
+
+    def _quote_korean_identifiers(self, sql: str) -> str:
+        """Add double quotes around unquoted Korean column/table identifiers."""
+        # Process line by line to avoid catastrophic backtracking
+        lines = sql.split('\n')
+        result_lines = []
+        in_string = False
+
+        for line in lines:
+            # Skip lines that are entirely inside string literals
+            new_line = []
+            i = 0
+            while i < len(line):
+                if line[i] == "'" and not in_string:
+                    in_string = True
+                    new_line.append(line[i])
+                    i += 1
+                elif line[i] == "'" and in_string:
+                    in_string = False
+                    new_line.append(line[i])
+                    i += 1
+                elif in_string:
+                    new_line.append(line[i])
+                    i += 1
+                elif line[i] == '"':
+                    # Already quoted identifier — skip to closing quote
+                    j = line.index('"', i + 1) + 1 if '"' in line[i+1:] else len(line)
+                    new_line.append(line[i:j])
+                    i = j
+                else:
+                    # Check for Korean identifier: optional prefix like "j." then Korean chars
+                    m = re.match(r'([a-zA-Z_]\w*\.)?([가-힣][가-힣a-zA-Z0-9_]*)', line[i:])
+                    if m:
+                        prefix = m.group(1) or ''
+                        ident = m.group(2)
+                        new_line.append(f'{prefix}"{ident}"')
+                        i += m.end()
+                    else:
+                        new_line.append(line[i])
+                        i += 1
+            result_lines.append(''.join(new_line))
+
+        return '\n'.join(result_lines)
 
     def _fix_case_when_syntax(self, sql: str) -> str:
         """Convert CASE col WHEN 'val' THEN to CASE WHEN col = 'val' THEN."""

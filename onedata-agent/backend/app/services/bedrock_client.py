@@ -9,6 +9,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import time
 from typing import Any, AsyncGenerator
 
 import boto3
@@ -138,6 +139,8 @@ class BedrockClient:
         name = tool["toolSpec"]["name"]
 
         def _invoke():
+            t0 = time.time()
+            logger.info("Bedrock tool_call start: %s (system=%d chars, user=%d chars)", name, len(system), len(user))
             resp = self._converse(
                 modelId=self._model_id,
                 system=[{"text": system}],
@@ -148,6 +151,10 @@ class BedrockClient:
                 },
                 inferenceConfig={"maxTokens": max_tokens or self._max_tokens},
             )
+            elapsed = time.time() - t0
+            usage = resp.get("usage", {})
+            logger.info("Bedrock tool_call done: %s in %.1fs (in=%d, out=%d tokens)",
+                       name, elapsed, usage.get("inputTokens", 0), usage.get("outputTokens", 0))
             blocks = (resp.get("output") or {}).get("message", {}).get("content") or []
             for b in blocks:
                 tu = b.get("toolUse")
@@ -166,12 +173,18 @@ class BedrockClient:
     async def text(self, system: str, user: str, max_tokens: int | None = None) -> str:
         """Plain text response via Converse API."""
         def _invoke():
+            t0 = time.time()
+            logger.info("Bedrock text start (system=%d chars, user=%d chars)", len(system), len(user))
             resp = self._converse(
                 modelId=self._model_id,
                 system=[{"text": system}],
                 messages=[{"role": "user", "content": [{"text": user}]}],
                 inferenceConfig={"maxTokens": max_tokens or self._max_tokens},
             )
+            elapsed = time.time() - t0
+            usage = resp.get("usage", {})
+            logger.info("Bedrock text done in %.1fs (in=%d, out=%d tokens)",
+                       elapsed, usage.get("inputTokens", 0), usage.get("outputTokens", 0))
             blocks = (resp.get("output") or {}).get("message", {}).get("content") or []
             return "".join(b.get("text", "") for b in blocks if isinstance(b, dict)).strip()
 
@@ -501,6 +514,14 @@ class BedrockClient:
 
 ★★ 금지: 사용자가 계열사를 특정하지 않았는데 cln_*_life, cln_*_sec 등 선택
 
+## ★ 성능 규칙 (쿼리 실행 시간 최소화)
+
+- 3개 이상 테이블 JOIN 시 반드시 LIMIT 100 이하로 제한
+- 복합 요청(계열사+연령대+성별 동시): 가장 핵심 차원 1~2개만 포함. 나머지는 사용자가 후속 질문으로 요청
+  예: "그룹사별 MAU 연령대별 성별로" → 계열사+연령대만 포함, 성별은 후속으로 유도
+- GROUP BY 차원이 3개 이상이면 데이터량 폭발 → 최대 2개 차원으로 제한
+- WHERE 조건에 기준년월 = (SELECT MAX(...)) 사용하여 1개월 데이터만 조회
+
 ## 쿼리 품질 기준
 
 - 결과는 집계·정렬해 상위 건으로 줄이세요 (LIMIT)
@@ -529,7 +550,7 @@ class BedrockClient:
         user_parts = []
         if examples:
             user_parts.append("## 참고 예시\n")
-            for ex in examples[:3]:
+            for ex in examples[:2]:
                 user_parts.append(f"Q: {ex['question']}")
                 user_parts.append(f"A: {json.dumps(ex['answer'], ensure_ascii=False)}\n")
             user_parts.append("---\n")
@@ -541,6 +562,7 @@ class BedrockClient:
             system=system_prompt,
             user=user_msg,
             tool=TOOL_SQL_GENERATE,
+            max_tokens=2048,
         )
         return result
 
@@ -591,7 +613,7 @@ SQL 쿼리 결과를 바탕으로 **채팅 형식**으로 간단히 답합니다
 
 위 결과를 바탕으로 사용자 질문에 답변해 주세요."""
 
-        return await self.text(system=system_prompt, user=user_msg, max_tokens=2048)
+        return await self.text(system=system_prompt, user=user_msg, max_tokens=1024)
 
     def _format_results_for_prompt(self, results: dict[str, Any]) -> str:
         """Format query results into a readable string for the LLM."""

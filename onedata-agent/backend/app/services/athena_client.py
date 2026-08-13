@@ -114,6 +114,7 @@ class AthenaClient:
         limited_sql = self._apply_row_limit(sql)
 
         start_time = time.monotonic()
+        logger.info("Athena execute_query start (sql=%d chars)", len(limited_sql))
 
         try:
             # Start query execution
@@ -125,11 +126,13 @@ class AthenaClient:
                 WorkGroup=self._workgroup,
             )
             execution_id = response["QueryExecutionId"]
+            logger.info("Athena query started: %s", execution_id)
 
             # Poll for completion
             result = await self._wait_for_completion(execution_id)
 
             elapsed_ms = int((time.monotonic() - start_time) * 1000)
+            logger.info("Athena query completed: %s in %dms (status=%s)", execution_id, elapsed_ms, result["status"])
 
             if result["status"] == "FAILED":
                 error_msg = result.get("error", "Unknown error")
