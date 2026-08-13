@@ -354,6 +354,11 @@ class BedrockClient:
 
 ## Athena(Presto) 문법 제약 (반드시 준수)
 
+- ★★★ CASE 문법: 반드시 "CASE WHEN col = 'val' THEN ..." 형태만 사용
+  절대 "CASE col WHEN 'val' THEN ..." 축약 형태 사용 금지 (Athena에서 GROUP BY 오류 발생)
+- ★★★ GROUP BY에서 alias 사용 금지: CASE WHEN 표현식은 GROUP BY에 전체를 반복
+  잘못된 예: GROUP BY "계열사"  (← alias 사용 = 오류)
+  올바른 예: GROUP BY CASE WHEN j."컬럼" = '01' THEN '신한은행' ... END
 - PERCENTILE_CONT(...) WITHIN GROUP 사용 금지 → 대신 approx_percentile(column, 0.9) 사용
 - MEDIAN 함수 없음 → approx_percentile(column, 0.5) 사용
 - LIMIT 절에 서브쿼리/수식 사용 불가 → 반드시 정수 리터럴만 (예: LIMIT 100)
@@ -406,17 +411,27 @@ class BedrockClient:
 ### 지역 분석 규칙
 - 지역별 분석 시 반드시 시도명(이름)으로 표시 (코드만 보여주지 말 것)
 - cln_m_cust_base_card."자택광역도시코드" (2자리, 17종) 사용하여 CASE WHEN으로 변환:
-  CASE "자택광역도시코드"
-    WHEN '11' THEN '서울특별시' WHEN '26' THEN '부산광역시'
-    WHEN '27' THEN '대구광역시' WHEN '28' THEN '인천광역시'
-    WHEN '29' THEN '광주광역시' WHEN '30' THEN '대전광역시'
-    WHEN '31' THEN '울산광역시' WHEN '36' THEN '세종특별자치시'
-    WHEN '41' THEN '경기도' WHEN '42' THEN '강원도'
-    WHEN '43' THEN '충청북도' WHEN '44' THEN '충청남도'
-    WHEN '45' THEN '전라북도' WHEN '46' THEN '전라남도'
-    WHEN '47' THEN '경상북도' WHEN '48' THEN '경상남도'
-    WHEN '50' THEN '제주특별자치도' ELSE '기타'
+  CASE
+    WHEN "자택광역도시코드" = '11' THEN '서울특별시'
+    WHEN "자택광역도시코드" = '26' THEN '부산광역시'
+    WHEN "자택광역도시코드" = '27' THEN '대구광역시'
+    WHEN "자택광역도시코드" = '28' THEN '인천광역시'
+    WHEN "자택광역도시코드" = '29' THEN '광주광역시'
+    WHEN "자택광역도시코드" = '30' THEN '대전광역시'
+    WHEN "자택광역도시코드" = '31' THEN '울산광역시'
+    WHEN "자택광역도시코드" = '36' THEN '세종특별자치시'
+    WHEN "자택광역도시코드" = '41' THEN '경기도'
+    WHEN "자택광역도시코드" = '42' THEN '강원도'
+    WHEN "자택광역도시코드" = '43' THEN '충청북도'
+    WHEN "자택광역도시코드" = '44' THEN '충청남도'
+    WHEN "자택광역도시코드" = '45' THEN '전라북도'
+    WHEN "자택광역도시코드" = '46' THEN '전라남도'
+    WHEN "자택광역도시코드" = '47' THEN '경상북도'
+    WHEN "자택광역도시코드" = '48' THEN '경상남도'
+    WHEN "자택광역도시코드" = '50' THEN '제주특별자치도'
+    ELSE '기타'
   END AS "시도명"
+- ★★ GROUP BY에서도 위 CASE WHEN 전체를 반복해야 합니다 (alias "시도명" 사용 금지)
 - 지역 분석은 cln_m_cust_base_card 또는 cln_d_cust_mas_card 테이블의 자택광역도시코드 사용
 
 ### ★★ 슈퍼솔 테이블 용도 구분 (매우 중요)
@@ -434,17 +449,26 @@ class BedrockClient:
   sol_m_supersol_visit에는 계열사 구분 컬럼이 없으므로, jaz_sh_fanclub_membership_chghist의
   "신한그룹통합플랫폼가입채널코드"를 JOIN하여 계열사 구분:
   SELECT s."기준년월",
-    CASE j."신한그룹통합플랫폼가입채널코드"
-      WHEN '01' THEN '신한은행' WHEN '02' THEN '신한카드'
-      WHEN '03' THEN '신한투자증권' WHEN '04' THEN '신한생명'
-      WHEN '05' THEN '신한캐피탈' ELSE '기타'
+    CASE
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '01' THEN '신한은행'
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '02' THEN '신한카드'
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '03' THEN '신한투자증권'
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '04' THEN '신한라이프'
+      ELSE '기타'
     END AS "계열사",
     COUNT(DISTINCT s."그룹md번호") AS "MAU"
   FROM ai_ready_v3.sol_m_supersol_visit s
   JOIN ai_ready_v3.jaz_sh_fanclub_membership_chghist j
     ON s."그룹md번호" = j."그룹md"
     AND j."처리일자" = (SELECT MAX("처리일자") FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist)
-  GROUP BY s."기준년월", j."신한그룹통합플랫폼가입채널코드"
+  GROUP BY s."기준년월",
+    CASE
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '01' THEN '신한은행'
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '02' THEN '신한카드'
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '03' THEN '신한투자증권'
+      WHEN j."신한그룹통합플랫폼가입채널코드" = '04' THEN '신한라이프'
+      ELSE '기타'
+    END
   ORDER BY s."기준년월" DESC, "MAU" DESC
 - ★★ jaz 조인 키 주의: jaz."그룹md" = sol."그룹md번호" (jaz는 "그룹md"이고 sol은 "그룹md번호")
 - ★★ sol 실제 컬럼명: "슈퍼솔월방문일수", "슈퍼솔월방문횟수", "슈퍼솔월체류분", "슈퍼솔mau대상tf"

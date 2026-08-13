@@ -152,6 +152,45 @@ _FEW_SHOT_EXAMPLES = [
             "tables_used": ["jaz_sh_fanclub_membership_chghist", "igd_m_cust_txn_card", "igd_m_shg_rfm_base_ledger"],
         },
     },
+    {
+        "question": "계열사별 슈퍼솔 MAU를 연령대별로 보여줘",
+        "answer": {
+            "sql": (
+                "SELECT\n"
+                "  s.\"기준년월\",\n"
+                "  CASE\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '01' THEN '신한은행'\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '02' THEN '신한카드'\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '03' THEN '신한투자증권'\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '04' THEN '신한라이프'\n"
+                "    ELSE '기타'\n"
+                "  END AS \"계열사\",\n"
+                "  c.\"연령5년구간코드\",\n"
+                "  COUNT(DISTINCT s.\"그룹md번호\") AS \"MAU\"\n"
+                "FROM ai_ready_v3.sol_m_supersol_visit s\n"
+                "JOIN ai_ready_v3.jaz_sh_fanclub_membership_chghist j\n"
+                "  ON s.\"그룹md번호\" = j.\"그룹md\"\n"
+                "JOIN ai_ready_v3.igd_m_cust_base c\n"
+                "  ON s.\"그룹md번호\" = c.\"그룹md번호\"\n"
+                "  AND s.\"기준년월\" = c.\"기준년월\"\n"
+                "WHERE s.\"기준년월\" >= '202601'\n"
+                "GROUP BY\n"
+                "  s.\"기준년월\",\n"
+                "  CASE\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '01' THEN '신한은행'\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '02' THEN '신한카드'\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '03' THEN '신한투자증권'\n"
+                "    WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '04' THEN '신한라이프'\n"
+                "    ELSE '기타'\n"
+                "  END,\n"
+                "  c.\"연령5년구간코드\"\n"
+                "ORDER BY s.\"기준년월\" DESC, \"MAU\" DESC\n"
+                "LIMIT 100"
+            ),
+            "explanation": "계열사별 슈퍼솔 MAU를 연령대별로 분석합니다. CASE WHEN 전체를 GROUP BY에 반복합니다.",
+            "tables_used": ["sol_m_supersol_visit", "jaz_sh_fanclub_membership_chghist", "igd_m_cust_base"],
+        },
+    },
 ]
 
 
@@ -212,6 +251,15 @@ class SQLGenerator:
         logger.info("Resolved %d terms from query", len(resolved_terms))
 
         relevant_tables = await self._find_relevant_tables(query, domain_hint, resolved_terms)
+
+        # Extract tables referenced in previous SQL from conversation context
+        if conversation_context:
+            all_known = [t.table_name for t in self._ontology.get_all_tables()]
+            for tname in all_known:
+                if tname in conversation_context and tname not in relevant_tables:
+                    relevant_tables.append(tname)
+                    logger.info("Added table from conversation context: %s", tname)
+
         logger.info("Found %d relevant tables", len(relevant_tables))
 
         if not relevant_tables:
@@ -252,17 +300,57 @@ class SQLGenerator:
             context_str += synonym_context
 
         if conversation_context:
-            context_str += f"\n\n=== 대화 이력 (드릴다운 컨텍스트) ===\n{conversation_context}\n"
+            context_str += f"\n\n=== 대화 이력 (누적 컨텍스트) ===\n{conversation_context}\n"
             context_str += (
-                "\n★ 드릴다운 규칙: '위 결과를 X별로' 형태의 질문이면 "
-                "이전 쿼리를 기반으로 GROUP BY에 X 차원을 추가하세요. "
-                "이전 쿼리의 FROM/WHERE/JOIN을 유지한 채 차원만 추가.\n"
+                "\n★★★ 대화 누적 SQL 생성 규칙 ★★★\n"
+                "이 대화는 이어지는 대화입니다. 반드시 이전 SQL을 기반으로 확장/수정하세요.\n\n"
+                "1. 드릴다운('위 결과를 X별로'): 이전 SQL의 FROM/WHERE/JOIN을 유지하고 GROUP BY에 차원 추가\n"
+                "2. 추가 요청('X도 같이 보고 싶어', 'X도 추가해줘'): 이전 SQL에 새 컬럼/JOIN을 추가. CTE(WITH절)로 확장 가능\n"
+                "3. 조건 변경('X 대신 Y로'): 이전 SQL의 해당 부분만 교체\n"
+                "4. 완전히 새로운 주제여도, 동일 세션이면 이전 SQL의 기준년월/WHERE 조건을 참고하여 일관성 유지\n\n"
+                "★ 절대 이전 SQL을 무시하고 처음부터 새로 작성하지 마세요. 이전 SQL을 복사한 뒤 수정/확장하세요.\n\n"
                 "각 차원에 맞는 테이블·컬럼:\n"
                 "  - 연령대별 → igd_m_cust_base.\"연령5년구간코드\" (통합 고객 기본 JOIN)\n"
                 "  - 성별 → igd_m_cust_base.\"성별\" (통합 고객 기본 JOIN)\n"
-                "  - 계열사별 → jaz의 \"신한그룹통합플랫폼가입채널코드\" CASE WHEN 변환\n"
                 "  - 월별/추이 → \"기준년월\" GROUP BY + ORDER BY ASC\n"
-                "  ★ 연령대/성별은 igd_m_cust_base만 사용. 절대 cln_*_life, cln_*_sec 등 사용 금지.\n"
+                "  ★ 연령대/성별은 igd_m_cust_base만 사용. 절대 cln_*_life, cln_*_sec 등 사용 금지.\n\n"
+                "★★ 계열사별 분류 시 반드시 아래 정확한 SQL 패턴을 사용하세요:\n"
+                "  SELECT\n"
+                "    CASE\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '01' THEN '신한은행'\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '02' THEN '신한카드'\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '03' THEN '신한투자증권'\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '04' THEN '신한라이프'\n"
+                "      ELSE '기타'\n"
+                "    END AS \"계열사\",\n"
+                "    ...\n"
+                "  FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist j\n"
+                "  GROUP BY\n"
+                "    CASE\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '01' THEN '신한은행'\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '02' THEN '신한카드'\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '03' THEN '신한투자증권'\n"
+                "      WHEN j.\"신한그룹통합플랫폼가입채널코드\" = '04' THEN '신한라이프'\n"
+                "      ELSE '기타'\n"
+                "    END\n\n"
+                "★★ 계열사 차원 추가 시 JOIN 방법 (이전 SQL에 계열사 분류를 추가할 때):\n"
+                "  - 이전 SQL이 특정 테이블(예: igd_m_cust_txn_card)만 사용 중이면:\n"
+                "    기존 FROM을 유지하고, jaz_sh_fanclub_membership_chghist를 \"그룹md\"로 JOIN\n"
+                "    JOIN ai_ready_v3.jaz_sh_fanclub_membership_chghist j\n"
+                "      ON 기존테이블.\"그룹md\" = j.\"그룹md\"\n"
+                "      AND j.\"기준년월\" = (SELECT MAX(\"기준년월\") FROM ai_ready_v3.jaz_sh_fanclub_membership_chghist)\n"
+                "  - 또는 CTE로 분리: WITH base AS (이전 SQL), grp AS (계열사 분류) SELECT ...\n"
+                "  ★ 절대 이전 SQL의 FROM을 삭제하고 jaz 테이블만 쓰지 마세요. 반드시 기존 테이블 유지 + JOIN.\n\n"
+                "★★ 주의: CASE col WHEN 축약 문법 사용 금지. 반드시 CASE WHEN col = 'val' THEN 형태 사용.\n"
+                "★★ 주의: GROUP BY에 alias 사용 금지. CASE WHEN 전체를 GROUP BY에 반복하세요.\n\n"
+                "★★ 업종별 분석 시:\n"
+                "  - 테이블: ai_ready_v3.igd_m_cust_txn_card\n"
+                "  - 업종 분류 컬럼: CASE WHEN으로 업종별 이용금액 컬럼을 UNPIVOT:\n"
+                "    외식이용금액, 교통이용금액, 편의점이용금액, 백화점이용금액, 주유이용금액, 병원약국이용금액, 온라인쇼핑이용금액\n"
+                "  - 간단한 방법: 각 업종 컬럼을 SELECT에 나열\n"
+                "    SELECT SUM(\"외식이용금액\") AS \"외식\", SUM(\"교통이용금액\") AS \"교통\", ...\n"
+                "  - 또는 GROUP BY 방식: 이전 SQL에 igd_m_cust_txn_card를 JOIN하고 업종 컬럼 추가\n"
+                "  ★ '업종별'이라는 요청이 오면 반드시 위 업종 컬럼들을 SQL에 포함하세요. 무시하지 마세요.\n"
             )
 
         try:
@@ -273,6 +361,8 @@ class SQLGenerator:
             )
 
             sql = result.get("sql", "")
+            sql = self._fix_case_when_syntax(sql)
+            sql = self._fix_group_by_alias(sql)
             sql = self._ensure_database_prefix(sql)
 
             return SQLGenerationResult(
@@ -318,6 +408,100 @@ class SQLGenerator:
                 tables.add(t.table_name)
 
         return list(tables)
+
+    def _fix_case_when_syntax(self, sql: str) -> str:
+        """Convert CASE col WHEN 'val' THEN to CASE WHEN col = 'val' THEN."""
+        # Match: CASE <expr> WHEN 'val' THEN (the shorthand form)
+        # Replace with: CASE WHEN <expr> = 'val' THEN
+        pattern = r"CASE\s+([a-zA-Z_][a-zA-Z0-9_.\"]*(?:\"[^\"]+\")?)\s*\n?\s*WHEN\s+'([^']+)'\s+THEN"
+
+        def _expand_case(m: re.Match) -> str:
+            col = m.group(1)
+            val = m.group(2)
+            return f"CASE\n    WHEN {col} = '{val}' THEN"
+
+        # First, handle the initial CASE col WHEN pattern
+        result = re.sub(pattern, _expand_case, sql, flags=re.IGNORECASE)
+
+        # Then handle subsequent WHEN 'val' THEN lines within the same CASE block
+        # After the first conversion, remaining bare "WHEN 'val' THEN" inside a CASE
+        # that was converted need the column name prepended.
+        # Strategy: find all CASE WHEN col = 'val' patterns, extract col, then fix
+        # subsequent WHEN 'val' lines in the same block.
+        lines = result.split('\n')
+        current_case_col = None
+        fixed_lines = []
+        for line in lines:
+            stripped = line.strip()
+            # Detect start of converted CASE block
+            case_start = re.match(r"CASE\s*$", stripped, re.IGNORECASE)
+            if case_start:
+                current_case_col = None
+                fixed_lines.append(line)
+                continue
+
+            # Detect WHEN col = 'val' (already correct form) → extract col
+            when_full = re.match(r"WHEN\s+(.+?)\s*=\s*'[^']+'\s+THEN", stripped, re.IGNORECASE)
+            if when_full and current_case_col is None:
+                current_case_col = when_full.group(1)
+                fixed_lines.append(line)
+                continue
+
+            # Detect bare WHEN 'val' THEN (shorthand remnant)
+            when_bare = re.match(r"((\s*)WHEN\s+)'([^']+)'(\s+THEN\s+.*)$", line, re.IGNORECASE)
+            if when_bare and current_case_col:
+                indent = when_bare.group(2)
+                val = when_bare.group(3)
+                rest = when_bare.group(4)
+                fixed_lines.append(f"{indent}WHEN {current_case_col} = '{val}'{rest}")
+                continue
+
+            # END resets context
+            if re.match(r"(END|ELSE)", stripped, re.IGNORECASE):
+                if stripped.upper().startswith('END'):
+                    current_case_col = None
+                fixed_lines.append(line)
+                continue
+
+            fixed_lines.append(line)
+
+        return '\n'.join(fixed_lines)
+
+    def _fix_group_by_alias(self, sql: str) -> str:
+        """Replace CASE expression aliases in GROUP BY with the full CASE expression."""
+        # Find all CASE...END AS "alias" patterns in SELECT
+        case_aliases: dict[str, str] = {}
+        case_pattern = re.compile(
+            r'(CASE\s*\n?\s*(?:WHEN\s+.+?\s+THEN\s+.+?\n?\s*)+(?:ELSE\s+.+?\n?\s*)?END)\s+AS\s+"([^"]+)"',
+            re.IGNORECASE | re.DOTALL,
+        )
+        for m in case_pattern.finditer(sql):
+            case_expr = m.group(1).strip()
+            alias = m.group(2)
+            case_aliases[alias] = case_expr
+
+        if not case_aliases:
+            return sql
+
+        # Find GROUP BY clause and replace alias references
+        group_by_match = re.search(r'(GROUP\s+BY\s+)(.*?)(?=\s*(?:ORDER|HAVING|LIMIT|$))', sql, re.IGNORECASE | re.DOTALL)
+        if not group_by_match:
+            return sql
+
+        group_by_prefix = group_by_match.group(1)
+        group_by_body = group_by_match.group(2)
+
+        for alias, case_expr in case_aliases.items():
+            # Replace "alias" reference in GROUP BY with full CASE expression
+            group_by_body = re.sub(
+                rf'(?<![.\w])"{re.escape(alias)}"(?![.\w])',
+                '\n  ' + case_expr,
+                group_by_body,
+            )
+
+        new_group_by = group_by_prefix + group_by_body
+        sql = sql[:group_by_match.start()] + new_group_by + sql[group_by_match.end():]
+        return sql
 
     def _ensure_database_prefix(self, sql: str) -> str:
         """Ensure all table references include the database prefix."""

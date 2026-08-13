@@ -20,9 +20,11 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
       return null;
     }
 
+    const isDateCol = (col: string) =>
+      col.includes('년월') || col.includes('일자') || col.includes('날짜');
+
     const isCodeCol = (col: string) =>
-      col.includes('년월') || col.includes('일자') || col.includes('날짜') ||
-      col.includes('코드') || col.includes('번호');
+      isDateCol(col) || col.includes('코드') || col.includes('번호');
 
     const isValueCol = (col: string) =>
       col.includes('수') || col.includes('금액') || col.includes('건수') ||
@@ -48,19 +50,24 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
     }
     if (!valueCol) valueCol = result.columns[result.columns.length - 1];
 
-    // Find group column (각사) and sub-group column (연령대)
+    // Find group column (각사) and sub-group column (연령대/기준년월)
     const otherCols = result.columns.filter(c => c !== valueCol);
     let groupCol = otherCols.find(c => isGroupCol(c));
-    let subCol = otherCols.find(c => isAgeCol(c));
+    let subCol = otherCols.find(c => isAgeCol(c) || isDateCol(c));
 
     // If no explicit group/sub columns, use first two non-value columns
     if (!groupCol && !subCol && otherCols.length >= 2) {
       groupCol = otherCols[0];
       subCol = otherCols[1];
     } else if (!groupCol && !subCol && otherCols.length === 1) {
-      // Only one dimension — flat chart
       groupCol = undefined;
       subCol = otherCols[0];
+    }
+
+    // When we have both group and date columns, always show date as sub label
+    if (groupCol && !subCol) {
+      const dateCol = otherCols.find(c => isDateCol(c) && c !== groupCol);
+      if (dateCol) subCol = dateCol;
     }
 
     // If we have both groupCol and subCol, build grouped charts
@@ -134,7 +141,7 @@ export function ReportChart({ result, title, answer }: ReportChartProps) {
                     const pct = (item.value / globalMax) * 100;
                     return (
                       <div key={ii} className="flex items-center gap-2 h-[20px]">
-                        <span className="text-[10px] text-gray-600 w-[56px] truncate text-right shrink-0">
+                        <span className="text-[10px] text-gray-600 w-[64px] text-right shrink-0" title={item.label}>
                           {item.label}
                         </span>
                         <div className="flex-1 h-3.5 rounded-[3px] bg-gray-100 overflow-hidden">

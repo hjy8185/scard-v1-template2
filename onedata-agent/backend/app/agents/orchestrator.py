@@ -252,8 +252,10 @@ class Orchestrator:
                     if last_sql:
                         conversation_context += (
                             f"\n\n★★★ 중요: '위 결과'는 위의 이전 SQL 결과를 의미합니다. "
-                            f"드릴다운 시 반드시 이전 SQL의 FROM/WHERE/JOIN을 유지하고 "
-                            f"GROUP BY 차원만 변경하세요. 테이블이나 조건을 바꾸지 마세요. ★★★"
+                            f"드릴다운 시 반드시 이전 SQL의 FROM/WHERE/JOIN을 유지하면서 확장하세요.\n"
+                            f"- 차원 추가(그룹사별, 연령대별): 기존 SQL에 필요한 JOIN/CASE WHEN을 추가\n"
+                            f"- 기존 WHERE/기준년월 조건은 유지\n"
+                            f"- 새 차원에 필요한 테이블은 JOIN으로 추가 가능 ★★★"
                         )
                     logger.info("Built conversation context: %d parts, last_sql=%s", len(ctx_parts), bool(last_sql))
 
